@@ -1,4 +1,4 @@
-Конечно! Вот пример современного лендинга с тёмным фоном, заголовком и кнопкой, с использованием только HTML и встроенного CSS:
+Вот пример современного лендинга с темным фоном, кнопкой и заголовком. HTML и CSS находятся внутри одного файла:
 
 ```html
 <!DOCTYPE html>
@@ -11,45 +11,38 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #1a1a1a;
+            color: #fff;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            text-align: center;
         }
         h1 {
-            font-size: 3rem;
+            font-size: 48px;
             margin-bottom: 20px;
         }
         .button {
-            background-color: #1e88e5;
-            color: white;
-            border: none;
             padding: 15px 30px;
-            font-size: 1.2rem;
+            font-size: 18px;
+            color: #fff;
+            background-color: #ff5722;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s;
         }
         .button:hover {
-            background-color: #1565c0;
+            background-color: #e64a19;
         }
     </style>
 </head>
 <body>
-    <div>
-        <h1>Привет, мир!</h1>
-        <button class="button">Начать</button>
-    </div>
+    <h1>Добро пожаловать</h1>
+    <button class="button">Начать</button>
 </body>
 </html>
 ```
 
-### Описание:
-- **Фон**: Тёмный фон для современного стиля.
-- **Заголовок**: Используется `h1` с большим шрифтом.
-- **Кнопка**: Современная кнопка с эффектом при наведении.
-
-Вы можете сохранить этот код как файл с расширением `.html` и открыть его в браузере для просмотра.
+Скопируй этот код в файл `index.html`, и открой его в браузере, чтобы увидеть лендинг.
