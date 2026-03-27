@@ -1,293 +1,97 @@
+Вот пример полноценного HTML сайта с добавленными фотографиями. В данном примере добавлены три изображения с подписью под каждым. Вы можете заменить ссылки на изображения своими.
+
 ```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Шиномонтаж Актау - Услуги и цены</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f7f7f7;
-    color: #333;
-  }
-  header {
-    background-color: #004d99;
-    color: white;
-    padding: 20px 15px;
-    text-align: center;
-  }
-  header h1 {
-    margin: 0;
-    font-size: 2rem;
-  }
-  nav {
-    background-color: #0066cc;
-    text-align: center;
-  }
-  nav a {
-    display: inline-block;
-    padding: 12px 20px;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    border-right: 1px solid #005bb5;
-  }
-  nav a:last-child {
-    border-right: none;
-  }
-  nav a:hover {
-    background-color: #005bb5;
-  }
-  main {
-    max-width: 1100px;
-    margin: 25px auto;
-    background: white;
-    padding: 20px 30px 40px;
-    box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
-    border-radius: 6px;
-  }
-  section {
-    margin-bottom: 50px;
-  }
-  section h2 {
-    color: #004d99;
-    border-bottom: 3px solid #004d99;
-    padding-bottom: 6px;
-    margin-bottom: 18px;
-  }
-  .service {
-    margin-bottom: 25px;
-  }
-  .service h3 {
-    color: #0073e6;
-    margin-bottom: 6px;
-  }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 15px;
-  }
-  .gallery-grid img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 5px;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-  .gallery-grid img:hover {
-    transform: scale(1.05);
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-  }
-  th, td {
-    border: 1px solid #ddd;
-    padding: 12px 15px;
-    text-align: left;
-  }
-  th {
-    background-color: #0073e6;
-    color: white;
-  }
-  footer {
-    background-color: #004d99;
-    color: white;
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 0.9rem;
-  }
-  .contacts p {
-    margin: 6px 0;
-  }
-
-  /* Lightbox style */
-  #lightboxOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
-  #lightboxOverlay img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 5px;
-    box-shadow: 0 0 20px #000;
-  }
-  #lightboxOverlay:active {
-    display: none;
-  }
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Сайт с фотографиями</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .photo {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+            width: 300px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .photo:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .caption {
+            padding: 10px 15px;
+            text-align: center;
+            font-size: 1rem;
+            color: #555;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #f1f1f1;
+            color: #777;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
-
-<header>
-  <h1>Шиномонтаж в Актау</h1>
-  <p>Профессиональные услуги по шиномонтажу и сервису шин</p>
-</header>
-<nav>
-  <a href="#services">Услуги</a>
-  <a href="#gallery">Галерея</a>
-  <a href="#contacts">Контакты</a>
-  <a href="#prices">Прайс-лист</a>
-</nav>
-
-<main>
-
-<section id="services">
-  <h2>Наши услуги</h2>
-
-  <article class="service">
-    <h3>Балансировка колес</h3>
-    <p>Балансировка колес — это процесс выравнивания массы колеса и шины для обеспечения плавного и безопасного движения автомобиля без вибраций. Мы используем современное оборудование, которое позволяет проводить балансировку для легковых и легких грузовых авто.</p>
-  </article>
-
-  <article class="service">
-    <h3>Шиномонтаж</h3>
-    <p>Профессиональная установка, снятие и монтаж шин на диски. Мы работаем с любыми типами шин — летними, зимними и всесезонными. Быстро и аккуратно обеспечим правильную посадку шины и надежное крепление.</p>
-  </article>
-
-  <article class="service">
-    <h3>Ремонт бескамерных шин</h3>
-    <p>Ремонт проколов и повреждений бескамерных шин. Используем качественные материалы для быстрого устранения повреждений, чтобы вы могли продолжать безопасно пользоваться шинами без замены.</p>
-  </article>
-
-  <article class="service">
-    <h3>Замена колес</h3>
-    <p>Обслуживание сезонной замены колес с хранением и без. Чистка, проверка дисков и установка шин — делаем быстро и удобно, чтобы ваш автомобиль был готов к любым дорогам.</p>
-  </article>
-
-  <article class="service">
-    <h3>Глубокая чистка дисков и шин</h3>
-    <p>Профессиональная чистка дисков от грязи, пыли тормозных колодок, битума и других загрязнений. Ваши колеса будут выглядеть как новые, плюс продлится срок службы резины и дисков.</p>
-  </article>
-
-  <article class="service">
-    <h3>Хранение шин</h3>
-    <p>Предлагаем сезонное хранение шин в специальных условиях — без сырости и температурных перепадов. Поможем с размещением и безопасностью хранения вашего комплекта шин.</p>
-  </article>
-
-</section>
-
-<section id="gallery">
-  <h2>Галерея</h2>
-  <div class="gallery-grid">
-    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=600&q=80" alt="Шиномонтаж - установка шин" />
-    <img src="https://images.unsplash.com/photo-1587825140308-806b7791764a?auto=format&fit=crop&w=600&q=80" alt="Балансировка колеса" />
-    <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=600&q=80" alt="Ремонт прокола шины" />
-    <img src="https://images.unsplash.com/photo-1549924230-ec3fa7dad1fb?auto=format&fit=crop&w=600&q=80" alt="Смена колес" />
-    <img src="https://images.unsplash.com/photo-1612831455541-d0b8d2a9916c?auto=format&fit=crop&w=600&q=80" alt="Чистка дисков" />
-    <img src="https://images.unsplash.com/photo-1602728587667-7fe252d1f9cd?auto=format&fit=crop&w=600&q=80" alt="Шиномонтажное оборудование" />
-  </div>
-</section>
-
-<section id="contacts">
-  <h2>Контактная информация</h2>
-  <div class="contacts">
-    <p><strong>Адрес:</strong> г. Актау, ул. Мангистау 15, офис 5</p>
-    <p><strong>Телефон:</strong> +7 (705) 123-45-67</p>
-    <p><strong>Email:</strong> info@aktau-shinomontazh.kz</p>
-    <p><strong>Время работы:</strong> Пн-Вс: 09:00 - 20:00</p>
-  </div>
-</section>
-
-<section id="prices">
-  <h2>Прайс-лист (цены указаны в тенге)</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Услуга</th>
-        <th>Описание</th>
-        <th>Цена (₸)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Балансировка колес</td>
-        <td>Балансировка одного колеса с помощью современного стенда</td>
-        <td>1500</td>
-      </tr>
-      <tr>
-        <td>Шиномонтаж</td>
-        <td>Снятие и установка шины на диск (легковые автомобили)</td>
-        <td>2000</td>
-      </tr>
-      <tr>
-        <td>Ремонт бескамерной шины</td>
-        <td>Заплата и герметизация прокола</td>
-        <td>1800</td>
-      </tr>
-      <tr>
-        <td>Замена колес</td>
-        <td>Демонтаж и монтаж всех 4 колес</td>
-        <td>3500</td>
-      </tr>
-      <tr>
-        <td>Чистка дисков</td>
-        <td>Удаление загрязнений, битума и пыли</td>
-        <td>2500</td>
-      </tr>
-      <tr>
-        <td>Хранение шин (за сезон)</td>
-        <td>Сезонное хранение комплекта шин в специализированном помещении</td>
-        <td>7000</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-</main>
-
-<footer>
-  © 2024 Шиномонтаж Актау. Все права защищены.
-</footer>
-
-<div id="lightboxOverlay" onclick="closeLightbox()">
-  <img id="lightboxImg" src="" alt="Просмотр изображения" />
-</div>
-
-<script>
-  // Lightbox functionality for gallery images
-  const galleryImages = document.querySelectorAll('.gallery-grid img');
-  const lightboxOverlay = document.getElementById('lightboxOverlay');
-  const lightboxImg = document.getElementById('lightboxImg');
-
-  galleryImages.forEach(img => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightboxOverlay.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  function closeLightbox() {
-    lightboxOverlay.style.display = 'none';
-    lightboxImg.src = '';
-    lightboxImg.alt = '';
-    document.body.style.overflow = '';
-  }
-
-  // Close lightbox on ESC key
-  document.addEventListener('keydown', event => {
-    if (event.key === "Escape" && lightboxOverlay.style.display === 'flex') {
-      closeLightbox();
-    }
-  });
-</script>
-
+    <header>
+        <h1>Галерея фотографий</h1>
+    </header>
+    <main>
+        <div class="gallery">
+            <div class="photo">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Пейзаж гор" />
+                <div class="caption">Пейзаж гор</div>
+            </div>
+            <div class="photo">
+                <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Лесная дорога" />
+                <div class="caption">Лесная дорога</div>
+            </div>
+            <div class="photo">
+                <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Закат на море" />
+                <div class="caption">Закат на море</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Мой сайт с фотографиями
+    </footer>
 </body>
 </html>
 ```
+
+Если хотите, могу добавить больше фотографий или сделать галерею интерактивной.
