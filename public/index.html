@@ -1,143 +1,465 @@
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Сайт милых котиков с фотографиями пород</title>
+  <title>Собаки Актау - Лендинг</title>
   <style>
+    :root {
+      --main-color: #ff6f61;
+      --accent-color: #4a4a4a;
+      --bg-color: #f9f9f9;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff8f0;
       margin: 0;
-      padding: 0;
-      color: #333;
+      font-family: var(--font-family);
+      background: var(--bg-color);
+      color: var(--accent-color);
+      line-height: 1.6;
     }
     header {
-      background-color: #ffb6b9;
-      padding: 1.5rem;
-      text-align: center;
-      color: #6b3e3e;
-      box-shadow: 0 2px 8px rgba(255, 182, 185, 0.4);
+      background: var(--main-color);
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
-    header h1 {
-      margin: 0;
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 1rem;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    nav .logo {
+      font-size: 1.8rem;
       font-weight: 700;
-      font-size: 2.5rem;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: #ffeaea;
+      outline: none;
     }
     main {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem 3rem;
+      padding: 2rem 1rem 4rem;
+      max-width: 1200px;
+      margin: auto;
     }
-    .cat-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
-      gap: 1.8rem;
+    h1, h2, h3 {
+      color: var(--main-color);
+      margin-top: 0;
     }
-    .cat-card {
-      background-color: #fff0f3;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(255, 182, 185, 0.35);
-      overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      cursor: default;
-    }
-    .cat-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 25px rgba(255, 182, 185, 0.6);
-    }
-    .cat-card img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      height: 180px;
-    }
-    .cat-content {
-      padding: 1rem 1.2rem 1.5rem;
-    }
-    .cat-content h2 {
-      margin: 0 0 0.6rem;
-      font-size: 1.5rem;
-      color: #b23a48;
-    }
-    .cat-content p {
-      margin: 0;
-      font-size: 1rem;
-      line-height: 1.4;
-      color: #6b3e3e;
-    }
-    footer {
+    /* Hero Section */
+    .hero {
       text-align: center;
-      background-color: #ffb6b9;
-      color: #6b3e3e;
-      padding: 1.2rem 1rem;
+      padding: 2rem 1rem;
+      background: url('https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=1200') center/cover no-repeat;
+      color: white;
+      border-radius: 8px;
+      box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.35);
+      margin-bottom: 3rem;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: auto;
+      text-shadow: 0 1px 5px rgba(0,0,0,0.6);
+    }
+    /* Breeds Section */
+    .breeds-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 1.8rem;
+      margin-bottom: 3rem;
+    }
+    .breed-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .breed-card:hover,
+    .breed-card:focus-within {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .breed-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .breed-card .content {
+      padding: 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .breed-card h3 {
+      margin: 0 0 0.5rem;
+    }
+    .breed-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.3;
+    }
+    /* Gallery Section */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 3px 6px rgb(0 0 0 / 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      background: white;
+    }
+    .gallery-item:hover,
+    .gallery-item:focus-within {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      z-index: 5;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-item .caption {
+      padding: 0.7rem;
+      font-size: 0.85rem;
+      color: var(--accent-color);
+      font-weight: 600;
+      text-align: center;
+      background: #fff;
+    }
+    /* Stories Section */
+    .stories {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .story {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      padding: 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .story img {
+      flex-shrink: 0;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .story-content {
+      flex-grow: 1;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .story-content h4 {
+      margin: 0 0 0.3rem;
+      color: var(--main-color);
+    }
+    .story-content span {
       font-size: 0.9rem;
       font-weight: 600;
-      box-shadow: 0 -2px 8px rgba(255, 182, 185, 0.4);
+      color: #999;
+    }
+    .story-content p {
+      margin-top: 0.8rem;
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.4;
+    }
+    /* Contacts Section */
+    .contacts {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      padding: 2rem 1.5rem;
+      max-width: 600px;
+      margin: auto;
+      margin-bottom: 3rem;
+    }
+    .contacts h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .contacts form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contacts label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+    .contacts input,
+    .contacts textarea {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: var(--font-family);
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+    .contacts input:focus,
+    .contacts textarea:focus {
+      border-color: var(--main-color);
+      outline: none;
+      box-shadow: 0 0 6px var(--main-color);
+    }
+    .contacts button {
+      background: var(--main-color);
+      border: none;
+      padding: 0.8rem 1rem;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .contacts button:hover,
+    .contacts button:focus {
+      background: #e65b50;
+      outline: none;
+    }
+    /* Footer */
+    footer {
+      background: var(--main-color);
+      color: white;
+      text-align: center;
+      padding: 1rem 1rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
       margin-top: 3rem;
     }
-    @media (max-width: 400px) {
-      header h1 {
-        font-size: 2rem;
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .story {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .story img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        border-radius: 12px;
+      }
+      .story-content {
+        min-width: unset;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Сайт милых котиков с фотографиями пород</h1>
-  </header>
-  <main>
-    <section class="cat-list" aria-label="Фотографии пород котиков">
-      <article class="cat-card">
-        <img src="https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg" alt="Кот породы Сиамская" />
-        <div class="cat-content">
-          <h2>Сиамская</h2>
-          <p>Элегантная порода с стройным телом и выразительными голубыми глазами. Очень общительные и любознательные коты.</p>
+<header>
+  <div class="container">
+    <nav aria-label="Главная навигация">
+      <div class="logo" tabindex="0">Собаки Актау</div>
+      <ul>
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#breeds">Породы</a></li>
+        <li><a href="#gallery">Галерея</a></li>
+        <li><a href="#stories">Истории хозяев</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="hero" role="banner">
+    <h1>Добро пожаловать в мир собак Актау</h1>
+    <p>Узнайте о самых популярных породах, посмотрите фотографии наших любимцев и прочитайте истории их хозяев.</p>
+  </section>
+
+  <section id="breeds" aria-labelledby="breeds-title">
+    <h2 id="breeds-title">Популярные породы собак</h2>
+    <div class="breeds-list">
+      <article class="breed-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=800" alt="Лабрадор ретривер" loading="lazy"/>
+        <div class="content">
+          <h3>Лабрадор</h3>
+          <p>Дружелюбный и умный лабрадор – идеальный семейный питомец и помощник.</p>
         </div>
       </article>
-      <article class="cat-card">
-        <img src="https://cdn2.thecatapi.com/images/B1svZgqE7.jpg" alt="Кот породы Мейн-кун" />
-        <div class="cat-content">
-          <h2>Мейн-кун</h2>
-          <p>Одна из крупнейших пород, с пушистой шерстью и дружелюбным характером. Отлично ладят с детьми и другими питомцами.</p>
+      <article class="breed-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800" alt="Немецкая овчарка" loading="lazy"/>
+        <div class="content">
+          <h3>Немецкая овчарка</h3>
+          <p>Смелая и преданная порода, известная своей выносливостью и умением обучаться.</p>
         </div>
       </article>
-      <article class="cat-card">
-        <img src="https://cdn2.thecatapi.com/images/3bkZAjRh1.jpg" alt="Кот породы Британская короткошерстная" />
-        <div class="cat-content">
-          <h2>Британская короткошерстная</h2>
-          <p>Чудесные плюшевые коты с круглыми глазами и плотным телосложением. Спокойные и уравновешенные домашние питомцы.</p>
+      <article class="breed-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1525253086316-d0c936c814f8?w=800" alt="Шпиц" loading="lazy"/>
+        <div class="content">
+          <h3>Шпиц</h3>
+          <p>Маленький пушистый друг с ярким характером и громким голосом.</p>
         </div>
       </article>
-      <article class="cat-card">
-        <img src="https://cdn2.thecatapi.com/images/4x2A-TpZT.jpg" alt="Кот породы Бенгальская кошка" />
-        <div class="cat-content">
-          <h2>Бенгальская</h2>
-          <p>Кошки дикой внешности с пятнами, похожие на леопардов. Очень активные и умные, любят играть и обучаться трюкам.</p>
+      <article class="breed-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?w=800" alt="Джек-рассел терьер" loading="lazy"/>
+        <div class="content">
+          <h3>Джек-рассел</h3>
+          <p>Энергичный и смелый терьер, который любит активные игры и приключения.</p>
         </div>
       </article>
-      <article class="cat-card">
-        <img src="https://cdn2.thecatapi.com/images/ZS2Is0e8i.jpg" alt="Кот породы Русская голубая" />
-        <div class="cat-content">
-          <h2>Русская голубая</h2>
-          <p>Порода с серебристо-голубой шерстью и ярко-зелеными глазами. Тихие, очень преданные своим хозяевам.</p>
+      <article class="breed-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1525253086316-d791a4ee0e5e?w=800" alt="Пудель" loading="lazy"/>
+        <div class="content">
+          <h3>Пудель</h3>
+          <p>Интеллигентный и элегантный питомец, который быстро учится и отлично ладит с детьми.</p>
         </div>
       </article>
-      <article class="cat-card">
-        <img src="https://cdn2.thecatapi.com/images/4MRjT4cKG.jpg" alt="Кот породы Сфинкс" />
-        <div class="cat-content">
-          <h2>Сфинкс</h2>
-          <p>Уникальные бесшерстные коты с морщинистой кожей. Очень ласковые, любят тепло и постоянное внимание.</p>
+      <article class="breed-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1508214751197-702b2f7b617f?w=800" alt="Бульдог" loading="lazy"/>
+        <div class="content">
+          <h3>Бульдог</h3>
+          <p>Спокойный и уравновешенный друг, с уникальным внешним видом и большим сердцем.</p>
         </div>
       </article>
-    </section>
-  </main>
-  <footer>
-    &copy; 2024 Сайт милых котиков. Все права защищены.
-  </footer>
+    </div>
+  </section>
+
+  <section id="gallery" aria-labelledby="gallery-title">
+    <h2 id="gallery-title">Галерея питомцев и их владельцев</h2>
+    <div class="gallery">
+      <figure class="gallery-item" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1508214751196-66e6d111058f?w=800" alt="Владелец с лабрадором" loading="lazy" />
+        <figcaption class="caption">Айдар и лабрадор Боня</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800" alt="Миниатюрный шпиц на руках у хозяйки" loading="lazy" />
+        <figcaption class="caption">Гульнара и шпиц Лаки</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?w=800" alt="Владелец с немецкой овчаркой на прогулке" loading="lazy" />
+        <figcaption class="caption">Данияр и немецкая овчарка Макс</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1570117266083-9d0f75aeaf15?w=800" alt="Джек-рассел и хозяин у дома" loading="lazy" />
+        <figcaption class="caption">Айгуль и джек-рассел Тоби</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?w=800" alt="Женщина с пуделем в парке" loading="lazy" />
+        <figcaption class="caption">Назым и пудель Лола</figcaption>
+      </figure>
+      <figure class="gallery-item" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1508214751194-732b8603844b?w=800" alt="Мужчина с бульдогом" loading="lazy" />
+        <figcaption class="caption">Ерлан и бульдог Чарли</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="stories" aria-labelledby="stories-title">
+    <h2 id="stories-title">Истории владельцев</h2>
+    <div class="stories">
+      <article class="story" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800" alt="Айдар, владелец собаки" />
+        <div class="story-content">
+          <h4>Айдар К.</h4>
+          <span>Молодой предприниматель, Актау</span>
+          <p>«Боня, мой лабрадор, стал настоящим членом семьи. Благодаря ей каждый день наполнен радостью и прогулками на свежем воздухе у Каспийского моря.»</p>
+        </div>
+      </article>
+      <article class="story" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1508214751198-9e85b034a3bb?w=800" alt="Гульнара, хозяйка шпица" />
+        <div class="story-content">
+          <h4>Гульнара М.</h4>
+          <span>Архитектор, Актау</span>
+          <p>«Мой шпиц Лаки — настоящий баловень, но он так согревает дом своим присутствием. В нашем доме царит любовь и теплота благодаря ему.»</p>
+        </div>
+      </article>
+      <article class="story" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800" alt="Данияр, владелец немецкой овчарки" />
+        <div class="story-content">
+          <h4>Данияр Б.</h4>
+          <span>Учитель, Актау</span>
+          <p>«Макс — немецкая овчарка, настоящий сторож и верный друг. Он научил меня ответственности и подарил настоящую дружбу.»</p>
+        </div>
+      </article>
+      <article class="story" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=800" alt="Айгуль, хозяйка джек-рассела" />
+        <div class="story-content">
+          <h4>Айгуль А.</h4>
+          <span>Фотограф, Актау</span>
+          <p>«Тоби — мой джек-рассел, он полон энергии и всегда сопровождает меня на фотоохоте. Наши приключения бесконечны и вдохновляющи.»</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="contacts" aria-labelledby="contacts-title" class="contacts">
+    <h2 id="contacts-title">Связаться с нами</h2>
+    <form action="#" method="post" novalidate>
+      <label for="name">Имя</label>
+      <input type="text" id="name" name="name" required placeholder="Ваше имя" />
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required placeholder="example@mail.com" />
+      <label for="message">Сообщение</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Ваше сообщение"></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  &copy; 2024 Собаки Актау. Все права защищены.
+</footer>
 </body>
 </html>
-```
