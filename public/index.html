@@ -3,22 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Кофейня Актау</title>
+  <title>Ресторан Актау</title>
   <style>
+    :root {
+      --primary-color: #bf6f4f;
+      --secondary-color: #3a3a3a;
+      --light-color: #f9f7f1;
+      --dark-color: #222;
+      --accent-color: #e27d60;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
     * {
       box-sizing: border-box;
     }
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #4b3f2f;
-      background: #f3f1ec;
+      font-family: var(--font-family);
+      background-color: var(--light-color);
+      color: var(--secondary-color);
       line-height: 1.6;
     }
     header {
-      background: #6f4e37;
-      padding: 15px 30px;
-      color: #fff;
+      background-color: var(--primary-color);
+      color: var(--light-color);
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -31,225 +39,158 @@
       margin: 0;
       font-weight: 700;
       font-size: 1.8rem;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
+    }
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 1.8rem;
     }
     nav a {
-      color: #fff;
+      color: var(--light-color);
       text-decoration: none;
-      margin-left: 25px;
       font-weight: 600;
       font-size: 1rem;
       transition: color 0.3s ease;
     }
-    nav a:hover {
-      color: #d9b382;
+    nav a:hover, nav a:focus {
+      color: var(--accent-color);
+      outline: none;
     }
     .hero {
-      background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800');
-      background-size: cover;
-      background-position: center;
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=1200') center/cover no-repeat;
       height: 60vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #faefdc;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-      font-size: 2.8rem;
-      font-weight: 700;
-      letter-spacing: 3px;
+      color: var(--light-color);
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
       text-align: center;
-      padding: 0 20px;
+      padding: 0 1rem;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      max-width: 700px;
+      margin: 0;
+      font-weight: 700;
+      background: rgba(191,111,79,0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    main {
+      padding: 2rem 3rem;
+      max-width: 1200px;
+      margin: auto;
     }
     section {
-      max-width: 1100px;
-      margin: 50px auto;
-      padding: 0 20px;
+      margin-bottom: 4rem;
     }
-    h2 {
-      text-align: center;
-      font-weight: 700;
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      color: #543b21;
-      letter-spacing: 1.5px;
-    }
-    .about {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      align-items: center;
-      justify-content: center;
-    }
-    .about img {
-      max-width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-      flex: 1 1 400px;
-      object-fit: cover;
-      height: 300px;
+    section h3 {
+      font-size: 2.2rem;
+      color: var(--primary-color);
+      border-bottom: 3px solid var(--accent-color);
+      display: inline-block;
+      margin-bottom: 1.5rem;
     }
     .about-text {
-      flex: 1 1 400px;
       font-size: 1.1rem;
-      color: #5e4a32;
+      max-width: 800px;
+      margin-bottom: 2rem;
     }
-    .locations {
+    .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 1.5rem;
     }
-    .location-card {
-      background: #fff7ef;
-      border-radius: 15px;
-      box-shadow: 0 5px 12px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    .location-card:hover {
-      transform: translateY(-8px);
-    }
-    .location-img {
+    .gallery img {
       width: 100%;
       height: 180px;
       object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
-    .location-info {
-      padding: 20px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .location-info h3 {
-      margin: 0 0 10px 0;
-      color: #6f4e37;
-    }
-    .location-info p {
-      margin: 5px 0;
-      font-size: 1rem;
-      color: #7a6650;
+    .gallery img:hover,
+    .gallery img:focus {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(190,109,79,0.6);
+      outline: none;
     }
     footer {
-      background: #6f4e37;
-      color: #d9b382;
+      background-color: var(--dark-color);
+      color: var(--light-color);
       text-align: center;
-      padding: 18px 20px;
+      padding: 1.2rem 1rem;
       font-size: 0.9rem;
-      letter-spacing: 1px;
-      margin-top: 50px;
+      letter-spacing: 0.05em;
+      margin-top: 2rem;
     }
-    @media (max-width: 600px) {
+    @media(max-width: 600px) {
       header {
         flex-direction: column;
-        align-items: flex-start;
+        gap: 0.8rem;
       }
-      nav {
-        margin-top: 10px;
+      .hero h2 {
+        font-size: 2rem;
       }
-      nav a {
-        margin-left: 0;
-        margin-right: 15px;
-      }
-      .about {
-        flex-direction: column;
-      }
-      .about img,
-      .about-text {
-        flex: 1 1 100%;
+      main {
+        padding: 1rem 1.5rem;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Кофейня Актау</h1>
+    <h1>Актау Ресторан</h1>
     <nav>
-      <a href="#about">О нас</a>
-      <a href="#locations">Наши локации</a>
-      <a href="#contacts">Контакты</a>
+      <ul>
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#menu">Меню</a></li>
+        <li><a href="#gallery">Галерея</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
     </nav>
   </header>
-
-  <section class="hero" aria-label="Главный экран">
-    Лучший кофе в Актау – вдохновляйтесь ароматом!
+  <section class="hero" role="banner" aria-label="Главный баннер ресторана">
+    <h2>Изысканная кухня в сердце Актау</h2>
   </section>
-
-  <section id="about">
-    <h2>О нашей кофейне</h2>
-    <div class="about">
-      <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800" alt="Кофе в стаканчике и зерна кофе" />
-      <div class="about-text">
-        <p>Добро пожаловать в Кофейню Актау – место, где каждое зерно выбирается с любовью и обжаривается до совершенства. Наши бариста создают напитки, в которых сочетаются традиции и современные тренды кофейного искусства.</p>
-        <p>Уютная атмосфера, дружелюбный сервис и только свежие натуральные ингредиенты делают наш кофе любимым местом для жителей и гостей города.</p>
+  <main>
+    <section id="about" tabindex="-1">
+      <h3>О нас</h3>
+      <p class="about-text">Добро пожаловать в наш ресторан в Актау! Мы гордимся сочетанием традиционных казахских блюд и современных гастрономических тенденций. Уютная атмосфера, свежие ингредиенты и безупречное обслуживание — все для вашего незабываемого вечера.</p>
+    </section>
+    <section id="menu" tabindex="-1">
+      <h3>Меню</h3>
+      <p class="about-text">Насладитесь разнообразием блюд, от аппетитных закусок и супов до изысканных горячих блюд и десертов, которые подчеркнут вкус и колорит нашего региона.</p>
+      <div class="gallery" aria-label="Фотографии блюд из меню">
+        <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb3b?w=800" alt="Тарелка с мясным ассорти и гарниром" tabindex="0" />
+        <img src="https://images.unsplash.com/photo-1604908177593-8a46075d6d92?w=800" alt="Свежий салат с овощами и зеленью" tabindex="0" />
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800" alt="Суп с зеленью и домашним хлебом" tabindex="0" />
+        <img src="https://images.unsplash.com/photo-1543352634-243166b2c55d?w=800" alt="Стейк с овощами гриль" tabindex="0" />
+        <img src="https://images.unsplash.com/photo-1617191510045-b578f778307c?w=800" alt="Тарелка с традиционным казахским блюдом" tabindex="0" />
+        <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800" alt="Красивый десерт с шоколадом и ягодами" tabindex="0" />
       </div>
-    </div>
-  </section>
-
-  <section id="locations">
-    <h2>Наши локации в Актау</h2>
-    <div class="locations">
-      <article class="location-card">
-        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800" alt="Кофейня на проспекте Мангистауская" class="location-img" />
-        <div class="location-info">
-          <h3>Проспект Мангистауская, 15</h3>
-          <p>Работаем: 08:00 - 22:00</p>
-          <p>Телефон: +7 (701) 123-45-67</p>
-          <p>E-mail: mangistau@coffeeaktau.kz</p>
-        </div>
-      </article>
-
-      <article class="location-card">
-        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800" alt="Интерьер кофейни в торговом центре" class="location-img" />
-        <div class="location-info">
-          <h3>ТЦ «Актау Plaza», 2 этаж</h3>
-          <p>Работаем: 10:00 - 23:00</p>
-          <p>Телефон: +7 (701) 234-56-78</p>
-          <p>E-mail: plaza@coffeeaktau.kz</p>
-        </div>
-      </article>
-
-      <article class="location-card">
-        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800" alt="Уютная кофейня с зеленью" class="location-img" />
-        <div class="location-info">
-          <h3>Улица Абая, 99</h3>
-          <p>Работаем: 07:30 - 21:30</p>
-          <p>Телефон: +7 (701) 345-67-89</p>
-          <p>E-mail: abay@coffeeaktau.kz</p>
-        </div>
-      </article>
-
-      <article class="location-card">
-        <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800" alt="Кофейня с открытой террасой" class="location-img" />
-        <div class="location-info">
-          <h3>Набережная, д. 7</h3>
-          <p>Работаем: 08:30 - 22:00</p>
-          <p>Телефон: +7 (701) 456-78-90</p>
-          <p>E-mail: embankment@coffeeaktau.kz</p>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="contacts">
-    <h2>Контакты</h2>
-    <div style="max-width: 600px; margin: 0 auto; font-size: 1.1rem; color: #5e4a32;">
-      <p><strong>Общая информация:</strong></p>
-      <p>Телефон: +7 (701) 000-00-00</p>
-      <p>Email: info@coffeeaktau.kz</p>
-      <p>Адрес офиса: г. Актау, пр. Мангистауская 1</p>
-      <p style="margin-top: 25px;"><strong>Следите за нами в соцсетях:</strong></p>
-      <p>
-        <a href="https://instagram.com/coffeeaktau" target="_blank" rel="noopener" style="color:#6f4e37; text-decoration:none;">Instagram</a> | 
-        <a href="https://facebook.com/coffeeaktau" target="_blank" rel="noopener" style="color:#6f4e37; text-decoration:none;">Facebook</a> | 
-        <a href="https://vk.com/coffeeaktau" target="_blank" rel="noopener" style="color:#6f4e37; text-decoration:none;">ВКонтакте</a>
-      </p>
-    </div>
-  </section>
-
+    </section>
+    <section id="gallery" tabindex="-1">
+      <h3>Галерея</h3>
+      <div class="gallery" aria-label="Фотографии интерьера и атмосферы ресторана">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800" alt="Интерьер ресторана с деревянной мебелью и теплыми светильниками" tabindex="0" />
+        <img src="https://images.unsplash.com/photo-1432139509613-5c4255815697?w=800" alt="Гости наслаждаются ужином в ресторане Актау" tabindex="0" />
+        <img src="https://images.unsplash.com/photo-1541544181211-62a2f1a9333a?w=800" alt="Подача блюд в элегантной обстановке" tabindex="0" />
+        <img src="https://images.unsplash.com/photo-1506089676908-3592f7389d4d?w=800" alt="Барная стойка с выбором напитков" tabindex="0" />
+      </div>
+    </section>
+    <section id="contacts" tabindex="-1">
+      <h3>Контакты</h3>
+      <p class="about-text">Адрес: г. Актау, ул. Абая 23<br />Телефон: +7 (7292) 123-456<br />Email: info@aktau-restaurant.kz<br />Время работы: с 10:00 до 23:00 ежедневно</p>
+    </section>
+  </main>
   <footer>
-    &copy; 2024 Кофейня Актау. Все права защищены.
+    &copy; 2024 Ресторан Актау. Все права защищены.
   </footer>
 </body>
 </html>
