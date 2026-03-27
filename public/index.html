@@ -1,107 +1,143 @@
-Понял, вы хотите полноценный HTML-сайт, который по каким-то данным выполнит "анализ". В вашем сообщении в поле data пустая строка, поэтому сделаю простой пример сайта с формой, куда пользователь может ввести текст, а при нажатии на кнопку "Проанализировать" будет выполнен базовый анализ — подсчет количества слов, символов и предложений.
-
-Вот пример полноценного HTML сайта, где реализован такой базовый анализ:
-
 ```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Анализ текста</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Сайт милых котиков с фотографиями пород</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 20px;
-      background-color: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff8f0;
+      margin: 0;
+      padding: 0;
       color: #333;
     }
-    h1 {
+    header {
+      background-color: #ffb6b9;
+      padding: 1.5rem;
       text-align: center;
-      color: #2c3e50;
+      color: #6b3e3e;
+      box-shadow: 0 2px 8px rgba(255, 182, 185, 0.4);
     }
-    textarea {
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 1.5px;
+    }
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem 3rem;
+    }
+    .cat-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+      gap: 1.8rem;
+    }
+    .cat-card {
+      background-color: #fff0f3;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(255, 182, 185, 0.35);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: default;
+    }
+    .cat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(255, 182, 185, 0.6);
+    }
+    .cat-card img {
       width: 100%;
-      height: 150px;
-      font-size: 16px;
-      padding: 10px;
-      box-sizing: border-box;
-      resize: vertical;
+      display: block;
+      object-fit: cover;
+      height: 180px;
     }
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #2980b9;
-      color: white;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
+    .cat-content {
+      padding: 1rem 1.2rem 1.5rem;
     }
-    button:hover {
-      background-color: #3498db;
+    .cat-content h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.5rem;
+      color: #b23a48;
     }
-    .result {
-      margin-top: 25px;
-      background: #ecf0f1;
-      padding: 15px;
-      border-radius: 5px;
+    .cat-content p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #6b3e3e;
+    }
+    footer {
+      text-align: center;
+      background-color: #ffb6b9;
+      color: #6b3e3e;
+      padding: 1.2rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 -2px 8px rgba(255, 182, 185, 0.4);
+      margin-top: 3rem;
+    }
+    @media (max-width: 400px) {
+      header h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Анализ текста</h1>
-  <p>Введите текст для анализа:</p>
-  <textarea id="inputText" placeholder="Введите текст здесь..."></textarea>
-  <button id="analyzeBtn">Проанализировать</button>
-
-  <div class="result" id="result" style="display: none;">
-    <h2>Результаты анализа</h2>
-    <p id="wordCount"></p>
-    <p id="charCount"></p>
-    <p id="sentenceCount"></p>
-  </div>
-
-  <script>
-    const analyzeBtn = document.getElementById('analyzeBtn');
-    const inputText = document.getElementById('inputText');
-    const resultDiv = document.getElementById('result');
-    const wordCountP = document.getElementById('wordCount');
-    const charCountP = document.getElementById('charCount');
-    const sentenceCountP = document.getElementById('sentenceCount');
-
-    analyzeBtn.addEventListener('click', () => {
-      const text = inputText.value.trim();
-
-      if (!text) {
-        alert('Пожалуйста, введите текст для анализа.');
-        return;
-      }
-
-      // Подсчет слов (слова разделяются пробелами, переносами и т.п.)
-      const words = text.match(/\b\w+\b/g) || [];
-      const wordCount = words.length;
-
-      // Подсчет символов без пробелов
-      const charCount = text.replace(/\s/g, '').length;
-
-      // Подсчет предложений (упрощенно считаем по точкам, восклицателным и вопросительным знакам)
-      const sentences = text.match(/[^.!?]+[.!?]/g) || [];
-      const sentenceCount = sentences.length;
-
-      // Вывод результатов
-      wordCountP.textContent = `Количество слов: ${wordCount}`;
-      charCountP.textContent = `Количество символов (без пробелов): ${charCount}`;
-      sentenceCountP.textContent = `Количество предложений: ${sentenceCount}`;
-
-      resultDiv.style.display = 'block';
-    });
-  </script>
+  <header>
+    <h1>Сайт милых котиков с фотографиями пород</h1>
+  </header>
+  <main>
+    <section class="cat-list" aria-label="Фотографии пород котиков">
+      <article class="cat-card">
+        <img src="https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg" alt="Кот породы Сиамская" />
+        <div class="cat-content">
+          <h2>Сиамская</h2>
+          <p>Элегантная порода с стройным телом и выразительными голубыми глазами. Очень общительные и любознательные коты.</p>
+        </div>
+      </article>
+      <article class="cat-card">
+        <img src="https://cdn2.thecatapi.com/images/B1svZgqE7.jpg" alt="Кот породы Мейн-кун" />
+        <div class="cat-content">
+          <h2>Мейн-кун</h2>
+          <p>Одна из крупнейших пород, с пушистой шерстью и дружелюбным характером. Отлично ладят с детьми и другими питомцами.</p>
+        </div>
+      </article>
+      <article class="cat-card">
+        <img src="https://cdn2.thecatapi.com/images/3bkZAjRh1.jpg" alt="Кот породы Британская короткошерстная" />
+        <div class="cat-content">
+          <h2>Британская короткошерстная</h2>
+          <p>Чудесные плюшевые коты с круглыми глазами и плотным телосложением. Спокойные и уравновешенные домашние питомцы.</p>
+        </div>
+      </article>
+      <article class="cat-card">
+        <img src="https://cdn2.thecatapi.com/images/4x2A-TpZT.jpg" alt="Кот породы Бенгальская кошка" />
+        <div class="cat-content">
+          <h2>Бенгальская</h2>
+          <p>Кошки дикой внешности с пятнами, похожие на леопардов. Очень активные и умные, любят играть и обучаться трюкам.</p>
+        </div>
+      </article>
+      <article class="cat-card">
+        <img src="https://cdn2.thecatapi.com/images/ZS2Is0e8i.jpg" alt="Кот породы Русская голубая" />
+        <div class="cat-content">
+          <h2>Русская голубая</h2>
+          <p>Порода с серебристо-голубой шерстью и ярко-зелеными глазами. Тихие, очень преданные своим хозяевам.</p>
+        </div>
+      </article>
+      <article class="cat-card">
+        <img src="https://cdn2.thecatapi.com/images/4MRjT4cKG.jpg" alt="Кот породы Сфинкс" />
+        <div class="cat-content">
+          <h2>Сфинкс</h2>
+          <p>Уникальные бесшерстные коты с морщинистой кожей. Очень ласковые, любят тепло и постоянное внимание.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+  <footer>
+    &copy; 2024 Сайт милых котиков. Все права защищены.
+  </footer>
 </body>
 </html>
 ```
-
----
-
-Если нужно что-то другое — уточните, что именно должен делать сайт с действием action=analysis и данными.
