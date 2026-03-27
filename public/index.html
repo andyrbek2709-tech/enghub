@@ -4,58 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кофейня "Аромат Кофе"</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Тёмный Лендинг</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #ff4081;
+            color: #ffffff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #e91e63;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Кофейня "Аромат Кофе"</h1>
-        <nav>
-            <ul>
-                <li><a href="#menu">Меню</a></li>
-                <li><a href="#about">О нас</a></li>
-                <li><a href="#contact">Контакты</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="hero">
-        <h2>Наслаждайтесь лучшим кофе в городе</h2>
-        <p>Приходите и проведите время в уютной обстановке!</p>
-    </section>
-
-    <section id="menu">
-        <h2>Меню</h2>
-        <ul>
-            <li>Эспрессо - 150 руб.</li>
-            <li>Капучино - 200 руб.</li>
-            <li>Латте - 220 руб.</li>
-            <li>Чай - 100 руб.</li>
-            <li>Круассан - 90 руб.</li>
-        </ul>
-    </section>
-
-    <section id="about">
-        <h2>О нас</h2>
-        <p>Мы гордимся тем, что используем только свежеобжаренные зерна, чтобы вы могли насладиться настоящим вкусом кофе.</p>
-    </section>
-
-    <section id="contact">
-        <h2>Контакты</h2>
-        <p>Телефон: +7 (999) 123-45-67</p>
-        <p>Адрес: г. Москва, ул. Примерная, д. 1</p>
-        <form>
-            <label for="name">Имя:</label><br>
-            <input type="text" id="name" name="name" required><br>
-            <label for="message">Сообщение:</label><br>
-            <textarea id="message" name="message" required></textarea><br>
-            <input type="submit" value="Отправить">
-        </form>
-    </section>
-
-    <footer>
-        <p>&copy; 2023 Кофейня "Аромат Кофе". Все права защищены.</p>
-    </footer>
+    <h1>Покупайте сейчас!</h1>
+    <button class="btn">Купить</button>
 </body>
 </html>
 ```
