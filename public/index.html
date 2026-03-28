@@ -3,141 +3,98 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bella Pizza - Пиццерия</title>
+<title>/clear</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  * {
+    box-sizing: border-box;
+  }
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #fff8f0;
-    color: #3e2f1c;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    color: #212121;
   }
   header {
-    background: #d94e1f;
-    color: white;
-    padding: 1rem 2rem;
+    background: #0b82f7;
+    color: #fff;
+    padding: 1.2rem 2rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 3px 8px rgb(11 130 247 / 0.4);
   }
   header h1 {
     margin: 0;
-    font-family: 'Georgia', serif;
     font-weight: 700;
+    font-size: 1.6rem;
   }
   nav a {
-    color: white;
+    color: #def1ff;
     text-decoration: none;
-    margin-left: 1.5rem;
+    margin-left: 1.7rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    font-size: 1rem;
+    transition: color 0.3s ease;
   }
   nav a:hover {
-    text-decoration: underline;
+    color: #fff;
   }
   main {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    max-width: 900px;
+    margin: 2rem auto 4rem;
+    padding: 0 1.5rem;
+    text-align: center;
   }
-  .intro {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-    align-items: center;
-    gap: 2rem;
-  }
-  .intro img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
-  }
-  .intro-text {
-    max-width: 600px;
-  }
-  .intro-text h2 {
+  main h2 {
     font-weight: 700;
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
   }
-  .menu {
-    background: #fef6f0;
-    padding: 2rem;
+  main p {
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #444;
+  }
+  section.content-image {
+    margin-top: 2.5rem;
+  }
+  section.content-image img {
+    max-width: 100%;
     border-radius: 12px;
-    box-shadow: 0 3px 10px rgb(217 78 31 / 0.2);
-  }
-  .menu h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #d94e1f;
-    padding-bottom: 0.3rem;
-    font-weight: 700;
-  }
-  ul.menu-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  ul.menu-list li {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 0;
-    border-bottom: 1px solid #d94e1f30;
-    font-weight: 600;
-  }
-  ul.menu-list li:last-child {
-    border-bottom: none;
-  }
-  .price {
-    color: #d94e1f;
+    box-shadow: 0 6px 16px rgb(0 0 0 / 0.1);
   }
   footer {
-    background: #d94e1f;
-    color: white;
+    background: #0b82f7;
+    color: #def1ff;
     text-align: center;
-    padding: 1rem 0.5rem;
-    margin-top: 4rem;
-    font-size: 0.9rem;
-  }
-  @media (max-width: 700px) {
-    .intro {
-      flex-direction: column;
-    }
-    nav a {
-      margin-left: 1rem;
-      font-size: 0.95rem;
-    }
+    padding: 1rem 2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 -3px 8px rgb(11 130 247 / 0.4);
   }
 </style>
 </head>
 <body>
 <header>
-  <h1>Bella Pizza</h1>
+  <h1>/clear</h1>
   <nav>
-    <a href="#about">О нас</a>
-    <a href="#menu">Меню</a>
-    <a href="#contacts">Контакты</a>
+    <a href="#about">О проекте</a>
+    <a href="#image">Изображение</a>
+    <a href="#footer">Контакты</a>
   </nav>
 </header>
 <main>
-  <section id="about" class="intro">
-    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Пицца Маргарита" />
-    <div class="intro-text">
-      <h2>Добро пожаловать в Bella Pizza</h2>
-      <p>Лучшие итальянские пиццы в Казахстане. Мы используем только свежие ингредиенты и традиционные рецепты, чтобы подарить вам настоящий вкус Италии. Закажите любимую пиццу и наслаждайтесь атмосферой уюта и тепла.</p>
-    </div>
+  <section id="about">
+    <h2>Добро пожаловать на сайт "/clear"</h2>
+    <p>Современный, чистый и прозрачный дизайн, отражающий минимализм и ясность. Здесь нет лишнего — только суть и функциональность.</p>
   </section>
-  <section id="menu" class="menu">
-    <h3>Меню</h3>
-    <ul class="menu-list">
-      <li><span>Маргарита</span> <span class="price">1500 ₸</span></li>
-      <li><span>Пепперони</span> <span class="price">1800 ₸</span></li>
-      <li><span>Четыре сыра</span> <span class="price">2000 ₸</span></li>
-    </ul>
+  <section id="image" class="content-image" aria-label="Фотография подчёркивающая концепт clear">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80" alt="Минималистичный светлый интерьер с чистыми линиями и прозрачным пространством" />
   </section>
 </main>
-<footer id="contacts">
-  <p>© 2024 Bella Pizza — Все права защищены | Тел: +7 (777) 123-45-67 | Алматы, Казахстан</p>
+<footer id="footer">
+  &#169; 2024 /clear — современный чистый стиль. Контакты: info@clear.example
 </footer>
 </body>
 </html>
