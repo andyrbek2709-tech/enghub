@@ -5,145 +5,164 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Современный сайт</title>
 <style>
+  * {
+    box-sizing: border-box;
+  }
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: #121212;
+    color: #eee;
+    line-height: 1.6;
   }
   header {
-    background-color: #0d47a1;
-    color: #fff;
-    padding: 20px 40px;
+    background-color: #1f1f1f;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index:100;
   }
   header h1 {
     margin: 0;
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   nav a {
-    color: #fff;
+    color: #eee;
     text-decoration: none;
-    margin-left: 30px;
+    margin-left: 2rem;
     font-weight: 600;
-    letter-spacing: 0.03em;
     transition: color 0.3s ease;
   }
   nav a:hover {
-    color: #90caf9;
-  }
-  main {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    color: #4dc0ff;
   }
   .hero {
     position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 50px;
+    height: 60vh;
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800') center center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #eee;
   }
-  .hero img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    filter: brightness(0.7);
-    vertical-align: middle;
-  }
-  .hero-text {
+  .hero::before {
+    content: "";
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
+    top:0;left:0;right:0;bottom:0;
+    background-color: rgba(0,0,0,0.6);
+  }
+  .hero-content {
+    position: relative;
     text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    max-width: 600px;
+  }
+  .hero-content h2 {
+    font-size: 3rem;
+    margin: 0 0 1rem;
+  }
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+  main {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1rem;
   }
   section {
-    margin-bottom: 60px;
+    margin-bottom: 3rem;
   }
-  section h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #0d47a1;
-    border-bottom: 3px solid #0d47a1;
-    padding-bottom: 5px;
+  section h3 {
+    border-bottom: 2px solid #4dc0ff;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
-  section p {
-    line-height: 1.6;
-    font-size: 1.1rem;
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+    gap: 1rem;
+  }
+  .gallery img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+    height: 150px;
+    object-fit: cover;
+    filter: brightness(0.85);
+    transition: filter 0.3s ease;
+    cursor: pointer;
+  }
+  .gallery img:hover {
+    filter: brightness(1);
   }
   footer {
-    background-color: #0d47a1;
-    color: #cfd8dc;
+    background-color: #1f1f1f;
+    color: #aaa;
     text-align: center;
-    padding: 20px 40px;
+    padding: 1rem 2rem;
     font-size: 0.9rem;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     header {
       flex-direction: column;
-      align-items: flex-start;
     }
     nav {
-      margin-top: 10px;
+      margin-top: 0.5rem;
     }
     nav a {
-      margin-left: 0;
-      margin-right: 15px;
-      display: inline-block;
-      margin-bottom: 5px;
+      margin-left: 1rem;
+      margin-right: 1rem;
     }
-    .hero img {
-      height: 250px;
-    }
-    .hero-text {
-      font-size: 1.8rem;
-      padding: 0 20px;
-      white-space: normal;
+    .hero-content h2 {
+      font-size: 2rem;
     }
   }
 </style>
 </head>
 <body>
 <header>
-  <h1>Современный Сайт</h1>
+  <h1>Мой Сайт</h1>
   <nav>
-    <a href="#home">Главная</a>
     <a href="#about">О нас</a>
-    <a href="#services">Услуги</a>
+    <a href="#gallery">Галерея</a>
     <a href="#contact">Контакты</a>
   </nav>
 </header>
+<section class="hero" aria-label="Главный баннер">
+  <div class="hero-content">
+    <h2>Красивый и современный веб-сайт</h2>
+    <p>Создаём лучшие сайты для вашего бизнеса</p>
+  </div>
+</section>
 <main>
-  <section id="home" class="hero">
-    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800" alt="Красивый пейзаж" />
-    <div class="hero-text">Добро пожаловать на наш современный сайт</div>
+  <section id="about" aria-labelledby="about-title">
+    <h3 id="about-title">О нас</h3>
+    <p>Мы - команда профессиональных веб-разработчиков, создающих современные и адаптивные сайты с удобной навигацией и привлекательным дизайном.</p>
   </section>
-  <section id="about">
-    <h2>О нас</h2>
-    <p>Мы — команда профессионалов, создающая современные и адаптивные сайты с удобной навигацией и стильным дизайном. Наша задача — помочь вашему бизнесу успешно присутствовать в интернете, предлагая качественные решения и индивидуальный подход к каждому проекту.</p>
+  <section id="gallery" aria-labelledby="gallery-title">
+    <h3 id="gallery-title">Галерея</h3>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800" alt="Современный дизайн интерьера" />
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800" alt="Код на компьютере" />
+      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800" alt="Работа в команде" />
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800" alt="Разработка сайта" />
+    </div>
   </section>
-  <section id="services">
-    <h2>Услуги</h2>
-    <p>Мы предоставляем полный спектр веб-разработки: дизайн, верстка, программирование, SEO-оптимизацию и поддержку. Наши сайты отлично выглядят на любых устройствах и легко управляются.</p>
-  </section>
-  <section id="contact">
-    <h2>Контакты</h2>
-    <p>Свяжитесь с нами для консультации или заказа проекта:</p>
-    <p>Телефон: +7 123 456 7890<br />Email: info@modernsite.ru<br />Адрес: г. Москва, ул. Пушкина, д. 10</p>
+  <section id="contact" aria-labelledby="contact-title">
+    <h3 id="contact-title">Контакты</h3>
+    <p>Свяжитесь с нами для создания вашего идеального сайта:</p>
+    <address>
+      Email: <a href="mailto:info@example.com" style="color: #4dc0ff;">info@example.com</a><br />
+      Телефон: <a href="tel:+71234567890" style="color: #4dc0ff;">+7 123 456 78 90</a>
+    </address>
   </section>
 </main>
 <footer>
-  &copy; 2024 Современный Сайт. Все права защищены.
+  &copy; 2024 Мой Сайт. Все права защищены.
 </footer>
 </body>
 </html>
