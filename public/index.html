@@ -3,659 +3,928 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Современный минималистичный сайт</title>
+<title>Профессиональный Минималистичный Сайт</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-  :root {
-    --color-primary: #1E3A8A;
-    --color-accent: #F97316;
-    --color-background: #F9FAFB;
-    --color-text-main: #111827;
-    --color-text-secondary: #6B7280;
-  }
-  *, *::before, *::after {
-    box-sizing: border-box;
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+  html {
+    scroll-behavior: smooth;
   }
   body {
-    margin:0;
-    font-family: 'Inter', sans-serif;
-    background: var(--color-background);
-    color: var(--color-text-main);
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F5F7FA;
+    color: #333333;
     line-height: 1.5;
     font-size: 16px;
   }
   a {
-    color: inherit;
+    color: #FF6F3C;
     text-decoration: none;
   }
+  a:hover, a:focus {
+    text-decoration: underline;
+  }
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
   header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: white;
-    border-bottom: 1px solid #E5E7EB;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 24px;
-    height: 60px;
-    z-index: 1000;
+    padding: 15px 0;
   }
   .logo {
     font-weight: 700;
     font-size: 24px;
-    color: var(--color-primary);
+    color: #1F3A93;
     user-select: none;
   }
   nav {
     display: flex;
-    gap: 24px;
-    font-weight: 600;
+    gap: 30px;
   }
   nav a {
-    color: var(--color-text-secondary);
-    padding: 8px 0;
-    position: relative;
-  }
-  nav a:focus-visible,
-  nav a:hover {
-    color: var(--color-primary);
-    outline: none;
-  }
-  nav a::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0; right: 0;
-    height: 2px;
-    background: var(--color-accent);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-    transform-origin: right;
-    border-radius: 1px;
-  }
-  nav a:hover::after,
-  nav a:focus-visible::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-  .btn-contact {
-    background-color: var(--color-accent);
-    color: white;
-    border: none;
-    padding: 8px 20px;
     font-weight: 600;
     font-size: 16px;
-    border-radius: 4px;
+    color: #333333;
+    padding: 10px 8px;
+  }
+  nav a:focus-visible {
+    outline: 2px solid #FF6F3C;
+    outline-offset: 2px;
+  }
+  .btn-consult {
+    background-color: #FF6F3C;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 6px;
     cursor: pointer;
+    min-width: 180px;
     transition: background-color 0.3s ease;
   }
-  .btn-contact:hover,
-  .btn-contact:focus-visible {
-    background-color: #d9590a;
+  .btn-consult:hover,
+  .btn-consult:focus-visible {
+    background-color: #e75a27;
     outline: none;
   }
-  .mobile-menu-btn {
+
+  /* Hamburger menu - MOBILE */
+  .hamburger {
     display: none;
-    background: none;
-    border: none;
+    flex-direction: column;
+    gap: 5px;
     cursor: pointer;
-    color: var(--color-primary);
+    width: 28px;
+    height: 22px;
   }
-  .mobile-menu-btn svg {
-    width: 24px;
-    height: 24px;
+  .hamburger span {
+    height: 3px;
+    background: #1F3A93;
+    border-radius: 2px;
+    transition: 0.3s;
   }
-  @media (max-width: 768px) {
-    nav {
-      display: none;
-      flex-direction: column;
-      position: fixed;
-      top: 60px;
-      right: 0;
-      background: white;
-      width: 220px;
-      box-shadow: -2px 0 8px rgb(0 0 0 / 0.1);
-      height: calc(100vh - 60px);
-      padding-top: 16px;
-      z-index: 1100;
-      gap: 16px;
-    }
-    nav.open {
-      display: flex;
-    }
-    .btn-contact {
-      display: none;
-    }
-    .mobile-menu-btn {
-      display: block;
-    }
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 220px;
+    background: white;
+    box-shadow: -4px 4px 16px rgb(0 0 0 / 0.15);
+    border-radius: 6px 0 0 6px;
+    padding: 20px;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1100;
   }
-  main {
-    padding-top: 60px;
+  .mobile-nav a,
+  .mobile-nav button {
+    font-size: 18px;
+    color: #333333;
   }
-  section {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 60px 24px;
-  }
-  /* Hero */
+
+  /* HERO */
   .hero {
+    background-color: #FFFFFF;
+    padding: 60px 0 80px;
+  }
+  .hero-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 40px;
+    gap: 30px;
+    flex-wrap: wrap;
   }
   .hero-content {
-    flex: 1 1 50%;
+    max-width: 600px;
   }
   .hero h1 {
+    font-size: 36px;
     font-weight: 700;
-    font-size: 32px;
-    color: var(--color-primary);
-    margin: 0 0 16px;
+    color: #1F3A93;
+    margin: 0 0 20px;
   }
   .hero p {
     font-size: 18px;
-    color: var(--color-text-secondary);
-    margin: 0 0 32px;
-    max-width: 480px;
+    font-weight: 400;
+    color: #555555;
+    margin: 0 0 30px;
   }
   .hero .btn-hero {
-    background-color: var(--color-accent);
+    background-color: #FF6F3C;
     border: none;
-    padding: 14px 32px;
-    font-weight: 600;
-    font-size: 18px;
-    border-radius: 6px;
-    cursor: pointer;
     color: white;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    min-width: 200px;
     transition: background-color 0.3s ease;
   }
   .hero .btn-hero:hover,
   .hero .btn-hero:focus-visible {
-    background-color: #d9590a;
+    background-color: #e75a27;
     outline: none;
   }
-  .hero-image {
-    flex: 1 1 50%;
-    max-width: 480px;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  .hero-image img {
+  .hero img {
+    max-width: 400px;
     width: 100%;
-    height: auto;
-    display: block;
     border-radius: 12px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
   }
-  /* About */
+
+  /* ABOUT / UTP */
   .about {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    align-items: center;
+    background-color: #F5F7FA;
+    padding: 60px 0;
   }
-  .about-text {
-    flex: 1 1 60%;
-    color: var(--color-text-main);
+  .about-inner {
+    max-width: 900px;
+    margin: 0 auto;
   }
-  .about-text p {
-    font-size: 16px;
-    color: var(--color-text-secondary);
-    max-width: 600px;
-  }
-  .about-icons {
-    flex: 1 1 35%;
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .icon-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 120px;
+  .about h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1F3A93;
     text-align: center;
+    margin-bottom: 40px;
   }
-  .icon-box svg {
-    width: 40px;
-    height: 40px;
-    fill: var(--color-primary);
-    margin-bottom: 12px;
-  }
-  .icon-box span {
-    font-size: 14px;
-    color: var(--color-text-secondary);
-  }
-  /* Advantages */
   .advantages {
     display: flex;
-    gap: 32px;
+    justify-content: center;
+    gap: 40px;
     flex-wrap: wrap;
+  }
+  .advantage {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 260px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+  }
+  .advantage img {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 18px;
+  }
+  .advantage h3 {
+    font-weight: 600;
+    font-size: 20px;
+    color: #1F3A93;
+    margin: 0 0 12px;
+  }
+  .advantage p {
+    color: #555555;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  /* SERVICES */
+  .services {
+    background-color: #FFFFFF;
+    padding: 60px 0;
+  }
+  .services-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .services h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1F3A93;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+  }
+  .service-card {
+    background: #F5F7FA;
+    border-radius: 12px;
+    padding: 28px 24px 36px;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.25s ease;
+  }
+  .service-card:hover,
+  .service-card:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 28px rgb(0 0 0 / 0.1);
+  }
+  .service-card img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+  }
+  .service-card h3 {
+    font-weight: 600;
+    font-size: 22px;
+    color: #1F3A93;
+    margin: 0 0 14px;
+  }
+  .service-card p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #555555;
+    flex-grow: 1;
+    margin-bottom: 18px;
+  }
+  .service-card a {
+    font-weight: 700;
+    font-size: 16px;
+    padding: 10px 22px;
+    background: #FF6F3C;
+    color: white;
+    border-radius: 6px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+  .service-card a:hover,
+  .service-card a:focus-visible {
+    background: #e75a27;
+    outline: none;
+  }
+
+  /* TESTIMONIALS / CASES */
+  .testimonials {
+    background-color: #F5F7FA;
+    padding: 60px 0;
+  }
+  .testimonials-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .testimonials h2 {
+    font-weight: 700;
+    font-size: 32px;
+    color: #1F3A93;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .testimonials-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
     justify-content: center;
   }
-  .advantage-card {
+  .testimonial-card {
     background: white;
-    border-radius: 10px;
-    padding: 24px;
-    flex: 1 1 220px;
-    box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+    border-radius: 16px;
+    padding: 28px 24px;
+    max-width: 320px;
+    box-shadow: 0 6px 18px rgb(0 0 0 / 0.06);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: box-shadow 0.3s ease;
-  }
-  .advantage-card:hover,
-  .advantage-card:focus-within {
-    box-shadow: 0 4px 16px rgb(0 0 0 / 0.15);
-    outline: none;
-  }
-  .advantage-card svg {
-    width: 48px;
-    height: 48px;
-    fill: var(--color-primary);
-    margin-bottom: 16px;
-  }
-  .advantage-card p {
-    font-size: 15px;
-    color: var(--color-text-secondary);
-    margin: 0;
-  }
-  /* Products/Services */
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
-    gap: 24px;
-  }
-  .product-card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-  }
-  .product-card:hover,
-  .product-card:focus {
-    box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
-    outline: none;
-  }
-  .product-card img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-  }
-  .product-info {
-    padding: 16px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .product-info h3 {
-    margin: 0 0 8px;
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--color-primary);
-  }
-  .product-info p {
-    margin: 0;
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    flex-grow: 1;
-  }
-  /* Testimonials */
-  .testimonials {
-    max-width: 720px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .testimonial {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 12px;
-  }
-  .testimonial.active {
-    display: flex;
   }
   .testimonial-photo {
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid var(--color-primary);
-  }
-  .testimonial-photo img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
+    margin-bottom: 18px;
   }
   .testimonial-text {
-    font-style: italic;
-    color: var(--color-text-main);
+    font-weight: 400;
     font-size: 16px;
-    max-width: 560px;
+    color: #555555;
+    flex-grow: 1;
+    margin-bottom: 18px;
   }
   .testimonial-name {
     font-weight: 600;
-    color: var(--color-primary);
+    font-size: 18px;
+    color: #1F3A93;
   }
-  .testimonial-controls {
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
-    gap: 12px;
+
+  /* TEAM */
+  .team {
+    background-color: #FFFFFF;
+    padding: 60px 0;
   }
-  .testimonial-controls button {
-    background: var(--color-primary);
-    border: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    opacity: 0.4;
-    transition: opacity 0.3s ease;
-  }
-  .testimonial-controls button.active,
-  .testimonial-controls button:hover,
-  .testimonial-controls button:focus-visible {
-    opacity: 1;
-    outline: none;
-  }
-  /* CTA */
-  .cta {
-    background-color: var(--color-primary);
-    padding: 48px 24px;
-    color: white;
-    text-align: center;
-    border-radius: 12px;
-    max-width: 720px;
+  .team-inner {
+    max-width: 1000px;
     margin: 0 auto;
+    text-align: center;
   }
-  .cta p {
-    font-size: 20px;
-    margin: 0 0 24px;
-    font-weight: 600;
+  .team h2 {
+    font-weight: 700;
+    font-size: 32px;
+    color: #1F3A93;
+    margin-bottom: 50px;
   }
-  .cta .btn-cta {
-    background-color: var(--color-accent);
-    border: none;
-    padding: 16px 36px;
+  .team-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+  }
+  .team-member {
+    max-width: 220px;
+    background: #F5F7FA;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.04);
+    padding: 24px 20px 30px;
+  }
+  .team-member img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+  .member-name {
     font-weight: 700;
     font-size: 20px;
-    border-radius: 8px;
-    cursor: pointer;
+    color: #1F3A93;
+    margin-bottom: 6px;
+  }
+  .member-role {
+    font-weight: 600;
+    font-size: 16px;
+    color: #555555;
+  }
+  .founder-quote {
+    margin-top: 60px;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 18px;
+    color: #333333;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* BLOG / NEWS */
+  .blog {
+    background-color: #F5F7FA;
+    padding: 60px 0;
+  }
+  .blog-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .blog h2 {
+    font-weight: 700;
+    font-size: 32px;
+    color: #1F3A93;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .blog-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 32px;
+  }
+  .blog-post {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgb(0 0 0 / 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .blog-post img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+  }
+  .post-content {
+    padding: 20px 24px 28px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .post-title {
+    color: #1F3A93;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 0 12px;
+  }
+  .post-desc {
+    color: #555555;
+    font-size: 16px;
+    font-weight: 400;
+    flex-grow: 1;
+    margin: 0 0 18px;
+  }
+  .btn-blog {
+    align-self: flex-start;
+    background: #FF6F3C;
     color: white;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
     transition: background-color 0.3s ease;
   }
-  .cta .btn-cta:hover,
-  .cta .btn-cta:focus-visible {
-    background-color: #d9590a;
+  .btn-blog:hover,
+  .btn-blog:focus-visible {
+    background: #e75a27;
     outline: none;
   }
-  /* Footer */
+  .blog-footer {
+    text-align: center;
+    margin-top: 40px;
+  }
+  .btn-view-all {
+    background-color: #FF6F3C;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 14px 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  .btn-view-all:hover,
+  .btn-view-all:focus-visible {
+    background-color: #e75a27;
+    outline: none;
+  }
+
+  /* FOOTER */
   footer {
-    background: white;
-    color: var(--color-text-secondary);
-    font-size: 14px;
-    padding: 24px;
-    max-width: 1080px;
-    margin: 0 auto 24px;
+    background-color: #1F3A93;
+    color: white;
+    padding: 40px 0 60px;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
+    gap: 40px;
     justify-content: space-between;
-    gap: 16px;
   }
-  .footer-info,
-  .footer-links,
-  .footer-social {
+  .footer-col {
+    flex: 1 1 220px;
+    min-width: 220px;
+  }
+  .footer h3 {
+    margin-top: 0;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .footer a {
+    display: block;
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 6px 0;
+  }
+  .footer a:hover,
+  .footer a:focus-visible {
+    text-decoration: underline;
+    outline: none;
+  }
+  .social-links {
     display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    align-items: center;
+    gap: 20px;
   }
-  .footer-info {
-    flex: 1 1 300px;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .footer-links a {
-    color: var(--color-text-secondary);
-    text-decoration: none;
+  .social-links a {
+    font-size: 24px;
+    color: white;
     transition: color 0.3s ease;
   }
-  .footer-links a:hover,
-  .footer-links a:focus-visible {
-    color: var(--color-primary);
+  .social-links a:hover,
+  .social-links a:focus-visible {
+    color: #FF6F3C;
     outline: none;
   }
-  .footer-social a {
-    color: var(--color-primary);
-    transition: color 0.3s ease;
+  .newsletter-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: nowrap;
   }
-  .footer-social a:hover,
-  .footer-social a:focus-visible {
-    color: var(--color-accent);
+  .newsletter-form input[type="email"] {
+    flex-grow: 1;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    outline-offset: 2px;
+  }
+  .newsletter-form input[type="email"]:focus {
+    outline: 2px solid #FF6F3C;
+  }
+  .newsletter-form button {
+    background-color: #FF6F3C;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .newsletter-form button:hover,
+  .newsletter-form button:focus-visible {
+    background-color: #e75a27;
     outline: none;
   }
-  .footer-social svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
+
+  .legal {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #ccc;
+    text-align: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 991px) {
+    .hero-inner {
+      flex-direction: column-reverse;
+      text-align: center;
+    }
+    .hero img {
+      max-width: 100%;
+      margin-bottom: 40px;
+    }
+    .advantages {
+      flex-direction: column;
+      align-items: center;
+    }
+    .testimonials-list {
+      flex-direction: column;
+      align-items: center;
+    }
+    .team-list {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  @media (max-width: 767px) {
+    nav {
+      display: none;
+    }
+    .btn-consult {
+      min-width: auto;
+      padding: 10px 16px;
+    }
+    .hamburger {
+      display: flex;
+    }
+    .mobile-nav.show {
+      display: flex;
+    }
   }
 </style>
 </head>
 <body>
 <header>
-  <div class="logo" tabindex="0">BrandName</div>
-  <nav id="nav-menu" aria-label="Главное меню">
-    <a href="#hero" tabindex="0">Главная</a>
-    <a href="#about" tabindex="0">О нас</a>
-    <a href="#products" tabindex="0">Услуги</a>
-    <a href="#contacts" tabindex="0">Контакты</a>
+  <div class="container header-inner">
+    <div class="logo" tabindex="0">MinimalPro</div>
+    <nav aria-label="Основное меню">
+      <a href="#hero">Главная</a>
+      <a href="#services">Услуги</a>
+      <a href="#testimonials">Кейсы</a>
+      <a href="#blog">Блог</a>
+      <a href="#footer">Контакты</a>
+    </nav>
+    <button class="btn-consult" onclick="document.getElementById('consultation-form')?.scrollIntoView({behavior:'smooth'})" aria-label="Заказать консультацию">Заказать консультацию</button>
+    <button class="hamburger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu" id="hamburgerBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobile-menu" aria-label="Мобильное меню">
+    <a href="#hero" onclick="toggleMobileMenu()">Главная</a>
+    <a href="#services" onclick="toggleMobileMenu()">Услуги</a>
+    <a href="#testimonials" onclick="toggleMobileMenu()">Кейсы</a>
+    <a href="#blog" onclick="toggleMobileMenu()">Блог</a>
+    <a href="#footer" onclick="toggleMobileMenu()">Контакты</a>
+    <button class="btn-consult" style="width:100%;margin-top:20px;" onclick="toggleMobileMenu();document.getElementById('consultation-form')?.scrollIntoView({behavior:'smooth'})">Заказать консультацию</button>
   </nav>
-  <button class="btn-contact" onclick="location.href='#contacts'" aria-label="Связаться">Связаться</button>
-  <button class="mobile-menu-btn" aria-label="Меню" aria-controls="nav-menu" aria-expanded="false">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
-      <line x1="3" y1="6" x2="21" y2="6"/>
-      <line x1="3" y1="12" x2="21" y2="12"/>
-      <line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
-  </button>
 </header>
-<main>
-  <section id="hero" class="hero" tabindex="-1">
+
+<section class="hero" id="hero" tabindex="-1">
+  <div class="container hero-inner">
     <div class="hero-content">
-      <h1>Доверяйте профессионалам вашего дела</h1>
-      <p>Наш опыт и ценности помогут вашему бизнесу расти и развиваться современными темпами и трендами.</p>
-      <button class="btn-hero" onclick="location.href='#contacts'">Связаться сейчас</button>
+      <h1>Современные решения для вашего бизнеса</h1>
+      <p>Мы создаём профессиональные минималистичные веб-сайты, чтобы ваш бренд выделялся, а клиенты доверяли вам с первого взгляда.</p>
+      <button class="btn-hero" onclick="document.getElementById('consultation-form')?.scrollIntoView({behavior:'smooth'})" aria-label="Заказать консультацию">Заказать консультацию</button>
     </div>
-    <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800" alt="Профессиональная команда" loading="lazy" />
-    </div>
-  </section>
+    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800" alt="Современный рабочий процесс веб-разработчика" />
+  </div>
+</section>
 
-  <section id="about" class="about" tabindex="-1" aria-label="О компании">
-    <div class="about-text">
-      <p>Мы — команда экспертов с многолетним опытом в разработке эффективных и современных решений. Наша миссия — создавать продукты, которые приносят реальную пользу вашим клиентам и бизнесу. Мы ценим ответственность, качество и инновации.</p>
+<section class="about" id="about" tabindex="-1" aria-labelledby="about-title">
+  <div class="about-inner">
+    <h2 id="about-title">О компании</h2>
+    <p style="max-width:700px; margin:0 auto 48px; font-size:18px; font-weight:400; color:#555555; text-align:center;">
+      MinimalPro — команда опытных веб-разработчиков, которые ценят чистый дизайн и максимальную удобность для пользователей. Мы делаем ваши идеи реальностью с простыми и стильными решениями.
+    </p>
+    <div class="advantages" role="list">
+      <article class="advantage" role="listitem">
+        <img src="https://images.unsplash.com/photo-1526378721144-fc85a5d2f880?w=64" alt="Иконка скорости" />
+        <h3>Быстрая загрузка</h3>
+        <p>Оптимизация до миллисекунд — для комфортного и быстрого взаимодействия с сайтом.</p>
+      </article>
+      <article class="advantage" role="listitem">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=64" alt="Иконка адаптивности" />
+        <h3>Адаптивность</h3>
+        <p>Идеальное отображение на всех устройствах — от смартфонов до десктопов.</p>
+      </article>
+      <article class="advantage" role="listitem">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=64" alt="Иконка поддержки" />
+        <h3>Поддержка и обновления</h3>
+        <p>Мы всегда на связи и помогаем развивать ваш сайт по мере необходимости.</p>
+      </article>
     </div>
-    <div class="about-icons" aria-hidden="true">
-      <div class="icon-box">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        <span>Опыт</span>
-      </div>
-      <div class="icon-box">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-width="2" stroke="currentColor" fill="none"/><path d="M12 6v6l4 2" stroke-width="2" stroke="currentColor" fill="none"/></svg>
-        <span>Ответственность</span>
-      </div>
-      <div class="icon-box">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17v-2a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v2"/><circle cx="12" cy="7" r="4" /></svg>
-        <span>Команда</span>
-      </div>
+  </div>
+</section>
+
+<section class="services" id="services" tabindex="-1" aria-labelledby="services-title">
+  <div class="services-inner">
+    <h2 id="services-title">Наши услуги</h2>
+    <div class="services-list" role="list">
+      <article class="service-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=64" alt="Иконка дизайна" />
+        <h3>Web-дизайн</h3>
+        <p>Создадим лаконичный и стильный дизайн, который подчеркнёт индивидуальность вашего бренда.</p>
+        <a href="#services" aria-label="Подробнее о Web-дизайне">Подробнее</a>
+      </article>
+      <article class="service-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=64" alt="Иконка разработки" />
+        <h3>Разработка сайтов</h3>
+        <p>Эффективные и быстрые сайты с современными технологиями для вашего бизнеса.</p>
+        <a href="#services" aria-label="Подробнее о Разработке сайтов">Подробнее</a>
+      </article>
+      <article class="service-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=64" alt="Иконка SEO" />
+        <h3>SEO-оптимизация</h3>
+        <p>Повышаем видимость в поисковых системах и привлекаем целевых посетителей.</p>
+        <a href="#services" aria-label="Подробнее о SEO-оптимизации">Подробнее</a>
+      </article>
+      <article class="service-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?w=64" alt="Иконка поддержки" />
+        <h3>Техническая поддержка</h3>
+        <p>Обеспечиваем стабильную работу и своевременные обновления вашего сайта.</p>
+        <a href="#services" aria-label="Подробнее о технической поддержке">Подробнее</a>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="advantages" class="advantages" tabindex="-1" aria-label="Преимущества">
-    <article class="advantage-card" tabindex="0">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke-width="2" stroke="currentColor" fill="none"/></svg>
-      <p>Безупречное качество работы и сроки</p>
-    </article>
-    <article class="advantage-card" tabindex="0">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-width="2" stroke="currentColor" fill="none"/><path d="M12 6v6l4 2" stroke-width="2" stroke="currentColor" fill="none"/></svg>
-      <p>Инновационные технологии и подходы</p>
-    </article>
-    <article class="advantage-card" tabindex="0">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16" stroke-width="2" stroke="currentColor" fill="none"/></svg>
-      <p>Индивидуальный подход к каждому клиенту</p>
-    </article>
-    <article class="advantage-card" tabindex="0">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 1 1-8 0" stroke-width="2" stroke="currentColor" fill="none"/></svg>
-      <p>Поддержка и развитие после запуска</p>
-    </article>
-  </section>
+<section class="testimonials" id="testimonials" tabindex="-1" aria-labelledby="testimonials-title">
+  <div class="testimonials-inner">
+    <h2 id="testimonials-title">Отзывы клиентов</h2>
+    <div class="testimonials-list" role="list">
+      <article class="testimonial-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=64" alt="Фото клиента Анна П." class="testimonial-photo" />
+        <p class="testimonial-text">«MinimalPro сделали наш сайт простым и современным. Клиенты отмечают удобство, а мы довольны скоростью и поддержкой.»</p>
+        <p class="testimonial-name">Анна П., директор</p>
+      </article>
+      <article class="testimonial-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=64" alt="Фото клиента Иван С." class="testimonial-photo" />
+        <p class="testimonial-text">«Профессиональная команда с четким пониманием задач. Сайт работает без сбоев уже полгода, что для нас большой плюс.»</p>
+        <p class="testimonial-name">Иван С., маркетолог</p>
+      </article>
+      <article class="testimonial-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=64" alt="Фото клиента Мария К." class="testimonial-photo" />
+        <p class="testimonial-text">«Рекомендуем MinimalPro тем, кто ищет минимализм и качество. Все было сделано в срок и с максимальным вниманием к деталям.»</p>
+        <p class="testimonial-name">Мария К., предприниматель</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-  <section id="products" tabindex="-1" aria-label="Продукты и услуги">
-    <div class="products-grid">
-      <a href="#" class="product-card" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="Веб-разработка" loading="lazy" />
-        <div class="product-info">
-          <h3>Веб-разработка</h3>
-          <p>Создание современных, адаптивных и быстрых сайтов любой сложности.</p>
+<section class="team" id="team" tabindex="-1" aria-labelledby="team-title">
+  <div class="team-inner">
+    <h2 id="team-title">Наша команда</h2>
+    <div class="team-list" role="list">
+      <article class="team-member" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400" alt="Фото Александра Иванова - Руководитель проекта" />
+        <p class="member-name">Александр Иванов</p>
+        <p class="member-role">Руководитель проекта</p>
+      </article>
+      <article class="team-member" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=400" alt="Фото Елена Смирнова - Ведущий дизайнер" />
+        <p class="member-name">Елена Смирнова</p>
+        <p class="member-role">Ведущий дизайнер</p>
+      </article>
+      <article class="team-member" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400" alt="Фото Дмитрий Кузнецов - Старший разработчик" />
+        <p class="member-name">Дмитрий Кузнецов</p>
+        <p class="member-role">Старший разработчик</p>
+      </article>
+      <article class="team-member" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400" alt="Фото Ольга Петрова - Менеджер проектов" />
+        <p class="member-name">Ольга Петрова</p>
+        <p class="member-role">Менеджер проектов</p>
+      </article>
+    </div>
+    <blockquote class="founder-quote" tabindex="0" aria-label="Цитата основателя">
+      «Мы верим, что минимализм – это не отсутствие, а правильно подобранное содержание. Простота рождает доверие.» — Александр Иванов, основатель MinimalPro
+    </blockquote>
+  </div>
+</section>
+
+<section class="blog" id="blog" tabindex="-1" aria-labelledby="blog-title">
+  <div class="blog-inner">
+    <h2 id="blog-title">Новости и статьи</h2>
+    <div class="blog-list" role="list">
+      <article class="blog-post" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800" alt="Советы по современному дизайну" />
+        <div class="post-content">
+          <h3 class="post-title">5 трендов в минималистичном дизайне 2024</h3>
+          <p class="post-desc">Обзор главных направлений, которые помогут вашему сайту оставаться актуальным и удобным.</p>
+          <a href="#blog" class="btn-blog" aria-label="Читать статью 5 трендов в минималистичном дизайне 2024">Читать</a>
         </div>
-      </a>
-      <a href="#" class="product-card" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?w=800" alt="Мобильные приложения" loading="lazy" />
-        <div class="product-info">
-          <h3>Мобильные приложения</h3>
-          <p>Разработка удобных и функциональных приложений для iOS и Android.</p>
+      </article>
+      <article class="blog-post" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800" alt="Оптимизация сайта под SEO" />
+        <div class="post-content">
+          <h3 class="post-title">SEO для современных сайтов: что изменилось?</h3>
+          <p class="post-desc">Новые правила и советы по продвижению в поисковых системах, которые работают в 2024 году.</p>
+          <a href="#blog" class="btn-blog" aria-label="Читать статью SEO для современных сайтов: что изменилось?">Читать</a>
         </div>
-      </a>
-      <a href="#" class="product-card" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800" alt="UI/UX дизайн" loading="lazy" />
-        <div class="product-info">
-          <h3>UI/UX дизайн</h3>
-          <p>Создаем интуитивно понятные интерфейсы и дизайн высокой эстетики.</p>
+      </article>
+      <article class="blog-post" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?w=800" alt="Техническая поддержка сайта" />
+        <div class="post-content">
+          <h3 class="post-title">Почему важна техническая поддержка сайта?</h3>
+          <p class="post-desc">Разбираемся, как своевременная поддержка помогает избежать потерь и простоев.</p>
+          <a href="#blog" class="btn-blog" aria-label="Читать статью Почему важна техническая поддержка сайта?">Читать</a>
         </div>
-      </a>
-      <a href="#" class="product-card" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800" alt="Техническая поддержка" loading="lazy" />
-        <div class="product-info">
-          <h3>Техническая поддержка</h3>
-          <p>Круглосуточная поддержка и сопровождение проектов после релиза.</p>
-        </div>
-      </a>
+      </article>
     </div>
-  </section>
-
-  <section id="testimonials" class="testimonials" tabindex="-1" aria-label="Отзывы клиентов">
-    <article class="testimonial active" aria-live="polite">
-      <div class="testimonial-photo">
-        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=72&h=72&fit=crop&crop=faces" alt="Фото клиента Анна Петрова" loading="lazy" />
-      </div>
-      <p class="testimonial-text">"Компания помогла запустить наш сайт за короткие сроки и с отличной поддержкой. Моя команда довольна результатом!"</p>
-      <span class="testimonial-name">Анна Петрова</span>
-    </article>
-    <article class="testimonial" aria-live="polite">
-      <div class="testimonial-photo">
-        <img src="https://images.unsplash.com/photo-1508214908516-16b3d9f90f55?w=72&h=72&fit=crop&crop=faces" alt="Фото клиента Иван Иванов" loading="lazy" />
-      </div>
-      <p class="testimonial-text">"Профессиональный подход и внимательное отношение к деталям сделали наше сотрудничество приятным и эффективным."</p>
-      <span class="testimonial-name">Иван Иванов</span>
-    </article>
-    <article class="testimonial" aria-live="polite">
-      <div class="testimonial-photo">
-        <img src="https://images.unsplash.com/photo-1508214908516-16b3d9f90f66?w=72&h=72&fit=crop&crop=faces" alt="Фото клиента Мария Соколова" loading="lazy" />
-      </div>
-      <p class="testimonial-text">"Рекомендую команду всем, кто хочет получить качественный современный сайт под ключ."</p>
-      <span class="testimonial-name">Мария Соколова</span>
-    </article>
-    <div class="testimonial-controls" aria-label="Управление отзывами">
-      <button aria-label="Отзыв 1" class="active" type="button"></button>
-      <button aria-label="Отзыв 2" type="button"></button>
-      <button aria-label="Отзыв 3" type="button"></button>
+    <div class="blog-footer">
+      <button class="btn-view-all" onclick="alert('Переход к блогу')">Смотреть все</button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="cta" class="cta" tabindex="-1" aria-label="Призыв к действию">
-    <p>Готовы начать? Закажите консультацию и получите индивидуальное предложение!</p>
-    <button class="btn-cta" onclick="location.href='#contacts'">Заказать консультацию</button>
-  </section>
+<section id="consultation-form" tabindex="-1" style="padding: 60px 0; background:#FFFFFF;">
+  <div class="container" style="max-width:480px;">
+    <h2 style="font-size:28px; font-weight:700; color: #1F3A93; margin-bottom: 24px; text-align:center;">Заказать консультацию</h2>
+    <form novalidate aria-label="Форма заказа консультации" onsubmit="return handleSubmit(event)" style="display:flex; flex-direction:column; gap:18px;">
+      <label for="name" style="font-weight:600; font-size:16px; color:#333;">Имя<span aria-hidden="true" style="color:#FF6F3C;"> *</span></label>
+      <input type="text" id="name" name="name" required aria-required="true" aria-describedby="nameHelp" autocomplete="name" style="padding:12px 16px; font-size:16px; border-radius:6px; border:1px solid #ccc;" />
+      <span id="nameHelp" class="error-msg" style="color:#FF6F3C; font-size:14px; display:none;">Пожалуйста, укажите имя.</span>
 
-  <section id="contacts" tabindex="-1" aria-label="Контакты и обратная связь">
-    <h2 style="text-align:center; color: var(--color-primary); font-weight: 700; font-size:28px; margin-bottom: 24px;">Свяжитесь с нами</h2>
-    <form style="max-width: 480px; margin: 0 auto; display:flex; flex-direction: column; gap: 16px;" action="#" method="post" novalidate>
-      <label for="name" style="color: var(--color-text-main); font-weight: 600;">Имя</label>
-      <input id="name" name="name" type="text" required style="padding: 12px; font-size: 16px; border: 1px solid #D1D5DB; border-radius: 6px;" />
-      <label for="email" style="color: var(--color-text-main); font-weight: 600;">Email</label>
-      <input id="email" name="email" type="email" required style="padding: 12px; font-size: 16px; border: 1px solid #D1D5DB; border-radius: 6px;" />
-      <label for="message" style="color: var(--color-text-main); font-weight: 600;">Сообщение</label>
-      <textarea id="message" name="message" rows="4" required style="padding: 12px; font-size: 16px; border: 1px solid #D1D5DB; border-radius: 6px;"></textarea>
-      <button type="submit" class="btn-hero" style="align-self: center; max-width: 200px;">Отправить</button>
+      <label for="email" style="font-weight:600; font-size:16px; color:#333;">Email<span aria-hidden="true" style="color:#FF6F3C;"> *</span></label>
+      <input type="email" id="email" name="email" required aria-required="true" aria-describedby="emailHelp" autocomplete="email" style="padding:12px 16px; font-size:16px; border-radius:6px; border:1px solid #ccc;" />
+      <span id="emailHelp" class="error-msg" style="color:#FF6F3C; font-size:14px; display:none;">Пожалуйста, введите корректный email.</span>
+
+      <label for="message" style="font-weight:600; font-size:16px; color:#333;">Сообщение</label>
+      <textarea id="message" name="message" rows="5" style="padding:12px 16px; font-size:16px; border-radius:6px; border:1px solid #ccc;"></textarea>
+
+      <button type="submit" class="btn-consult" style="align-self:center; min-width: 220px;">Отправить</button>
     </form>
-  </section>
-</main>
-<footer>
-  <div class="footer-info" aria-label="Контактная информация">
-    <div>Телефон: <a href="tel:+123456789">+1 234 567 89</a></div>
-    <div>Email: <a href="mailto:info@brandname.com">info@brandname.com</a></div>
-    <div>Адрес: г. Москва, ул. Примерная, 12</div>
   </div>
-  <div class="footer-links" aria-label="Полезные ссылки">
-    <a href="#privacy">Политика конфиденциальности</a>
-    <a href="#faq">FAQ</a>
+</section>
+
+<footer id="footer" tabindex="-1" aria-label="Футер сайта">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <h3>Контакты</h3>
+      <a href="tel:+79991234567" aria-label="Телефон +7 999 123-45-67">Телефон: +7 999 123-45-67</a>
+      <a href="mailto:info@minimalpro.ru" aria-label="Email info@minimalpro.ru">Email: info@minimalpro.ru</a>
+      <address style="font-style:normal; margin-top:8px;">Москва, ул. Тверская, 7</address>
+    </div>
+    <div class="footer-col">
+      <h3>Меню</h3>
+      <a href="#hero">Главная</a>
+      <a href="#services">Услуги</a>
+      <a href="#testimonials">Кейсы</a>
+      <a href="#blog">Блог</a>
+      <a href="#consultation-form">Заказать консультацию</a>
+    </div>
+    <div class="footer-col" aria-label="Социальные сети">
+      <h3>Мы в соцсетях</h3>
+      <div class="social-links">
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" tabindex="0">&#x1F426;</a>
+        <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter" tabindex="0">&#x1F426;</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" tabindex="0">&#x1F426;</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h3>Подписка</h3>
+      <form class="newsletter-form" aria-label="Подписка на рассылку" onsubmit="return handleSubscribe(event)" novalidate>
+        <input type="email" id="subscribe-email" name="subscribe-email" aria-label="Ваш email" placeholder="Ваш email" required autocomplete="email" />
+        <button type="submit" aria-label="Подписаться на рассылку">Подписаться</button>
+      </form>
+      <span id="subscribeMessage" role="alert" style="display:none; color:#FF6F3C; font-size:14px; margin-top:8px;"></span>
+    </div>
   </div>
-  <div class="footer-social" aria-label="Социальные сети">
-    <a href="#" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.625 9.874v-6.982h-3.27v-2.892h3.27v-2.207c0-3.235 1.926-5.012 4.885-5.012 1.417 0 2.9.253 2.9.253v3.187h-1.638c-1.615 0-2.119 1-2.119 2.027v2.751h3.606l-.577 2.892h-3.029v6.987A10 10 0 0 0 22 12z"/></svg></a>
-    <a href="#" aria-label="Twitter" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14.86 4.48 4.48 0 0 0 2-2.5 9.14 9.14 0 0 1-2.88 1.11 4.48 4.48 0 0 0-7.64 4.09A12.72 12.72 0 0 1 2 3.15a4.48 4.48 0 0 0 1.4 6 4.37 4.37 0 0 1-2-.57v.06a4.49 4.49 0 0 0 3.6 4.4 4.51 4.51 0 0 1-1.99.08 4.48 4.48 0 0 0 4.18 3.12 9 9 0 0 1-6 2.1 9.21 9.21 0 0 1-1.07-.06 12.54 12.54 0 0 0 6.7 1.96c8 0 12.37-6.6 12.37-12.3 0-.2 0-.4-.02-.6A8.6 8.6 0 0 0 23 3z"/></svg></a>
-    <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM6 9H2v12h4zM4 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></a>
+  <div class="legal" aria-label="Юридическая информация">
+    &copy; 2024 MinimalPro. Все права защищены.
   </div>
 </footer>
+
 <script>
-  const menuBtn = document.querySelector('.mobile-menu-btn');
-  const navMenu = document.getElementById('nav-menu');
-  menuBtn.addEventListener('click', () => {
-    const expanded = menuBtn.getAttribute('aria-expanded') === 'true' || false;
-    menuBtn.setAttribute('aria-expanded', !expanded);
-    navMenu.classList.toggle('open');
-  });
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-  // Testimonials slider
-  const testimonials = document.querySelectorAll('.testimonial');
-  const controls = document.querySelectorAll('.testimonial-controls button');
+  hamburgerBtn.addEventListener('click', toggleMobileMenu);
 
-  let currentIndex = 0;
-
-  function showTestimonial(index) {
-    testimonials.forEach((t, i) => {
-      t.classList.toggle('active', i === index);
-      controls[i].classList.toggle('active', i === index);
-    });
-    currentIndex = index;
+  function toggleMobileMenu() {
+    const expanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+    hamburgerBtn.setAttribute('aria-expanded', !expanded);
+    mobileMenu.classList.toggle('show');
   }
 
-  controls.forEach((btn, i) => {
-    btn.addEventListener('click', () => {
-      showTestimonial(i);
-    });
-  });
+  function handleSubmit(event){
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    let valid = true;
 
-  // Auto rotate testimonials every 8 seconds, pause on focus/hover
-  let autoRotate = setInterval(() => {
-    let nextIndex = (currentIndex + 1) % testimonials.length;
-    showTestimonial(nextIndex);
-  }, 8000);
+    const nameHelp = document.getElementById('nameHelp');
+    const emailHelp = document.getElementById('emailHelp');
 
-  document.querySelector('.testimonials').addEventListener('mouseenter', () => clearInterval(autoRotate));
-  document.querySelector('.testimonials').addEventListener('mouseleave', () => {
-    autoRotate = setInterval(() => {
-      let nextIndex = (currentIndex + 1) % testimonials.length;
-      showTestimonial(nextIndex);
-    }, 8000);
-  });
+    if(name.length === 0){
+      nameHelp.style.display = 'block';
+      valid = false;
+    } else {
+      nameHelp.style.display = 'none';
+    }
+    if(!validateEmail(email)){
+      emailHelp.style.display = 'block';
+      valid = false;
+    } else {
+      emailHelp.style.display = 'none';
+    }
+    if(!valid) return false;
+
+    alert('Спасибо за заявку, ' + name + '! Мы свяжемся с вами в ближайшее время.');
+    form.reset();
+    return false;
+  }
+
+  function validateEmail(email) {
+    const re = /^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$/;
+    return re.test(email.toLowerCase());
+  }
+
+  function handleSubscribe(event){
+    event.preventDefault();
+    const emailInput = event.target['subscribe-email'];
+    const msg = document.getElementById('subscribeMessage');
+    if(validateEmail(emailInput.value.trim())){
+      msg.style.color = '#4BB543';
+      msg.textContent = 'Спасибо за подписку!';
+      emailInput.value = '';
+    } else {
+      msg.style.color = '#FF6F3C';
+      msg.textContent = 'Введите корректный email.';
+    }
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 4000);
+    return false;
+  }
 </script>
 </body>
 </html>
