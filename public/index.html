@@ -3,182 +3,237 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Тёмно фиолетовый сайт</title>
+<title>Японский Ресторан "Сакура"</title>
 <style>
   :root {
-    --dark-purple: #2e1a47;
-    --medium-purple: #4b297a;
-    --light-purple: #6c4fa0;
-    --accent-purple: #9f7ee7;
-    --text-light: #e0d9f2;
-    --text-dark: #ccc3dc;
-    --hover-purple: #855fd1;
+    --color-primary: #e60039;
+    --color-secondary: #ffffff;
+    --color-bg: #f7f7f7;
+    --color-text: #333333;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   * {
     box-sizing: border-box;
   }
   body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--dark-purple);
-    color: var(--text-light);
+    margin: 0; 
+    font-family: var(--font-family);
+    background-color: var(--color-bg);
+    color: var(--color-text);
   }
   header {
-    background-color: var(--medium-purple);
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
     padding: 1rem 2rem;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.4);
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
   header h1 {
-    margin: 0;
     font-weight: 700;
     font-size: 1.8rem;
-    color: var(--accent-purple);
-  }
-  nav ul {
-    list-style: none;
     margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 1.8rem;
   }
   nav a {
-    color: var(--text-light);
+    color: var(--color-secondary);
     text-decoration: none;
+    margin-left: 2rem;
     font-weight: 600;
-    font-size: 1rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: color 0.3s ease;
   }
-  nav a:hover,
-  nav a:focus {
-    background-color: var(--hover-purple);
-    color: white;
-    outline: none;
+  nav a:hover {
+    color: #ff99a4;
+  }
+  .hero {
+    position: relative;
+    height: 60vh;
+    background: url('https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=800') center center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-secondary);
+    text-shadow: 0 0 10px rgba(0,0,0,0.6);
+  }
+  .hero h2 {
+    font-size: 3rem;
+    background-color: rgba(230, 0, 57, 0.7);
+    padding: 1rem 2rem;
+    border-radius: 8px;
   }
   main {
     max-width: 1200px;
-    margin: 2rem auto;
+    margin: 3rem auto 4rem;
     padding: 0 1rem;
   }
-  .hero {
-    background: linear-gradient(135deg, #48307bcc, #1f153fcc), url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800") no-repeat center/cover;
-    border-radius: 12px;
-    color: var(--text-light);
-    padding: 4rem 2rem;
-    text-align: center;
-    box-shadow: 0 6px 12px rgb(0 0 0 / 0.5);
+  section {
+    margin-bottom: 3rem;
   }
-  .hero h2 {
-    font-size: 2.8rem;
-    margin-bottom: 0.7rem;
+  section h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid var(--color-primary);
+    padding-bottom: .3rem;
   }
-  .hero p {
-    font-size: 1.3rem;
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-  section.cards {
-    margin-top: 3rem;
+  .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
     gap: 2rem;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
   }
-  .card {
-    background-color: var(--medium-purple);
-    padding: 1.8rem 1.4rem;
+  .menu-item {
+    background: var(--color-secondary);
     border-radius: 12px;
-    box-shadow: 0 3px 8px rgb(0 0 0 / 0.45);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+    overflow: hidden;
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
   }
-  .card:hover {
-    transform: translateY(-6px);
+  .menu-item:hover {
+    transform: translateY(-10px);
   }
-  .card img {
-    border-radius: 10px;
+  .menu-item img {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    margin-bottom: 1rem;
   }
-  .card h3 {
-    margin-top: 0;
-    font-size: 1.4rem;
-    color: var(--accent-purple);
+  .menu-content {
+    padding: 1rem 1.2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
-  .card p {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: var(--text-dark);
+  .menu-content h4 {
+    margin: 0 0 .5rem;
+    font-size: 1.3rem;
+    color: var(--color-primary);
+  }
+  .menu-content p {
+    margin: 0 0 1rem;
+    flex-grow: 1;
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+  }
+  .menu-content span {
+    font-weight: 700;
+    color: var(--color-primary);
+    font-size: 1.1rem;
   }
   footer {
-    background-color: var(--medium-purple);
-    padding: 1.5rem 2rem;
-    color: var(--text-dark);
+    background-color: #222;
+    color: #ddd;
     text-align: center;
+    padding: 1.5rem 1rem;
     font-size: 0.9rem;
-    margin-top: 4rem;
+  }
+  footer a {
+    color: #e60039;
+    text-decoration: none;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    nav {
+      margin-top: .5rem;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      padding: .7rem 1.2rem;
+    }
   }
 </style>
 </head>
 <body>
 <header>
-  <h1>Фиолетовый Сайт</h1>
+  <h1>Сакура</h1>
   <nav>
-    <ul>
-      <li><a href="#home" tabindex="1">Главная</a></li>
-      <li><a href="#services" tabindex="2">Услуги</a></li>
-      <li><a href="#about" tabindex="3">О нас</a></li>
-      <li><a href="#contact" tabindex="4">Контакты</a></li>
-    </ul>
+    <a href="#about">О нас</a>
+    <a href="#menu">Меню</a>
+    <a href="#contact">Контакты</a>
   </nav>
 </header>
+
+<section class="hero">
+  <h2>Изысканная японская кухня у вас на столе</h2>
+</section>
+
 <main>
-  <section class="hero" id="home" role="banner" aria-label="Главный баннер сайта">
-    <h2>Добро пожаловать в мир тёмных фиолетовых оттенков</h2>
-    <p>Современный и стильный веб-сайт с темной тематикой, наполненный атмосферой изысканности и глубины. Исследуйте возможности фиолетового сегодня!</p>
+  <section id="about">
+    <h3>О нас</h3>
+    <p>Добро пожаловать в "Сакуру" – ресторан японской кухни, где традиции сочетаются с современным подходом к приготовлению блюд. Мы предлагаем свежие суши, сашими, рамен и многое другое в теплой и уютной атмосфере.</p>
   </section>
-  <section class="cards" id="services" aria-label="Наши услуги">
-    <article class="card" tabindex="0">
-      <img src="https://images.unsplash.com/photo-1520975697801-4f7df4aa3a53?w=800" alt="Дизайн интерфейсов в фиолетовых тонах" />
-      <h3>Дизайн интерфейсов</h3>
-      <p>Создаем современные UX/UI решения с акцентом на стильные темные фиолетовые палитры для яркого визуального впечатления.</p>
-    </article>
-    <article class="card" tabindex="0">
-      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800" alt="Разработка веб-приложений" />
-      <h3>Разработка</h3>
-      <p>Пишем эффективные и надежные веб-приложения, гармонично вписывающиеся в темные стили и обеспечивающие отличную производительность.</p>
-    </article>
-    <article class="card" tabindex="0">
-      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="SEO и маркетинг для вашего сайта" />
-      <h3>SEO и маркетинг</h3>
-      <p>Повышаем видимость вашего проекта в Сети с помощью современных маркетинговых стратегий и SEO оптимизации.</p>
-    </article>
+
+  <section id="menu">
+    <h3>Меню</h3>
+    <div class="menu-grid">
+      <article class="menu-item">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800" alt="Суши Плато" />
+        <div class="menu-content">
+          <h4>Суши Плато</h4>
+          <p>Ассорти из свежих суши с лососем, тунцом, креветками и угрем.</p>
+          <span>850 ₽</span>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800" alt="Рамен" />
+        <div class="menu-content">
+          <h4>Рамен</h4>
+          <p>Традиционный японский суп с ароматным бульоном, лапшой и свининой.</p>
+          <span>450 ₽</span>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb38?w=800" alt="Сашими" />
+        <div class="menu-content">
+          <h4>Сашими</h4>
+          <p>Свежайшие нарезки сырой рыбы: тунец, лосось и желтый хвост.</p>
+          <span>700 ₽</span>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800" alt="Темпура" />
+        <div class="menu-content">
+          <h4>Темпура</h4>
+          <p>Креветки и овощи в нежном хрустящем кляре, обжаренные до золотистой корочки.</p>
+          <span>500 ₽</span>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <img src="https://images.unsplash.com/photo-1584284573214-7571b1a6c233?w=800" alt="Зеленый чай матча" />
+        <div class="menu-content">
+          <h4>Зеленый чай матча</h4>
+          <p>Традиционный порошковый японский зеленый чай с бодрящим вкусом.</p>
+          <span>250 ₽</span>
+        </div>
+      </article>
+    </div>
   </section>
-  <section id="about" style="margin-top:3rem;">
-    <h2>О нашей компании</h2>
-    <p>Мы — команда профессионалов, вдохновленная красотой темных фиолетовых оттенков. Наш опыт помогает создавать качественные и привлекательные сайты для любых задач.</p>
-  </section>
-  <section id="contact" style="margin-top:3rem;">
-    <h2>Свяжитесь с нами</h2>
-    <p>Есть вопросы или хотите начать проект? Напишите нам, и мы обязательно поможем!</p>
-    <form style="max-width:400px; margin-top:1rem;">
-      <label for="name" style="display:block; margin-bottom:0.3rem;">Имя</label>
-      <input type="text" id="name" name="name" required style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:6px; border:none; font-size:1rem;" />
-      <label for="email" style="display:block; margin-bottom:0.3rem;">Email</label>
-      <input type="email" id="email" name="email" required style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:6px; border:none; font-size:1rem;" />
-      <label for="message" style="display:block; margin-bottom:0.3rem;">Сообщение</label>
-      <textarea id="message" name="message" rows="4" required style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:6px; border:none; font-size:1rem;"></textarea>
-      <button type="submit" style="background-color: var(--accent-purple); color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; transition: background-color 0.3s ease;">Отправить</button>
-    </form>
+
+  <section id="contact">
+    <h3>Контакты</h3>
+    <p>Адрес: г. Москва, ул. Японская, 12</p>
+    <p>Телефон: +7 (495) 123-45-67</p>
+    <p>Email: info@sakura-restaurant.ru</p>
   </section>
 </main>
+
 <footer>
-  &copy; 2024 Фиолетовый Сайт. Все права защищены.
+  &copy; 2024 Ресторан "Сакура". Все права защищены. | <a href="mailto:info@sakura-restaurant.ru">Связаться с нами</a>
 </footer>
 </body>
 </html>
