@@ -3,194 +3,809 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Современный сайт</title>
+<title>Сантехника - Надежный магазин</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet" />
 <style>
+  :root {
+    --color-primary: #0066CC;
+    --color-secondary: #F5F5F5;
+    --color-accent: #FF6600;
+    --color-text: #333333;
+    --font-header: 'Montserrat', sans-serif;
+    --font-text: 'Open Sans', sans-serif;
+  }
   * {
     box-sizing: border-box;
-    margin: 0; 
-    padding: 0;
   }
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    background: #f5f7fa;
-    color: #333;
+    margin: 0;
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    font-family: var(--font-text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  a:hover,
+  button:hover {
+    opacity: 0.85;
   }
   header {
-    background-color: #004aad;
-    padding: 20px 40px;
-    color: white;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    font-family: var(--font-header);
     position: sticky;
     top: 0;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
+    z-index: 1000;
   }
-  nav {
+  .topbar {
+    background: var(--color-primary);
+    color: white;
+    font-size: 0.875rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
   }
-  nav .logo {
+  .topbar span {
+    margin: 0 10px;
+  }
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+  }
+  .logo {
     font-weight: 700;
     font-size: 1.5rem;
-    letter-spacing: 2px;
+    color: var(--color-primary);
     user-select: none;
   }
+  nav {
+    flex: 1;
+    margin-left: 40px;
+  }
   nav ul {
+    margin: 0;
+    padding: 0;
     list-style: none;
     display: flex;
-    gap: 25px;
+    gap: 30px;
+    font-weight: 500;
+    font-size: 1rem;
   }
-  nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+  nav li {
+    position: relative;
   }
-  nav ul li a:hover,
-  nav ul li a:focus {
-    background-color: rgba(255 255 255 / 0.3);
-    outline: none;
+  nav li a {
+    padding: 6px 0;
+    display: inline-block;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  nav li a.active,
+  nav li a:hover {
+    border-color: var(--color-primary);
+    font-weight: 700;
+  }
+  .header-icons {
+    display: flex;
+    gap: 20px;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    cursor: pointer;
+  }
+  .header-icons svg {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    fill: var(--color-primary);
+    transition: fill 0.2s ease;
+  }
+  .header-icons svg:hover {
+    fill: var(--color-accent);
   }
   main {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin-top: 20px;
   }
   .hero {
     position: relative;
+    background-color: var(--color-secondary);
     overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
+    border-radius: 6px;
   }
   .hero img {
     width: 100%;
-    display: block;
+    height: auto;
     object-fit: cover;
-    height: 320px;
+    filter: brightness(0.9);
+    border-radius: 6px;
+    max-height: 480px;
+    display: block;
   }
-  .hero-text {
+  .hero-content {
     position: absolute;
-    bottom: 30px;
-    left: 40px;
+    top: 50%;
+    left: 6%;
+    transform: translateY(-50%);
+    max-width: 450px;
     color: white;
-    background: rgba(0,0,0,0.35);
-    padding: 20px 30px;
-    border-radius: 8px;
-    max-width: 60%;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+    font-family: var(--font-header);
   }
-  .hero-text h1 {
+  .hero-content h1 {
     font-size: 2.8rem;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 10px rgba(0,0,0,0.7);
+    margin-bottom: 16px;
+    font-weight: 700;
   }
-  .hero-text p {
+  .hero-content button {
+    background-color: var(--color-accent);
+    border: none;
+    padding: 14px 28px;
+    font-family: var(--font-header);
+    font-weight: 600;
     font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    text-shadow: 1px 1px 10px rgba(0,0,0,0.6);
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(255,102,0,0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
-  section.cards {
-    margin-top: 60px;
+  .hero-content button:hover,
+  .hero-content button:focus {
+    background-color: #e65500;
+    box-shadow: 0 6px 12px rgba(230,85,0,0.6);
+  }
+  section {
+    margin: 40px 0;
+  }
+  .categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 35px;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 24px;
+    padding: 0 10px;
   }
-  .card {
+  .category-card {
     background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgb(0 0 0 / 0.1);
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 20px 15px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  .category-card:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  }
+  .category-card img {
+    max-width: 100px;
+    margin-bottom: 14px;
+    height: 100px;
+    object-fit: contain;
+  }
+  .category-card h3 {
+    font-family: var(--font-header);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 6px;
+    font-size: 1.25rem;
+  }
+  .category-card p {
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+  .products-slider {
+    position: relative;
+    overflow-x: auto;
+    display: flex;
+    gap: 20px;
+    padding-left: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) transparent;
+  }
+  .products-slider::-webkit-scrollbar {
+    height: 8px;
+  }
+  .products-slider::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 4px;
+  }
+  .product-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    width: 260px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+  }
+  .product-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+  .product-image {
+    height: 180px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    overflow: hidden;
+  }
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.3s ease;
   }
-  .card:hover {
-    transform: translateY(-8px);
+  .product-card:hover .product-image img {
+    transform: scale(1.05);
   }
-  .card h3 {
-    margin-bottom: 15px;
-    color: #004aad;
-    font-size: 1.4rem;
-  }
-  .card p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.5;
-  }
-  footer {
-    background-color: #222f5b;
+  .product-label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--color-accent);
     color: white;
-    padding: 30px 40px;
-    margin-top: 80px;
-    text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    user-select:none;
+  }
+  .product-content {
+    padding: 14px 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .product-title {
+    font-family: var(--font-header);
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 6px 0;
+    color: var(--color-primary);
+  }
+  .product-description {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 12px;
+    flex-grow: 1;
+  }
+  .product-price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
+  .btn-add {
+    background-color: var(--color-accent);
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-family: var(--font-header);
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(255,102,0,0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     user-select: none;
   }
-  @media (max-width: 600px) {
-    .hero-text {
-      max-width: 90%;
-      left: 20px;
-      bottom: 20px;
-      padding: 15px 20px;
+  .btn-add:focus,
+  .btn-add:hover {
+    background-color: #e65500;
+    box-shadow: 0 4px 12px rgba(230,85,0,0.6);
+  }
+  .advantages {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 24px;
+    padding: 0 10px;
+  }
+  .advantage-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    font-family: var(--font-header);
+    font-weight: 600;
+    color: var(--color-primary);
+    user-select: none;
+  }
+  .advantage-icon {
+    width: 36px;
+    height: 36px;
+    fill: var(--color-accent);
+    flex-shrink: 0;
+  }
+  .reviews-section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+  .reviews-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 24px;
+  }
+  .review-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+  }
+  .review-photo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 14px;
+  }
+  .review-name {
+    font-weight: 700;
+    font-family: var(--font-header);
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+  }
+  .review-text {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    color: #444444;
+  }
+  .review-form {
+    margin-top: 28px;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    max-width: 480px;
+  }
+  .review-form h3 {
+    font-family: var(--font-header);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+  }
+  .review-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+  .review-form input,
+  .review-form textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    font-family: var(--font-text);
+    font-size: 1rem;
+    margin-bottom: 16px;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+  }
+  .review-form input:focus,
+  .review-form textarea:focus {
+    border-color: var(--color-primary);
+    outline: none;
+  }
+  .review-form button {
+    background-color: var(--color-primary);
+    color: white;
+    font-family: var(--font-header);
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .review-form button:hover,
+  .review-form button:focus {
+    background-color: #004a99;
+  }
+  .info-block {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+  .articles-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 24px;
+  }
+  .article-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    font-family: var(--font-header);
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  .article-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  .article-card h4 {
+    margin-top: 0;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  .article-card p {
+    font-family: var(--font-text);
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+  footer {
+    background: #222;
+    color: #ddd;
+    font-family: var(--font-text);
+    font-size: 0.9rem;
+    padding: 24px 10px 40px;
+  }
+  footer .container {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 30px;
+  }
+  .footer-col {
+    flex: 1 1 220px;
+    min-width: 220px;
+  }
+  .footer-col h5 {
+    font-family: var(--font-header);
+    color: var(--color-primary);
+    margin-bottom: 14px;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  .footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+  .footer-col ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .footer-col ul li a:hover {
+    color: var(--color-accent);
+  }
+  .footer-contact p {
+    margin: 8px 0;
+  }
+  .social-links a {
+    display: inline-block;
+    margin-right: 14px;
+    color: #ccc;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+  }
+  .social-links a:hover {
+    color: var(--color-accent);
+  }
+  .newsletter-form {
+    display: flex;
+    max-width: 300px;
+  }
+  .newsletter-form input[type=email] {
+    flex-grow: 1;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 1rem;
+    font-family: var(--font-text);
+  }
+  .newsletter-form button {
+    background-color: var(--color-accent);
+    border: none;
+    padding: 10px 16px;
+    font-family: var(--font-header);
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    transition: background-color 0.3s ease;
+  }
+  .newsletter-form button:hover,
+  .newsletter-form button:focus {
+    background-color: #e65500;
+  }
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #555;
+    border-top: 1px solid #444;
+    padding-top: 14px;
+  }
+  @media (max-width: 768px) {
+    nav ul {
+      gap: 20px;
     }
-    .hero-text h1 {
+    .hero-content h1 {
       font-size: 2rem;
+    }
+    .hero-content {
+      max-width: 90%;
+      left: 5%;
+    }
+    .header-main {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    nav {
+      order: 3;
+      width: 100%;
+      margin-left: 0;
+    }
+    .header-icons {
+      order: 2;
+      gap: 15px;
+    }
+    .container {
+      width: 95%;
+    }
+    .products-slider {
+      padding-left: 16px;
     }
   }
 </style>
 </head>
 <body>
 <header>
-  <nav aria-label="Основная навигация сайта">
-    <div class="logo" tabindex="0">ModernSite</div>
-    <ul>
-      <li><a href="#home" tabindex="0">Главная</a></li>
-      <li><a href="#services" tabindex="0">Услуги</a></li>
-      <li><a href="#about" tabindex="0">О нас</a></li>
-      <li><a href="#contact" tabindex="0">Контакты</a></li>
-    </ul>
-  </nav>
+  <div class="topbar" aria-label="Контактная информация и режим работы">
+    <span>📞 Телефон: <a href="tel:+78001234567" style="color:#fff;text-decoration:none;">+7 (800) 123-45-67</a></span>
+    <span>🕒 Пн-Пт 9:00–18:00</span>
+  </div>
+  <div class="container header-main">
+    <a href="#" class="logo" aria-label="Логотип магазина сантехники">САНТЕХНИКА</a>
+    <nav aria-label="Основное меню">
+      <ul>
+        <li><a href="#" class="active" aria-current="page">Каталог</a></li>
+        <li><a href="#">Акции</a></li>
+        <li><a href="#">Доставка и оплата</a></li>
+        <li><a href="#">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="header-icons" role="navigation" aria-label="Иконки поиска, корзины и входа пользователя">
+      <button aria-label="Поиск"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
+        <path d="M10 2a8 8 0 105.293 14.707l4.853 4.854 1.414-1.414-4.854-4.853A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
+      </svg></button>
+      <button aria-label="Корзина"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
+        <path d="M7 18a2 2 0 104 0 2 2 0 00-4 0zm8 0a2 2 0 104 0 2 2 0 00-4 0zM5.5 4h-1l1.5 9a1 1 0 001 1h11a1 1 0 001-1l1.5-9h-1m-1 0h-10l-1-2H3"/>
+      </svg></button>
+      <button aria-label="Вход пользователя"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
+        <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+      </svg></button>
+    </div>
+  </div>
 </header>
 <main>
-  <section class="hero" id="home" role="banner" aria-label="Главный баннер с изображением и текстом">
-    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800" alt="Современный город с небоскребами под голубым небом" />
-    <div class="hero-text">
-      <h1>Добро пожаловать на ModernSite</h1>
-      <p>Современный и красивый веб-сайт для вашего бизнеса или личного проекта.</p>
+<section class="hero" aria-label="Главный баннер с призывом к действию">
+  <img src="https://images.unsplash.com/photo-1560184897-0b35d1e8ddb9?w=1200" alt="Современная сантехника в интерьере" loading="lazy" />
+  <div class="hero-content">
+    <h1>Выберите свою идеальную сантехнику</h1>
+    <button type="button" onclick="location.href='#catalog'">Перейти в каталог</button>
+  </div>
+</section>
+<section id="catalog" aria-labelledby="catalog-heading">
+  <h2 id="catalog-heading" style="text-align:center; font-family:var(--font-header); margin-bottom: 24px; color: var(--color-primary); font-weight:700;">Категории товаров</h2>
+  <div class="categories">
+    <article class="category-card" tabindex="0" role="link" aria-label="Категория Смесители">
+      <img src="https://images.unsplash.com/photo-1555696959-cbe8bba3a5a1?w=200" alt="Смесители" loading="lazy" />
+      <h3>Смесители</h3>
+      <p>Современные и надежные модели для кухни и ванной комнаты.</p>
+    </article>
+    <article class="category-card" tabindex="0" role="link" aria-label="Категория Ванны">
+      <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200" alt="Ванны" loading="lazy" />
+      <h3>Ванны</h3>
+      <p>Комфортные и стильные ванны различных форм и размеров.</p>
+    </article>
+    <article class="category-card" tabindex="0" role="link" aria-label="Категория Унитазы">
+      <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=200" alt="Унитазы" loading="lazy" />
+      <h3>Унитазы</h3>
+      <p>Современные модели с эффективным расходом воды и удобством.</p>
+    </article>
+    <article class="category-card" tabindex="0" role="link" aria-label="Категория Аксессуары">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=200" alt="Аксессуары" loading="lazy" />
+      <h3>Аксессуары</h3>
+      <p>Элементы декора и функциональные дополнения для сантехники.</p>
+    </article>
+  </div>
+</section>
+<section aria-labelledby="promo-heading" style="margin-top:50px;">
+  <h2 id="promo-heading" style="text-align:center; font-family:var(--font-header); margin-bottom: 24px; color: var(--color-primary); font-weight:700;">Популярные товары и акции</h2>
+  <div class="products-slider" role="list" aria-label="Популярные товары и акционные предложения">
+    <article class="product-card" role="listitem">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1587574293340-6cb3d91ddc5c?w=300" alt="Смеситель для ванной LOF" loading="lazy" />
+        <div class="product-label" aria-label="Новинка">Новинка</div>
+      </div>
+      <div class="product-content">
+        <h3 class="product-title">Смеситель LOF</h3>
+        <p class="product-description">Экологичный хромированный смеситель с термостатом.</p>
+        <div class="product-price">7 990 ₽</div>
+        <button class="btn-add" type="button" aria-label="Добавить Смеситель LOF в корзину">В корзину</button>
+      </div>
+    </article>
+    <article class="product-card" role="listitem">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1560185127-489b57e43d6d?w=300" alt="Акриловая ванна Murano" loading="lazy" />
+        <div class="product-label" aria-label="Скидка">Скидка</div>
+      </div>
+      <div class="product-content">
+        <h3 class="product-title">Ванна Murano</h3>
+        <p class="product-description">Акриловая ванна с суперстойким покрытием.</p>
+        <div class="product-price">16 500 ₽</div>
+        <button class="btn-add" type="button" aria-label="Добавить Ванна Murano в корзину">В корзину</button>
+      </div>
+    </article>
+    <article class="product-card" role="listitem">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1556911073-52527ac437f5?w=300" alt="Компактный унитаз Tonino" loading="lazy" />
+        <div class="product-label" aria-label="Новинка">Новинка</div>
+      </div>
+      <div class="product-content">
+        <h3 class="product-title">Унитаз Tonino</h3>
+        <p class="product-description">Современный дизайн и тихая смывная система.</p>
+        <div class="product-price">8 790 ₽</div>
+        <button class="btn-add" type="button" aria-label="Добавить Унитаз Tonino в корзину">В корзину</button>
+      </div>
+    </article>
+    <article class="product-card" role="listitem">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1506262972479-8700a44e87c0?w=300" alt="Набор аксессуаров Elegance" loading="lazy" />
+      </div>
+      <div class="product-content">
+        <h3 class="product-title">Аксессуары Elegance</h3>
+        <p class="product-description">Комплект стильных аксессуаров для ванной комнаты.</p>
+        <div class="product-price">3 490 ₽</div>
+        <button class="btn-add" type="button" aria-label="Добавить Аксессуары Elegance в корзину">В корзину</button>
+      </div>
+    </article>
+  </div>
+</section>
+<section aria-labelledby="advantages-heading" style="margin-top: 60px; padding-bottom: 60px;">
+  <h2 id="advantages-heading" style="text-align:center; font-family:var(--font-header); margin-bottom: 30px; color: var(--color-primary); font-weight:700;">Преимущества магазина</h2>
+  <div class="advantages" role="list" aria-label="Преимущества магазина">
+    <div class="advantage-card" role="listitem">
+      <svg class="advantage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 1010 10A10.011 10.011 0 0012 2zm-1 15l-5-5 1.41-1.41L11 14.17l6.59-6.58L19 9z"/></svg>
+      Гарантия качества
     </div>
-  </section>
-  <section class="cards" id="services" aria-label="Наши услуги">
-    <article class="card" tabindex="0">
-      <h3>Веб-дизайн</h3>
-      <p>Создаем интуитивно понятные и стильные интерфейсы, которые привлекают и удерживают внимание.</p>
-    </article>
-    <article class="card" tabindex="0">
-      <h3>Разработка</h3>
-      <p>Пишем качественный, адаптивный и современный код, оптимизированный для всех устройств.</p>
-    </article>
-    <article class="card" tabindex="0">
-      <h3>SEO-оптимизация</h3>
-      <p>Помогаем вашему сайту занимать первые позиции в поисковых системах и привлекать больше клиентов.</p>
-    </article>
-  </section>
-  <section id="about" style="margin-top: 60px;" tabindex="0">
-    <h2 style="color:#004aad; margin-bottom: 20px;">О нас</h2>
-    <p style="max-width: 700px; color:#444; font-size:1.1rem; line-height:1.6;">
-      ModernSite — команда профессионалов в области веб-разработки с многолетним опытом. Мы создаем удобные и качественные решения для вашего бизнеса. Наша цель — помочь вам выделиться в интернете и достичь успеха.
-    </p>
-  </section>
-  <section id="contact" style="margin-top: 60px;" tabindex="0">
-    <h2 style="color:#004aad; margin-bottom: 20px;">Контакты</h2>
-    <p style="max-width: 700px; color:#444; font-size:1.1rem; line-height:1.6;">
-      <strong>Email:</strong> info@modernsite.ru<br />
-      <strong>Телефон:</strong> +7 999 123 45 67<br />
-      <strong>Адрес:</strong> г. Москва, ул. Примерная, д.1
-    </p>
-  </section>
+    <div class="advantage-card" role="listitem">
+      <svg class="advantage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 2H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM7 20v-6h4v6zm6-15l5 5h-4v4h-6v-4H8V4z"/></svg>
+      Быстрая доставка
+    </div>
+    <div class="advantage-card" role="listitem">
+      <svg class="advantage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3v18h10V3zm8 16H9V5h6z"/></svg>
+      Оплата любыми способами
+    </div>
+    <div class="advantage-card" role="listitem">
+      <svg class="advantage-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9v-2a7 7 0 0114 0v2z"/></svg>
+      Консультации специалистов
+    </div>
+  </div>
+</section>
+<section aria-labelledby="reviews-heading" style="padding-bottom: 60px; background: var(--color-secondary);">
+  <h2 id="reviews-heading" style="text-align:center; font-family:var(--font-header); margin-bottom: 32px; color: var(--color-primary); font-weight:700;">Отзывы клиентов</h2>
+  <div class="reviews-section">
+    <div class="reviews-list" role="list" aria-label="Отзывы клиентов">
+      <article class="review-card" role="listitem">
+        <img class="review-photo" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100" alt="Фото клиента Мария" loading="lazy" />
+        <h3 class="review-name">Мария</h3>
+        <p class="review-text">Очень довольна покупкой смесителя – удобный, стильный и качественный. Доставка была быстрой, спасибо!</p>
+      </article>
+      <article class="review-card" role="listitem">
+        <img class="review-photo" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100" alt="Фото клиента Алексей" loading="lazy" />
+        <h3 class="review-name">Алексей</h3>
+        <p class="review-text">Заказывал ванну Murano – классная модель, установили быстро. Магазин очень помог консультацией.</p>
+      </article>
+      <article class="review-card" role="listitem">
+        <img class="review-photo" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100" alt="Фото клиента Елена" loading="lazy" />
+        <h3 class="review-name">Елена</h3>
+        <p class="review-text">Унитаз Tonino полностью оправдал ожидания. Цены адекватные, обслуживание на высоте.</p>
+      </article>
+    </div>
+    <form class="review-form" aria-label="Форма добавления отзыва">
+      <h3>Добавить свой отзыв</h3>
+      <label for="review-name">Имя</label>
+      <input type="text" id="review-name" name="review-name" required aria-required="true" />
+      <label for="review-text">Отзыв</label>
+      <textarea id="review-text" name="review-text" rows="4" required aria-required="true"></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
+</section>
+<section aria-labelledby="info-heading" style="margin-bottom: 60px;">
+  <h2 id="info-heading" style="text-align:center; font-family:var(--font-header); margin-bottom: 30px; color: var(--color-primary); font-weight:700;">Статьи и советы</h2>
+  <div class="info-block">
+    <div class="articles-list">
+      <article class="article-card" tabindex="0" role="link" aria-label="Статья: Как выбрать смеситель">
+        <h4>Как выбрать смеситель</h4>
+        <p>Подробное руководство по выбору качественного смесителя для кухни и ванной.</p>
+      </article>
+      <article class="article-card" tabindex="0" role="link" aria-label="Статья: Установка сантехники своими руками">
+        <h4>Установка своими руками</h4>
+        <p>Пошаговая инструкция по самостоятельной установке сантехники в доме.</p>
+      </article>
+      <article class="article-card" tabindex="0" role="link" aria-label="Статья: Советы по уходу за ваннами">
+        <h4>Советы по уходу за ваннами</h4>
+        <p>Как сохранить ванну в идеальном состоянии на долгие годы.</p>
+      </article>
+    </div>
+  </div>
+</section>
 </main>
 <footer>
-  &copy; 2024 ModernSite. Все права защищены.
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-col footer-contact" aria-label="Контактная информация">
+        <h5>Контакты</h5>
+        <p>Телефон: <a href="tel:+78001234567" style="color:#ccc;">+7 (800) 123-45-67</a></p>
+        <p>Email: <a href="mailto:info@santehnika.ru" style="color:#ccc;">info@santehnika.ru</a></p>
+        <p>Адрес: г. Москва, ул. Примерная, д. 10</p>
+        <p>Часы работы: Пн-Пт 9:00–18:00</p>
+      </div>
+      <nav class="footer-col" aria-label="Дополнительное меню">
+        <h5>Меню</h5>
+        <ul>
+          <li><a href="#">Политика конфиденциальности</a></li>
+          <li><a href="#">Возврат</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col social-links" aria-label="Социальные сети">
+        <h5>Мы в соцсетях</h5>
+        <a href="#" aria-label="Facebook" target="_blank" rel="noopener"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.1c0-5.5-4.5-10-10-10S2 6.6 2 12.1c0 5 3.7 9.1 8.5 9.9v-7H8v-3h2.5v-2.3c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.3.2 2.3.2v2.6h-1.3c-1.3 0-1.7.8-1.7 1.6v2h3l-.5 3h-2.5v7c4.8-.8 8.5-4.9 8.5-9.9z"/></svg></a>
+        <a href="#" aria-label="Instagram" target="_blank" rel="noopener"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M7 2c-3.3 0-5 1.7-5 5v10c0 3.3 1.7 5 5 5h10c3.3 0 5-1.7 5-5V7c0-3.3-1.7-5-5-5H7zm10 2a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-2A1.5 1.5 0 1116 8.5 1.5 1.5 0 0116.5 5z"/></svg></a>
+        <a href="#" aria-label="VK" target="_blank" rel="noopener"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M22 7c-1.2 0-2.4 1.4-3.3 2.1-1.1.9-1.5.7-1.7.7-.3 0-.5-.2-.8-.6-1.4-2.7-2.9-5.4-7.8-5.4-1.6 0-2.9 1.1-3.6 2.5v2.7s1.7 2.1 2.3 2.6c.6.5 2.7 3.5 4.4 4.8 1.6 1.2 2.4 1.6 2.9 1.6 1 0 1.6-.9 1.6-1.7 0-1.2-1.4-1.7-2-2.2L16 13c.7-.6 3.3-3.9 3.3-5.4 0-1.3-1-2.1-2.3-2.1z"/></svg></a>
+      </div>
+      <div class="footer-col" aria-label="Подписка на рассылку">
+        <h5>Подпишитесь на рассылку</h5>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Спасибо за подписку!');" aria-label="Форма подписки на рассылку">
+          <input type="email" placeholder="Введите email" aria-label="Email для подписки" required />
+          <button type="submit" aria-label="Подписаться">Подписаться</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2024 САНТЕХНИКА. Все права защищены.
+    </div>
+  </div>
 </footer>
 </body>
 </html>
