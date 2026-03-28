@@ -5,130 +5,145 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Bella Pizza - Пиццерия</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  * {
+    box-sizing: border-box;
+  }
   body {
-    margin: 0;
-    font-family: "Arial", sans-serif;
+    margin:0;
+    font-family: 'Montserrat', sans-serif;
     background: #fff8f0;
-    color: #4b2e0e;
+    color: #333;
   }
   header {
-    background-color: #d94f00;
-    padding: 20px 40px;
-    color: #fff;
+    background: #d64a2a;
+    padding: 15px 30px;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
   header h1 {
-    margin: 0;
-    font-family: 'Georgia', serif;
-    font-weight: normal;
+    margin:0;
+    font-weight: 700;
+    letter-spacing: 2px;
   }
   nav a {
-    color: #fff;
+    color: white;
     text-decoration: none;
     margin-left: 25px;
-    font-size: 18px;
     font-weight: 600;
     transition: color 0.3s ease;
   }
   nav a:hover {
-    color: #ffe7c4;
+    color: #fbd6c1;
   }
-  .hero {
-    position: relative;
-    text-align: center;
-    color: white;
-  }
-  .hero img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    filter: brightness(70%);
-  }
-  .hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Georgia', serif;
-    font-size: 3em;
-    font-weight: normal;
-    text-shadow: 2px 2px 6px #5c1f00;
-  }
+
   main {
-    max-width: 960px;
+    max-width: 1200px;
     margin: 40px auto;
     padding: 0 20px;
   }
-  h2 {
-    font-family: 'Georgia', serif;
-    font-weight: normal;
-    font-size: 2.4em;
-    margin-bottom: 20px;
-    border-bottom: 3px solid #d94f00;
-    padding-bottom: 5px;
-  }
-  .menu {
+  .intro {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
+    align-items: center;
     justify-content: center;
+    margin-bottom: 50px;
   }
-  .pizza-card {
-    background: #fff3e1;
-    border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(217,79,0,0.3);
-    width: 280px;
+  .intro-img {
+    flex: 1 1 400px;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgb(214 74 42 / 0.3);
+    border-radius: 12px;
     overflow: hidden;
+  }
+  .intro-img img {
+    width: 100%;
+    display: block;
+  }
+  .intro-text {
+    flex: 1 1 320px;
+    max-width: 500px;
+  }
+  .intro-text h2 {
+    font-weight: 700;
+    font-size: 2.2em;
+    margin-bottom: 16px;
+    color: #d64a2a;
+  }
+  .intro-text p {
+    font-size: 1.1em;
+    line-height: 1.5;
+    color: #5a3c28;
+  }
+
+  section.menu {
+    margin-bottom: 60px;
+  }
+  section.menu h2 {
+    text-align: center;
+    color: #d64a2a;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    letter-spacing: 1.5px;
+  }
+  .menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+  .menu-item {
+    background: #fff1e6;
+    border-radius: 15px;
+    padding: 15px;
+    max-width: 280px;
+    box-shadow: 0 12px 20px rgb(214 74 42 / 0.15);
     transition: transform 0.3s ease;
   }
-  .pizza-card:hover {
-    transform: scale(1.05);
+  .menu-item:hover {
+    transform: translateY(-6px);
   }
-  .pizza-card img {
+  .menu-item img {
     width: 100%;
-    height: 180px;
+    border-radius: 12px;
     object-fit: cover;
+    height: 180px;
+    margin-bottom: 12px;
   }
-  .pizza-info {
-    padding: 15px 20px;
-  }
-  .pizza-info h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.5em;
-    color: #a83800;
-  }
-  .price {
+  .menu-item h3 {
+    margin: 0 0 10px;
+    color: #a83d21;
     font-weight: 700;
-    font-size: 1.2em;
-    color: #d94f00;
+    font-size: 1.4em;
   }
+  .menu-item .price {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: #7a2a15;
+  }
+
   footer {
-    background-color: #d94f00;
-    color: #fff;
+    background: #d64a2a;
+    color: white;
     text-align: center;
-    padding: 15px 10px;
-    font-size: 14px;
-    margin-top: 60px;
+    padding: 25px 20px;
+    font-size: 0.9em;
+    letter-spacing: 0.06em;
   }
-  @media (max-width: 600px) {
-    .menu {
+
+  @media (max-width: 700px) {
+    .intro {
       flex-direction: column;
-      align-items: center;
+      text-align: center;
     }
-    header {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
+    .intro-text, .intro-img {
+      max-width: 100%;
     }
-    nav a {
-      margin-left: 10px;
-      font-size: 16px;
-    }
-    .hero-text {
-      font-size: 2em;
-      padding: 0 10px;
+    .menu-list {
+      gap: 25px;
     }
   }
 </style>
@@ -137,59 +152,50 @@
 <header>
   <h1>Bella Pizza</h1>
   <nav>
-    <a href="#menu">Меню</a>
     <a href="#about">О нас</a>
-    <a href="#contact">Контакты</a>
+    <a href="#menu">Меню</a>
+    <a href="#contacts">Контакты</a>
   </nav>
 </header>
-<section class="hero">
-  <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1470&q=80" alt="Пицца Bella Pizza" />
-  <div class="hero-text">Настоящая Итальянская Пицца в Алматы</div>
-</section>
 <main>
-  <section id="menu">
-    <h2>Меню</h2>
-    <div class="menu">
-      <article class="pizza-card">
-        <img src="https://images.unsplash.com/photo-1548365328-6e7f1e2c5273?auto=format&fit=crop&w=600&q=80" alt="Пицца Маргарита" />
-        <div class="pizza-info">
-          <h3>Маргарита</h3>
-          <p>Классическая пицца с томатным соусом, моцареллой и базиликом.</p>
-          <div class="price">2 000 ₸</div>
-        </div>
+  <section id="about" class="intro">
+    <div class="intro-img">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Вкусная пицца Маргарита" />
+    </div>
+    <div class="intro-text">
+      <h2>Добро пожаловать в Bella Pizza</h2>
+      <p>Настоящая итальянская пицца с тонким хрустящим тестом и свежими ингредиентами. Попробуйте классику или наши авторские рецепты, приготовленные с любовью. Мы предлагаем уютную атмосферу и отличный сервис.</p>
+    </div>
+  </section>
+  <section id="menu" class="menu">
+    <h2>Наше меню</h2>
+    <div class="menu-list">
+      <article class="menu-item">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Пицца Маргарита" />
+        <h3>Маргарита</h3>
+        <p class="price">2000 ₸</p>
       </article>
-      <article class="pizza-card">
-        <img src="https://images.unsplash.com/photo-1601924582973-84b59f647f9c?auto=format&fit=crop&w=600&q=80" alt="Пицца Пепперони" />
-        <div class="pizza-info">
-          <h3>Пепперони</h3>
-          <p>Пикантная пепперони на тонком тесте с томатным соусом и сыром.</p>
-          <div class="price">2 500 ₸</div>
-        </div>
+      <article class="menu-item">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" alt="Пицца Пепперони" />
+        <h3>Пепперони</h3>
+        <p class="price">2700 ₸</p>
       </article>
-      <article class="pizza-card">
-        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80" alt="Пицца Четыре сыра" />
-        <div class="pizza-info">
-          <h3>Четыре сыра</h3>
-          <p>Сырный микс: моцарелла, пармезан, дорблю и гауда.</p>
-          <div class="price">3 000 ₸</div>
-        </div>
+      <article class="menu-item">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Пицца Четыре сыра" />
+        <h3>Четыре сыра</h3>
+        <p class="price">3200 ₸</p>
       </article>
     </div>
   </section>
-  <section id="about" style="margin-top: 60px;">
-    <h2>О нас</h2>
-    <p>«Bella Pizza» — любимая пиццерия Алматы, предлагающая аутентичные итальянские рецепты с использованием свежих ингредиентов и традиционных технологий. У нас уютная атмосфера и быстрая доставка. Насладитесь вкусом настоящей итальянской пиццы по доступным ценам!</p>
-  </section>
-  <section id="contact" style="margin-top: 60px; margin-bottom: 40px;">
-    <h2>Контакты</h2>
-    <p><strong>Адрес:</strong> г. Алматы, пр. Достык, 123</p>
-    <p><strong>Телефон:</strong> +7 (727) 123-45-67</p>
-    <p><strong>Email:</strong> info@bellapizza.kz</p>
-    <p><strong>Время работы:</strong> Ежедневно 10:00 - 22:00</p>
+  <section id="contacts" style="max-width:500px; margin: 0 auto; text-align: center;">
+    <h2 style="color:#d64a2a; margin-bottom:15px;">Контакты</h2>
+    <p>Телефон: <a href="tel:+77001234567" style="color:#d64a2a; text-decoration:none;">+7 700 123 45 67</a></p>
+    <p>Email: <a href="mailto:info@bellapizza.kz" style="color:#d64a2a; text-decoration:none;">info@bellapizza.kz</a></p>
+    <p>Адрес: г. Алматы, ул. Абая 45</p>
   </section>
 </main>
 <footer>
-  &copy; 2024 Bella Pizza — Вкус Италии у вас дома
+  &copy; 2024 Bella Pizza. Все права защищены.
 </footer>
 </body>
 </html>
