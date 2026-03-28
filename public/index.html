@@ -3,919 +3,527 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ресторан Актау</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora&family=Montserrat&family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet" />
+<title>Розовый современный сайт</title>
 <style>
-  :root {
-    --color-main: #004E7C;
-    --color-beige: #F5E9DA;
-    --color-accent1: #2E8B7B;
-    --color-accent2: #D46A3E;
-    --color-bg-light: #FAFAFA;
-    --color-white: #FFFFFF;
-    --font-main: 'Montserrat', 'Poppins', sans-serif;
-    --font-accent: 'Playfair Display', 'Lora', serif;
-  }
-  /* Reset */
-  * {
-    box-sizing: border-box;
-    margin: 0; padding: 0;
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400&display=swap');
   body {
-    font-family: var(--font-main);
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
-    color: var(--color-main);
-    background: var(--color-bg-light);
-    scroll-behavior: smooth;
+    color: #4A4A4A;
+    background-color: #FFFFFF;
   }
+  h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    margin: 0 0 0.5em 0;
+    line-height: 1.4;
+    color: #4A4A4A;
+  }
+  h1 { font-size: 32px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 24px; }
   a {
-    color: var(--color-accent2);
+    color: #E91E63;
     text-decoration: none;
+    transition: color 0.3s ease;
   }
-  a:focus,
-  button:focus {
-    outline: 2px solid var(--color-accent2);
-    outline-offset: 2px;
+  a:hover, a:focus {
+    color: #BE1451;
+    outline: none;
+  }
+  button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    background-color: #E91E63;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75em 1.75em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover, button:focus {
+    background-color: #BE1451;
+    outline: none;
   }
   header {
-    background: var(--color-white);
-    border-bottom: 1px solid #ddd;
-    position: sticky;
+    position: fixed;
     top: 0;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     z-index: 1000;
   }
   .container {
-    width: min(1200px, 90vw);
+    max-width: 1080px;
     margin: 0 auto;
-  }
-  /* Header */
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0;
-  }
-  .logo {
-    font-family: var(--font-accent);
-    font-size: 1.8rem;
-    color: var(--color-main);
-    display: flex;
-    align-items: center;
-    user-select: none;
-  }
-  .logo svg {
-    width: 32px;
-    height: 32px;
-    margin-right: 0.5rem;
-    fill: var(--color-accent1);
+    padding: 0 20px;
   }
   nav {
-    flex: 1;
-    margin-left: 2rem;
-  }
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 1.8rem;
-    justify-content: flex-end;
-    font-weight: 600;
-  }
-  .nav-links li a {
-    color: var(--color-main);
-    transition: color 0.3s;
-  }
-  .nav-links li a:hover,
-  .nav-links li a:focus {
-    color: var(--color-accent2);
-  }
-  .header-right {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
   }
-  .btn-book {
-    background-color: var(--color-accent2);
-    border: none;
-    padding: 0.6rem 1.3rem;
-    color: var(--color-white);
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+  .logo {
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    font-size: 28px;
+    color: #E91E63;
+  }
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .menu a {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 8px;
     border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-family: var(--font-main);
   }
-  .btn-book:hover,
-  .btn-book:focus {
-    background-color: #b75329;
+  .menu a:hover,
+  .menu a:focus {
+    background-color: #F8C8DC;
+    color: #E91E63;
   }
-  .contacts {
-    font-size: 0.9rem;
-    color: var(--color-main);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.3rem;
+  .btn-contact {
+    margin-left: 1rem;
   }
-  .social-icons {
-    display: flex;
-    gap: 0.4rem;
+  main {
+    padding-top: 64px;
   }
-  .social-icons a svg {
-    width: 20px;
-    height: 20px;
-    fill: var(--color-main);
-    transition: fill 0.3s;
-  }
-  .social-icons a:hover svg,
-  .social-icons a:focus svg {
-    fill: var(--color-accent1);
-  }
-  /* Hero */
+
+  /* Баннер */
   .hero {
     position: relative;
-    background-color: var(--color-white);
-    overflow: hidden;
-    min-height: 70vh;
+    background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1600");
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    color: #FFFFFF;
     display: flex;
     align-items: center;
-    color: var(--color-white);
   }
   .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(0,78,124,0.7), rgba(46,139,123,0.5));
-    z-index: 1;
-    pointer-events: none;
-  }
-  .hero img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 110%;
-    height: 110%;
-    object-fit: cover;
-    object-position: center;
-    transform: translate(-50%, -50%);
-    filter: brightness(0.7);
-    will-change: transform;
-    transition: transform 0.3s ease-out;
+    background: rgba(232, 30, 99, 0.55);
+    mix-blend-mode: multiply;
   }
   .hero-content {
     position: relative;
-    z-index: 2;
-    max-width: 600px;
-    padding-left: 2rem;
+    max-width: 720px;
+    padding: 0 20px;
   }
-  .hero-title {
-    font-family: var(--font-accent);
-    font-size: 3rem;
-    margin-bottom: 0.4rem;
-    line-height: 1.1;
+  .hero h1 {
+    font-size: 32px;
+    line-height: 1.4;
+    margin-bottom: 0.5em;
   }
-  .hero-subtitle {
-    font-family: var(--font-main);
-    font-size: 1.2rem;
-    margin-bottom: 1.2rem;
-    font-weight: 600;
+  .hero p {
+    font-size: 18px;
+    margin-bottom: 1.5em;
   }
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-  }
-  .btn-hero {
-    cursor: pointer;
-    font-weight: 600;
-    padding: 0.8rem 2rem;
-    border-radius: 30px;
-    border: 2px solid var(--color-white);
-    background-color: transparent;
-    color: var(--color-white);
-    font-family: var(--font-main);
-    transition: background-color 0.3s, color 0.3s;
-  }
-  .btn-hero:hover,
-  .btn-hero:focus {
-    background-color: var(--color-accent1);
-    border-color: var(--color-accent1);
-    color: var(--color-white);
-  }
-  /* About Us */
-  section {
-    padding: 3rem 0;
-  }
+
+  /* Блок о компании */
   .about {
-    max-width: 1200px;
-    margin: 0 auto;
+    background-color: #FBE9F7;
+    padding: 60px 20px;
+  }
+  .about .container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
     align-items: center;
-    background: var(--color-white);
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgb(0 0 0 / 0.05);
-    padding: 2rem;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1080px;
+    margin: 0 auto;
   }
   .about-text {
-    flex: 1 1 300px;
+    flex: 1 1 320px;
   }
   .about-text p {
-    font-size: 1.1rem;
-    color: var(--color-main);
-    line-height: 1.6;
+    max-width: 480px;
+    font-size: 18px;
+    line-height: 1.5;
   }
-  .about-photo {
+  .about-image {
     flex: 1 1 280px;
-    text-align: center;
   }
-  .about-photo img {
-    border-radius: 10px;
-    max-width: 100%;
-    height: auto;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
-  }
-  /* Menu */
-  .menu {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: var(--color-white);
+  .about-image img {
+    width: 100%;
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgb(0 0 0 / 0.05);
-    padding: 2rem;
+    box-shadow: 0 8px 16px rgba(232, 30, 99, 0.15);
   }
-  .menu h2 {
-    font-family: var(--font-accent);
-    font-size: 2.4rem;
-    color: var(--color-main);
-    margin-bottom: 2rem;
+
+  /* Услуги */
+  .services {
+    background: #FFFFFF;
+    padding: 60px 20px;
+  }
+  .services .container {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .services h2 {
+    margin-bottom: 1em;
     text-align: center;
   }
-  .menu-categories {
-    display: flex;
-    justify-content: center;
-    gap: 1.8rem;
+  .service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .service-card {
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(245, 245, 245, 1);
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+  }
+  .service-card:hover,
+  .service-card:focus-within {
+    box-shadow: 0 6px 18px rgba(233, 30, 99, 0.3);
+  }
+  .service-icon {
+    font-size: 48px;
+    color: #E91E63;
+    margin-bottom: 1em;
+  }
+  .service-card h3 {
+    margin-bottom: 0.5em;
+  }
+  .service-card p {
+    color: #4A4A4A;
+    font-size: 16px;
+  }
+
+  /* Преимущества */
+  .advantages {
+    background-color: #FFF0F7;
+    padding: 60px 20px;
+  }
+  .advantages .container {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .advantages h2 {
+    text-align: center;
     margin-bottom: 2rem;
+  }
+  .advantages-list {
+    display: flex;
     flex-wrap: wrap;
-  }
-  .menu-category {
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 0.6rem 1.2rem;
-    border-radius: 25px;
-    background-color: var(--color-beige);
-    color: var(--color-main);
-    transition: background-color 0.3s;
-    user-select: none;
-  }
-  .menu-category.active,
-  .menu-category:hover,
-  .menu-category:focus {
-    background-color: var(--color-accent1);
-    color: var(--color-white);
-    outline: none;
-  }
-  .menu-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 1.8rem;
-  }
-  .menu-item {
-    display: flex;
-    gap: 1rem;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.07);
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: var(--color-beige);
-    color: var(--color-main);
-  }
-  .menu-item img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 10px 0 0 10px;
-  }
-  .menu-info {
-    padding: 0.8rem 1rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    gap: 32px;
     justify-content: center;
   }
-  .menu-title {
-    font-family: var(--font-main);
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
+  .advantage-item {
+    background: transparent;
+    border-bottom: 1px solid #F8C8DC;
+    flex: 1 1 220px;
+    padding-bottom: 24px;
+    text-align: center;
+    transition: border-color 0.3s ease;
   }
-  .menu-desc {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-    color: #444;
+  .advantage-item:last-child {
+    border-bottom: none;
   }
-  .menu-price {
-    font-weight: 700;
-    color: var(--color-accent2);
-    font-size: 1rem;
+  .advantage-icon {
+    font-size: 36px;
+    color: #E91E63;
+    margin-bottom: 0.8em;
   }
-  /* Gallery */
-  .gallery {
-    max-width: 1200px;
+  .advantage-item h3 {
+    margin-bottom: 0.4em;
+  }
+  .advantage-item p {
+    font-size: 16px;
+    color: #4A4A4A;
+    line-height: 1.5;
+  }
+
+  /* Отзывы */
+  .testimonials {
+    background: #FFFFFF;
+    padding: 60px 20px;
+  }
+  .testimonials .container {
+    max-width: 1080px;
     margin: 0 auto;
   }
-  .gallery h2 {
-    font-family: var(--font-accent);
-    font-size: 2.4rem;
+  .testimonials h2 {
     text-align: center;
     margin-bottom: 2rem;
-    color: var(--color-main);
   }
-  .gallery-grid {
+  .testimonial-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 1.4rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
   }
-  .gallery-grid img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+  .testimonial {
+    background: #FFFFFF;
     border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.12);
-    transition: transform 0.3s ease;
-  }
-  .gallery-grid img:hover,
-  .gallery-grid img:focus {
-    transform: scale(1.05);
-    outline: none;
-  }
-  /* Modal for gallery */
-  #modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    display: none;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.1);
+    display: flex;
+    gap: 16px;
     align-items: center;
-    justify-content: center;
-    z-index: 1500;
   }
-  #modal img {
-    max-width: 90vw;
-    max-height: 90vh;
-    border-radius: 10px;
-    box-shadow: 0 0 20px #000;
-  }
-  #modal.active {
-    display: flex;
-  }
-  /* Reviews */
-  .reviews {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: var(--color-white);
-    padding: 2rem 2rem 3rem;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgb(0 0 0 / 0.05);
-    overflow: hidden;
-  }
-  .reviews h2 {
-    font-family: var(--font-accent);
-    font-size: 2.4rem;
-    color: var(--color-main);
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  .reviews-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 2rem;
-    padding-bottom: 1rem;
-  }
-  .review {
-    background: var(--color-beige);
-    border-radius: 10px;
-    min-width: 280px;
+  .testimonial-photo {
     flex-shrink: 0;
-    padding: 1.2rem 1.5rem;
-    scroll-snap-align: center;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.07);
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-  .review-photo {
-    width: 60px;
-    height: 60px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow: 0 0 6px rgba(232, 30, 99, 0.3);
+  }
+  .testimonial-photo img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    box-shadow: 0 0 0 2px var(--color-accent1);
   }
-  .review-content {
-    font-size: 0.95rem;
-    color: var(--color-main);
-    flex: 1;
+  .testimonial-text {
+    font-style: italic;
+    color: #4A4A4A;
   }
-  .review-name {
-    font-weight: 700;
-    margin-top: 0.2rem;
-    color: var(--color-accent2);
-  }
-  /* Booking */
-  .booking {
-    max-width: 700px;
-    margin: 0 auto;
-    background: var(--color-white);
-    padding: 2rem 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgb(0 0 0 / 0.05);
-  }
-  .booking h2 {
-    font-family: var(--font-accent);
-    font-size: 2rem;
-    color: var(--color-main);
-    margin-bottom: 1.5rem;
+
+  /* CTA-блок */
+  .cta {
+    background-color: #E91E63;
+    color: #FFFFFF;
+    padding: 60px 20px;
     text-align: center;
   }
-  form.booking-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
+  .cta h2 {
+    font-size: 28px;
+    margin-bottom: 1rem;
   }
-  label {
-    font-weight: 600;
-    color: var(--color-main);
-    margin-bottom: 0.3rem;
-    display: block;
+  .cta button {
+    background: #FFFFFF;
+    color: #E91E63;
+    padding: 1em 2em;
+    font-size: 18px;
+    border-radius: 6px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-  input[type="date"],
-  input[type="time"],
-  input[type="number"] {
-    width: 100%;
-    padding: 0.5rem 0.7rem;
-    border-radius: 5px;
-    border: 1.7px solid #ccc;
-    font-size: 1rem;
-    font-family: var(--font-main);
-    transition: border-color 0.3s;
-  }
-  input[type="date"]:focus,
-  input[type="time"]:focus,
-  input[type="number"]:focus {
-    border-color: var(--color-accent1);
+  .cta button:hover,
+  .cta button:focus {
+    background-color: #F8C8DC;
+    color: #4A4A4A;
     outline: none;
   }
-  button[type="submit"] {
-    background-color: var(--color-accent2);
-    color: var(--color-white);
-    border: none;
-    font-weight: 700;
-    padding: 0.75rem 1.8rem;
-    font-size: 1.1rem;
-    border-radius: 30px;
-    cursor: pointer;
-    font-family: var(--font-main);
-    transition: background-color 0.3s ease;
-  }
-  button[type="submit"]:hover,
-  button[type="submit"]:focus {
-    background-color: #b75329;
-  }
-  .booking-contact {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: var(--color-main);
-    text-align: center;
-  }
-  .booking-contact strong {
-    display: block;
-    margin-bottom: 0.3rem;
-    color: var(--color-accent1);
-  }
-  /* Footer */
+
+  /* Футер */
   footer {
-    background: var(--color-main);
-    color: var(--color-beige);
-    padding: 2rem 0 3rem;
-    font-size: 0.9rem;
+    background-color: #C2185B;
+    color: #FFFFFF;
+    padding: 30px 20px;
   }
   footer .container {
+    max-width: 1080px;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 2rem;
-    max-width: 1200px;
+    align-items: center;
+    gap: 16px;
   }
-  .footer-section {
-    flex: 1 1 260px;
-  }
-  .footer-section h3 {
-    font-family: var(--font-accent);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--color-beige);
-  }
-  .footer-contacts p {
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-  }
-  .footer-socials {
-    margin-top: 1rem;
+  .social-links {
     display: flex;
-    gap: 1rem;
+    gap: 16px;
   }
-  .footer-socials a svg {
-    fill: var(--color-beige);
-    width: 28px;
-    height: 28px;
-    transition: fill 0.3s;
+  .social-links a {
+    color: #FFFFFF;
+    font-size: 20px;
+    transition: color 0.3s ease;
   }
-  .footer-socials a:hover svg,
-  .footer-socials a:focus svg {
-    fill: var(--color-accent2);
+  .social-links a:hover,
+  .social-links a:focus {
+    color: #F8C8DC;
+    outline: none;
   }
-  /* Map */
-  .map-wrap {
-    margin-top: 1rem;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 3px 12px rgb(0 0 0 / 0.3);
-    height: 240px;
+  .footer-info {
+    font-size: 14px;
   }
-  iframe {
-    border: 0;
-    width: 100%;
-    height: 100%;
+
+  /* Иконки через SVG */
+  .icon {
+    display: inline-block;
+    fill: #E91E63;
   }
-  /* Responsive */
-  @media (max-width: 900px) {
-    .header-inner {
-      flex-wrap: wrap;
+
+  /* Мобильная адаптивность */
+  @media (max-width: 768px) {
+    .about .container {
+      flex-direction: column;
     }
-    nav {
-      margin-left: 0;
-      order: 3;
-      width: 100%;
-      margin-top: 0.8rem;
+    .advantages-list {
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
     }
-    .nav-links {
-      justify-content: center;
-      flex-wrap: wrap;
+    nav .menu {
       gap: 1rem;
+      flex-wrap: wrap;
     }
-    .header-right {
-      order: 2;
-      gap: 0.8rem;
-      margin-left: auto;
-    }
-    .hero-content {
-      max-width: 100%;
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-    .hero-title {
-      font-size: 2.4rem;
-    }
-    .menu-items {
+    .service-cards {
       grid-template-columns: 1fr;
     }
-    .about {
-      flex-direction: column;
-      text-align: center;
-    }
-    .about-text {
-      flex: none;
-    }
-    .about-photo {
-      flex: none;
-    }
-    .reviews-slider {
-      gap: 1rem;
+    .testimonial-list {
+      grid-template-columns: 1fr;
     }
   }
 </style>
 </head>
 <body>
-
 <header>
   <div class="container header-inner">
-    <a href="#hero" class="logo" aria-label="Логотип ресторана">
-      <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 4c11.046 0 20 8.954 20 20s-17.8 36-20 36S12 35.046 12 24 20.954 4 32 4zM32 7c-8.284 0-15 6.716-15 15 0 5.313 12.874 29.938 15 29.938s15-24.625 15-29.938c0-8.284-6.716-15-15-15z"/></svg>
-      Актау
-    </a>
-    <nav aria-label="Главное меню">
-      <ul class="nav-links">
-        <li><a href="#hero">Главная</a></li>
-        <li><a href="#menu">Меню</a></li>
-        <li><a href="#about">О нас</a></li>
-        <li><a href="#gallery">Галерея</a></li>
-        <li><a href="#contacts">Контакты</a></li>
-        <li><a href="#booking">Бронирование</a></li>
-      </ul>
-    </nav>
-    <div class="header-right">
-      <a href="#booking" class="btn-book">Заказать стол</a>
-      <div class="contacts" aria-label="Контактный телефон и социальные сети">
-        <a href="tel:+77273220000" style="color:var(--color-main); font-weight: 600;">+7 (7273) 220-000</a>
-        <div class="social-icons">
-          <a href="#" aria-label="Facebook" tabindex="0"><svg viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5 3.66 9.13 8.44 9.93v-7.03H7.9v-2.9h2.53V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34v7.04C18.34 21.2 22 17.07 22 12.07z"/></svg></a>
-          <a href="#" aria-label="Instagram" tabindex="0"><svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5a4.25 4.25 0 0 0-4.25 4.25v8.5a4.25 4.25 0 0 0 4.25 4.25h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5zm8.5 2.25a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg></a>
-          <a href="#" aria-label="Twitter" tabindex="0"><svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.28 4.28 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9 12.15 12.15 0 0 1-8.83-4.48 4.28 4.28 0 0 0 1.33 5.72 4.24 4.24 0 0 1-1.94-.54v.05a4.28 4.28 0 0 0 3.43 4.2 4.26 4.26 0 0 1-1.93.07 4.28 4.28 0 0 0 3.99 2.98A8.6 8.6 0 0 1 2 19.54a12.14 12.14 0 0 0 6.57 1.93c7.88 0 12.2-6.53 12.2-12.19 0-.19 0-.38-.01-.57A8.66 8.66 0 0 0 22.46 6z"/></svg></a>
-        </div>
+    <div class="logo" aria-label="Логотип сайта">MyPinkSite</div>
+    <nav aria-label="Основное меню">
+      <div class="menu">
+        <a href="#about">О компании</a>
+        <a href="#services">Услуги</a>
+        <a href="#advantages">Преимущества</a>
+        <a href="#testimonials">Отзывы</a>
+        <a href="#contact" class="btn-contact"><button>Связаться</button></a>
       </div>
-    </div>
+    </nav>
   </div>
 </header>
-
 <main>
-  <section class="hero" id="hero" aria-label="Главный баннер">
-    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800" alt="Интерьер ресторана с морепродуктами" loading="lazy" />
+  <section class="hero" role="banner" aria-label="Главный баннер сайта">
     <div class="hero-content">
-      <h1 class="hero-title" tabindex="0">Ресторан Актау</h1>
-      <p class="hero-subtitle" tabindex="0">Свежие морепродукты и местная кухня у Каспийского моря</p>
-      <div class="hero-buttons">
-        <a href="tel:+77273220000" class="btn-hero">Позвонить</a>
-        <a href="#booking" class="btn-hero">Забронировать</a>
+      <h1>Добро пожаловать в мир розовой элегантности</h1>
+      <p>Создаем современные и минималистичные решения с легким романтичным акцентом.</p>
+      <button>Начать сотрудничество</button>
+    </div>
+  </section>
+
+  <section id="about" class="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="about-text">
+        <h2 id="about-title">О компании</h2>
+        <p>Мы создаем красивые и функциональные сайты с акцентом на удобство и эмоциональную привлекательность, используя современные тенденции дизайна и уникальную цветовую палитру розовых оттенков.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1502672023488-70e25813eb80?w=600" alt="Офис компании, дружный коллектив"/>
       </div>
     </div>
   </section>
 
-  <section class="about" id="about" aria-labelledby="about-title">
-    <div class="about-text">
-      <h2 id="about-title" class="hero-title" style="font-size:2rem; color: var(--color-accent1);">О ресторане</h2>
-      <p>Мы гордимся сочетанием свежих морепродуктов и традиционной местной кухни Актау. Каждый день — это новые вкусы и атмосфера уюта, вдохновлённая морской гладью и восточными мотивами.</p>
-    </div>
-    <figure class="about-photo">
-      <img src="https://images.unsplash.com/photo-1529692236671-f8f61dee2a48?w=400" alt="Фото шеф-повара" loading="lazy" />
-      <figcaption style="font-size: 0.85rem; margin-top: 0.3rem; color: #555;">Шеф-повар Асем</figcaption>
-    </figure>
-  </section>
-
-  <section class="menu" id="menu" aria-labelledby="menu-title">
-    <h2 id="menu-title">Меню</h2>
-    <nav class="menu-categories" role="tablist" aria-label="Категории меню">
-      <button class="menu-category active" role="tab" aria-selected="true" aria-controls="menu-1" id="tab-1" tabindex="0">Закуски</button>
-      <button class="menu-category" role="tab" aria-selected="false" aria-controls="menu-2" id="tab-2" tabindex="-1">Основные блюда</button>
-      <button class="menu-category" role="tab" aria-selected="false" aria-controls="menu-3" id="tab-3" tabindex="-1">Десерты</button>
-      <button class="menu-category" role="tab" aria-selected="false" aria-controls="menu-4" id="tab-4" tabindex="-1">Напитки</button>
-    </nav>
-    <div tabindex="0" role="tabpanel" id="menu-1" aria-labelledby="tab-1" class="menu-items">
-      <article class="menu-item">
-        <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb37?w=120" alt="Тарелка с тартаром из лосося" loading="lazy" />
-        <div class="menu-info">
-          <h3 class="menu-title">Тартар из лосося</h3>
-          <p class="menu-desc">Свежий лосось, каперсы, зелёный лук, оливковое масло.</p>
-          <span class="menu-price">1800 ₸</span>
-        </div>
-      </article>
-      <article class="menu-item">
-        <img src="https://images.unsplash.com/photo-1505253210343-0caff72f4a49?w=120" alt="Тигровые креветки с чесноком" loading="lazy" />
-        <div class="menu-info">
-          <h3 class="menu-title">Тигровые креветки с чесноком</h3>
-          <p class="menu-desc">Обжаренные креветки в пряном чесночном соусе.</p>
-          <span class="menu-price">2200 ₸</span>
-        </div>
-      </article>
-      <article class="menu-item">
-        <img src="https://images.unsplash.com/photo-1546069901-eacef0df6022?w=120" alt="Табуле с зеленью и киноа" loading="lazy" />
-        <div class="menu-info">
-          <h3 class="menu-title">Табуле с киноа</h3>
-          <p class="menu-desc">Свежая зелень, помидоры, оливковое масло, киноа.</p>
-          <span class="menu-price">1200 ₸</span>
-        </div>
-      </article>
-    </div>
-    <div tabindex="0" role="tabpanel" id="menu-2" aria-labelledby="tab-2" class="menu-items" hidden>
-      <article class="menu-item">
-        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=120" alt="Жареный судак с овощами" loading="lazy" />
-        <div class="menu-info">
-          <h3 class="menu-title">Жареный судак с овощами</h3>
-          <p class="menu-desc">Филе судака, сезонные овощи, лимонный соус.</p>
-          <span class="menu-price">3500 ₸</span>
-        </div>
-      </article>
-      <article class="menu-item">
-        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8cbd?w=120" alt="Плов с морепродуктами" loading="lazy" />
-        <div class="menu-info">
-          <h3 class="menu-title">Плов с морепродуктами</h3>
-          <p class="menu-desc">Рис, мидии, кальмары, креветки и фирменные специи.</p>
-          <span class="menu-price">2800 ₸</span>
-        </div>
-      </article>
-    </div>
-    <div tabindex="0" role="tabpanel" id="menu-3" aria-labelledby="tab-3" class="menu-items" hidden>
-      <article class="menu-item">
-        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=120" alt="Медовик классический" loading="lazy" />
-        <div class="menu-info">
-          <h3 class="menu-title">Медовик классический</h3>
-          <p class="menu-desc">Домашний торт с нежным медовым кремом.</p>
-          <span class="menu-price">950 ₸</span>
-        </div>
-      </article>
-      <article class="menu-item">
-        <img src="https://images.unsplash.com/photo-1562440499-59c8d788d94c?w=120" alt="Фисташковое мороженое" loading="lazy" />
-        <div class="menu-info">
-          <h3 class="menu-title">Фисташковое мороженое</h3>
-          <p class="menu-desc">Подаётся с ягодным соусом и свежими ягодами.</p>
-          <span class="menu-price">850 ₸</span>
-        </div>
-      </article>
-    </div>
-    <div tabindex="0" role="tabpanel" id="menu-4" aria-labelledby="tab-4" class="menu-items" hidden>
-      <article class="menu-item">
-        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=120" alt="Зелёный чай с мятой" loading="lazy" />
-        <div class="menu-info">
-          <h3 class="menu-title">Зелёный чай с мятой</h3>
-          <p class="menu-desc">Свежие листья мяты и ароматный зелёный чай.</p>
-          <span class="menu-price">450 ₸</span>
-        </div>
-      </article>
-      <article class="menu-item">
-        <img src="https://images.unsplash.com/photo-1542444459-db464e5d04be?w=120" alt="Свежевыжатый апельсиновый сок" loading="lazy" />
-        <div class="menu-info">
-          <h3 class="menu-title">Апельсиновый сок</h3>
-          <p class="menu-desc">Натуральный сок из свежих апельсинов.</p>
-          <span class="menu-price">600 ₸</span>
-        </div>
-      </article>
+  <section id="services" class="services" aria-labelledby="services-title">
+    <div class="container">
+      <h2 id="services-title">Наши услуги</h2>
+      <div class="service-cards">
+        <article class="service-card" tabindex="0" aria-label="Веб-дизайн">
+          <svg aria-hidden="true" class="icon" width="48" height="48" viewBox="0 0 24 24"><path d="M3 4v16h18V4H3zm16 2v2H5V6h14zM5 18v-6h14v6H5z"/></svg>
+          <h3>Веб-дизайн</h3>
+          <p>Создаем привлекательные и минималистичные дизайны для вашего сайта, акцентируя внимание на деталях.</p>
+        </article>
+        <article class="service-card" tabindex="0" aria-label="Разработка">
+          <svg aria-hidden="true" class="icon" width="48" height="48" viewBox="0 0 24 24"><path d="M6 19h12v-2H6v2zm0-5h12v-2H6v2zm0-5v2h12V9H6z"/></svg>
+          <h3>Разработка</h3>
+          <p>Профессиональная front- и back-end разработка с фокусом на производительность и удобство пользователя.</p>
+        </article>
+        <article class="service-card" tabindex="0" aria-label="Поддержка">
+          <svg aria-hidden="true" class="icon" width="48" height="48" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <h3>Поддержка</h3>
+          <p>Обеспечиваем надежное сопровождение и обновления вашего сайта после запуска.</p>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section class="gallery" id="gallery" aria-labelledby="gallery-title">
-    <h2 id="gallery-title">Галерея</h2>
-    <div class="gallery-grid">
-      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800" alt="Интерьер ресторана с деревянными элементами и видом на море" tabindex="0" />
-      <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb37?w=800" alt="Шеф-повар готовит блюда на кухне" tabindex="0" />
-      <img src="https://images.unsplash.com/photo-1529692236671-f8f61dee2a48?w=800" alt="Красивое сервированное блюдо с морепродуктами" tabindex="0" />
-      <img src="https://images.unsplash.com/photo-1546069901-eacef0df6022?w=800" alt="Гости наслаждаются ужином в ресторане" tabindex="0" />
-      <img src="https://images.unsplash.com/photo-1556911220-e15b29be8cbd?w=800" alt="Плов с морепродуктами" tabindex="0" />
-      <img src="https://images.unsplash.com/photo-1505253210343-0caff72f4a49?w=800" alt="Тигровые креветки в чесночном соусе" tabindex="0" />
-      <img src="https://images.unsplash.com/photo-1562440499-59c8d788d94c?w=800" alt="Десерт с мороженым и ягодами" tabindex="0" />
-      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800" alt="Чашка зелёного чая с мятой" tabindex="0" />
+  <section id="advantages" class="advantages" aria-labelledby="advantages-title">
+    <div class="container">
+      <h2 id="advantages-title">Почему выбирают нас</h2>
+      <div class="advantages-list">
+        <article class="advantage-item" tabindex="0" aria-label="Индивидуальный подход">
+          <svg aria-hidden="true" class="advantage-icon" width="36" height="36" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-2.21 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6 2-6 4h12c0-2-2.67-4-6-4z"/></svg>
+          <h3>Индивидуальный подход</h3>
+          <p>Прорабатываем каждое решение под ваши задачи и пожелания с тонким вниманием к деталям.</p>
+        </article>
+        <article class="advantage-item" tabindex="0" aria-label="Высокое качество">
+          <svg aria-hidden="true" class="advantage-icon" width="36" height="36" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 5.5L4.8 8.75 12 11l7.2-2.25L12 7.5zM2 17l10 5 10-5-10-5-10 5z"/></svg>
+          <h3>Высокое качество</h3>
+          <p>Используем лучшие практики и современные технологии для создания надежных проектов.</p>
+        </article>
+        <article class="advantage-item" tabindex="0" aria-label="Поддержка и сопровождение">
+          <svg aria-hidden="true" class="advantage-icon" width="36" height="36" viewBox="0 0 24 24"><path d="M12 22c5.52 0 10-4.48 10-10H2c0 5.52 4.48 10 10 10zm0-14c-2.21 0-4 1.79-4 4a4 4 0 0 0 8 0c0-2.21-1.79-4-4-4z"/></svg>
+          <h3>Поддержка и сопровождение</h3>
+          <p>Гарантируем быстрые ответы и помощь после запуска вашего сайта.</p>
+        </article>
+        <article class="advantage-item" tabindex="0" aria-label="Современный дизайн">
+          <svg aria-hidden="true" class="advantage-icon" width="36" height="36" viewBox="0 0 24 24"><path d="M4 19h16v2H4v-2zm0-16h16v2H4V3zm0 8h16v2H4v-2z"/></svg>
+          <h3>Современный дизайн</h3>
+          <p>Стильные и чистые интерфейсы, которые создают эмоциональную связь с пользователями.</p>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section class="reviews" id="reviews" aria-labelledby="reviews-title">
-    <h2 id="reviews-title">Отзывы клиентов</h2>
-    <div class="reviews-slider" role="list">
-      <article class="review" role="listitem" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=60" alt="Фото клиента Алина" class="review-photo" />
-        <div class="review-content">
-          <p>Отличный сервис и невероятно свежие морепродукты! Атмосфера ресторана заставляет возвращаться снова.</p>
-          <p class="review-name">— Алина</p>
-        </div>
-      </article>
-      <article class="review" role="listitem" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=60" alt="Фото клиента Руслан" class="review-photo" />
-        <div class="review-content">
-          <p>Потрясающая кухня и вежливый персонал. Особенно понравился плов с морепродуктами.</p>
-          <p class="review-name">— Руслан</p>
-        </div>
-      </article>
-      <article class="review" role="listitem" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1508214751196-2e2a41480320?w=60" alt="Фото клиента Зарина" class="review-photo" />
-        <div class="review-content">
-          <p>Идеальное место для семейного вечера. Дети в восторге от десертов, а мы от уюта и вида на море.</p>
-          <p class="review-name">— Зарина</p>
-        </div>
-      </article>
-      <article class="review" role="listitem" tabindex="0">
-        <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=60" alt="Фото клиента Айдар" class="review-photo" />
-        <div class="review-content">
-          <p>Лучший ресторан с атмосферой востока и моря. Заказываю стол всегда заранее через сайт - удобно и быстро!</p>
-          <p class="review-name">— Айдар</p>
-        </div>
-      </article>
+  <section id="testimonials" class="testimonials" aria-labelledby="testimonials-title">
+    <div class="container">
+      <h2 id="testimonials-title">Отзывы клиентов</h2>
+      <div class="testimonial-list">
+        <article class="testimonial" tabindex="0" aria-label="Отзыв клиента Алены">
+          <div class="testimonial-photo">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100" alt="Фото Алены" />
+          </div>
+          <p class="testimonial-text">«Работать с компанией — одно удовольствие! Уютный и современный дизайн в розовой палитре впечатлил меня.»</p>
+        </article>
+        <article class="testimonial" tabindex="0" aria-label="Отзыв клиента Максима">
+          <div class="testimonial-photo">
+            <img src="https://images.unsplash.com/photo-1508214751198-6fcd4c374cd5?w=100" alt="Фото Максима" />
+          </div>
+          <p class="testimonial-text">«Высокое качество работы и индивидуальный подход — именно то, что мы искали для нашего проекта.»</p>
+        </article>
+        <article class="testimonial" tabindex="0" aria-label="Отзыв клиента Светланы">
+          <div class="testimonial-photo">
+            <img src="https://images.unsplash.com/photo-1508214751192-3a3d74b14f00?w=100" alt="Фото Светланы" />
+          </div>
+          <p class="testimonial-text">«Поддержка и внимание к деталям на высшем уровне. Результат превзошел все ожидания.»</p>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section class="booking" id="booking" aria-labelledby="booking-title">
-    <h2 id="booking-title">Бронирование</h2>
-    <form class="booking-form" action="#" method="post" aria-describedby="booking-desc">
-      <p id="booking-desc" style="font-size:0.9rem; color:#555; text-align:center; margin-bottom:1.2rem;">Выберите дату, время и количество гостей</p>
-      <label for="date">Дата</label>
-      <input type="date" id="date" name="date" required aria-required="true" min="" />
-      
-      <label for="time">Время</label>
-      <input type="time" id="time" name="time" required aria-required="true" min="10:00" max="22:00" />
-      
-      <label for="guests">Количество гостей</label>
-      <input type="number" id="guests" name="guests" required aria-required="true" min="1" max="20" value="1" />
-      
-      <button type="submit">Отправить</button>
-    </form>
-    <div class="booking-contact" aria-label="Контактная информация для бронирования">
-      <strong>Телефон:</strong> <a href="tel:+77273220000" style="color: var(--color-accent1); text-decoration: underline;">+7 (7273) 220-000</a><br />
-      <strong>Email:</strong> <a href="mailto:info@akwrestaurant.kz" style="color: var(--color-accent1); text-decoration: underline;">info@akwrestaurant.kz</a><br />
-      <strong>Часы работы:</strong> 10:00 – 22:00
-    </div>
+  <section id="contact" class="cta" aria-labelledby="contact-title">
+    <h2 id="contact-title">Готовы начать?</h2>
+    <button>Связаться с нами</button>
   </section>
 </main>
 
-<footer id="contacts" aria-label="Контакты и карта ресторана">
+<footer>
   <div class="container">
-    <section class="footer-section footer-contacts" aria-labelledby="footer-address-title">
-      <h3 id="footer-address-title">Адрес</h3>
-      <p>г. Актау, ул. Каспийская, 12</p>
-      <p>Телефон: <a href="tel:+77273220000" style="color: var(--color-beige); text-decoration: underline;">+7 (7273) 220-000</a></p>
-      <p>Email: <a href="mailto:info@akwrestaurant.kz" style="color: var(--color-beige); text-decoration: underline;">info@akwrestaurant.kz</a></p>
-      <p>Часы работы: 10:00 – 22:00</p>
-    </section>
-
-    <section class="footer-section map-wrap" aria-label="Карта расположения ресторана Актау">
-      <iframe title="Карта ресторана Актау" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12587.827195659422!2d51.163045799999994!3d43.65026689999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x423ef15e92661d69%3A0x6fadd08e0892c0f!2z0J3QsNC70YzQvdGB0Lsg0JrQvtGA0Lgg0KTQvtGA0LjRhtC40LfQuNC5INCY0LvQtdC80LjQvdCwLCDQkdCw0LfQsNC90LDRjyDQsyDQvtCx0YDQuNC70L7QstC40YHRjNC60L7QvNCw0YLQtdC10L3QuNC1!5e0!3m2!1sru!2skz!4v1693281092222!5m2!1sru!2skz" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen="" aria-hidden="false"></iframe>
-    </section>
-
-    <section class="footer-section" aria-labelledby="footer-socials-title">
-      <h3 id="footer-socials-title">Мы в соцсетях</h3>
-      <div class="footer-socials">
-        <a href="#" aria-label="Facebook" tabindex="0"><svg viewBox="0 0 24 24"><path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5 3.66 9.13 8.44 9.93v-7.03H7.9v-2.9h2.53V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34v7.04C18.34 21.2 22 17.07 22 12.07z"/></svg></a>
-        <a href="#" aria-label="Instagram" tabindex="0"><svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5a4.25 4.25 0 0 0-4.25 4.25v8.5a4.25 4.25 0 0 0 4.25 4.25h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5zm8.5 2.25a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg></a>
-        <a href="#" aria-label="Twitter" tabindex="0"><svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.28 4.28 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9 12.15 12.15 0 0 1-8.83-4.48 4.28 4.28 0 0 0 1.33 5.72 4.24 4.24 0 0 1-1.94-.54v.05a4.28 4.28 0 0 0 3.43 4.2 4.26 4.26 0 0 1-1.93.07 4.28 4.28 0 0 0 3.99 2.98A8.6 8.6 0 0 1 2 19.54a12.14 12.14 0 0 0 6.57 1.93c7.88 0 12.2-6.53 12.2-12.19 0-.19 0-.38-.01-.57A8.66 8.66 0 0 0 22.46 6z"/></svg></a>
-      </div>
-    </section>
+    <div class="social-links" aria-label="Социальные сети">
+      <a href="#" aria-label="Facebook" tabindex="0">
+        <svg width="24" height="24" fill="currentColor" aria-hidden="true" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.98 3.66 9.09 8.44 9.88v-7H8.07v-2.88h2.37V9.41c0-2.34 1.4-3.63 3.55-3.63 1.03 0 2.1.18 2.1.18v2.31h-1.18c-1.17 0-1.54.73-1.54 1.48v1.78h2.62l-.42 2.88h-2.2v7C18.34 21.09 22 16.98 22 12z"/></svg>
+      </a>
+      <a href="#" aria-label="Instagram" tabindex="0">
+        <svg width="24" height="24" fill="currentColor" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm5 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.5-1.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0z"/></svg>
+      </a>
+      <a href="#" aria-label="Twitter" tabindex="0">
+        <svg width="24" height="24" fill="currentColor" aria-hidden="true" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.6-2.46.71a4.28 4.28 0 0 0 1.88-2.36 8.4 8.4 0 0 1-2.7 1.03 4.22 4.22 0 0 0-7.19 3.85A12 12 0 0 1 3.26 4.9a4.21 4.21 0 0 0 1.31 5.63 4.15 4.15 0 0 1-1.91-.53v.05a4.22 4.22 0 0 0 3.38 4.14 4.29 4.29 0 0 1-1.9.07 4.22 4.22 0 0 0 3.94 2.92A8.47 8.47 0 0 1 2 18.41 11.96 11.96 0 0 0 8.29 20c7.55 0 11.68-6.25 11.68-11.67 0-.18-.01-.36-.02-.54A8.3 8.3 0 0 0 22.46 6z"/></svg>
+      </a>
+    </div>
+    <div class="footer-info" role="contentinfo">
+      <p>Контакты: info@mypinksite.ru | +7 (123) 456-78-90</p>
+      <p>© 2024 MyPinkSite. Все права защищены.</p>
+    </div>
   </div>
 </footer>
-
-<script>
-  // Menu tabs functionality
-  const categories = document.querySelectorAll('.menu-category');
-  const panels = document.querySelectorAll('[role="tabpanel"]');
-  categories.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      categories.forEach(t => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-        t.tabIndex = -1;
-      });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-      tab.tabIndex = 0;
-
-      const target = tab.getAttribute('aria-controls');
-      panels.forEach(panel => {
-        if(panel.id === target){
-          panel.hidden = false;
-          panel.focus();
-        } else {
-          panel.hidden = true;
-        }
-      });
-    });
-  });
-
-  // Gallery modal
-  const galleryImages = document.querySelectorAll('.gallery-grid img');
-  const modal = document.createElement('div');
-  modal.id = 'modal';
-  modal.setAttribute('role', 'dialog');
-  modal.setAttribute('aria-modal', 'true');
-  modal.tabIndex = -1;
-  modal.innerHTML = '<img alt="" /><button aria-label="Закрыть" style="position:absolute;top:10px;right:10px;background:none;border:none;color:white;font-size:2rem;cursor:pointer;">×</button>';
-
-  document.body.appendChild(modal);
-  const modalImage = modal.querySelector('img');
-  const closeBtn = modal.querySelector('button');
-
-  galleryImages.forEach(img => {
-    img.addEventListener('click', () => {
-      modalImage.src = img.src;
-      modalImage.alt = img.alt;
-      modal.classList.add('active');
-      modal.focus();
-    });
-    img.addEventListener('keydown', e => {
-      if(e.key === "Enter" || e.key === " "){
-        e.preventDefault();
-        img.click();
-      }
-    });
-  });
-
-  closeBtn.addEventListener('click', () => {
-    modal.classList.remove('active');
-  });
-  modal.addEventListener('click', e => {
-    if(e.target === modal){
-      modal.classList.remove('active');
-    }
-  });
-  document.addEventListener('keydown', e => {
-    if(e.key === 'Escape' && modal.classList.contains('active')){
-      modal.classList.remove('active');
-    }
-  });
-
-  // Set minimum date in booking form as today
-  const dateInput = document.getElementById('date');
-  if(dateInput){
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.setAttribute('min', today);
-  }
-</script>
-
 </body>
 </html>
