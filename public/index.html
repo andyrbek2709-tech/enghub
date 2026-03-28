@@ -3,573 +3,722 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Мои боты</title>
+<title>Современный минималистичный сайт</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto&display=swap" rel="stylesheet" />
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
   :root {
-    --color-bg: #F9FAFB;
-    --color-primary: #2563EB;
-    --color-text-secondary: #6B7280;
-    --color-status-active: #10B981;
-    --color-error: #EF4444;
-    --color-footer-bg: #F3F4F6;
-    --font-main: 'Inter', sans-serif;
+    --color-primary: #1E3A8A;
+    --color-secondary: #F5F7FA;
+    --color-accent: #F97316;
+    --text-color: #333333;
   }
   * {
     box-sizing: border-box;
   }
   body {
     margin: 0;
-    background: var(--color-bg);
-    font-family: var(--font-main);
-    color: #111827;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Roboto', sans-serif;
+    font-size: 17px;
     line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--color-secondary);
   }
   a {
-    color: var(--color-primary);
+    color: var(--color-accent);
     text-decoration: none;
+    transition: color 0.3s ease;
   }
-  a:focus,
-  button:focus,
-  input:focus {
-    outline-offset: 2px;
-    outline-color: var(--color-primary);
-    outline-style: solid;
+  a:hover,
+  button:hover {
+    color: #d75b0f;
   }
   header {
+    position: sticky;
+    top: 0;
+    background: var(--color-secondary);
+    border-bottom: 1px solid #ddd;
+    padding: 0.75rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 24px;
-    border-bottom: 1px solid #E5E7EB;
-    background: var(--color-bg);
+    z-index: 1000;
   }
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .logo img {
-    width: 40px;
-    height: 40px;
-    border-radius: 6px;
-    object-fit: cover;
-  }
-  .page-title {
+  .logo {
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 22px;
-    color: #111827;
-    white-space: nowrap;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    user-select: none;
   }
-  .header-right {
+  nav {
+    flex-grow: 1;
+    margin-left: 3rem;
+  }
+  .menu {
     display: flex;
-    align-items: center;
-    gap: 16px;
+    justify-content: flex-end;
+    gap: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
   }
-  button.add-bot {
-    background-color: var(--color-primary);
-    border: none;
-    color: white;
-    font-weight: 500;
-    font-size: 15px;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  button.add-bot:hover,
-  button.add-bot:focus {
-    background-color: #1E40AF;
-  }
-  .user-menu {
+  .menu a {
+    color: var(--color-primary);
     position: relative;
   }
-  .user-menu button {
-    background: none;
+  .menu a:focus, .menu a:hover {
+    color: var(--color-accent);
+  }
+  .btn-contact {
+    margin-left: 2rem;
+    padding: 0.5rem 1.3rem;
+    background: var(--color-accent);
     border: none;
+    border-radius: 4px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    padding: 6px;
-    border-radius: 50%;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.3s ease;
   }
-  .user-menu button:hover,
-  .user-menu button:focus {
-    background-color: #E0E7FF;
+  .btn-contact:hover,
+  .btn-contact:focus {
+    background: #d75b0f;
   }
-  .user-menu img {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-  }
-  .user-dropdown {
-    position: absolute;
-    top: 48px;
-    right: 0;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-    padding: 8px 0;
-    width: 160px;
-    font-size: 14px;
+  /* Mobile menu toggle */
+  .menu-toggle {
     display: none;
     flex-direction: column;
-    z-index: 10;
-  }
-  .user-dropdown a, .user-dropdown button {
-    padding: 10px 16px;
-    text-align: left;
-    border: none;
-    background: none;
-    width: 100%;
-    cursor: pointer;
-    color: #374151;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-  .user-dropdown a:hover,
-  .user-dropdown button:hover,
-  .user-dropdown a:focus,
-  .user-dropdown button:focus {
-    background-color: #EFF6FF;
-  }
-
-  /* Filters Panel */
-  .filters-panel {
-    background: white;
-    padding: 16px 24px;
-    border-bottom: 1px solid #E5E7EB;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 20px;
-    font-size: 14px;
-    color: var(--color-text-secondary);
-  }
-  .search-wrapper {
-    flex: 1 1 280px;
-    max-width: 360px;
-    position: relative;
-  }
-  .search-wrapper input[type="search"] {
-    width: 100%;
-    font-family: var(--font-main);
-    font-size: 15px;
-    padding: 10px 40px 10px 14px;
-    border: 1px solid #D1D5DB;
-    border-radius: 6px;
-    background-color: #F9FAFB;
-    color: #111827;
-    transition: border-color 0.2s ease;
-  }
-  .search-wrapper input[type="search"]::placeholder {
-    color: var(--color-text-secondary);
-  }
-  .search-wrapper input[type="search"]:focus {
-    border-color: var(--color-primary);
-    outline: none;
-    background: white;
-  }
-  .search-wrapper svg {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    fill: var(--color-text-secondary);
-    width: 18px;
+    justify-content: space-between;
+    width: 25px;
     height: 18px;
-    pointer-events: none;
+    cursor: pointer;
+  }
+  .menu-toggle span {
+    display: block;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+  }
+  /* Mobile menu */
+  @media (max-width: 768px) {
+    nav {
+      position: fixed;
+      top: 56px;
+      right: 0;
+      background: var(--color-secondary);
+      width: 220px;
+      height: calc(100% - 56px);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+      padding-top: 1.5rem;
+      z-index: 999;
+    }
+    nav.open {
+      transform: translateX(0);
+    }
+    .menu {
+      flex-direction: column;
+      gap: 1.5rem;
+      padding-left: 1.5rem;
+    }
+    .btn-contact {
+      margin: 1.5rem 0 0 1.5rem;
+      width: calc(100% - 3rem);
+    }
+    .menu-toggle {
+      display: flex;
+    }
+    .menu a {
+      font-size: 1.2rem;
+    }
   }
 
-  .filter-status,
-  .filter-sort {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .filter-status label,
-  .filter-sort label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    user-select: none;
-    font-weight: 500;
-    color: var(--color-text-secondary);
-  }
-  .filter-status input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    border: 1.5px solid #9CA3AF;
-    cursor: pointer;
-    accent-color: var(--color-primary);
-  }
-  .filter-sort select {
-    font-family: var(--font-main);
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid #D1D5DB;
-    background-color: #F9FAFB;
-    color: var(--color-text-secondary);
-    font-weight: 500;
-    cursor: pointer;
-    transition: border-color 0.2s ease;
-  }
-  .filter-sort select:focus {
-    border-color: var(--color-primary);
-    outline: none;
-    background: white;
+  main > section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
   }
 
-  /* Main content: bot cards grid */
-  main {
-    padding: 24px 24px 36px;
-    max-width: 1200px;
+  /* Hero Section */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding-top: 6rem;
+  }
+  .hero-text {
+    flex: 1 1 320px;
+  }
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+  }
+  .hero p.subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    margin: 0 0 1.5rem 0;
+    color: var(--text-color);
+  }
+  .hero p.description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    max-width: 480px;
+  }
+  .hero .btn-primary {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    background: var(--color-accent);
+    border: none;
+    color: white;
+    padding: 0.75rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgb(249 115 22 / 0.45);
+    transition: background-color 0.25s ease;
+  }
+  .hero .btn-primary:hover,
+  .hero .btn-primary:focus {
+    background: #d75b0f;
+  }
+  .hero-image {
+    flex: 1 1 320px;
+    text-align: center;
+  }
+  .hero-image img {
+    max-width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 12px rgb(30 58 138 / 0.25);
+  }
+
+  /* About Section */
+  .about {
+    text-align: center;
+  }
+  .about p {
+    max-width: 700px;
+    margin: 0 auto 2.5rem auto;
+    font-size: 1.1rem;
+    color: var(--text-color);
+  }
+  .advantages {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .advantage-item {
+    flex: 1 1 200px;
+    max-width: 240px;
+    text-align: center;
+  }
+  .advantage-icon {
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+  .advantage-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+    color: var(--color-primary);
+  }
+  .advantage-desc {
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+  .about-team-photo {
+    margin-top: 3rem;
+    max-width: 360px;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgb(30 58 138 / 0.1);
   }
-  .bots-grid {
+
+  /* Services Section */
+  .services {
+    max-width: 1100px;
+  }
+  .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 2rem;
   }
-  .bot-card {
+  .service-item {
     background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 1.8rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgb(30 58 138 / 0.05);
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+  }
+  .service-item:hover {
+    box-shadow: 0 6px 20px rgb(249 115 22 / 0.3);
+  }
+  .service-icon {
+    font-size: 2.8rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+  .service-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.6rem;
+    color: var(--color-primary);
+  }
+  .service-desc {
+    font-size: 0.95rem;
+    color: var(--text-color);
+  }
+
+  /* Portfolio Section */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 1.5rem;
+  }
+  .portfolio-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgb(30 58 138 / 0.1);
+    background: white;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+  .portfolio-card:hover {
+    transform: translateY(-4px);
+  }
+  .portfolio-card img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+  .portfolio-info {
+    padding: 1rem 1.25rem 1.5rem 1.25rem;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: box-shadow 0.2s ease;
-    cursor: default;
   }
-  .bot-card:hover,
-  .bot-card:focus-within {
-    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+  .portfolio-desc {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    flex-grow: 1;
   }
-  .bot-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  .bot-name {
-    font-weight: 700;
-    font-size: 20px;
-    color: #111827;
-    word-break: break-word;
-  }
-  .status-indicator {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  .portfolio-more {
+    align-self: start;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    font-size: 14px;
-    text-transform: capitalize;
-    color: var(--color-text-secondary);
-  }
-  .status-indicator .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .status-active .dot {
-    background-color: var(--color-status-active);
-  }
-  .status-inactive .dot {
-    background-color: #9CA3AF;
-  }
-  .status-draft .dot {
-    background-color: #FBBF24; /* amber-400 */
-  }
-
-  .bot-description {
-    font-size: 15px;
-    color: var(--color-text-secondary);
-    margin-bottom: 14px;
-    min-height: 38px;
-    word-break: break-word;
-  }
-  .bot-dates {
-    font-size: 13px;
-    color: var(--color-text-secondary);
-    margin-bottom: 14px;
-  }
-
-  .bot-actions {
-    display: flex;
-    gap: 16px;
-  }
-  .bot-actions button {
+    color: var(--color-accent);
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
-    border-radius: 8px;
-    color: var(--color-text-secondary);
-    transition: background-color 0.2s ease, color 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0;
+    font-size: 1rem;
+    transition: color 0.25s ease;
   }
-  .bot-actions button:hover,
-  .bot-actions button:focus {
-    background-color: #EFF6FF;
-    color: var(--color-primary);
-    outline: none;
-  }
-  .bot-actions button.delete:hover,
-  .bot-actions button.delete:focus {
-    background-color: #FEE2E2;
-    color: var(--color-error);
-  }
-
-  /* Icons base style */
-  svg.icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* Load More Button */
-  .load-more-wrapper {
-    margin-top: 32px;
-    text-align: center;
-  }
-  button.load-more {
-    background-color: var(--color-primary);
-    border: none;
-    color: white;
-    font-weight: 600;
-    font-size: 15px;
-    padding: 12px 28px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  button.load-more:hover,
-  button.load-more:focus {
-    background-color: #1D4ED8;
-    outline: none;
-  }
-
-  /* Footer */
-  footer {
-    background-color: var(--color-footer-bg);
-    padding: 20px 24px;
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  footer a {
-    color: var(--color-text-secondary);
-    font-weight: 500;
-  }
-  footer a:hover,
-  footer a:focus {
+  .portfolio-more:hover {
+    color: #d75b0f;
     text-decoration: underline;
   }
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    header {
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
+  /* Testimonials Section */
+  .testimonials {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .testimonial-slider {
+    overflow: hidden;
+    position: relative;
+  }
+  .testimonial-item {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--text-color);
+  }
+  .testimonial-item.active {
+    display: flex;
+  }
+  .testimonial-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 0 3px var(--color-primary);
+  }
+  .testimonial-text {
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    max-width: 600px;
+  }
+  .testimonial-author {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  .testimonial-position {
+    font-size: 0.9rem;
+    color: #666666;
+  }
+  .testimonial-controls {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .testimonial-btn {
+    background: var(--color-accent);
+    border: none;
+    color: white;
+    padding: 0.4rem 1rem;
+    margin: 0 0.3rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  .testimonial-btn:hover,
+  .testimonial-btn:focus {
+    background: #d75b0f;
+  }
+
+  /* CTA Section */
+  .cta {
+    background: var(--color-primary);
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    max-width: 900px;
+    margin: 3rem auto 4rem auto;
+  }
+  .cta-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.1;
+  }
+  .cta-subtext {
+    font-size: 1.1rem;
+    margin-bottom: 2.2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    background: var(--color-accent);
+    border: none;
+    color: white;
+    padding: 0.9rem 3rem;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgb(249 115 22 / 0.65);
+    transition: background-color 0.25s ease;
+  }
+  .cta-button:hover,
+  .cta-button:focus {
+    background: #d75b0f;
+  }
+
+  /* Footer Section */
+  footer {
+    background: var(--color-primary);
+    color: white;
+    padding: 3rem 2rem 2rem 2rem;
+    font-size: 0.95rem;
+  }
+  .footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+  .footer-col {
+    min-width: 200px;
+    flex: 1 1 200px;
+  }
+  .footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .footer-contact p,
+  .footer-links a {
+    margin: 0.3rem 0;
+    color: white;
+    opacity: 0.85;
+    text-decoration: none;
+  }
+  .footer-links a:hover,
+  .footer-contact p a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+  .footer-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .footer-socials a {
+    color: white;
+    opacity: 0.85;
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+  .footer-socials a:hover,
+  .footer-socials a:focus {
+    opacity: 1;
+  }
+  .footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+  @media (max-width:600px) {
+    footer {
+      font-size: 0.9rem;
+      padding: 2rem 1rem 1.5rem 1rem;
     }
-    .header-left {
-      order: 1;
-      flex-basis: 100%;
-      justify-content: center;
-    }
-    .header-right {
-      order: 2;
-      flex-basis: 100%;
-      justify-content: center;
-      gap: 20px;
-    }
-    .filters-panel {
+    .footer-container {
       flex-direction: column;
-      align-items: stretch;
-    }
-    .filter-status,
-    .filter-sort {
-      justify-content: flex-start;
-    }
-    .bots-grid {
-      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
   }
 </style>
 </head>
 <body>
+
 <header>
-  <div class="header-left" role="banner">
-    <a href="#" class="logo" aria-label="Логотип сайта">
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=80" alt="Логотип" loading="lazy">
-    </a>
-    <h1 class="page-title">Мои боты</h1>
-  </div>
-  <div class="header-right">
-    <button type="button" class="add-bot" aria-label="Добавить бота">Добавить бота</button>
-    <div class="user-menu">
-      <button aria-haspopup="true" aria-expanded="false" aria-controls="user-menu-list" id="user-menu-button" aria-label="Меню пользователя">
-        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=80" alt="Фото пользователя" loading="lazy" width="36" height="36">
-      </button>
-      <div id="user-menu-list" class="user-dropdown" role="menu" aria-labelledby="user-menu-button" tabindex="-1">
-        <a href="#settings" role="menuitem" tabindex="-1">Настройки</a>
-        <button type="button" role="menuitem" tabindex="-1">Выйти</button>
-      </div>
+  <div class="logo" aria-label="Логотип сайта">MyCompany</div>
+  <button class="menu-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="primary-menu">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="primary-menu" aria-label="Основное меню">
+    <div class="menu">
+      <a href="#hero">Главная</a>
+      <a href="#about">О компании</a>
+      <a href="#services">Услуги</a>
+      <a href="#portfolio">Портфолио</a>
+      <a href="#testimonials">Отзывы</a>
     </div>
-  </div>
+    <button class="btn-contact" type="button">Связаться</button>
+  </nav>
 </header>
 
-<section class="filters-panel" aria-label="Панель фильтров и поиска">
-  <div class="search-wrapper">
-    <input type="search" placeholder="Поиск по имени бота" aria-label="Поиск по имени бота" />
-    <svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="7" stroke-width="2"></circle><line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2" stroke-linecap="round"></line>
-    </svg>
-  </div>
-  <fieldset class="filter-status" aria-label="Фильтр по статусу">
-    <legend style="position:absolute;left:-9999px;">Фильтр по статусу</legend>
-    <label><input type="checkbox" name="status" value="active" checked /> Активные</label>
-    <label><input type="checkbox" name="status" value="inactive" checked /> Неактивные</label>
-    <label><input type="checkbox" name="status" value="draft" checked /> Черновики</label>
-  </fieldset>
-  <div class="filter-sort">
-    <label for="sort-select">Сортировка:</label>
-    <select id="sort-select" name="sort" aria-label="Сортировка списка ботов">
-      <option value="date-desc" selected>По дате создания (новые)</option>
-      <option value="date-asc">По дате создания (старые)</option>
-      <option value="name-asc">По имени (А–Я)</option>
-      <option value="name-desc">По имени (Я–А)</option>
-      <option value="status">По активности</option>
-    </select>
-  </div>
-</section>
-
 <main>
-  <section class="bots-grid" aria-label="Список ботов">
-    <article class="bot-card" tabindex="0">
-      <header class="bot-header">
-        <h2 class="bot-name">Помощник по финансам</h2>
-        <div class="status-indicator status-active" aria-label="Статус: Активен">
-          <span class="dot" aria-hidden="true"></span> Активен
-        </div>
-      </header>
-      <p class="bot-description">Автоматизирует бюджетирование и прогнозирует расходы.</p>
-      <p class="bot-dates">Создан: 12.05.2023 | Обновлён: 01.06.2023</p>
-      <div class="bot-actions" role="group" aria-label="Действия с ботом Помощник по финансам">
-        <button type="button" title="Редактировать">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-1.5l-8 8V17h3.232l8-8a2.828 2.828 0 00-4-4z"/></svg>
-        </button>
-        <button type="button" class="delete" title="Удалить" aria-describedby="delete-confirm-desc">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-7 4h10"/></svg>
-        </button>
-        <button type="button" title="Запустить">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.172-3.597A1 1 0 007 8.402v7.196a1 1 0 001.58.814l6.172-3.597a1 1 0 000-1.742z"/></svg>
-        </button>
-      </div>
-    </article>
 
-    <article class="bot-card" tabindex="0">
-      <header class="bot-header">
-        <h2 class="bot-name">Чат-бот поддержки</h2>
-        <div class="status-indicator status-inactive" aria-label="Статус: Не активен">
-          <span class="dot" aria-hidden="true"></span> Неактивен
-        </div>
-      </header>
-      <p class="bot-description">Отвечает на часто задаваемые вопросы клиентов автоматически.</p>
-      <p class="bot-dates">Создан: 30.03.2023 | Обновлён: 15.04.2023</p>
-      <div class="bot-actions" role="group" aria-label="Действия с ботом Чат-бот поддержки">
-        <button type="button" title="Редактировать">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-1.5l-8 8V17h3.232l8-8a2.828 2.828 0 00-4-4z"/></svg>
-        </button>
-        <button type="button" class="delete" title="Удалить" aria-describedby="delete-confirm-desc">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-7 4h10"/></svg>
-        </button>
-        <button type="button" title="Запустить">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.172-3.597A1 1 0 007 8.402v7.196a1 1 0 001.58.814l6.172-3.597a1 1 0 000-1.742z"/></svg>
-        </button>
-      </div>
-    </article>
-
-    <article class="bot-card" tabindex="0">
-      <header class="bot-header">
-        <h2 class="bot-name">Бета-тест бот</h2>
-        <div class="status-indicator status-draft" aria-label="Статус: Черновик">
-          <span class="dot" aria-hidden="true"></span> Черновик
-        </div>
-      </header>
-      <p class="bot-description">Функции в разработке, тестируется новый алгоритм обработки запросов.</p>
-      <p class="bot-dates">Создан: 05.05.2023 | Обновлён: 29.05.2023</p>
-      <div class="bot-actions" role="group" aria-label="Действия с ботом Бета-тест бот">
-        <button type="button" title="Редактировать">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-1.5l-8 8V17h3.232l8-8a2.828 2.828 0 00-4-4z"/></svg>
-        </button>
-        <button type="button" class="delete" title="Удалить" aria-describedby="delete-confirm-desc">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-7 4h10"/></svg>
-        </button>
-        <button type="button" title="Запустить">
-          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.172-3.597A1 1 0 007 8.402v7.196a1 1 0 001.58.814l6.172-3.597a1 1 0 000-1.742z"/></svg>
-        </button>
-      </div>
-    </article>
+  <section id="hero" class="hero" role="banner">
+    <div class="hero-text">
+      <h1>Создаём современные цифровые решения</h1>
+      <p class="subtitle">Профессиональные веб-сервисы и мобильные приложения на заказ.</p>
+      <p class="description">Мы объединяем минимализм и функциональность для вашего бизнеса – качественно, быстро и с заботой о пользователях.</p>
+      <button class="btn-primary" type="button">Начать</button>
+    </div>
+    <div class="hero-image" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800" alt="Современное цифровое решение" />
+    </div>
   </section>
-  <div class="load-more-wrapper">
-    <button type="button" class="load-more" aria-label="Загрузить ещё ботов">Загрузить ещё</button>
-  </div>
+
+  <section id="about" class="about" aria-labelledby="about-title">
+    <h2 id="about-title" style="font-family: 'Montserrat',sans-serif; font-weight:700; font-size:28px; color:#1E3A8A; margin-bottom:1rem; text-align:center;">О компании</h2>
+    <p>Мы стремимся создавать инновационные продукты, которые упрощают жизнь людей и помогают бизнесам расти, сохраняя минималистичный и удобный дизайн.</p>
+    <div class="advantages" role="list">
+      <div class="advantage-item" role="listitem">
+        <div class="advantage-icon" aria-hidden="true">🚀</div>
+        <div class="advantage-title">Быстрая разработка</div>
+        <div class="advantage-desc">Оптимизированные процессы и опытная команда.</div>
+      </div>
+      <div class="advantage-item" role="listitem">
+        <div class="advantage-icon" aria-hidden="true">💡</div>
+        <div class="advantage-title">Креативные решения</div>
+        <div class="advantage-desc">Индивидуальный подход к каждому проекту.</div>
+      </div>
+      <div class="advantage-item" role="listitem">
+        <div class="advantage-icon" aria-hidden="true">🔒</div>
+        <div class="advantage-title">Безопасность</div>
+        <div class="advantage-desc">Данные и проекты под надежной защитой.</div>
+      </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800" alt="Фото команды" class="about-team-photo" />
+  </section>
+
+  <section id="services" class="services" aria-labelledby="services-title">
+    <h2 id="services-title" style="font-family: 'Montserrat',sans-serif; font-weight:700; font-size:28px; color:#1E3A8A; margin-bottom:2rem; text-align:center;">Наши услуги</h2>
+    <div class="services-grid">
+      <article class="service-item" tabindex="0">
+        <div class="service-icon" aria-hidden="true">🌐</div>
+        <h3 class="service-title">Веб-разработка</h3>
+        <p class="service-desc">Создание современных и адаптивных сайтов любой сложности.</p>
+      </article>
+      <article class="service-item" tabindex="0">
+        <div class="service-icon" aria-hidden="true">📱</div>
+        <h3 class="service-title">Мобильные приложения</h3>
+        <p class="service-desc">Разработка нативных и кроссплатформенных приложений.</p>
+      </article>
+      <article class="service-item" tabindex="0">
+        <div class="service-icon" aria-hidden="true">⚙️</div>
+        <h3 class="service-title">Поддержка и сопровождение</h3>
+        <p class="service-desc">Обеспечение стабильной работы и обновление продуктов.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="portfolio" aria-labelledby="portfolio-title">
+    <h2 id="portfolio-title" style="font-family: 'Montserrat',sans-serif; font-weight:700; font-size:28px; color:#1E3A8A; margin: 2rem auto 2rem auto; max-width:1100px; text-align:center;">Портфолио</h2>
+    <div class="portfolio-grid" role="list">
+      <article class="portfolio-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800" alt="Проект интернет-магазин" />
+        <div class="portfolio-info">
+          <p class="portfolio-desc">Интернет-магазин с интеграцией платежных систем и адаптивным дизайном.</p>
+          <button class="portfolio-more" type="button">Подробнее</button>
+        </div>
+      </article>
+      <article class="portfolio-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="Проект мобильное приложение" />
+        <div class="portfolio-info">
+          <p class="portfolio-desc">Кроссплатформенное мобильное приложение для управления задачами.</p>
+          <button class="portfolio-more" type="button">Подробнее</button>
+        </div>
+      </article>
+      <article class="portfolio-card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=800" alt="Проект корпоративный сайт" />
+        <div class="portfolio-info">
+          <p class="portfolio-desc">Корпоративный сайт с возможностями блога и клиентской поддержки.</p>
+          <button class="portfolio-more" type="button">Подробнее</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="testimonials" class="testimonials" aria-labelledby="testimonials-title">
+    <h2 id="testimonials-title" style="font-family: 'Montserrat',sans-serif; font-weight:700; font-size:28px; color:#1E3A8A; margin-bottom:2rem; text-align:center;">Отзывы клиентов</h2>
+    <div class="testimonial-slider" id="testimonial-slider" role="region" aria-roledescription="carousel" aria-live="polite">
+      <article class="testimonial-item active" role="group" aria-label="Отзыв 1 из 3">
+        <img class="testimonial-photo" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=80" alt="Фото клиента Иван Иванов" />
+        <p class="testimonial-text">"Отличная команда, быстро и качественно воплотили все наши идеи. Рекомендуем!"</p>
+        <div class="testimonial-author">Иван Иванов</div>
+        <div class="testimonial-position">Директор, ООО Ромашка</div>
+      </article>
+      <article class="testimonial-item" role="group" aria-label="Отзыв 2 из 3">
+        <img class="testimonial-photo" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=80" alt="Фото клиента Мария Смирнова" />
+        <p class="testimonial-text">"Профессиональный подход и отличное понимание задач. Работаем уже второй год."</p>
+        <div class="testimonial-author">Мария Смирнова</div>
+        <div class="testimonial-position">Маркетолог, Стартап Х</div>
+      </article>
+      <article class="testimonial-item" role="group" aria-label="Отзыв 3 из 3">
+        <img class="testimonial-photo" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80" alt="Фото клиента Алексей Петров" />
+        <p class="testimonial-text">"Дизайн и реализация выше всяких похвал. Спасибо за сотрудничество!"</p>
+        <div class="testimonial-author">Алексей Петров</div>
+        <div class="testimonial-position">Основатель, Компания Z</div>
+      </article>
+    </div>
+    <div class="testimonial-controls" role="group" aria-label="Управление слайдером отзывов">
+      <button class="testimonial-btn" type="button" aria-label="Предыдущий отзыв" id="testimonial-prev">&larr;</button>
+      <button class="testimonial-btn" type="button" aria-label="Следующий отзыв" id="testimonial-next">&rarr;</button>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <h2 id="cta-title" class="cta-text">Готовы начать работу с профессионалами?</h2>
+    <p class="cta-subtext">Свяжитесь с нами прямо сейчас и создайте продукт, который полюбят ваши пользователи.</p>
+    <button class="cta-button" type="button">Связаться</button>
+  </section>
+
 </main>
 
 <footer>
-  <a href="#contacts" tabindex="0">Контактная информация</a>
-  <a href="#privacy" tabindex="0">Политика конфиденциальности</a>
-  <a href="#help" tabindex="0">Помощь</a>
+  <div class="footer-container">
+    <div class="footer-col">
+      <div class="footer-logo" aria-label="Логотип сайта">MyCompany</div>
+      <p>Современные цифровые решения с заботой о пользователях.</p>
+      <div class="footer-socials" role="list" aria-label="Социальные сети">
+        <a href="#" role="listitem" aria-label="Facebook" target="_blank" rel="noopener noreferrer">🌐</a>
+        <a href="#" role="listitem" aria-label="Instagram" target="_blank" rel="noopener noreferrer">📸</a>
+        <a href="#" role="listitem" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">🔗</a>
+      </div>
+    </div>
+    <div class="footer-col footer-contact" aria-label="Контактная информация">
+      <p>Телефон: <a href="tel:+71234567890">+7 (123) 456-78-90</a></p>
+      <p>Email: <a href="mailto:info@mycompany.ru">info@mycompany.ru</a></p>
+      <p>Адрес: Москва, ул. Пушкина, д. 10</p>
+    </div>
+    <div class="footer-col footer-links" aria-label="Полезные ссылки">
+      <a href="#">Политика конфиденциальности</a><br/>
+      <a href="#">Пользовательское соглашение</a><br/>
+      <a href="#">Карта сайта</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2024 MyCompany. Все права защищены.
+  </div>
 </footer>
 
 <script>
-  // User menu toggling
-  const userBtn = document.getElementById('user-menu-button');
-  const userMenu = document.getElementById('user-menu-list');
+  // Mobile menu toggle
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('nav#primary-menu');
 
-  userBtn.addEventListener('click', () => {
-    const expanded = userBtn.getAttribute('aria-expanded') === 'true';
-    userBtn.setAttribute('aria-expanded', String(!expanded));
-    if (!expanded) {
-      userMenu.style.display = 'flex';
-      userMenu.focus();
-    } else {
-      userMenu.style.display = 'none';
-    }
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+    menuToggle.setAttribute('aria-expanded', !expanded);
+    nav.classList.toggle('open');
   });
 
-  document.addEventListener('click', (e) => {
-    if (!userBtn.contains(e.target) && !userMenu.contains(e.target)) {
-      userBtn.setAttribute('aria-expanded', 'false');
-      userMenu.style.display = 'none';
-    }
-  });
+  // Testimonials slider logic
+  const testimonials = document.querySelectorAll('.testimonial-item');
+  const prevBtn = document.getElementById('testimonial-prev');
+  const nextBtn = document.getElementById('testimonial-next');
+  let currentIndex = 0;
 
-  // Delete confirmation
-  const deleteButtons = document.querySelectorAll('.bot-actions button.delete');
-  deleteButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const botName = btn.closest('.bot-card').querySelector('.bot-name').textContent;
-      const confirmed = confirm(`Вы действительно хотите удалить бота "${botName}"?`);
-      if (confirmed) {
-        btn.closest('.bot-card').remove();
-      }
+  function showTestimonial(index) {
+    testimonials.forEach((item, i) => {
+      item.classList.toggle('active', i === index);
     });
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex === 0) ? testimonials.length - 1 : currentIndex - 1;
+    showTestimonial(currentIndex);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex === testimonials.length - 1) ? 0 : currentIndex + 1;
+    showTestimonial(currentIndex);
   });
 </script>
+
 </body>
 </html>
