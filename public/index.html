@@ -1,164 +1,175 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bella Pizza – Пиццерия</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #fff8f0;
-            color: #3a2f17;
-        }
-        header {
-            background-color: #d94f09;
-            padding: 20px;
-            text-align: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: 2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-        }
-        nav {
-            background-color: #7a3000;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            padding: 15px 0;
-            font-weight: 600;
-        }
-        nav a {
-            color: #fff3e6;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-        nav a:hover,
-        nav a:focus {
-            color: #fddca7;
-            outline: none;
-        }
-        main {
-            max-width: 960px;
-            margin: 30px auto;
-            padding: 0 15px;
-        }
-        h1, h2 {
-            font-weight: 700;
-            color: #7a3000;
-            margin-bottom: 10px;
-        }
-        .intro {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 1.2rem;
-            line-height: 1.5;
-            color: #5a3a09;
-        }
-        .pizza-photo {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin: 0 auto 40px auto;
-            box-shadow: 0 8px 15px rgba(169, 81, 8, 0.3);
-        }
-        .menu {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-        @media (max-width: 600px) {
-            .menu {
-                grid-template-columns: 1fr;
-            }
-        }
-        .pizza-item {
-            background: #fff3e6;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(122, 48, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        .pizza-item:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 10px 25px rgba(169, 81, 8, 0.4);
-        }
-        .pizza-name {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-            color: #d94f09;
-        }
-        .pizza-desc {
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            color: #5a3a09;
-        }
-        .pizza-price {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: #7a3000;
-        }
-        footer {
-            background-color: #7a3000;
-            color: #fff3e6;
-            text-align: center;
-            padding: 18px 15px;
-            font-size: 0.9rem;
-            user-select: none;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ыы</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  body {
+    margin:0; font-family: 'Roboto', sans-serif; background: #f5f7fa; color: #222;
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(90deg, #2c3e50, #3498db);
+    padding: 20px 30px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1 {
+    margin: 0; font-weight: 700; font-size: 28px;
+    letter-spacing: 3px;
+  }
+  nav a {
+    color: #dbe9fb; text-decoration: none; margin-left: 25px; font-weight: 500;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+  }
+  nav a:hover {
+    color: #fff;
+  }
+  main {
+    flex-grow: 1;
+    max-width: 1200px;
+    width: 90%;
+    margin: 40px auto;
+    background: #fff;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.07);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .hero {
+    position: relative;
+    height: 380px;
+    background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1350&q=80') center center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 62, 80, 0.65);
+    z-index: 0;
+  }
+  .hero h2 {
+    position: relative;
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 10px;
+    margin: 0;
+    z-index: 1;
+  }
+  .content-section {
+    padding: 40px 50px;
+  }
+  .content-section h3 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    letter-spacing: 2px;
+  }
+  .intro-text {
+    font-size: 18px;
+    line-height: 1.58;
+    color: #555;
+    max-width: 720px;
+    margin-bottom: 28px;
+  }
+  .gallery {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .gallery figure {
+    margin: 0;
+    width: 240px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(52,152,219,0.15);
+    background: #fff;
+    transition: transform 0.3s ease;
+  }
+  .gallery figure:hover {
+    transform: translateY(-8px);
+  }
+  .gallery img {
+    display: block;
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+  .gallery figcaption {
+    padding: 16px 14px;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    background: #f0f5fa;
+    color: #2c3e50;
+    letter-spacing: 1px;
+  }
+  footer {
+    background: #2c3e50;
+    color: #aab7c3;
+    text-align: center;
+    padding: 18px 15px;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+  }
+</style>
 </head>
 <body>
-    <header>Bella Pizza</header>
-    <nav>
-        <a href="#menu">Меню</a>
-        <a href="#about">О нас</a>
-        <a href="#contacts">Контакты</a>
-    </nav>
-    <main>
-        <section id="about" class="intro">
-            <h1>Настоящая итальянская пицца в Алматы</h1>
-            <p>Добро пожаловать в Bella Pizza! Мы готовим классические и любимые всеми пиццы из свежих ингредиентов с душой и уважением к традициям. Попробуйте наши фирменные пиццы и почувствуйте вкус Италии!</p>
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=960&q=80" alt="Пицца Bella Pizza" class="pizza-photo" />
-        </section>
-        <section id="menu">
-            <h2>Меню</h2>
-            <div class="menu">
-                <article class="pizza-item">
-                    <div class="pizza-name">Маргарита</div>
-                    <div class="pizza-desc">С классическим томатным соусом, моцареллой и свежим базиликом.</div>
-                    <div class="pizza-price">1800 ₸</div>
-                </article>
-                <article class="pizza-item">
-                    <div class="pizza-name">Пепперони</div>
-                    <div class="pizza-desc">Пикантная колбаса пепперони, томатный соус и растопленная моцарелла.</div>
-                    <div class="pizza-price">2200 ₸</div>
-                </article>
-                <article class="pizza-item">
-                    <div class="pizza-name">Четыре сыра</div>
-                    <div class="pizza-desc">Моцарелла, пармезан, горгонзола и эдам на тонком тесте.</div>
-                    <div class="pizza-price">2500 ₸</div>
-                </article>
-            </div>
-        </section>
-        <section id="contacts">
-            <h2>Контакты</h2>
-            <p>Адрес: г. Алматы, ул. Пушкина, 15</p>
-            <p>Телефон: +7 (727) 123-45-67</p>
-            <p>Работаем ежедневно с 11:00 до 23:00</p>
-        </section>
-    </main>
-    <footer>
-        &copy; 2024 Bella Pizza. Все права защищены.
-    </footer>
+<header>
+  <h1>Ыы</h1>
+  <nav>
+    <a href="#about">О проекте</a>
+    <a href="#gallery">Галерея</a>
+    <a href="#contact">Контакты</a>
+  </nav>
+</header>
+<main>
+  <section class="hero" aria-label="Главная секция с изображением">
+    <h2>ЫЫ</h2>
+  </section>
+  <section id="about" class="content-section">
+    <h3>Современный сайт «Ыы»</h3>
+    <p class="intro-text">
+      Добро пожаловать на сайт «Ыы» — острое современное ощущение в мире веб-дизайна. Здесь каждый элемент пропитан уникальностью, а дизайн балансирует между лаконичностью и выразительностью. Название «Ыы» — это игра с формой и звуком, выражение свободы и нестандартного мышления.
+    </p>
+  </section>
+  <section id="gallery" class="content-section">
+    <h3>Галерея</h3>
+    <div class="gallery" role="list">
+      <figure role="listitem">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=480&q=80" alt="Абстрактное современное изображение визуального искусства"/>
+        <figcaption>Визуальное Искусство</figcaption>
+      </figure>
+      <figure role="listitem">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=480&q=80" alt="Современный городской пейзаж с акцентом на архитектуру"/>
+        <figcaption>Городская Архитектура</figcaption>
+      </figure>
+      <figure role="listitem">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=480&q=80" alt="Динамичное абстрактное изображение света и тени"/>
+        <figcaption>Игра Света и Тени</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section id="contact" class="content-section" style="text-align:center;">
+    <h3>Контакты</h3>
+    <p>Свяжитесь с нами для обсуждения креативных проектов и идей.</p>
+    <p><strong>Email:</strong> info@yy-site.kz</p>
+    <p><strong>Телефон:</strong> +7 (777) 123-45-67</p>
+  </section>
+</main>
+<footer>
+  &copy; 2024 Ыы. Все права защищены.
+</footer>
 </body>
 </html>
