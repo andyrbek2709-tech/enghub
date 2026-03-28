@@ -1,224 +1,966 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>BarberKing – Барбершоп в центре города</title>
-<style>
-  body {
-    margin:0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #1e1e1e;
-    color: #f1f1f1;
-  }
-  header {
-    background: #111;
-    padding: 20px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.7);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  header h1 {
-    font-weight: 900;
-    font-size: 1.8rem;
-    color: #ffb703;
-    text-transform: uppercase;
-  }
-  nav a {
-    color: #f1f1f1;
-    text-decoration: none;
-    margin-left: 25px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    transition: color 0.3s ease;
-  }
-  nav a:hover {
-    color: #ffb703;
-  }
-  .hero {
-    background: url("https://images.unsplash.com/photo-1534367610370-16e106b8f633?w=1600") center/cover no-repeat;
-    height: 460px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0 20px;
-    color: #ffb703;
-    font-size: 2.4rem;
-    font-weight: 700;
-    text-shadow: 2px 2px 10px #000000cc;
-  }
-  main {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
-  h2.section-title {
-    font-size: 2rem;
-    color: #ffb703;
-    border-bottom: 2px solid #ffb703;
-    display: inline-block;
-    margin-bottom: 25px;
-  }
-  .services {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-  }
-  .service-card {
-    background: #292929;
-    flex: 1 1 300px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 14px #161616;
-    transition: transform 0.3s ease;
-  }
-  .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 30px #ffb703;
-  }
-  .service-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  .service-content {
-    padding: 15px 20px 25px;
-  }
-  .service-content h3 {
-    margin: 0 0 8px;
-    font-size: 1.4rem;
-    color: #ffb703;
-  }
-  .service-content p {
-    margin: 0 0 12px;
-    line-height: 1.4;
-    color: #ddd;
-  }
-  .price {
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: #ffa500;
-  }
-  footer {
-    background: #111;
-    padding: 20px 40px;
-    text-align: center;
-    color: #777;
-    font-size: 0.9rem;
-    margin-top: 50px;
-    border-top: 1px solid #222;
-  }
-  @media(max-width: 700px){
-    .services {
-      flex-direction: column;
-      gap: 25px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IT Solutions - Корпоративный сайт IT-компании</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --dark-blue: #0A2342;
+      --bright-blue: #1DA1F2;
+      --white: #FFFFFF;
+      --light-gray: #F5F7FA;
+      --orange: #FF6F3C;
+      --gradient-start: rgba(29,161,242,0.8);
+      --gradient-end: rgba(10,35,66,0.85);
+      --transition-speed: 0.3s;
     }
-  }
-</style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--dark-blue);
+      background-color: var(--white);
+      scroll-behavior: smooth;
+    }
+    a {
+      color: var(--bright-blue);
+      text-decoration: none;
+      transition: color var(--transition-speed);
+    }
+    a:hover,
+    a:focus {
+      color: var(--orange);
+      outline: none;
+    }
+    header {
+      background: var(--dark-blue);
+      color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 1.1px;
+      user-select: none;
+      cursor: default;
+    }
+    nav {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    nav a {
+      font-weight: 600;
+      font-size: 16px;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    nav a:hover,
+    nav a:focus {
+      background: var(--bright-blue);
+      color: var(--white);
+    }
+    .btn-contact {
+      background: var(--orange);
+      color: var(--white);
+      border: none;
+      padding: 10px 18px;
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed);
+    }
+    .btn-contact:hover,
+    .btn-contact:focus {
+      background: #e05831;
+      outline: none;
+    }
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    section {
+      margin-bottom: 64px;
+    }
+    /* Hero */
+    .hero {
+      position: relative;
+      color: var(--white);
+      text-align: center;
+      padding: 100px 20px 120px;
+      background-image:
+        linear-gradient(to bottom right, var(--gradient-start), var(--gradient-end)),
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600');
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      user-select: none;
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 48px;
+      margin: 0 0 16px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+    .hero p {
+      font-size: 20px;
+      max-width: 720px;
+      margin: 0 auto 32px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+    .hero .btn-primary {
+      background: var(--orange);
+      border: none;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 20px;
+      padding: 14px 34px;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(255,111,60,0.6);
+      transition: background-color var(--transition-speed);
+      user-select: none;
+    }
+    .hero .btn-primary:hover,
+    .hero .btn-primary:focus {
+      background: #e05831;
+      outline: none;
+      box-shadow: 0 8px 14px rgba(224,88,49,0.8);
+    }
+    /* About */
+    #about {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+      text-align: center;
+    }
+    #about p {
+      max-width: 720px;
+      font-size: 18px;
+      color: var(--dark-blue);
+      line-height: 1.5;
+    }
+    .about-icons {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .about-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--bright-blue);
+      max-width: 140px;
+      user-select: none;
+    }
+    .about-icon svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 8px;
+      fill: var(--bright-blue);
+      opacity: 0.85;
+      transition: opacity var(--transition-speed);
+    }
+    .about-icon:hover svg,
+    .about-icon:focus svg {
+      opacity: 1;
+      outline: none;
+    }
+    .about-icon span {
+      font-weight: 600;
+      font-size: 16px;
+    }
+    /* Services */
+    #services {
+      text-align: center;
+    }
+    #services h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      margin-bottom: 24px;
+      color: var(--dark-blue);
+    }
+    .service-cards {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    }
+    .service-card {
+      background: var(--light-gray);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgb(10 35 66 / 0.1);
+      user-select: none;
+      transition: box-shadow var(--transition-speed);
+      cursor: default;
+    }
+    .service-card:hover,
+    .service-card:focus-within {
+      box-shadow: 0 6px 18px rgb(10 35 66 / 0.18);
+      outline: none;
+    }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      fill: var(--bright-blue);
+      opacity: 0.9;
+      transition: fill var(--transition-speed);
+    }
+    .service-card:hover .service-icon,
+    .service-card:focus-within .service-icon {
+      fill: var(--orange);
+      outline: none;
+    }
+    .service-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: var(--dark-blue);
+    }
+    .service-desc {
+      color: var(--dark-blue);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .service-link {
+      margin-top: 12px;
+      display: inline-block;
+      font-weight: 600;
+      color: var(--bright-blue);
+      font-size: 15px;
+      transition: color var(--transition-speed);
+    }
+    .service-link:hover,
+    .service-link:focus {
+      color: var(--orange);
+      outline: none;
+    }
+    /* Portfolio */
+    #portfolio {
+      max-width: 100%;
+    }
+    #portfolio h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      margin-bottom: 24px;
+      color: var(--dark-blue);
+      text-align: center;
+    }
+    .portfolio-filter {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: var(--light-gray);
+      border: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      font-size: 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--dark-blue);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      user-select: none;
+    }
+    .filter-btn.active,
+    .filter-btn:hover,
+    .filter-btn:focus {
+      background: var(--bright-blue);
+      color: var(--white);
+      outline: none;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-gap: 24px;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      user-select: none;
+    }
+    .portfolio-item {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgb(10 35 66 / 0.12);
+      background: var(--white);
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow var(--transition-speed);
+    }
+    .portfolio-item:hover,
+    .portfolio-item:focus-within {
+      box-shadow: 0 8px 28px rgb(10 35 66 / 0.22);
+      outline: none;
+    }
+    .portfolio-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      transition: transform var(--transition-speed);
+    }
+    .portfolio-item:hover .portfolio-img,
+    .portfolio-item:focus-within .portfolio-img {
+      transform: scale(1.03);
+      outline: none;
+    }
+    .portfolio-info {
+      padding: 16px 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .portfolio-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--dark-blue);
+      margin-bottom: 8px;
+    }
+    .portfolio-desc {
+      font-size: 15px;
+      color: var(--dark-blue);
+      line-height: 1.4;
+    }
+    /* Team */
+    #team h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      margin-bottom: 24px;
+      color: var(--dark-blue);
+      text-align: center;
+    }
+    .team-grid {
+      display: grid;
+      grid-gap: 32px;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      justify-items: center;
+      user-select: none;
+    }
+    .team-member {
+      text-align: center;
+      max-width: 240px;
+      padding: 0 12px;
+    }
+    .team-photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 3px 5px rgba(10,35,66,0.15));
+      transition: filter var(--transition-speed);
+    }
+    .team-member:hover .team-photo,
+    .team-member:focus-within .team-photo {
+      filter: drop-shadow(0 5px 8px rgba(10,35,66,0.25));
+      outline: none;
+    }
+    .team-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--dark-blue);
+      margin-bottom: 4px;
+    }
+    .team-position {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--bright-blue);
+      margin-bottom: 8px;
+    }
+    .team-skills {
+      font-size: 14px;
+      color: var(--dark-blue);
+      line-height: 1.4;
+    }
+    /* Testimonials */
+    #testimonials h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      margin-bottom: 24px;
+      color: var(--dark-blue);
+      text-align: center;
+    }
+    .testimonials-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+    }
+    .testimonial {
+      max-width: 320px;
+      background: var(--light-gray);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 3px 12px rgb(10 35 66 / 0.1);
+      display: flex;
+      gap: 16px;
+      user-select: none;
+    }
+    .testimonial-photo {
+      flex-shrink: 0;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: drop-shadow(0 2px 3px rgba(10,35,66,0.15));
+      margin-top: 4px;
+    }
+    .testimonial-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .testimonial-text {
+      font-style: italic;
+      font-size: 15px;
+      color: var(--dark-blue);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .testimonial-name {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--bright-blue);
+    }
+    /* Blog/News */
+    #blog h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      margin-bottom: 24px;
+      color: var(--dark-blue);
+      text-align: center;
+    }
+    .blog-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+    .blog-post {
+      max-width: 320px;
+      background: var(--light-gray);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgb(10 35 66 / 0.12);
+      display: flex;
+      flex-direction: column;
+      cursor: default;
+      user-select: none;
+      transition: box-shadow var(--transition-speed);
+    }
+    .blog-post:hover,
+    .blog-post:focus-within {
+      box-shadow: 0 8px 28px rgb(10 35 66 / 0.22);
+      outline: none;
+    }
+    .blog-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      transition: transform var(--transition-speed);
+    }
+    .blog-post:hover .blog-img,
+    .blog-post:focus-within .blog-img {
+      transform: scale(1.05);
+      outline: none;
+    }
+    .blog-content {
+      padding: 16px 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .blog-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--dark-blue);
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .blog-meta {
+      font-size: 13px;
+      color: var(--bright-blue);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .blog-excerpt {
+      color: var(--dark-blue);
+      font-size: 15px;
+      flex-grow: 1;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .blog-link {
+      font-weight: 600;
+      color: var(--orange);
+      font-size: 15px;
+      align-self: flex-start;
+      transition: color var(--transition-speed);
+    }
+    .blog-link:hover,
+    .blog-link:focus {
+      color: #e05831;
+      outline: none;
+    }
+    /* Contacts */
+    #contacts {
+      max-width: 750px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+      text-align: center;
+    }
+    #contacts h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      margin-bottom: 24px;
+      color: var(--dark-blue);
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--dark-blue);
+      user-select: text;
+      margin-bottom: 32px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: var(--light-gray);
+      padding: 24px 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgb(10 35 66 / 0.12);
+    }
+    label {
+      font-weight: 600;
+      color: var(--dark-blue);
+      margin-bottom: 6px;
+      display: block;
+      font-size: 15px;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      padding: 12px 14px;
+      border-radius: 6px;
+      border: 1.8px solid var(--bright-blue);
+      font-size: 16px;
+      font-family: 'Open Sans', sans-serif;
+      resize: vertical;
+      transition: border-color var(--transition-speed);
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      border-color: var(--orange);
+      outline: none;
+    }
+    textarea {
+      min-height: 100px;
+    }
+    .btn-submit {
+      background: var(--orange);
+      border: none;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 18px;
+      padding: 14px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed);
+      user-select: none;
+    }
+    .btn-submit:hover,
+    .btn-submit:focus {
+      background: #e05831;
+      outline: none;
+    }
+    .map-container {
+      margin-top: 40px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgb(10 35 66 / 0.16);
+    }
+    iframe {
+      width: 100%;
+      height: 320px;
+      border: 0;
+      display: block;
+    }
+    /* Footer */
+    footer {
+      background: var(--dark-blue);
+      color: var(--white);
+      padding: 28px 20px;
+      text-align: center;
+      font-size: 15px;
+      user-select: none;
+    }
+    .footer-links {
+      margin-bottom: 14px;
+    }
+    .footer-links a {
+      color: var(--bright-blue);
+      margin: 0 10px;
+      font-weight: 600;
+      transition: color var(--transition-speed);
+    }
+    .footer-links a:hover,
+    .footer-links a:focus {
+      color: var(--orange);
+      outline: none;
+    }
+    .footer-contact {
+      margin-top: 8px;
+      font-weight: 600;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+        width: 100%;
+      }
+      main {
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      #about {
+        gap: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>BarberKing</h1>
-  <nav>
-    <a href="#services">Услуги</a>
-    <a href="#prices">Цены</a>
-    <a href="#contacts">Контакты</a>
-  </nav>
-</header>
+  <header role="banner">
+    <div class="logo" aria-label="Логотип IT Solutions">IT Solutions</div>
+    <nav role="navigation" aria-label="Основная навигация">
+      <a href="#hero" tabindex="0">Главная</a>
+      <a href="#about" tabindex="0">О компании</a>
+      <a href="#services" tabindex="0">Услуги</a>
+      <a href="#portfolio" tabindex="0">Портфолио</a>
+      <a href="#team" tabindex="0">Команда</a>
+      <a href="#testimonials" tabindex="0">Отзывы</a>
+      <a href="#blog" tabindex="0">Блог</a>
+      <a href="#contacts" tabindex="0">Контакты</a>
+    </nav>
+    <button class="btn-contact" aria-label="Связаться с компанией" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'});">Связаться</button>
+  </header>
 
-<section class="hero" aria-label="Барбершоп BarberKing">
-  Лучшие мужские стрижки и уход в BarberKing
-</section>
+  <main>
+    <section id="hero" class="hero" role="region" aria-label="Главный баннер с уникальным торговым предложением">
+      <h1>Инновационные IT-решения для вашего бизнеса</h1>
+      <p>Мы создаем эффективные и масштабируемые цифровые продукты с использованием современных технологий.</p>
+      <button class="btn-primary" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'});" aria-label="Узнать больше и связаться">Узнать больше</button>
+    </section>
 
-<main>
-  <section id="services" aria-label="Услуги барбершопа BarberKing">
-    <h2 class="section-title">Наши услуги</h2>
-    <div class="services">
-      <article class="service-card">
-        <img src="https://images.unsplash.com/photo-1555421689-b4cf9a83f60f?w=800" alt="Мужская классическая стрижка" />
-        <div class="service-content">
-          <h3>Классическая мужская стрижка</h3>
-          <p>Точная и аккуратная стрижка с классическими линиями, подчеркивающая стиль и статус.</p>
-          <div class="price">от 1200 ₽</div>
+    <section id="about" role="region" aria-labelledby="about-title">
+      <h2 id="about-title" style="font-family: 'Montserrat', sans-serif; font-weight:700; font-size:32px; margin-bottom:20px; color: var(--dark-blue);">О компании</h2>
+      <p>IT Solutions — команда профессионалов, стремящихся создавать технологичные и адаптивные решения, которые помогают бизнесу расти и развиваться.</p>
+      <p>Наша миссия — трансформировать идеи в реальные цифровые продукты с максимальной эффективностью и качеством.</p>
+      <div class="about-icons">
+        <div class="about-icon" tabindex="0" aria-label="Современные технологии">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><path d="M32 2a30 30 0 1 0 30 30A30.034 30.034 0 0 0 32 2Zm0 56a26 26 0 1 1 26-26 26.03 26.03 0 0 1-26 26Z"/><path d="M32 12a20 20 0 0 0 0 40 20.023 20.023 0 0 0 0-40Zm6.723 6.277a16.007 16.007 0 0 1 0 23.447Z"/></svg>
+          <span>Современные технологии</span>
         </div>
-      </article>
-      <article class="service-card">
-        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800" alt="Бритье опасной бритвой" />
-        <div class="service-content">
-          <h3>Бритье опасной бритвой</h3>
-          <p>Изысканное бритье с использованием традиционных техник и профессиональной косметики.</p>
-          <div class="price">от 900 ₽</div>
+        <div class="about-icon" tabindex="0" aria-label="Клиентоориентированность">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="32" cy="20" r="12" fill="none" stroke="currentColor" stroke-width="4"/><path d="M14 50c0-9 36-9 36 0" fill="none" stroke="currentColor" stroke-width="4"/></svg>
+          <span>Клиентоориентированность</span>
         </div>
-      </article>
-      <article class="service-card">
-        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37b?w=800" alt="Моделирование бороды" />
-        <div class="service-content">
-          <h3>Моделирование бороды</h3>
-          <p>Создание индивидуального образа с помощью стрижки и коррекции бороды любой сложности.</p>
-          <div class="price">от 800 ₽</div>
+        <div class="about-icon" tabindex="0" aria-label="Командная работа">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><circle cx="12" cy="44" r="6" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="32" cy="32" r="10" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="52" cy="44" r="6" fill="none" stroke="currentColor" stroke-width="4"/><path d="M18 48h28v6H18z" fill="none" stroke="currentColor" stroke-width="4"/></svg>
+          <span>Командная работа</span>
         </div>
-      </article>
-      <article class="service-card">
-        <img src="https://images.unsplash.com/photo-1542068829-1115f7259450?w=800" alt="Укладка волос и укладочные средства" />
-        <div class="service-content">
-          <h3>Укладка и уход</h3>
-          <p>Профессиональная укладка с использованием средств, которые подчеркнут вашу индивидуальность.</p>
-          <div class="price">от 600 ₽</div>
-        </div>
-      </article>
+      </div>
+    </section>
+
+    <section id="services" role="region" aria-labelledby="services-title">
+      <h2 id="services-title">Наши услуги</h2>
+      <div class="service-cards">
+        <article class="service-card" tabindex="0" aria-label="Разработка программного обеспечения">
+          <svg class="service-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20 12h24v40H20z" fill="none" stroke="currentColor" stroke-width="4" />
+            <path d="M20 32h24" stroke="currentColor" stroke-width="4" />
+            <path d="M32 12v40" stroke="currentColor" stroke-width="4" />
+          </svg>
+          <h3 class="service-title">Разработка ПО</h3>
+          <p class="service-desc">Создаем надежные, масштабируемые и безопасные приложения под любые задачи бизнеса.</p>
+          <a href="#services" class="service-link" tabindex="0">Подробнее</a>
+        </article>
+
+        <article class="service-card" tabindex="0" aria-label="Веб-разработка">
+          <svg class="service-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="4"/>
+            <path d="M12 44l40-24" stroke="currentColor" stroke-width="4"/>
+            <path d="M12 20l40 24" stroke="currentColor" stroke-width="4"/>
+          </svg>
+          <h3 class="service-title">Веб-разработка</h3>
+          <p class="service-desc">Создаем современные, адаптивные и быстро загружаемые веб-сайты и приложения.</p>
+          <a href="#services" class="service-link" tabindex="0">Подробнее</a>
+        </article>
+
+        <article class="service-card" tabindex="0" aria-label="Консалтинг и IT-стратегии">
+          <svg class="service-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 48V16h48v32z" fill="none" stroke="currentColor" stroke-width="4"/>
+            <path d="M32 24v16" stroke="currentColor" stroke-width="4" />
+            <path d="M24 32h16" stroke="currentColor" stroke-width="4" />
+          </svg>
+          <h3 class="service-title">Консалтинг</h3>
+          <p class="service-desc">Помогаем оптимизировать IT-инфраструктуру и разработать цифровые стратегии развития.</p>
+          <a href="#services" class="service-link" tabindex="0">Подробнее</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="portfolio" role="region" aria-labelledby="portfolio-title">
+      <h2 id="portfolio-title">Портфолио</h2>
+      <div class="portfolio-filter" role="list" aria-label="Фильтр проектов по категориям">
+        <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Все</button>
+        <button class="filter-btn" type="button" data-filter="web" aria-pressed="false">Веб</button>
+        <button class="filter-btn" type="button" data-filter="mobile" aria-pressed="false">Мобильные</button>
+        <button class="filter-btn" type="button" data-filter="consulting" aria-pressed="false">Консалтинг</button>
+      </div>
+      <div class="portfolio-grid">
+        <article class="portfolio-item" data-category="web" tabindex="0">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800" alt="Платформа электронной коммерции" class="portfolio-img" />
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Платформа электронной коммерции</h3>
+            <p class="portfolio-desc">Разработка крупного онлайн-магазина с интеграцией безопасных платежей и системой управления заказами.</p>
+          </div>
+        </article>
+        <article class="portfolio-item" data-category="mobile" tabindex="0">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="Мобильное приложение для управления задачами" class="portfolio-img" />
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Task Manager App</h3>
+            <p class="portfolio-desc">Разработка кроссплатформенного мобильного приложения для планирования и отслеживания задач.</p>
+          </div>
+        </article>
+        <article class="portfolio-item" data-category="consulting" tabindex="0">
+          <img src="https://images.unsplash.com/photo-1551836022-429e8f8d3ad6?w=800" alt="Консалтинг по IT-инфраструктуре" class="portfolio-img" />
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">IT-консалтинг для банка</h3>
+            <p class="portfolio-desc">Оптимизация IT-инфраструктуры и повышение безопасности критически важных систем.</p>
+          </div>
+        </article>
+        <article class="portfolio-item" data-category="web" tabindex="0">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800" alt="Корпоративный веб-сайт для SaaS-компании" class="portfolio-img" />
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Корпоративный сайт SaaS</h3>
+            <p class="portfolio-desc">Создание современного сайта с демонстрацией функций и клиентскими кейсами.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="team" role="region" aria-labelledby="team-title">
+      <h2 id="team-title">Наша команда</h2>
+      <div class="team-grid">
+        <article class="team-member" tabindex="0" aria-label="Иван Иванов, Главный разработчик">
+          <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=400" alt="Иван Иванов, фото" class="team-photo" />
+          <h3 class="team-name">Иван Иванов</h3>
+          <p class="team-position">Главный разработчик</p>
+          <p class="team-skills">Full-stack, JavaScript, Python, облачные сервисы</p>
+        </article>
+        <article class="team-member" tabindex="0" aria-label="Екатерина Смирнова, Руководитель проектов">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400" alt="Екатерина Смирнова, фото" class="team-photo" />
+          <h3 class="team-name">Екатерина Смирнова</h3>
+          <p class="team-position">Руководитель проектов</p>
+          <p class="team-skills">Agile, Scrum, управление командой, коммуникации</p>
+        </article>
+        <article class="team-member" tabindex="0" aria-label="Алексей Петров, UX/UI дизайнер">
+          <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=400" alt="Алексей Петров, фото" class="team-photo" />
+          <h3 class="team-name">Алексей Петров</h3>
+          <p class="team-position">UX/UI дизайнер</p>
+          <p class="team-skills">Прототипирование, Figma, Adobe XD, адаптивный дизайн</p>
+        </article>
+        <article class="team-member" tabindex="0" aria-label="Мария Кузнецова, IT-консультант">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400" alt="Мария Кузнецова, фото" class="team-photo" />
+          <h3 class="team-name">Мария Кузнецова</h3>
+          <p class="team-position">IT-консультант</p>
+          <p class="team-skills">Стратегия, оптимизация, анализ бизнес-процессов</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="testimonials" role="region" aria-labelledby="testimonials-title">
+      <h2 id="testimonials-title">Отзывы клиентов</h2>
+      <div class="testimonials-list">
+        <blockquote class="testimonial" tabindex="0" aria-label="Отзыв клиента Андрея Васильева">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=128" alt="Фото клиента Андрей Васильев" class="testimonial-photo" />
+          <div class="testimonial-content">
+            <p class="testimonial-text">"Потрясающая команда! Реализовали наш проект точно в срок и с высоким качеством, все пожелания учли."</p>
+            <footer class="testimonial-name">Андрей Васильев</footer>
+          </div>
+        </blockquote>
+        <blockquote class="testimonial" tabindex="0" aria-label="Отзыв клиента Ольги Михайловой">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=128" alt="Фото клиента Ольга Михайлова" class="testimonial-photo" />
+          <div class="testimonial-content">
+            <p class="testimonial-text">"IT Solutions — надежный партнер в сфере IT-консалтинга. Помогли улучшить наши процессы и сэкономить значительные ресурсы."</p>
+            <footer class="testimonial-name">Ольга Михайлова</footer>
+          </div>
+        </blockquote>
+        <blockquote class="testimonial" tabindex="0" aria-label="Отзыв клиента Сергея Николаева">
+          <img src="https://images.unsplash.com/photo-1546525848-3ce03ca516f6?w=128" alt="Фото клиента Сергей Николаев" class="testimonial-photo" />
+          <div class="testimonial-content">
+            <p class="testimonial-text">"Великолепный сервис и поддержка, постоянно на связи и всегда готовы помочь даже после сдачи проекта."</p>
+            <footer class="testimonial-name">Сергей Николаев</footer>
+          </div>
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="blog" role="region" aria-labelledby="blog-title">
+      <h2 id="blog-title">Блог и новости</h2>
+      <div class="blog-list">
+        <article class="blog-post" tabindex="0" aria-label="Публикация: Тенденции веб-разработки 2024">
+          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800" alt="Иллюстрация статьи о веб-разработке" class="blog-img" />
+          <div class="blog-content">
+            <h3 class="blog-title">Тенденции веб-разработки 2024</h3>
+            <div class="blog-meta">15 мая 2024 — Веб-разработка</div>
+            <p class="blog-excerpt">Обзор ключевых технологий и подходов, которые будут доминировать в веб-индустрии в ближайшем году.</p>
+            <a href="#blog" class="blog-link" tabindex="0" aria-label="Читать статью Тенденции веб-разработки 2024">Читать далее</a>
+          </div>
+        </article>
+
+        <article class="blog-post" tabindex="0" aria-label="Публикация: Как обеспечить безопасность данных в компании">
+          <img src="https://images.unsplash.com/photo-1556740767-901a3b2ab0e7?w=800" alt="Иллюстрация статьи о безопасности данных" class="blog-img" />
+          <div class="blog-content">
+            <h3 class="blog-title">Как обеспечить безопасность данных в компании</h3>
+            <div class="blog-meta">28 апреля 2024 — IT-безопасность</div>
+            <p class="blog-excerpt">Практические рекомендации по защите корпоративной информации от киберугроз и утечек.</p>
+            <a href="#blog" class="blog-link" tabindex="0" aria-label="Читать статью Как обеспечить безопасность данных в компании">Читать далее</a>
+          </div>
+        </article>
+
+        <article class="blog-post" tabindex="0" aria-label="Публикация: Agile-методологии для IT-команд">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800" alt="Иллюстрация статьи об Agile" class="blog-img" />
+          <div class="blog-content">
+            <h3 class="blog-title">Agile-методологии для IT-команд</h3>
+            <div class="blog-meta">10 апреля 2024 — Менеджмент</div>
+            <p class="blog-excerpt">Как внедрить Agile и повысить продуктивность разработки и коммуникации в команде.</p>
+            <a href="#blog" class="blog-link" tabindex="0" aria-label="Читать статью Agile-методологии для IT-команд">Читать далее</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contacts" role="region" aria-labelledby="contacts-title">
+      <h2 id="contacts-title">Контакты</h2>
+      <div class="contact-info" aria-live="polite">
+        <div><strong>Телефон:</strong> <a href="tel:+7-495-123-45-67" style="color: var(--dark-blue);">+7 (495) 123-45-67</a></div>
+        <div><strong>Email:</strong> <a href="mailto:info@itsolutions.ru" style="color: var(--dark-blue);">info@itsolutions.ru</a></div>
+        <div><strong>Адрес:</strong> г. Москва, ул. Технологическая, д. 15</div>
+      </div>
+      <form action="#" method="POST" aria-label="Форма обратной связи с IT Solutions" novalidate>
+        <label for="name">Имя</label>
+        <input type="text" id="name" name="name" required aria-required="true" placeholder="Введите ваше имя" />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required aria-required="true" placeholder="Введите ваш Email" />
+        <label for="message">Сообщение</label>
+        <textarea id="message" name="message" required aria-required="true" placeholder="Ваше сообщение"></textarea>
+        <button type="submit" class="btn-submit">Отправить</button>
+      </form>
+      <div class="map-container" role="region" aria-label="Карта расположения офиса IT Solutions">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.4255728617025!2d37.60041751616369!3d55.754865680553205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a05594459fb%3A0xb32cf69fcd923715!2z0J7Qu9Cw0L3QtdC90YLRg9Cz0YPQv9GC0YDQsNC90LjQuiwgMTUsINCc0YHRgdC60LDRjyDQstCw0YDRgdC60LjQuSDQutC-0YHRgtCy0LDQu9C40LrQuA!5e0!3m2!1sru!2sru!4v1685382247188!5m2!1sru!2sru"
+          loading="lazy" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade" title="Карта офиса IT Solutions"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-links" aria-label="Социальные сети IT Solutions">
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+      <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter">Twitter</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
     </div>
-  </section>
+    <div>© 2024 IT Solutions. Все права защищены.</div>
+    <div class="footer-contact" aria-label="Контактная информация">Телефон: +7 (495) 123-45-67 | Email: info@itsolutions.ru</div>
+  </footer>
 
-  <section id="prices" aria-label="Цены на услуги">
-    <h2 class="section-title">Цены</h2>
-    <table style="width:100%; border-collapse: collapse; margin-top: 20px; color:#eee;">
-      <thead>
-        <tr style="border-bottom: 2px solid #ffb703;">
-          <th style="text-align:left; padding: 10px 10px;">Название услуги</th>
-          <th style="text-align:right; padding: 10px 10px;">Цена</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-bottom:1px solid #333;">
-          <td style="padding: 10px;">Классическая мужская стрижка</td>
-          <td style="padding: 10px; text-align:right;">1200 ₽</td>
-        </tr>
-        <tr style="border-bottom:1px solid #333;">
-          <td style="padding: 10px;">Бритье опасной бритвой</td>
-          <td style="padding: 10px; text-align:right;">900 ₽</td>
-        </tr>
-        <tr style="border-bottom:1px solid #333;">
-          <td style="padding: 10px;">Моделирование бороды</td>
-          <td style="padding: 10px; text-align:right;">800 ₽</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px;">Укладка и уход</td>
-          <td style="padding: 10px; text-align:right;">600 ₽</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  <script>
+    // Portfolio filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
 
-  <section id="contacts" aria-label="Контактная информация Барбершопа BarberKing" style="margin-top: 50px;">
-    <h2 class="section-title">Контакты</h2>
-    <p style="font-size:1.1rem;">Мы находимся в центре Москвы, всегда рады новым и постоянным клиентам.</p>
-    <address style="font-style: normal; line-height:1.6; color:#ccc;">
-      <strong>Адрес:</strong> ул. Тверская, 12, Москва<br />
-      <strong>Телефон:</strong> <a href="tel:+74951234567" style="color:#ffb703;">+7 (495) 123-45-67</a><br />
-      <strong>Email:</strong> <a href="mailto:info@barberking.ru" style="color:#ffb703;">info@barberking.ru</a><br />
-      <strong>Часы работы:</strong> Пн-Сб: 10:00 – 21:00, Вс: выходной
-    </address>
-  </section>
-</main>
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update aria-pressed and active class
+        filterButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
 
-<footer>
-  &copy; 2024 BarberKing. Все права защищены.
-</footer>
+        const filter = btn.getAttribute('data-filter');
+        portfolioItems.forEach(item => {
+          if(filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Simple form feedback
+    const form = document.querySelector('form');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+      if(!name || !email || !message){
+        alert('Пожалуйста, заполните все поля формы.');
+        return;
+      }
+      alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+      form.reset();
+    });
+  </script>
 </body>
 </html>
