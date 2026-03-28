@@ -1,175 +1,145 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bella Pizza - Пиццерия</title>
-    <style>
-        body {
-            margin:0;
-            font-family: 'Arial', sans-serif;
-            background-color: #fff8f0;
-            color: #4a2c0c;
-        }
-        header {
-            background-color: #d84315;
-            padding: 20px 40px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        }
-        header h1 {
-            font-family: 'Georgia', serif;
-            font-weight: normal;
-            font-size: 28px;
-            margin: 0;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: 600;
-            font-size: 16px;
-            transition: color 0.3s ease;
-        }
-        nav a:hover {
-            color: #ffb74d;
-        }
-        main {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .intro {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        .intro h2 {
-            font-size: 36px;
-            margin-bottom: 10px;
-            font-family: 'Georgia', serif;
-        }
-        .intro p {
-            font-size: 18px;
-            color: #6b4a26;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-        .menu {
-            display: flex;
-            gap: 40px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .pizza-card {
-            background-color: #fff;
-            box-shadow: 0 4px 10px rgba(216,67,21,0.25);
-            border-radius: 12px;
-            width: 320px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-        .pizza-card:hover {
-            transform: translateY(-8px);
-        }
-        .pizza-image {
-            width: 100%;
-            height: 210px;
-            object-fit: cover;
-            display: block;
-        }
-        .pizza-info {
-            padding: 20px;
-            text-align: center;
-        }
-        .pizza-info h3 {
-            margin: 0 0 8px 0;
-            font-family: 'Georgia', serif;
-            font-size: 24px;
-            color: #b33a07;
-        }
-        .pizza-info p {
-            margin: 0 0 12px 0;
-            color: #6b4a26;
-            font-weight: 500;
-            font-size: 16px;
-        }
-        .price {
-            font-size: 20px;
-            font-weight: 700;
-            color: #d84315;
-        }
-        footer {
-            background-color: #d84315;
-            color: #fff;
-            text-align: center;
-            padding: 15px 20px;
-            margin-top: 70px;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-        }
-        @media (max-width: 768px) {
-            .menu {
-                flex-direction: column;
-                align-items: center;
-            }
-            .pizza-card {
-                width: 90%;
-                max-width: 400px;
-            }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Современный стиль</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  body {
+    margin: 0; 
+    font-family: 'Montserrat', sans-serif;
+    background: #f5f7fa;
+    color: #2c3e50;
+  }
+  header {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    padding: 1rem 2rem;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header h1 {
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+  nav a:hover {
+    color: #f9ca24;
+  }
+  main {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+  }
+  section {
+    margin-bottom: 4rem;
+  }
+  h2 {
+    border-bottom: 4px solid #764ba2;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: 2rem;
+  }
+  .intro {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 700px;
+  }
+  .image-container {
+    margin-top: 2rem;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(118, 75, 162, 0.3);
+  }
+  .image-container img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    height: 400px;
+  }
+  footer {
+    background: #2c3e50;
+    padding: 1.5rem 2rem;
+    color: #bdc3c7;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 700px) {
+    nav {
+      font-size: 0.8rem;
+    }
+    .image-container img {
+      height: 250px;
+    }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Bella Pizza</h1>
-        <nav>
-            <a href="#about">О нас</a>
-            <a href="#menu">Меню</a>
-            <a href="#contacts">Контакты</a>
-        </nav>
-    </header>
-    <main>
-        <section id="about" class="intro">
-            <h2>Добро пожаловать в Bella Pizza</h2>
-            <p>Насладитесь лучшей пиццей в городе! Мы готовим свежие, ароматные и сочные пиццы с любовью и только из лучших ингредиентов. Попробуйте наши популярные классические сорта и откройте для себя вкус настоящей итальянской пиццы.</p>
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80" alt="Пицца Bella Pizza" style="margin-top:25px; max-width:100%; border-radius:12px; box-shadow:0 4px 12px rgba(216,67,21,0.3);" />
-        </section>
-        <section id="menu">
-            <h2 style="text-align:center; margin-bottom: 40px; font-family: 'Georgia', serif; color:#b33a07;">Наше меню</h2>
-            <div class="menu">
-                <article class="pizza-card">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=60" alt="Пицца Маргарита" class="pizza-image" />
-                    <div class="pizza-info">
-                        <h3>Маргарита</h3>
-                        <p>Классическая пицца с томатным соусом, моцареллой и свежим базиликом.</p>
-                        <div class="price">1500 ₸</div>
-                    </div>
-                </article>
-                <article class="pizza-card">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=60" alt="Пицца Пепперони" class="pizza-image" />
-                    <div class="pizza-info">
-                        <h3>Пепперони</h3>
-                        <p>Пикантная пицца с томатным соусом, сыром и острыми колбасками пепперони.</p>
-                        <div class="price">2200 ₸</div>
-                    </div>
-                </article>
-                <article class="pizza-card">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=60" alt="Пицца Четыре сыра" class="pizza-image" />
-                    <div class="pizza-info">
-                        <h3>Четыре сыра</h3>
-                        <p>Сочетание моцареллы, пармезана, горгонзолы и эдамского сыра на тонком тесте.</p>
-                        <div class="price">2500 ₸</div>
-                    </div>
-                </article>
-            </div>
-        </section>
-    </main>
-    <footer id="contacts">
-        <p>© 2024 Bella Pizza. Все права защищены. | Телефон: +7 777 555 33 22 | Адрес: г. Нур-Султан, ул. Пиццерийная, 15</p>
-    </footer>
+<header>
+  <h1>Современный стиль</h1>
+  <nav>
+    <a href="#about">О дизайне</a>
+    <a href="#features">Характеристики</a>
+    <a href="#gallery">Галерея</a>
+    <a href="#contact">Контакты</a>
+  </nav>
+</header>
+<main>
+  <section id="about">
+    <h2>О современном стиле</h2>
+    <p class="intro">Современный стиль в дизайне интерьеров и веб-разработке сочетает в себе минимализм, функциональность и элегантность. Он основан на чистых линиях, сдержанной цветовой палитре и акцентах на качестве материалов и пространства.</p>
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1350&q=80" alt="Современный стиль интерьер" />
+    </div>
+  </section>
+
+  <section id="features">
+    <h2>Ключевые характеристики</h2>
+    <ul>
+      <li>Минимализм: исключение всего лишнего, только функциональные элементы</li>
+      <li>Простота форм и геометрия</li>
+      <li>Нейтральная и монохромная цветовая гамма с яркими акцентами</li>
+      <li>Использование натуральных материалов – стекло, металл, дерево</li>
+      <li>Хорошее освещение: естественное и точечное</li>
+      <li>Функциональность и эргономика в приоритете</li>
+    </ul>
+  </section>
+
+  <section id="gallery">
+    <h2>Галерея</h2>
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1350&q=80" alt="Современный интерьер" />
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Контакты</h2>
+    <p>Есть вопросы по дизайну в современном стиле? Свяжитесь с нами:</p>
+    <ul>
+      <li>Email: info@modernstyle.ru</li>
+      <li>Телефон: +7 (700) 123-45-67</li>
+      <li>Адрес: г. Алматы, ул. Дизайнерская, 10</li>
+    </ul>
+  </section>
+</main>
+<footer>
+  &copy; 2024 Современный стиль. Все права защищены.
+</footer>
 </body>
 </html>
