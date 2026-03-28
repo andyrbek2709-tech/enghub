@@ -3,182 +3,127 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bella Pizza - Пиццерия</title>
+<title>Современный стиль</title>
 <style>
+  * {
+    box-sizing: border-box;
+  }
   body {
-    font-family: 'Trebuchet MS', sans-serif;
-    margin: 0;
-    background: #fff8f0;
-    color: #4a2f0e;
+    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    color: #222;
   }
   header {
-    background: #c94e1f;
-    padding: 15px 20px;
-    color: #fff1e6;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: linear-gradient(90deg, #4b6cb7, #182848);
+    padding: 1rem 2rem;
+    color: #fff;
   }
-  header h1 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 1.8rem;
-    letter-spacing: 2px;
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-weight: 600;
   }
   nav a {
-    color: #fff1e6;
+    color: #cce0ff;
     text-decoration: none;
-    margin-left: 20px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: color 0.25s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
   }
   nav a:hover {
-    color: #ffbc42;
+    color: #fff;
   }
   main {
     max-width: 1000px;
-    margin: 30px auto;
-    padding: 0 15px 60px;
+    margin: 2rem auto;
+    padding: 0 1rem;
   }
-  section.hero {
+  h1, h2 {
     text-align: center;
-    margin-bottom: 40px;
-  }
-  section.hero img {
-    max-width: 90vw;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(201, 78, 31, 0.5);
-    height: auto;
-  }
-  section.hero h2 {
-    margin-top: 20px;
-    font-size: 2rem;
-  }
-  section.menu {
-    background: #f4e8dc;
-    padding: 25px 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgb(201 78 31 / 0.3);
-  }
-  section.menu h3 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #c94e1f;
-    padding-bottom: 8px;
-  }
-  .menu-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 15px;
-  }
-  .menu-item img {
-    width: 130px;
-    height: 90px;
-    border-radius: 10px;
-    object-fit: cover;
-    flex-shrink: 0;
-    box-shadow: 0 3px 7px rgba(201, 78, 31, 0.4);
-  }
-  .item-info {
-    flex-grow: 1;
-  }
-  .item-info h4 {
-    margin: 0 0 6px 0;
-    font-size: 1.3rem;
-  }
-  .item-info p {
-    margin: 0;
-    font-size: 1rem;
-    color: #6b4b20;
-  }
-  .price {
     font-weight: 700;
-    font-size: 1.1rem;
-    color: #a33708;
-    min-width: 70px;
-    text-align: right;
+    margin-bottom: 1rem;
+  }
+  section {
+    margin-bottom: 4rem;
+  }
+  .intro {
+    font-size: 1.25rem;
+    text-align: center;
+    color: #555;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+  .images {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .images img {
+    width: 320px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(40, 60, 90, 0.15);
+    transition: transform 0.3s ease;
+  }
+  .images img:hover {
+    transform: scale(1.05);
   }
   footer {
-    background: #c94e1f;
-    color: #fff1e6;
+    background-color: #182848;
+    color: #aab8d2;
     text-align: center;
-    padding: 12px 10px;
+    padding: 1rem 1rem;
     font-size: 0.9rem;
-    letter-spacing: 0.7px;
+  }
+  @media(max-width:700px) {
+    .images img {
+      width: 90vw;
+      height: auto;
+    }
   }
 </style>
 </head>
 <body>
 <header>
-  <h1>Bella Pizza</h1>
   <nav>
-    <a href="#menu">Меню</a>
-    <a href="#about">О нас</a>
-    <a href="#contacts">Контакты</a>
+    <a href="#about">О дизайне</a>
+    <a href="#gallery">Галерея</a>
+    <a href="#contact">Контакты</a>
   </nav>
 </header>
 <main>
-  <section class="hero">
-    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80" alt="Пицца Bella Pizza" />
-    <h2>Настоящая итальянская пицца в Алматы</h2>
-  </section>
-
-  <section id="menu" class="menu">
-    <h3>Меню</h3>
-
-    <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80" alt="Пицца Маргарита" />
-      <div class="item-info">
-        <h4>Маргарита</h4>
-        <p>Традиционная пицца с томатным соусом, моцареллой и базиликом.</p>
-      </div>
-      <div class="price">1800 тг</div>
-    </div>
-
-    <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1548365328-6c0d414568b9?auto=format&fit=crop&w=400&q=80" alt="Пицца Пепперони" />
-      <div class="item-info">
-        <h4>Пепперони</h4>
-        <p>Пикантная пицца с сыром моцарелла и острыми колбасками пепперони.</p>
-      </div>
-      <div class="price">2300 тг</div>
-    </div>
-
-    <div class="menu-item">
-      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80" alt="Пицца Четыре сыра" />
-      <div class="item-info">
-        <h4>Четыре сыра</h4>
-        <p>Сливочная пицца с моцареллой, пармезаном, горгонзолой и эмменталем.</p>
-      </div>
-      <div class="price">2800 тг</div>
-    </div>
-
-  </section>
-
-  <section id="about" style="max-width: 900px; margin: 50px auto 60px; padding: 0 15px;">
-    <h3>О нас</h3>
-    <p style="font-size: 1.1rem; line-height: 1.5; color: #5c3a0a;">
-      Bella Pizza — семейная пиццерия в Алматы, где мы приготавливаем пиццу с любовью и по традиционным итальянским рецептам. У нас только натуральные ингредиенты и ароматный тесто с хрустящей корочкой. Приходите и попробуйте настоящие вкусы Италии!
+  <section id="about">
+    <h1>Современный стиль</h1>
+    <p class="intro">
+      Современный стиль в дизайне — это сочетание функциональности, простоты и эстетики. 
+      Это чистые линии, нейтральные и смелые цвета, простор и минимализм с акцентами. 
+      Такой подход создаёт комфортную, стильную и актуальную обстановку для жизни и работы.
     </p>
   </section>
-
-  <section id="contacts" style="max-width: 900px; margin: 50px auto 0; padding: 0 15px;">
-    <h3>Контакты</h3>
-    <p style="font-size: 1.1rem; color: #5c3a0a; margin-bottom: 8px;">
-      Адрес: г. Алматы, ул. Абылай хана, 12
-    </p>
-    <p style="font-size: 1.1rem; color: #5c3a0a; margin-bottom: 8px;">
-      Телефон: +7 (727) 123-45-67
-    </p>
-    <p style="font-size: 1.1rem; color: #5c3a0a;">
-      Время работы: Пн-Вс 10:00 - 23:00
+  <section id="gallery">
+    <h2>Галерея современного стиля</h2>
+    <div class="images">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Современный интерьер 1" />
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Современный интерьер 2" />
+    </div>
+  </section>
+  <section id="contact">
+    <h2>Контакты</h2>
+    <p style="text-align:center; max-width:400px; margin: 0 auto; line-height:1.6;">
+      Для консультаций и вопросов по современному дизайну вы можете связаться с нами:<br />
+      Email: <a href="mailto:info@modernstyle.ru">info@modernstyle.ru</a><br />
+      Телефон: +7 (700) 123-45-67<br />
+      Адрес: г. Алматы, ул. Дизайнеров, 12
     </p>
   </section>
 </main>
 <footer>
-  © 2024 Bella Pizza - Ваша любимая пиццерия в Алматы
+  &copy; 2024 Современный стиль. Все права защищены.
 </footer>
 </body>
 </html>
