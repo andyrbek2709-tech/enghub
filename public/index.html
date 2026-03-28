@@ -3,366 +3,659 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Сайт про символ «Ы»</title>
+<title>Современный минималистичный сайт</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
   :root {
-    --bg-light: #FAFAFA;
-    --accent: #003366;
-    --accent-dark: #4B0082;
-    --gray-dark: #666666;
-    --gray-light: #CCCCCC;
+    --color-primary: #1E3A8A;
+    --color-accent: #F97316;
+    --color-background: #F9FAFB;
+    --color-text-main: #111827;
+    --color-text-secondary: #6B7280;
   }
-  * {
+  *, *::before, *::after {
     box-sizing: border-box;
   }
   body {
-    margin: 0;
+    margin:0;
     font-family: 'Inter', sans-serif;
-    background: var(--bg-light);
-    color: var(--gray-dark);
+    background: var(--color-background);
+    color: var(--color-text-main);
     line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
   }
   a {
-    color: var(--accent);
+    color: inherit;
     text-decoration: none;
   }
   header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
     background: white;
-    border-bottom: 1px solid var(--gray-light);
+    border-bottom: 1px solid #E5E7EB;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 60px;
+    z-index: 1000;
   }
   .logo {
-    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 2rem;
-    color: var(--accent-dark);
+    font-size: 24px;
+    color: var(--color-primary);
     user-select: none;
-    letter-spacing: 0.02em;
   }
   nav {
     display: flex;
-    gap: 2rem;
+    gap: 24px;
+    font-weight: 600;
   }
   nav a {
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--gray-dark);
-    transition: color 0.3s;
+    color: var(--color-text-secondary);
+    padding: 8px 0;
+    position: relative;
   }
-  nav a:hover,
-  nav a:focus {
-    color: var(--accent);
+  nav a:focus-visible,
+  nav a:hover {
+    color: var(--color-primary);
     outline: none;
   }
-  .btn-header {
-    background-color: var(--accent);
+  nav a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: right;
+    border-radius: 1px;
+  }
+  nav a:hover::after,
+  nav a:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .btn-contact {
+    background-color: var(--color-accent);
     color: white;
     border: none;
+    padding: 8px 20px;
+    font-weight: 600;
+    font-size: 16px;
     border-radius: 4px;
-    font-weight: 700;
-    padding: 0.6rem 1.4rem;
-    font-size: 1rem;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 51, 102, 0.4);
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s ease;
   }
-  .btn-header:hover,
-  .btn-header:focus {
-    background-color: var(--accent-dark);
-    box-shadow: 0 4px 12px rgba(75, 0, 130, 0.5);
+  .btn-contact:hover,
+  .btn-contact:focus-visible {
+    background-color: #d9590a;
     outline: none;
+  }
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-primary);
+  }
+  .mobile-menu-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+  @media (max-width: 768px) {
+    nav {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 60px;
+      right: 0;
+      background: white;
+      width: 220px;
+      box-shadow: -2px 0 8px rgb(0 0 0 / 0.1);
+      height: calc(100vh - 60px);
+      padding-top: 16px;
+      z-index: 1100;
+      gap: 16px;
+    }
+    nav.open {
+      display: flex;
+    }
+    .btn-contact {
+      display: none;
+    }
+    .mobile-menu-btn {
+      display: block;
+    }
   }
   main {
-    max-width: 900px;
-    margin: 2rem auto 4rem;
-    padding: 0 1rem;
-  }
-  .hero {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-  .hero-symbol {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 8rem;
-    font-weight: 700;
-    color: var(--accent-dark);
-    line-height: 1;
-    user-select: none;
-    margin-bottom: 1rem;
-  }
-  .hero-description {
-    font-size: 1.25rem;
-    max-width: 580px;
-    margin: 0 auto 2rem;
-    color: var(--gray-dark);
-  }
-  .btn-hero {
-    background-color: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 0.8rem 2rem;
-    font-weight: 700;
-    font-size: 1.125rem;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 51, 102, 0.4);
-    transition: background-color 0.3s, box-shadow 0.3s;
-  }
-  .btn-hero:hover,
-  .btn-hero:focus {
-    background-color: var(--accent-dark);
-    box-shadow: 0 4px 12px rgba(75, 0, 130, 0.5);
-    outline: none;
+    padding-top: 60px;
   }
   section {
-    margin-bottom: 4rem;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 60px 24px;
   }
-  section h2 {
-    font-family: 'Montserrat', sans-serif;
+  /* Hero */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .hero-content {
+    flex: 1 1 50%;
+  }
+  .hero h1 {
     font-weight: 700;
-    font-size: 2rem;
-    color: var(--accent-dark);
-    margin-bottom: 1rem;
-    text-align: center;
+    font-size: 32px;
+    color: var(--color-primary);
+    margin: 0 0 16px;
+  }
+  .hero p {
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    margin: 0 0 32px;
+    max-width: 480px;
+  }
+  .hero .btn-hero {
+    background-color: var(--color-accent);
+    border: none;
+    padding: 14px 32px;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  .hero .btn-hero:hover,
+  .hero .btn-hero:focus-visible {
+    background-color: #d9590a;
+    outline: none;
+  }
+  .hero-image {
+    flex: 1 1 50%;
+    max-width: 480px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+  }
+  /* About */
+  .about {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: center;
   }
   .about-text {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: var(--gray-dark);
-    max-width: 700px;
-    margin: 0 auto 2rem;
-    text-align: center;
+    flex: 1 1 60%;
+    color: var(--color-text-main);
+  }
+  .about-text p {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    max-width: 600px;
   }
   .about-icons {
+    flex: 1 1 35%;
     display: flex;
-    justify-content: center;
-    gap: 2.5rem;
+    gap: 24px;
     flex-wrap: wrap;
   }
-  .about-icon {
+  .icon-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: var(--accent);
-    max-width: 120px;
+    width: 120px;
     text-align: center;
   }
-  .about-icon svg {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 0.5rem;
-    fill: var(--accent);
+  .icon-box svg {
+    width: 40px;
+    height: 40px;
+    fill: var(--color-primary);
+    margin-bottom: 12px;
   }
-  .features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 2.5rem;
+  .icon-box span {
+    font-size: 14px;
+    color: var(--color-text-secondary);
   }
-  .feature-item {
+  /* Advantages */
+  .advantages {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .advantage-card {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 1px 5px rgba(102, 102, 102, 0.1);
-    padding: 2rem 1.5rem;
+    border-radius: 10px;
+    padding: 24px;
+    flex: 1 1 220px;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s ease;
   }
-  .feature-item:hover,
-  .feature-item:focus-within {
-    box-shadow: 0 4px 15px rgba(0, 51, 102, 0.3);
+  .advantage-card:hover,
+  .advantage-card:focus-within {
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.15);
     outline: none;
   }
-  .feature-icon {
+  .advantage-card svg {
     width: 48px;
     height: 48px;
-    margin-bottom: 1rem;
-    fill: var(--accent-dark);
+    fill: var(--color-primary);
+    margin-bottom: 16px;
   }
-  .feature-title {
+  .advantage-card p {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+  /* Products/Services */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+    gap: 24px;
+  }
+  .product-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  .product-card:hover,
+  .product-card:focus {
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
+    outline: none;
+  }
+  .product-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+  }
+  .product-info {
+    padding: 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .product-info h3 {
+    margin: 0 0 8px;
     font-weight: 700;
-    font-size: 1.125rem;
-    margin-bottom: 0.5rem;
-    color: var(--accent-dark);
+    font-size: 18px;
+    color: var(--color-primary);
   }
-  .feature-desc {
-    font-size: 1rem;
-    color: var(--gray-dark);
+  .product-info p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    flex-grow: 1;
   }
-  .reviews {
-    background: #f0f0f5;
-    border-radius: 8px;
-    padding: 2rem 1rem;
-    max-width: 800px;
+  /* Testimonials */
+  .testimonials {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .testimonial {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  .testimonial.active {
+    display: flex;
+  }
+  .testimonial-photo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--color-primary);
+  }
+  .testimonial-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .testimonial-text {
+    font-style: italic;
+    color: var(--color-text-main);
+    font-size: 16px;
+    max-width: 560px;
+  }
+  .testimonial-name {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  .testimonial-controls {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  .testimonial-controls button {
+    background: var(--color-primary);
+    border: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+  }
+  .testimonial-controls button.active,
+  .testimonial-controls button:hover,
+  .testimonial-controls button:focus-visible {
+    opacity: 1;
+    outline: none;
+  }
+  /* CTA */
+  .cta {
+    background-color: var(--color-primary);
+    padding: 48px 24px;
+    color: white;
+    text-align: center;
+    border-radius: 12px;
+    max-width: 720px;
     margin: 0 auto;
   }
-  .review-item {
-    margin-bottom: 1.8rem;
+  .cta p {
+    font-size: 20px;
+    margin: 0 0 24px;
+    font-weight: 600;
   }
-  .review-text {
-    font-style: italic;
-    font-size: 1.125rem;
-    color: var(--accent-dark);
-  }
-  .review-author {
-    margin-top: 0.5rem;
+  .cta .btn-cta {
+    background-color: var(--color-accent);
+    border: none;
+    padding: 16px 36px;
     font-weight: 700;
-    font-size: 0.95rem;
-    text-align: right;
-    color: var(--gray-dark);
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
   }
+  .cta .btn-cta:hover,
+  .cta .btn-cta:focus-visible {
+    background-color: #d9590a;
+    outline: none;
+  }
+  /* Footer */
   footer {
     background: white;
-    border-top: 1px solid var(--gray-light);
-    padding: 2rem 1rem;
-    font-size: 0.875rem;
-    color: var(--gray-dark);
-  }
-  .footer-content {
-    max-width: 900px;
-    margin: 0 auto;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    padding: 24px;
+    max-width: 1080px;
+    margin: 0 auto 24px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+    gap: 16px;
   }
+  .footer-info,
+  .footer-links,
   .footer-social {
     display: flex;
-    gap: 1rem;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
   }
-  .footer-social a {
-    color: var(--accent);
-    transition: color 0.3s;
-    font-size: 1.25rem;
-  }
-  .footer-social a:hover,
-  .footer-social a:focus {
-    color: var(--accent-dark);
-    outline: none;
+  .footer-info {
+    flex: 1 1 300px;
+    flex-direction: column;
+    gap: 6px;
   }
   .footer-links a {
-    margin-left: 1rem;
-    color: var(--gray-dark);
-    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
   }
-  @media (max-width: 600px) {
-    header {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-    }
-    nav {
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: 100%;
-    }
-    .footer-content {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 0.5rem;
-    }
+  .footer-links a:hover,
+  .footer-links a:focus-visible {
+    color: var(--color-primary);
+    outline: none;
+  }
+  .footer-social a {
+    color: var(--color-primary);
+    transition: color 0.3s ease;
+  }
+  .footer-social a:hover,
+  .footer-social a:focus-visible {
+    color: var(--color-accent);
+    outline: none;
+  }
+  .footer-social svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
   }
 </style>
 </head>
 <body>
 <header>
-  <div class="logo" aria-label="Логотип сайта символ Ы" role="heading" aria-level="1">Ы</div>
-  <nav aria-label="Главная навигация">
-    <a href="#about">О проекте</a>
-    <a href="#meaning">Значение</a>
-    <a href="#contacts">Контакты</a>
+  <div class="logo" tabindex="0">BrandName</div>
+  <nav id="nav-menu" aria-label="Главное меню">
+    <a href="#hero" tabindex="0">Главная</a>
+    <a href="#about" tabindex="0">О нас</a>
+    <a href="#products" tabindex="0">Услуги</a>
+    <a href="#contacts" tabindex="0">Контакты</a>
   </nav>
-  <button class="btn-header" type="button" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Связаться</button>
+  <button class="btn-contact" onclick="location.href='#contacts'" aria-label="Связаться">Связаться</button>
+  <button class="mobile-menu-btn" aria-label="Меню" aria-controls="nav-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
 </header>
 <main>
-  <section class="hero" aria-label="Главный блок сайта">
-    <div class="hero-symbol" aria-hidden="true">Ы</div>
-    <p class="hero-description">Символ «Ы» — уникальная буква кириллицы, отражающая богатство и глубину русского языка. Познакомьтесь с её историей и значением.</p>
-    <button class="btn-hero" type="button" onclick="document.getElementById('meaning').scrollIntoView({behavior:'smooth'})">Подробнее</button>
+  <section id="hero" class="hero" tabindex="-1">
+    <div class="hero-content">
+      <h1>Доверяйте профессионалам вашего дела</h1>
+      <p>Наш опыт и ценности помогут вашему бизнесу расти и развиваться современными темпами и трендами.</p>
+      <button class="btn-hero" onclick="location.href='#contacts'">Связаться сейчас</button>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800" alt="Профессиональная команда" loading="lazy" />
+    </div>
   </section>
-  <section id="meaning" aria-labelledby="meaning-title">
-    <h2 id="meaning-title">О значении символа «Ы»</h2>
-    <p class="about-text">Буква «Ы» появилась в древнерусском алфавите и сохраняет свою неповторимость. Она не имеет аналога в латинском алфавите и носит важную звуковую нагрузку в речи.</p>
-    <div class="about-icons" role="list">
-      <div class="about-icon" role="listitem">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 14h-2v-2h2v2zm0-4h-2V6h2v6z"/></svg>
-        <div>История</div>
+
+  <section id="about" class="about" tabindex="-1" aria-label="О компании">
+    <div class="about-text">
+      <p>Мы — команда экспертов с многолетним опытом в разработке эффективных и современных решений. Наша миссия — создавать продукты, которые приносят реальную пользу вашим клиентам и бизнесу. Мы ценим ответственность, качество и инновации.</p>
+    </div>
+    <div class="about-icons" aria-hidden="true">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>Опыт</span>
       </div>
-      <div class="about-icon" role="listitem">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 7h6v2H9zm0 4h6v2H9z"/></svg>
-        <div>Фонетика</div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-width="2" stroke="currentColor" fill="none"/><path d="M12 6v6l4 2" stroke-width="2" stroke="currentColor" fill="none"/></svg>
+        <span>Ответственность</span>
       </div>
-      <div class="about-icon" role="listitem">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4a8 8 0 018 8 8 8 0 01-8 8 8 8 0 010-16z"/></svg>
-        <div>Уникальность</div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17v-2a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v2"/><circle cx="12" cy="7" r="4" /></svg>
+        <span>Команда</span>
       </div>
     </div>
   </section>
-  <section id="features" aria-labelledby="features-title">
-    <h2 id="features-title">Преимущества и особенности</h2>
-    <div class="features">
-      <article class="feature-item" tabindex="0" aria-label="Уникальность символа Ы">
-        <svg class="feature-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2L2 21h20L12 2z"/></svg>
-        <h3 class="feature-title">Уникальность</h3>
-        <p class="feature-desc">Символ «Ы» не имеет аналогов в других алфавитах и выделяется в кириллице своей формой и звучанием.</p>
-      </article>
-      <article class="feature-item" tabindex="0" aria-label="Историческое значение буквы Ы">
-        <svg class="feature-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>
-        <h3 class="feature-title">Историческое значение</h3>
-        <p class="feature-desc">Буква «Ы» известна с древнерусских времён и отражает языковое развитие и культурное наследие.</p>
-      </article>
-      <article class="feature-item" tabindex="0" aria-label="Фонетика и звучание">
-        <svg class="feature-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg>
-        <h3 class="feature-title">Фонетика и звучание</h3>
-        <p class="feature-desc">Она выражает неподражаемый звук, характерный для славянских языков, и влияет на звучание слов.</p>
-      </article>
-      <article class="feature-item" tabindex="0" aria-label="Использование в искусстве и дизайне">
-        <svg class="feature-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
-        <h3 class="feature-title">Дизайн и искусство</h3>
-        <p class="feature-desc">Символ «Ы» вдохновляет художников и дизайнеров своей формой и уникальностью.</p>
-      </article>
+
+  <section id="advantages" class="advantages" tabindex="-1" aria-label="Преимущества">
+    <article class="advantage-card" tabindex="0">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke-width="2" stroke="currentColor" fill="none"/></svg>
+      <p>Безупречное качество работы и сроки</p>
+    </article>
+    <article class="advantage-card" tabindex="0">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-width="2" stroke="currentColor" fill="none"/><path d="M12 6v6l4 2" stroke-width="2" stroke="currentColor" fill="none"/></svg>
+      <p>Инновационные технологии и подходы</p>
+    </article>
+    <article class="advantage-card" tabindex="0">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16" stroke-width="2" stroke="currentColor" fill="none"/></svg>
+      <p>Индивидуальный подход к каждому клиенту</p>
+    </article>
+    <article class="advantage-card" tabindex="0">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 1 1-8 0" stroke-width="2" stroke="currentColor" fill="none"/></svg>
+      <p>Поддержка и развитие после запуска</p>
+    </article>
+  </section>
+
+  <section id="products" tabindex="-1" aria-label="Продукты и услуги">
+    <div class="products-grid">
+      <a href="#" class="product-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="Веб-разработка" loading="lazy" />
+        <div class="product-info">
+          <h3>Веб-разработка</h3>
+          <p>Создание современных, адаптивных и быстрых сайтов любой сложности.</p>
+        </div>
+      </a>
+      <a href="#" class="product-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?w=800" alt="Мобильные приложения" loading="lazy" />
+        <div class="product-info">
+          <h3>Мобильные приложения</h3>
+          <p>Разработка удобных и функциональных приложений для iOS и Android.</p>
+        </div>
+      </a>
+      <a href="#" class="product-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800" alt="UI/UX дизайн" loading="lazy" />
+        <div class="product-info">
+          <h3>UI/UX дизайн</h3>
+          <p>Создаем интуитивно понятные интерфейсы и дизайн высокой эстетики.</p>
+        </div>
+      </a>
+      <a href="#" class="product-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800" alt="Техническая поддержка" loading="lazy" />
+        <div class="product-info">
+          <h3>Техническая поддержка</h3>
+          <p>Круглосуточная поддержка и сопровождение проектов после релиза.</p>
+        </div>
+      </a>
     </div>
   </section>
-  <section id="reviews" aria-labelledby="reviews-title">
-    <h2 id="reviews-title">Отзывы и цитаты</h2>
-    <div class="reviews">
-      <blockquote class="review-item">
-        <p class="review-text">«Символ «Ы» — сердце русского языка. Его уникальность невозможно переоценить.»</p>
-        <footer class="review-author">— Лингвист Иван Петров</footer>
-      </blockquote>
-      <blockquote class="review-item">
-        <p class="review-text">«Эта буква — больше, чем просто звук, она часть культуры и истории.»</p>
-        <footer class="review-author">— Культуролог Мария Соколова</footer>
-      </blockquote>
-      <blockquote class="review-item">
-        <p class="review-text">«Дизайнеры находят в «Ы» неисчерпаемый источник вдохновения.»</p>
-        <footer class="review-author">— Арт-директор Николай Орлов</footer>
-      </blockquote>
+
+  <section id="testimonials" class="testimonials" tabindex="-1" aria-label="Отзывы клиентов">
+    <article class="testimonial active" aria-live="polite">
+      <div class="testimonial-photo">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=72&h=72&fit=crop&crop=faces" alt="Фото клиента Анна Петрова" loading="lazy" />
+      </div>
+      <p class="testimonial-text">"Компания помогла запустить наш сайт за короткие сроки и с отличной поддержкой. Моя команда довольна результатом!"</p>
+      <span class="testimonial-name">Анна Петрова</span>
+    </article>
+    <article class="testimonial" aria-live="polite">
+      <div class="testimonial-photo">
+        <img src="https://images.unsplash.com/photo-1508214908516-16b3d9f90f55?w=72&h=72&fit=crop&crop=faces" alt="Фото клиента Иван Иванов" loading="lazy" />
+      </div>
+      <p class="testimonial-text">"Профессиональный подход и внимательное отношение к деталям сделали наше сотрудничество приятным и эффективным."</p>
+      <span class="testimonial-name">Иван Иванов</span>
+    </article>
+    <article class="testimonial" aria-live="polite">
+      <div class="testimonial-photo">
+        <img src="https://images.unsplash.com/photo-1508214908516-16b3d9f90f66?w=72&h=72&fit=crop&crop=faces" alt="Фото клиента Мария Соколова" loading="lazy" />
+      </div>
+      <p class="testimonial-text">"Рекомендую команду всем, кто хочет получить качественный современный сайт под ключ."</p>
+      <span class="testimonial-name">Мария Соколова</span>
+    </article>
+    <div class="testimonial-controls" aria-label="Управление отзывами">
+      <button aria-label="Отзыв 1" class="active" type="button"></button>
+      <button aria-label="Отзыв 2" type="button"></button>
+      <button aria-label="Отзыв 3" type="button"></button>
     </div>
+  </section>
+
+  <section id="cta" class="cta" tabindex="-1" aria-label="Призыв к действию">
+    <p>Готовы начать? Закажите консультацию и получите индивидуальное предложение!</p>
+    <button class="btn-cta" onclick="location.href='#contacts'">Заказать консультацию</button>
+  </section>
+
+  <section id="contacts" tabindex="-1" aria-label="Контакты и обратная связь">
+    <h2 style="text-align:center; color: var(--color-primary); font-weight: 700; font-size:28px; margin-bottom: 24px;">Свяжитесь с нами</h2>
+    <form style="max-width: 480px; margin: 0 auto; display:flex; flex-direction: column; gap: 16px;" action="#" method="post" novalidate>
+      <label for="name" style="color: var(--color-text-main); font-weight: 600;">Имя</label>
+      <input id="name" name="name" type="text" required style="padding: 12px; font-size: 16px; border: 1px solid #D1D5DB; border-radius: 6px;" />
+      <label for="email" style="color: var(--color-text-main); font-weight: 600;">Email</label>
+      <input id="email" name="email" type="email" required style="padding: 12px; font-size: 16px; border: 1px solid #D1D5DB; border-radius: 6px;" />
+      <label for="message" style="color: var(--color-text-main); font-weight: 600;">Сообщение</label>
+      <textarea id="message" name="message" rows="4" required style="padding: 12px; font-size: 16px; border: 1px solid #D1D5DB; border-radius: 6px;"></textarea>
+      <button type="submit" class="btn-hero" style="align-self: center; max-width: 200px;">Отправить</button>
+    </form>
   </section>
 </main>
-<footer id="contacts" aria-label="Контактная информация и ссылки">
-  <div class="footer-content">
-    <div>© 2024 Проект «Ы» — Все права защищены</div>
-    <div class="footer-social" role="navigation" aria-label="Социальные сети">
-      <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter" title="Twitter" tabindex="0" >&#x1F426;</a>
-      <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook" tabindex="0">&#x1F464;</a>
-      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram" tabindex="0">&#x1F4F7;</a>
-    </div>
-    <div class="footer-links">
-      <a href="#">Политика конфиденциальности</a>
-    </div>
+<footer>
+  <div class="footer-info" aria-label="Контактная информация">
+    <div>Телефон: <a href="tel:+123456789">+1 234 567 89</a></div>
+    <div>Email: <a href="mailto:info@brandname.com">info@brandname.com</a></div>
+    <div>Адрес: г. Москва, ул. Примерная, 12</div>
+  </div>
+  <div class="footer-links" aria-label="Полезные ссылки">
+    <a href="#privacy">Политика конфиденциальности</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="footer-social" aria-label="Социальные сети">
+    <a href="#" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.625 9.874v-6.982h-3.27v-2.892h3.27v-2.207c0-3.235 1.926-5.012 4.885-5.012 1.417 0 2.9.253 2.9.253v3.187h-1.638c-1.615 0-2.119 1-2.119 2.027v2.751h3.606l-.577 2.892h-3.029v6.987A10 10 0 0 0 22 12z"/></svg></a>
+    <a href="#" aria-label="Twitter" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14.86 4.48 4.48 0 0 0 2-2.5 9.14 9.14 0 0 1-2.88 1.11 4.48 4.48 0 0 0-7.64 4.09A12.72 12.72 0 0 1 2 3.15a4.48 4.48 0 0 0 1.4 6 4.37 4.37 0 0 1-2-.57v.06a4.49 4.49 0 0 0 3.6 4.4 4.51 4.51 0 0 1-1.99.08 4.48 4.48 0 0 0 4.18 3.12 9 9 0 0 1-6 2.1 9.21 9.21 0 0 1-1.07-.06 12.54 12.54 0 0 0 6.7 1.96c8 0 12.37-6.6 12.37-12.3 0-.2 0-.4-.02-.6A8.6 8.6 0 0 0 23 3z"/></svg></a>
+    <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM6 9H2v12h4zM4 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg></a>
   </div>
 </footer>
+<script>
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const navMenu = document.getElementById('nav-menu');
+  menuBtn.addEventListener('click', () => {
+    const expanded = menuBtn.getAttribute('aria-expanded') === 'true' || false;
+    menuBtn.setAttribute('aria-expanded', !expanded);
+    navMenu.classList.toggle('open');
+  });
+
+  // Testimonials slider
+  const testimonials = document.querySelectorAll('.testimonial');
+  const controls = document.querySelectorAll('.testimonial-controls button');
+
+  let currentIndex = 0;
+
+  function showTestimonial(index) {
+    testimonials.forEach((t, i) => {
+      t.classList.toggle('active', i === index);
+      controls[i].classList.toggle('active', i === index);
+    });
+    currentIndex = index;
+  }
+
+  controls.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      showTestimonial(i);
+    });
+  });
+
+  // Auto rotate testimonials every 8 seconds, pause on focus/hover
+  let autoRotate = setInterval(() => {
+    let nextIndex = (currentIndex + 1) % testimonials.length;
+    showTestimonial(nextIndex);
+  }, 8000);
+
+  document.querySelector('.testimonials').addEventListener('mouseenter', () => clearInterval(autoRotate));
+  document.querySelector('.testimonials').addEventListener('mouseleave', () => {
+    autoRotate = setInterval(() => {
+      let nextIndex = (currentIndex + 1) % testimonials.length;
+      showTestimonial(nextIndex);
+    }, 8000);
+  });
+</script>
 </body>
 </html>
