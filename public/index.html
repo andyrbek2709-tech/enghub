@@ -3,1038 +3,366 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Пиццерия «Домашняя Пицца»</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans&display=swap" rel="stylesheet" />
+<title>Сайт про символ «Ы»</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&display=swap');
   :root {
-    --color-red: #D32F2F;
-    --color-brown: #4E342E;
-    --color-cream: #FFF3E0;
-    --color-green: #81C784;
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
+    --bg-light: #FAFAFA;
+    --accent: #003366;
+    --accent-dark: #4B0082;
+    --gray-dark: #666666;
+    --gray-light: #CCCCCC;
   }
   * {
     box-sizing: border-box;
   }
   body {
     margin: 0;
-    font-family: var(--font-body);
-    background: var(--color-cream);
-    color: var(--color-brown);
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-light);
+    color: var(--gray-dark);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   a {
-    color: var(--color-red);
+    color: var(--accent);
     text-decoration: none;
   }
-  a:hover,
-  a:focus {
-    text-decoration: underline;
-  }
-  img {
-    max-width: 100%;
-    display: block;
-    border-radius: 10px;
-  }
   header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: var(--color-cream);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 1000;
-  }
-  .container {
-    width: 90%;
-    max-width: 1180px;
-    margin: 0 auto;
-  }
-  .header-inner {
+    background: white;
+    border-bottom: 1px solid var(--gray-light);
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    height: 70px;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
   .logo {
-    display: flex;
-    align-items: center;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.3rem;
-    color: var(--color-red);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--accent-dark);
     user-select: none;
-  }
-  .logo svg {
-    width: 32px;
-    height: 32px;
-    margin-right: 10px;
-    fill: var(--color-red);
+    letter-spacing: 0.02em;
   }
   nav {
     display: flex;
-    gap: 24px;
-    font-weight: 600;
-    font-family: var(--font-heading);
-    font-size: 1rem;
+    gap: 2rem;
   }
   nav a {
-    padding: 8px 0;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--gray-dark);
+    transition: color 0.3s;
   }
   nav a:hover,
   nav a:focus {
-    color: var(--color-green);
+    color: var(--accent);
+    outline: none;
   }
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-weight: 600;
-    font-size: 1rem;
-    font-family: var(--font-heading);
-  }
-  .phone {
-    color: var(--color-brown);
-    user-select: text;
-  }
-  .btn-order {
-    background-color: var(--color-red);
-    color: #fff;
+  .btn-header {
+    background-color: var(--accent);
+    color: white;
     border: none;
-    padding: 10px 22px;
-    font-family: var(--font-heading);
-    font-weight: 600;
+    border-radius: 4px;
+    font-weight: 700;
+    padding: 0.6rem 1.4rem;
     font-size: 1rem;
-    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 51, 102, 0.4);
+    transition: background-color 0.3s, box-shadow 0.3s;
   }
-  .btn-order:hover,
-  .btn-order:focus {
-    background-color: #b02727;
+  .btn-header:hover,
+  .btn-header:focus {
+    background-color: var(--accent-dark);
+    box-shadow: 0 4px 12px rgba(75, 0, 130, 0.5);
     outline: none;
   }
   main {
-    padding-top: 70px;
-    min-height: 100vh;
-  }
-  /* Hero */
-  .hero {
-    background: var(--color-cream);
-    padding: 60px 0 40px;
-    text-align: center;
-  }
-  .hero-content {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
   }
-  .hero img {
-    max-width: 800px;
-    border-radius: 16px;
-    box-shadow: 0 10px 20px rgba(77, 52, 46, 0.25);
-    margin-bottom: 30px;
-    user-select: none;
-  }
-  .hero-title {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 2rem;
-    color: var(--color-brown);
-    margin-bottom: 16px;
-  }
-  .hero-buttons {
-    display: inline-flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .btn-primary, .btn-secondary {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 14px 32px;
-    border-radius: 8px;
-    cursor: pointer;
-    border: none;
-    transition: box-shadow 0.3s ease;
-  }
-  .btn-primary {
-    background-color: var(--color-red);
-    color: #fff;
-  }
-  .btn-primary:hover,
-  .btn-primary:focus {
-    box-shadow: 0 0 12px var(--color-red);
-    outline: none;
-  }
-  .btn-secondary {
-    background-color: var(--color-green);
-    color: #fff;
-  }
-  .btn-secondary:hover,
-  .btn-secondary:focus {
-    box-shadow: 0 0 12px var(--color-green);
-    outline: none;
-  }
-  /* Advantages */
-  .advantages {
-    background: #fff;
-    padding: 40px 0 50px;
-  }
-  .advantages .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 48px;
-    max-width: 1020px;
-  }
-  .advantage {
-    flex: 1 1 180px;
-    max-width: 220px;
+  .hero {
     text-align: center;
-    color: var(--color-brown);
+    margin-bottom: 4rem;
   }
-  .advantage svg {
-    width: 48px;
-    height: 48px;
-    fill: var(--color-red);
-    margin-bottom: 14px;
-  }
-  .advantage p {
-    font-weight: 600;
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
+  .hero-symbol {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    line-height: 1;
     user-select: none;
+    margin-bottom: 1rem;
   }
-  /* Menu */
-  .menu {
-    padding: 40px 0 60px;
-    background: var(--color-cream);
+  .hero-description {
+    font-size: 1.25rem;
+    max-width: 580px;
+    margin: 0 auto 2rem;
+    color: var(--gray-dark);
   }
-  .menu .container {
-    max-width: 1180px;
-  }
-  .menu h2 {
-    font-family: var(--font-heading);
-    color: var(--color-brown);
-    font-weight: 600;
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  .menu-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    margin-bottom: 32px;
-    font-family: var(--font-heading);
-    font-weight: 600;
-  }
-  .menu-tab {
-    cursor: pointer;
-    position: relative;
-    padding-bottom: 6px;
-    color: var(--color-brown);
-    user-select: none;
-    transition: color 0.3s ease;
-  }
-  .menu-tab.active,
-  .menu-tab:hover,
-  .menu-tab:focus {
-    color: var(--color-red);
-  }
-  .menu-tab.active::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0; right: 0;
-    height: 3px;
-    background-color: var(--color-red);
-    border-radius: 3px 3px 0 0;
-  }
-  .menu-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 28px;
-    justify-content: center;
-  }
-  .menu-card {
-    background: #fff;
-    border-radius: 14px;
-    width: 260px;
-    box-shadow: 0 10px 18px rgb(78 52 46 / 0.12);
-    transition: box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-  }
-  .menu-card:hover,
-  .menu-card:focus-within {
-    box-shadow: 0 15px 25px var(--color-green);
-  }
-  .menu-card img {
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
-    user-select: none;
-  }
-  .menu-content {
-    padding: 16px 18px 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .menu-title {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.2rem;
-    margin: 0 0 6px;
-    color: var(--color-brown);
-  }
-  .menu-desc {
-    font-size: 0.9rem;
-    color: var(--color-brown);
-    flex-grow: 1;
-    margin-bottom: 8px;
-  }
-  .menu-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .menu-price {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: var(--color-red);
-    user-select: none;
-  }
-  .btn-add {
-    background-color: var(--color-green);
+  .btn-hero {
+    background-color: var(--accent);
+    color: white;
     border: none;
-    border-radius: 6px;
-    color: #fff;
-    padding: 8px 14px;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.95rem;
+    border-radius: 4px;
+    padding: 0.8rem 2rem;
+    font-weight: 700;
+    font-size: 1.125rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    user-select: none;
+    box-shadow: 0 2px 8px rgba(0, 51, 102, 0.4);
+    transition: background-color 0.3s, box-shadow 0.3s;
   }
-  .btn-add:hover,
-  .btn-add:focus {
-    background-color: #5baa6b;
+  .btn-hero:hover,
+  .btn-hero:focus {
+    background-color: var(--accent-dark);
+    box-shadow: 0 4px 12px rgba(75, 0, 130, 0.5);
     outline: none;
   }
-  /* Promotions */
-  .promotions {
-    background: #fff;
-    padding: 40px 0 40px;
+  section {
+    margin-bottom: 4rem;
   }
-  .promotions .container {
-    max-width: 1080px;
-    position: relative;
-  }
-  .promo-slider {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 20px;
-    padding-bottom: 8px;
-  }
-  .promo-slide {
-    flex: 0 0 320px;
-    scroll-snap-align: start;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 8px 18px rgb(0 0 0 / 0.12);
-    position: relative;
-    background-color: var(--color-red);
-    color: #fff;
-  }
-  .promo-slide img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    user-select: none;
-  }
-  .promo-content {
-    position: relative;
-    padding: 18px 20px 20px;
-    background: linear-gradient(0deg, rgba(211,47,47,0.85), rgba(211,47,47,0.85));
-    height: 140px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .promo-title {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.3rem;
-    margin-bottom: 6px;
-  }
-  .promo-time {
-    font-weight: 600;
-    font-size: 0.9rem;
-    opacity: 0.85;
-    user-select: none;
-  }
-  /* About us */
-  .about {
-    background: var(--color-cream);
-    padding: 50px 0 50px;
-  }
-  .about .container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 40px;
-    max-width: 1100px;
+  section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--accent-dark);
+    margin-bottom: 1rem;
+    text-align: center;
   }
   .about-text {
-    flex: 1 1 470px;
-    font-size: 1.05rem;
-    color: var(--color-brown);
-    font-family: var(--font-body);
+    font-size: 1.125rem;
     line-height: 1.6;
-  }
-  .about-text strong {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    color: var(--color-red);
-  }
-  .about-img {
-    flex: 1 1 420px;
-    border-radius: 18px;
-    box-shadow: 0 10px 18px rgb(78 52 46 / 0.18);
-    user-select: none;
-  }
-  /* Reviews */
-  .reviews {
-    padding: 60px 0 50px;
-    background: #fff;
-  }
-  .reviews .container {
-    max-width: 1020px;
+    color: var(--gray-dark);
+    max-width: 700px;
+    margin: 0 auto 2rem;
     text-align: center;
   }
-  .reviews h2 {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 2rem;
-    color: var(--color-brown);
-    margin-bottom: 36px;
-  }
-  .review-list {
+  .about-icons {
     display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
     justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
   }
-  .review {
-    background: var(--color-cream);
-    border-radius: 14px;
-    padding: 24px 20px;
-    max-width: 360px;
-    box-shadow: 0 10px 18px rgb(78 52 46 / 0.1);
+  .about-icon {
     display: flex;
     flex-direction: column;
     align-items: center;
-    user-select: none;
+    color: var(--accent);
+    max-width: 120px;
+    text-align: center;
   }
-  .review-img {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 16px;
-    flex-shrink: 0;
+  .about-icon svg {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.5rem;
+    fill: var(--accent);
   }
-  .review-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    user-select: none;
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 2.5rem;
+  }
+  .feature-item {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(102, 102, 102, 0.1);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: box-shadow 0.3s;
+  }
+  .feature-item:hover,
+  .feature-item:focus-within {
+    box-shadow: 0 4px 15px rgba(0, 51, 102, 0.3);
+    outline: none;
+  }
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+    fill: var(--accent-dark);
+  }
+  .feature-title {
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-dark);
+  }
+  .feature-desc {
+    font-size: 1rem;
+    color: var(--gray-dark);
+  }
+  .reviews {
+    background: #f0f0f5;
+    border-radius: 8px;
+    padding: 2rem 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .review-item {
+    margin-bottom: 1.8rem;
   }
   .review-text {
     font-style: italic;
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: var(--color-brown);
-    line-height: 1.4;
-    margin-bottom: 12px;
+    font-size: 1.125rem;
+    color: var(--accent-dark);
   }
   .review-author {
-    font-weight: 600;
-    font-family: var(--font-heading);
-    color: var(--color-red);
-    font-size: 1rem;
-    margin-bottom: 8px;
+    margin-top: 0.5rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-align: right;
+    color: var(--gray-dark);
   }
-  .review-stars {
-    color: var(--color-green);
-    font-size: 1.1rem;
-    user-select: none;
-  }
-  /* Contact */
-  .contact {
-    background: var(--color-cream);
-    padding: 50px 0 70px;
-  }
-  .contact .container {
-    max-width: 1080px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: space-between;
-  }
-  .contact-info {
-    flex: 1 1 380px;
-    font-family: var(--font-body);
-    color: var(--color-brown);
-  }
-  .contact-info h3 {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.8rem;
-    margin-bottom: 24px;
-  }
-  .contact-info p {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 14px;
-  }
-  .contact-info a {
-    color: var(--color-red);
-    font-weight: 600;
-    user-select: text;
-  }
-  .contact-form {
-    flex: 1 1 380px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 10px 18px rgb(78 52 46 / 0.12);
-    padding: 30px 24px;
-  }
-  .contact-form h3 {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.8rem;
-    margin-bottom: 24px;
-    text-align: center;
-    color: var(--color-brown);
-    user-select: none;
-  }
-  .contact-form label {
-    display: block;
-    font-weight: 600;
-    font-family: var(--font-body);
-    margin-bottom: 6px;
-    color: var(--color-brown);
-  }
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: 1.8px solid #bba996;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    resize: vertical;
-    margin-bottom: 18px;
-    transition: border-color 0.25s ease;
-  }
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    outline: none;
-    border-color: var(--color-red);
-  }
-  .contact-form button {
-    width: 100%;
-    background-color: var(--color-red);
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 12px 0;
-    border: none;
-    border-radius: 10px;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .contact-form button:hover,
-  .contact-form button:focus {
-    background-color: #b02727;
-    outline: none;
-  }
-  .map {
-    flex: 1 1 100%;
-    height: 300px;
-    border-radius: 14px;
-    overflow: hidden;
-    margin-top: 32px;
-    box-shadow: 0 10px 18px rgb(78 52 46 / 0.12);
-  }
-  /* Footer */
   footer {
-    background: var(--color-brown);
-    color: #fff;
-    font-family: var(--font-body);
-    padding: 24px 0;
+    background: white;
+    border-top: 1px solid var(--gray-light);
+    padding: 2rem 1rem;
+    font-size: 0.875rem;
+    color: var(--gray-dark);
   }
-  footer .container {
-    max-width: 1100px;
+  .footer-content {
+    max-width: 900px;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 1rem;
   }
-  footer nav {
+  .footer-social {
     display: flex;
-    gap: 24px;
+    gap: 1rem;
+  }
+  .footer-social a {
+    color: var(--accent);
+    transition: color 0.3s;
+    font-size: 1.25rem;
+  }
+  .footer-social a:hover,
+  .footer-social a:focus {
+    color: var(--accent-dark);
+    outline: none;
+  }
+  .footer-links a {
+    margin-left: 1rem;
+    color: var(--gray-dark);
     font-weight: 600;
-    font-family: var(--font-heading);
   }
-  footer nav a {
-    color: #f5f5f5;
-    font-size: 0.95rem;
-    transition: color 0.3s ease;
-  }
-  footer nav a:hover,
-  footer nav a:focus {
-    color: var(--color-green);
-  }
-  .footer-socials a {
-    color: #f5f5f5;
-    font-size: 1.4rem;
-    margin-left: 14px;
-    transition: color 0.3s ease;
-  }
-  .footer-socials a:first-child {
-    margin-left: 0;
-  }
-  .footer-socials a:hover,
-  .footer-socials a:focus {
-    color: var(--color-green);
-  }
-  .footer-copy {
-    font-size: 0.88rem;
-    user-select: none;
-  }
-  /* Icons */
-  svg.icon {
-    vertical-align: middle;
-    fill: var(--color-red);
-  }
-  /* Stars for reviews */
-  .star {
-    width: 16px;
-    height: 16px;
-    fill: var(--color-green);
-    margin: 0 1.5px;
-  }
-  /* Responsive */
-  @media (max-width: 950px) {
-    .menu-list {
+  @media (max-width: 600px) {
+    header {
+      flex-wrap: wrap;
       justify-content: center;
+      gap: 1rem;
     }
-    .advantages .container {
-      gap: 28px 48px;
-    }
-  }
-  @media (max-width: 768px) {
     nav {
-      display: none;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
     }
-    .header-right > .phone {
-      display: none;
-    }
-    .header-inner {
-      justify-content: space-between;
-    }
-    .btn-order {
-      padding: 10px 18px;
-      font-size: 0.95rem;
-    }
-    .about .container {
+    .footer-content {
       flex-direction: column;
       align-items: center;
-      gap: 32px;
-    }
-    .about-text, .about-img {
-      flex: 1 1 100%;
-      max-width: 100%;
-    }
-    .contact .container {
-      flex-direction: column;
-      gap: 32px;
-    }
-    .contact-info, .contact-form {
-      flex: 1 1 100%;
-    }
-    .menu-tabs {
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 18px 24px;
-      font-size: 1rem;
-    }
-    .menu-card {
-      width: 100%;
-      max-width: 500px;
-    }
-    .promo-slide {
-      flex: 0 0 85vw;
-    }
-  }
-  @media (max-width: 400px) {
-    .btn-primary,
-    .btn-secondary {
-      padding: 12px 24px;
-      font-size: 1rem;
+      text-align: center;
+      gap: 0.5rem;
     }
   }
 </style>
 </head>
 <body>
-<header role="banner" aria-label="Основная навигация">
-  <div class="container header-inner">
-    <a href="#hero" class="logo" aria-label="Главная страница">
-      <svg aria-hidden="true" role="img" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" stroke="#D32F2F" stroke-width="3" fill="#FFF3E0"/><path d="M16 32a16 16 0 0132 0 16 16 0 01-32 0z" fill="#D32F2F"/><circle cx="32" cy="24" r="4" fill="#FFF3E0"/><path d="M24 36a2 2 0 014 0 4 4 0 008 0 2 2 0 014 0 10 10 0 01-20 0z" fill="#FFF3E0"/></svg>
-      Домашняя Пицца
-    </a>
-    <nav role="navigation" aria-label="Основное меню">
-      <a href="#hero" tabindex="0">Главная</a>
-      <a href="#menu" tabindex="0">Меню</a>
-      <a href="#promotions" tabindex="0">Акции</a>
-      <a href="#about" tabindex="0">О нас</a>
-      <a href="#contact" tabindex="0">Контакты</a>
-    </nav>
-    <div class="header-right">
-      <a class="phone" href="tel:+74951234567" aria-label="Позвонить в пиццерию +7 (495) 123-45-67">+7 (495) 123-45-67</a>
-      <button class="btn-order" type="button" aria-haspopup="dialog" aria-controls="order-modal" aria-label="Заказать пиццу">Заказать</button>
-    </div>
-  </div>
+<header>
+  <div class="logo" aria-label="Логотип сайта символ Ы" role="heading" aria-level="1">Ы</div>
+  <nav aria-label="Главная навигация">
+    <a href="#about">О проекте</a>
+    <a href="#meaning">Значение</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+  <button class="btn-header" type="button" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Связаться</button>
 </header>
 <main>
-  <section id="hero" class="hero" aria-label="Приветственный баннер">
-    <div class="hero-content" tabindex="-1">
-      <img src="https://images.unsplash.com/photo-1601924582975-c72169501eb0?w=800" alt="Аппетитная пицца на деревянном столе" />
-      <h1 class="hero-title">Свежая пицца с доставкой за 30 минут</h1>
-      <div class="hero-buttons">
-        <a href="#menu" class="btn-primary" role="button">Посмотреть меню</a>
-        <button class="btn-secondary" type="button" aria-haspopup="dialog" aria-controls="order-modal">Заказать сейчас</button>
+  <section class="hero" aria-label="Главный блок сайта">
+    <div class="hero-symbol" aria-hidden="true">Ы</div>
+    <p class="hero-description">Символ «Ы» — уникальная буква кириллицы, отражающая богатство и глубину русского языка. Познакомьтесь с её историей и значением.</p>
+    <button class="btn-hero" type="button" onclick="document.getElementById('meaning').scrollIntoView({behavior:'smooth'})">Подробнее</button>
+  </section>
+  <section id="meaning" aria-labelledby="meaning-title">
+    <h2 id="meaning-title">О значении символа «Ы»</h2>
+    <p class="about-text">Буква «Ы» появилась в древнерусском алфавите и сохраняет свою неповторимость. Она не имеет аналога в латинском алфавите и носит важную звуковую нагрузку в речи.</p>
+    <div class="about-icons" role="list">
+      <div class="about-icon" role="listitem">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 14h-2v-2h2v2zm0-4h-2V6h2v6z"/></svg>
+        <div>История</div>
+      </div>
+      <div class="about-icon" role="listitem">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 7h6v2H9zm0 4h6v2H9z"/></svg>
+        <div>Фонетика</div>
+      </div>
+      <div class="about-icon" role="listitem">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4a8 8 0 018 8 8 8 0 01-8 8 8 8 0 010-16z"/></svg>
+        <div>Уникальность</div>
       </div>
     </div>
   </section>
-  <section class="advantages" aria-label="Преимущества пиццерии">
-    <div class="container">
-      <article class="advantage" tabindex="0">
-        <svg class="icon" aria-hidden="true" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" stroke="none" fill="var(--color-red)"/><path d="M40 22a8 8 0 11-16 0 8 8 0 0116 0z" fill="#FFF3E0"/></svg>
-        <p>Свежие ингредиенты</p>
+  <section id="features" aria-labelledby="features-title">
+    <h2 id="features-title">Преимущества и особенности</h2>
+    <div class="features">
+      <article class="feature-item" tabindex="0" aria-label="Уникальность символа Ы">
+        <svg class="feature-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2L2 21h20L12 2z"/></svg>
+        <h3 class="feature-title">Уникальность</h3>
+        <p class="feature-desc">Символ «Ы» не имеет аналогов в других алфавитах и выделяется в кириллице своей формой и звучанием.</p>
       </article>
-      <article class="advantage" tabindex="0">
-        <svg class="icon" aria-hidden="true" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" stroke="none" fill="var(--color-red)"/><path d="M24 38v10h16V38" fill="#FFF3E0"/></svg>
-        <p>Быстрая доставка</p>
+      <article class="feature-item" tabindex="0" aria-label="Историческое значение буквы Ы">
+        <svg class="feature-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>
+        <h3 class="feature-title">Историческое значение</h3>
+        <p class="feature-desc">Буква «Ы» известна с древнерусских времён и отражает языковое развитие и культурное наследие.</p>
       </article>
-      <article class="advantage" tabindex="0">
-        <svg class="icon" aria-hidden="true" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" stroke="none" fill="var(--color-red)"/><path d="M36 22l-8 20" stroke="#FFF3E0" stroke-width="4" stroke-linecap="round"/></svg>
-        <p>Ручная лепка</p>
+      <article class="feature-item" tabindex="0" aria-label="Фонетика и звучание">
+        <svg class="feature-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg>
+        <h3 class="feature-title">Фонетика и звучание</h3>
+        <p class="feature-desc">Она выражает неподражаемый звук, характерный для славянских языков, и влияет на звучание слов.</p>
       </article>
-      <article class="advantage" tabindex="0">
-        <svg class="icon" aria-hidden="true" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" stroke="none" fill="var(--color-red)"/><rect x="22" y="22" width="20" height="20" rx="4" ry="4" fill="#FFF3E0"/></svg>
-        <p>Экологичная упаковка</p>
+      <article class="feature-item" tabindex="0" aria-label="Использование в искусстве и дизайне">
+        <svg class="feature-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+        <h3 class="feature-title">Дизайн и искусство</h3>
+        <p class="feature-desc">Символ «Ы» вдохновляет художников и дизайнеров своей формой и уникальностью.</p>
       </article>
     </div>
   </section>
-  <section id="menu" class="menu" aria-label="Меню пиццерии">
-    <h2>Наше меню</h2>
-    <nav class="menu-tabs" role="tablist">
-      <button type="button" role="tab" aria-selected="true" id="tab-classic" aria-controls="panel-classic" class="menu-tab active" tabindex="0">Классические пиццы</button>
-      <button type="button" role="tab" aria-selected="false" id="tab-special" aria-controls="panel-special" class="menu-tab" tabindex="-1">Специальные предложения</button>
-      <button type="button" role="tab" aria-selected="false" id="tab-snacks" aria-controls="panel-snacks" class="menu-tab" tabindex="-1">Закуски</button>
-    </nav>
-    <div id="panel-classic" role="tabpanel" aria-labelledby="tab-classic">
-      <div class="menu-list">
-        <article class="menu-card" tabindex="0" aria-label="Пицца Маргарита, классическая итальянская пицца с сыром и базиликом, цена 450 рублей">
-          <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?w=800" alt="Пицца Маргарита" loading="lazy"/>
-          <div class="menu-content">
-            <h3 class="menu-title">Маргарита</h3>
-            <p class="menu-desc">Классическая итальянская с томатным соусом, сыром моцарелла и свежим базиликом.</p>
-            <div class="menu-footer">
-              <span class="menu-price">450 ₽</span>
-              <button class="btn-add" type="button" aria-label="Добавить пиццу Маргарита в корзину">В корзину</button>
-            </div>
-          </div>
-        </article>
-        <article class="menu-card" tabindex="0" aria-label="Пицца Пепперони, с острыми колбасками и сыром, цена 520 рублей">
-          <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800" alt="Пицца Пепперони" loading="lazy"/>
-          <div class="menu-content">
-            <h3 class="menu-title">Пепперони</h3>
-            <p class="menu-desc">Пикантная пицца с острыми колбасками, томатным соусом и сыром моцарелла.</p>
-            <div class="menu-footer">
-              <span class="menu-price">520 ₽</span>
-              <button class="btn-add" type="button" aria-label="Добавить пиццу Пепперони в корзину">В корзину</button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-    <div id="panel-special" role="tabpanel" aria-labelledby="tab-special" hidden>
-      <div class="menu-list">
-        <article class="menu-card" tabindex="0" aria-label="Пицца Вегетарианская, с овощами и свежими травами, цена 490 рублей">
-          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800" alt="Пицца Вегетарианская" loading="lazy"/>
-          <div class="menu-content">
-            <h3 class="menu-title">Вегетарианская</h3>
-            <p class="menu-desc">Свежие овощи, томатный соус и ароматные травы для любителей лёгкой пиццы.</p>
-            <div class="menu-footer">
-              <span class="menu-price">490 ₽</span>
-              <button class="btn-add" type="button" aria-label="Добавить пиццу Вегетарианская в корзину">В корзину</button>
-            </div>
-          </div>
-        </article>
-        <article class="menu-card" tabindex="0" aria-label="Пицца Четыре Сыра, с миксом итальянских сыров, цена 570 рублей">
-          <img src="https://images.unsplash.com/photo-1548365328-971920689bbf?w=800" alt="Пицца Четыре Сыра" loading="lazy"/>
-          <div class="menu-content">
-            <h3 class="menu-title">Четыре Сыра</h3>
-            <p class="menu-desc">Микс из моцареллы, горгонзолы, пармезана и ситтера на нежном тесте.</p>
-            <div class="menu-footer">
-              <span class="menu-price">570 ₽</span>
-              <button class="btn-add" type="button" aria-label="Добавить пиццу Четыре Сыра в корзину">В корзину</button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-    <div id="panel-snacks" role="tabpanel" aria-labelledby="tab-snacks" hidden>
-      <div class="menu-list">
-        <article class="menu-card" tabindex="0" aria-label="Куриные крылышки с соусом барбекю, цена 350 рублей">
-          <img src="https://images.unsplash.com/photo-1605479569813-3a0122afa8d1?w=800" alt="Куриные крылышки с соусом" loading="lazy"/>
-          <div class="menu-content">
-            <h3 class="menu-title">Куриные крылышки</h3>
-            <p class="menu-desc">Нежные крылышки в соусе барбекю с пикантным ароматом.</p>
-            <div class="menu-footer">
-              <span class="menu-price">350 ₽</span>
-              <button class="btn-add" type="button" aria-label="Добавить Куриные крылышки в корзину">В корзину</button>
-            </div>
-          </div>
-        </article>
-        <article class="menu-card" tabindex="0" aria-label="Сырные палочки с чесночным соусом, цена 320 рублей">
-          <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=800" alt="Сырные палочки" loading="lazy"/>
-          <div class="menu-content">
-            <h3 class="menu-title">Сырные палочки</h3>
-            <p class="menu-desc">Сырные палочки с ароматом чеснока и соусом для макания.</p>
-            <div class="menu-footer">
-              <span class="menu-price">320 ₽</span>
-              <button class="btn-add" type="button" aria-label="Добавить Сырные палочки в корзину">В корзину</button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-  <section id="promotions" class="promotions" aria-label="Акции и специальные предложения">
-    <div class="container">
-      <h2 class="visually-hidden">Акции и спецпредложения</h2>
-      <div class="promo-slider" aria-live="polite" aria-atomic="true" aria-relevant="additions removals">
-        <article class="promo-slide" tabindex="0" role="region" aria-label="Скидка 20% на все пиццы с понедельника по среду">
-          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" alt="Пицца со скидкой 20%" loading="lazy" />
-          <div class="promo-content">
-            <h3 class="promo-title">Скидка 20% на все пиццы</h3>
-            <p class="promo-time">Действует: Понедельник - Среда</p>
-          </div>
-        </article>
-        <article class="promo-slide" tabindex="0" role="region" aria-label="Бонусные баллы при заказе от 1000 рублей">
-          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800" alt="Бонусные баллы при заказе" loading="lazy" />
-          <div class="promo-content">
-            <h3 class="promo-title">Бонусы при заказе от 1000 ₽</h3>
-            <p class="promo-time">Акция длится весь месяц</p>
-          </div>
-        </article>
-        <article class="promo-slide" tabindex="0" role="region" aria-label="Бесплатная доставка при первом заказе">
-          <img src="https://images.unsplash.com/photo-1552332386-f8dd00dc0f7f?w=800" alt="Бесплатная доставка" loading="lazy" />
-          <div class="promo-content">
-            <h3 class="promo-title">Бесплатная доставка</h3>
-            <p class="promo-time">Для новых клиентов</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-  <section id="about" class="about" aria-label="Информация о пиццерии">
-    <div class="container">
-      <div class="about-text" tabindex="0">
-        <h2>О нас</h2>
-        <p><strong>Домашняя Пицца</strong> — небольшая пиццерия с большой душой. Мы ценим традиции итальянской кухни и бережно подбираем свежие натуральные ингредиенты. Наша философия — быстрый сервис, домашний уют и высокое качество в каждом кусочке.</p>
-        <p>Каждая пицца у нас — ручная лепка и любовь в тесто. Мы гордимся своей командой настоящих пиццайоло, которые делают вкус каждой пиццы уникальным.</p>
-      </div>
-      <div class="about-img" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800" alt="Команда пиццайоло" loading="lazy" />
-      </div>
-    </div>
-  </section>
-  <section class="reviews" aria-label="Отзывы клиентов">
-    <div class="container">
-      <h2>Отзывы наших клиентов</h2>
-      <div class="review-list">
-        <article class="review" tabindex="0" aria-label="Отзыв Анны">
-          <div class="review-img">
-            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=64" alt="Анна" loading="lazy" />
-          </div>
-          <p class="review-text">«Пицца всегда свежая и вкусная! Доставка действительно быстрая, а сервис — на высоте.»</p>
-          <p class="review-author">Анна, Москва</p>
-          <div class="review-stars" aria-label="Рейтинг: 5 из 5 звезд">
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-          </div>
-        </article>
-        <article class="review" tabindex="0" aria-label="Отзыв Сергея">
-          <div class="review-img">
-            <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=64" alt="Сергей" loading="lazy" />
-          </div>
-          <p class="review-text">«Идеальная пицца на любой вкус! Особенно нравится вегетарианская и доставка — всегда вовремя.»</p>
-          <p class="review-author">Сергей, Санкт-Петербург</p>
-          <div class="review-stars" aria-label="Рейтинг: 5 из 5 звезд">
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-          </div>
-        </article>
-        <article class="review" tabindex="0" aria-label="Отзыв Марии">
-          <div class="review-img">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=64" alt="Мария" loading="lazy" />
-          </div>
-          <p class="review-text">«Очень приятное обслуживание! Пицца вкусная, сытная и свежая. Буду заказывать снова.»</p>
-          <p class="review-author">Мария, Казань</p>
-          <div class="review-stars" aria-label="Рейтинг: 5 из 5 звезд">
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-            <svg class="star" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 1.5l2.93 5.94 6.57 0.96-4.76 4.64 1.12 6.54L10 16.27l-5.87 3.08 1.12-6.54-4.76-4.64 6.57-0.96L10 1.5z"/></svg>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-  <section id="contact" class="contact" aria-label="Контактная информация и форма обратной связи">
-    <div class="container">
-      <div class="contact-info" tabindex="0">
-        <h3>Контакты</h3>
-        <p><strong>Адрес:</strong><br />г. Москва, ул. Пиццерийная, 15</p>
-        <p><strong>Телефон:</strong><br /><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
-        <p><strong>E-mail:</strong><br /><a href="mailto:info@domashnyapizza.ru">info@domashnyapizza.ru</a></p>
-        <p><strong>Часы работы:</strong><br />Пн-Вс: 10:00 — 23:00</p>
-      </div>
-      <form class="contact-form" aria-label="Форма обратной связи" name="feedback" method="post" action="#" novalidate>
-        <h3>Обратная связь</h3>
-        <label for="cf-name">Имя</label>
-        <input type="text" id="cf-name" name="name" placeholder="Ваше имя" required aria-required="true" />
-        <label for="cf-phone">Телефон</label>
-        <input type="tel" id="cf-phone" name="phone" placeholder="+7 (___) ___-__-__" pattern="[\+7]{2}[0-9\s\-\(\)]{10,}" required aria-required="true" />
-        <label for="cf-message">Сообщение</label>
-        <textarea id="cf-message" name="message" rows="4" placeholder="Ваш вопрос или комментарий" required aria-required="true"></textarea>
-        <button type="submit">Отправить</button>
-      </form>
-      <div class="map" aria-label="Карта расположения пиццерии">
-        <iframe title="Карта пиццерии" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.093142184316!2d37.61729961593099!3d55.75582658055367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x414ab7f3e8e18449%3A0x50023217750b45c0!2z0JPQsNC90LDRgNC-0YHQutCw0Y8g0L3QsNGA0LDQvNC10LrQuNC1INCc0LTQsNGPINGB0YLQvtCz0L4g0LzQvtC00LXQvdC-0LLQsCwgMTUsINC_0YDQuNC90LjQtSwg0JHQtdC-0YLQtdC80YHQutC-0LAsIDEwMDA2MA!5e0!3m2!1sru!2sru!4v1687648511723!5m2!1sru!2sru" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+  <section id="reviews" aria-labelledby="reviews-title">
+    <h2 id="reviews-title">Отзывы и цитаты</h2>
+    <div class="reviews">
+      <blockquote class="review-item">
+        <p class="review-text">«Символ «Ы» — сердце русского языка. Его уникальность невозможно переоценить.»</p>
+        <footer class="review-author">— Лингвист Иван Петров</footer>
+      </blockquote>
+      <blockquote class="review-item">
+        <p class="review-text">«Эта буква — больше, чем просто звук, она часть культуры и истории.»</p>
+        <footer class="review-author">— Культуролог Мария Соколова</footer>
+      </blockquote>
+      <blockquote class="review-item">
+        <p class="review-text">«Дизайнеры находят в «Ы» неисчерпаемый источник вдохновения.»</p>
+        <footer class="review-author">— Арт-директор Николай Орлов</footer>
+      </blockquote>
     </div>
   </section>
 </main>
-<footer role="contentinfo" aria-label="Футер сайта">
-  <div class="container">
-    <nav aria-label="Меню в футере">
-      <a href="#hero">Главная</a>
-      <a href="#menu">Меню</a>
-      <a href="#promotions">Акции</a>
-      <a href="#about">О нас</a>
-      <a href="#contact">Контакты</a>
-    </nav>
-    <div class="footer-socials" aria-label="Социальные сети">
-      <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook" tabindex="0" >
-        <svg aria-hidden="true" width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.87v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.15 1.8.15v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0022 12z"/></svg>
-      </a>
-      <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" tabindex="0">
-        <svg aria-hidden="true" width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M7 2C4 2 2 4 2 7v10c0 3 2 5 5 5h10c3 0 5-2 5-5V7c0-3-2-5-5-5H7zm7 3a2 2 0 110 4 2 2 0 010-4zm-5 3a5 5 0 110 10 5 5 0 010-10zm6.5-2a1 1 0 110 2 1 1 0 010-2z"/></svg>
-      </a>
-      <a href="https://www.twitter.com" target="_blank" rel="noopener" aria-label="Twitter" tabindex="0">
-        <svg aria-hidden="true" width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 7.5c.01.17.01.34.01.5a9.4 9.4 0 01-9.6 9.47 9.3 9.3 0 01-5.6-1.62c.3.03.6.05.92.05a6.7 6.7 0 004.17-1.47 3.34 3.34 0 01-3.11-2.31c.2.03.4.05.6.05a3.3 3.3 0 01-.99-4.43 9.4 9.4 0 006.83 3.47 3.76 3.76 0 01-.08-.75 3.3 3.3 0 015.7-2.25 6.54 6.54 0 002.1-.8 3.3 3.3 0 01-1.46 1.82 6.65 6.65 0 001.88-.52 7.08 7.08 0 01-1.65 1.7z"/></svg>
-      </a>
+<footer id="contacts" aria-label="Контактная информация и ссылки">
+  <div class="footer-content">
+    <div>© 2024 Проект «Ы» — Все права защищены</div>
+    <div class="footer-social" role="navigation" aria-label="Социальные сети">
+      <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter" title="Twitter" tabindex="0" >&#x1F426;</a>
+      <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook" tabindex="0">&#x1F464;</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram" tabindex="0">&#x1F4F7;</a>
     </div>
-    <small class="footer-copy" aria-label="Авторские права">© 2024 Домашняя Пицца. Все права защищены.</small>
+    <div class="footer-links">
+      <a href="#">Политика конфиденциальности</a>
+    </div>
   </div>
 </footer>
-<script>
-  // Tabs for menu
-  const tabs = document.querySelectorAll('.menu-tab');
-  const panels = document.querySelectorAll('[role="tabpanel"]');
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => {
-        t.setAttribute('aria-selected', 'false');
-        t.tabIndex = -1;
-        t.classList.remove('active');
-      });
-      tab.setAttribute('aria-selected', 'true');
-      tab.tabIndex = 0;
-      tab.classList.add('active');
-
-      panels.forEach(panel => panel.hidden = true);
-      const id = tab.getAttribute('aria-controls');
-      const panel = document.getElementById(id);
-      if (panel) panel.hidden = false;
-
-      tab.focus();
-    });
-  });
-
-  // Keyboard arrow key navigation between tabs
-  let tabFocus = 0;
-  tabs.forEach((tab, i) => {
-    tab.addEventListener('keydown', e => {
-      if(e.key === "ArrowRight" || e.key === "ArrowLeft") {
-        tabs[tabFocus].tabIndex = -1;
-        if(e.key === "ArrowRight") tabFocus++;
-        else if(e.key === "ArrowLeft") tabFocus--;
-        if(tabFocus >= tabs.length) tabFocus = 0;
-        if(tabFocus < 0) tabFocus = tabs.length - 1;
-        tabs[tabFocus].tabIndex = 0;
-        tabs[tabFocus].focus();
-      }
-    });
-  });
-
-  // Focus trap/order modal placeholder (just alert on order buttons)
-  const orderButtons = document.querySelectorAll('.btn-order, .btn-secondary');
-  orderButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      alert('Функция заказа временно недоступна.');
-    });
-  });
-
-  // Add to cart button feedback
-  const addButtons = document.querySelectorAll('.btn-add');
-  addButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      btn.textContent = "Добавлено";
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.textContent = "В корзину";
-        btn.disabled = false;
-      }, 2000);
-    });
-  });
-</script>
 </body>
 </html>
