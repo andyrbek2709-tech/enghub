@@ -3,239 +3,182 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Шиномонтаж Профи</title>
+<title>Тёмно фиолетовый сайт</title>
 <style>
+  :root {
+    --dark-purple: #2e1a47;
+    --medium-purple: #4b297a;
+    --light-purple: #6c4fa0;
+    --accent-purple: #9f7ee7;
+    --text-light: #e0d9f2;
+    --text-dark: #ccc3dc;
+    --hover-purple: #855fd1;
+  }
+  * {
+    box-sizing: border-box;
+  }
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f6f8;
-    color: #333;
+    background-color: var(--dark-purple);
+    color: var(--text-light);
   }
   header {
-    background-color: #1e2a38;
-    padding: 20px 40px;
+    background-color: var(--medium-purple);
+    padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.4);
   }
   header h1 {
-    color: #fff;
     margin: 0;
     font-weight: 700;
     font-size: 1.8rem;
-    letter-spacing: 1px;
+    color: var(--accent-purple);
   }
-  nav {
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    gap: 25px;
+    gap: 1.8rem;
   }
   nav a {
-    color: #a8bfcf;
+    color: var(--text-light);
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
-    transition: color 0.3s ease;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-  nav a:hover, nav a:focus {
-    color: #ff6f3c;
+  nav a:hover,
+  nav a:focus {
+    background-color: var(--hover-purple);
+    color: white;
+    outline: none;
   }
   main {
     max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 2rem auto;
+    padding: 0 1rem;
   }
   .hero {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 60px;
-  }
-  .hero-text {
-    flex: 1 1 400px;
-  }
-  .hero-text h2 {
-    font-size: 2.8rem;
-    color: #1e2a38;
-    margin: 0 0 20px;
-    line-height: 1.2;
-  }
-  .hero-text p {
-    font-size: 1.15rem;
-    color: #555f6e;
-    margin-bottom: 30px;
-    max-width: 520px;
-  }
-  .btn-primary {
-    padding: 14px 28px;
-    background-color: #ff6f3c;
-    color: white;
-    font-weight: 700;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease;
-  }
-  .btn-primary:hover, .btn-primary:focus {
-    background-color: #e05b2a;
-  }
-  .hero-img {
-    flex: 1 1 400px;
+    background: linear-gradient(135deg, #48307bcc, #1f153fcc), url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800") no-repeat center/cover;
     border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    color: var(--text-light);
+    padding: 4rem 2rem;
+    text-align: center;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 0.5);
   }
-  .hero-img img {
-    width: 100%;
-    height: auto;
-    display: block;
+  .hero h2 {
+    font-size: 2.8rem;
+    margin-bottom: 0.7rem;
   }
-  section.services {
+  .hero p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  section.cards {
+    margin-top: 3rem;
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 35px;
-    margin-bottom: 60px;
+    gap: 2rem;
   }
-  .service-card {
-    background: white;
+  .card {
+    background-color: var(--medium-purple);
+    padding: 1.8rem 1.4rem;
     border-radius: 12px;
-    padding: 30px 25px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    text-align: center;
-    transition: transform 0.25s ease;
+    box-shadow: 0 3px 8px rgb(0 0 0 / 0.45);
+    transition: transform 0.3s ease;
   }
-  .service-card:hover, .service-card:focus-within {
-    transform: translateY(-8px);
+  .card:hover {
+    transform: translateY(-6px);
   }
-  .service-card img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    margin-bottom: 18px;
+  .card img {
+    border-radius: 10px;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 1rem;
   }
-  .service-card h3 {
+  .card h3 {
+    margin-top: 0;
     font-size: 1.4rem;
-    color: #1e2a38;
-    margin-bottom: 14px;
+    color: var(--accent-purple);
   }
-  .service-card p {
+  .card p {
     font-size: 1rem;
-    color: #556270;
-  }
-  section.about {
-    background-color: #1e2a38;
-    color: white;
-    padding: 60px 20px;
-    border-radius: 12px;
-    max-width: 900px;
-    margin: 0 auto 80px auto;
-    text-align: center;
-  }
-  section.about h2 {
-    font-size: 2.2rem;
-    margin-bottom: 20px;
-  }
-  section.about p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    line-height: 1.5;
+    color: var(--text-dark);
   }
   footer {
-    background-color: #161f2b;
-    color: #9faecf;
+    background-color: var(--medium-purple);
+    padding: 1.5rem 2rem;
+    color: var(--text-dark);
     text-align: center;
-    padding: 25px 20px;
     font-size: 0.9rem;
-  }
-  @media(max-width: 600px) {
-    header {
-      flex-direction: column;
-      gap: 15px;
-    }
-    nav {
-      gap: 15px;
-    }
-    .hero {
-      flex-direction: column;
-      gap: 30px;
-    }
+    margin-top: 4rem;
   }
 </style>
 </head>
 <body>
 <header>
-  <h1>Шиномонтаж Профи</h1>
-  <nav aria-label="Основная навигация">
-    <a href="#services">Услуги</a>
-    <a href="#about">О нас</a>
-    <a href="#contact">Контакты</a>
+  <h1>Фиолетовый Сайт</h1>
+  <nav>
+    <ul>
+      <li><a href="#home" tabindex="1">Главная</a></li>
+      <li><a href="#services" tabindex="2">Услуги</a></li>
+      <li><a href="#about" tabindex="3">О нас</a></li>
+      <li><a href="#contact" tabindex="4">Контакты</a></li>
+    </ul>
   </nav>
 </header>
 <main>
-  <section class="hero" aria-label="Главный баннер">
-    <div class="hero-text">
-      <h2>Профессиональный шиномонтаж в вашем городе</h2>
-      <p>Быстро, качественно и по доступным ценам меняем и балансируем ваши шины. Ваш автомобиль в надежных руках!</p>
-      <a href="#contact" class="btn-primary">Записаться сейчас</a>
-    </div>
-    <div class="hero-img">
-      <img src="https://images.unsplash.com/photo-1517991104124-5320fe302617?w=800" alt="Мастер шиномонтажа за работой" />
-    </div>
+  <section class="hero" id="home" role="banner" aria-label="Главный баннер сайта">
+    <h2>Добро пожаловать в мир тёмных фиолетовых оттенков</h2>
+    <p>Современный и стильный веб-сайт с темной тематикой, наполненный атмосферой изысканности и глубины. Исследуйте возможности фиолетового сегодня!</p>
   </section>
-  <section id="services" class="services" aria-label="Услуги шиномонтажа">
-    <article class="service-card" tabindex="0">
-      <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=80" alt="Замена шин" />
-      <h3>Замена шин</h3>
-      <p>Быстрая и аккуратная замена летних и зимних шин без очередей и с гарантией качества.</p>
+  <section class="cards" id="services" aria-label="Наши услуги">
+    <article class="card" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1520975697801-4f7df4aa3a53?w=800" alt="Дизайн интерфейсов в фиолетовых тонах" />
+      <h3>Дизайн интерфейсов</h3>
+      <p>Создаем современные UX/UI решения с акцентом на стильные темные фиолетовые палитры для яркого визуального впечатления.</p>
     </article>
-    <article class="service-card" tabindex="0">
-      <img src="https://images.unsplash.com/photo-1568667256549-f59bde70e0ca?w=80" alt="Балансировка колес" />
-      <h3>Балансировка колес</h3>
-      <p>Точная балансировка под любый тип колёсных дисков для плавной и безопасной езды.</p>
+    <article class="card" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800" alt="Разработка веб-приложений" />
+      <h3>Разработка</h3>
+      <p>Пишем эффективные и надежные веб-приложения, гармонично вписывающиеся в темные стили и обеспечивающие отличную производительность.</p>
     </article>
-    <article class="service-card" tabindex="0">
-      <img src="https://images.unsplash.com/photo-1572656634897-dd3d778e3942?w=80" alt="Ремонт шин" />
-      <h3>Ремонт шин</h3>
-      <p>Ремонт повреждений шин без снятия с диска, восстановление герметичности и прочности.</p>
-    </article>
-    <article class="service-card" tabindex="0">
-      <img src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?w=80" alt="Хранение шин" />
-      <h3>Хранение шин</h3>
-      <p>Комфортное сезонное хранение ваших шин в чистом и сухом помещении с контролем температуры.</p>
+    <article class="card" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="SEO и маркетинг для вашего сайта" />
+      <h3>SEO и маркетинг</h3>
+      <p>Повышаем видимость вашего проекта в Сети с помощью современных маркетинговых стратегий и SEO оптимизации.</p>
     </article>
   </section>
-  <section id="about" class="about" aria-label="О компании">
-    <h2>Почему выбирают нас?</h2>
-    <p>Наш шиномонтаж оснащён современным оборудованием, а команда состоит из опытных профессионалов, которые любят и знают своё дело. Мы всегда готовы помочь вам в любое время года и гарантировать качественный сервис, чтобы вы были спокойны за свою безопасность на дороге.</p>
+  <section id="about" style="margin-top:3rem;">
+    <h2>О нашей компании</h2>
+    <p>Мы — команда профессионалов, вдохновленная красотой темных фиолетовых оттенков. Наш опыт помогает создавать качественные и привлекательные сайты для любых задач.</p>
   </section>
-  <section id="contact" aria-label="Контакты и запись" style="max-width: 600px; margin: 0 auto 80px auto; padding: 0 20px;">
-    <h2 style="text-align:center; margin-bottom: 20px;">Свяжитесь с нами</h2>
-    <form style="display: flex; flex-direction: column; gap: 15px;">
-      <label for="name">Ваше имя</label>
-      <input id="name" name="name" type="text" placeholder="Иван Иванов" required style="padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;" />
-      <label for="phone">Телефон</label>
-      <input id="phone" name="phone" type="tel" placeholder="+7 (999) 123-45-67" required style="padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;" />
-      <label for="service">Услуга</label>
-      <select id="service" name="service" required style="padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
-        <option value="" disabled selected>Выберите услугу</option>
-        <option value="Замена шин">Замена шин</option>
-        <option value="Балансировка колес">Балансировка колес</option>
-        <option value="Ремонт шин">Ремонт шин</option>
-        <option value="Хранение шин">Хранение шин</option>
-      </select>
-      <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.2rem;">Отправить заявку</button>
+  <section id="contact" style="margin-top:3rem;">
+    <h2>Свяжитесь с нами</h2>
+    <p>Есть вопросы или хотите начать проект? Напишите нам, и мы обязательно поможем!</p>
+    <form style="max-width:400px; margin-top:1rem;">
+      <label for="name" style="display:block; margin-bottom:0.3rem;">Имя</label>
+      <input type="text" id="name" name="name" required style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:6px; border:none; font-size:1rem;" />
+      <label for="email" style="display:block; margin-bottom:0.3rem;">Email</label>
+      <input type="email" id="email" name="email" required style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:6px; border:none; font-size:1rem;" />
+      <label for="message" style="display:block; margin-bottom:0.3rem;">Сообщение</label>
+      <textarea id="message" name="message" rows="4" required style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:6px; border:none; font-size:1rem;"></textarea>
+      <button type="submit" style="background-color: var(--accent-purple); color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; transition: background-color 0.3s ease;">Отправить</button>
     </form>
   </section>
 </main>
 <footer>
-  &copy; 2024 Шиномонтаж Профи — Все права защищены<br />
-  Телефон: +7 (123) 456-78-90 | Адрес: г. Москва, ул. Примерная, д. 10
+  &copy; 2024 Фиолетовый Сайт. Все права защищены.
 </footer>
 </body>
 </html>
