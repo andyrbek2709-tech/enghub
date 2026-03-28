@@ -3,937 +3,573 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Кофейня Уютный Кофе</title>
+<title>Мои боты</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Merriweather&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
   :root {
-    --brown-dark: #6F4E37;
-    --brown-light: #8B6D5C;
-    --cream-light: #F5F0E6;
-    --cream-dark: #DCC9B6;
-    --accent-green: #3A5A40;
-    --accent-brick: #A1523E;
-    --font-header: 'Montserrat', sans-serif;
-    --font-body: 'Merriweather', serif;
+    --color-bg: #F9FAFB;
+    --color-primary: #2563EB;
+    --color-text-secondary: #6B7280;
+    --color-status-active: #10B981;
+    --color-error: #EF4444;
+    --color-footer-bg: #F3F4F6;
+    --font-main: 'Inter', sans-serif;
   }
-
-  *, *::before, *::after {
+  * {
     box-sizing: border-box;
   }
-
   body {
     margin: 0;
-    background: var(--cream-light);
-    color: var(--brown-dark);
-    font-family: var(--font-body);
+    background: var(--color-bg);
+    font-family: var(--font-main);
+    color: #111827;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     line-height: 1.5;
-    font-size: 17px;
   }
-
   a {
-    color: var(--accent-green);
+    color: var(--color-primary);
     text-decoration: none;
-    transition: color 0.3s ease;
   }
-  a:hover, a:focus {
-    color: var(--accent-brick);
+  a:focus,
+  button:focus,
+  input:focus {
+    outline-offset: 2px;
+    outline-color: var(--color-primary);
+    outline-style: solid;
   }
-
   header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: var(--cream-light);
-    box-shadow: 0 2px 10px rgb(111 78 55 / 0.2);
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    height: 60px;
-    z-index: 1000;
+    padding: 16px 24px;
+    border-bottom: 1px solid #E5E7EB;
+    background: var(--color-bg);
   }
-
-  .logo {
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 24px;
-    color: var(--brown-dark);
-    user-select: none;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-
-  nav li {
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 16px;
-  }
-
-  nav li a {
-    padding: 6px 4px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  nav li a:hover, nav li a:focus {
-    background-color: var(--cream-dark);
-  }
-
-  .header-actions {
+  .header-left {
     display: flex;
     align-items: center;
     gap: 12px;
   }
-
-  .btn-order {
-    background-color: var(--accent-brick);
-    color: var(--cream-light);
-    font-family: var(--font-header);
+  .logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+  .page-title {
     font-weight: 700;
-    font-size: 15px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 22px;
+    color: #111827;
     white-space: nowrap;
   }
-  .btn-order:hover, .btn-order:focus {
-    background-color: var(--accent-green);
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
-
-  .icon-cart {
-    width: 28px;
-    height: 28px;
-    stroke: var(--brown-dark);
-    cursor: pointer;
-    transition: stroke 0.3s ease;
-  }
-  .icon-cart:hover, .icon-cart:focus {
-    stroke: var(--accent-brick);
-  }
-
-  main {
-    padding-top: 70px;
-  }
-
-  section {
-    max-width: 960px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
-
-  /* Hero */
-  .hero {
-    position: relative;
-    border-radius: 14px;
-    overflow: hidden;
-    background-color: var(--cream-light);
-  }
-  .hero img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: brightness(0.85);
-    transition: filter 0.5s ease;
-  }
-  .hero img:hover {
-    filter: brightness(1);
-  }
-  .hero-content {
-    position: absolute;
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-    color: var(--cream-light);
-    max-width: 360px;
-    font-family: var(--font-header);
-  }
-  .hero-content h1 {
-    font-size: 36px;
-    margin: 0 0 12px 0;
-    line-height: 1.1;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
-  }
-  .hero-content .btn-menu {
-    background-color: var(--accent-green);
-    color: var(--cream-light);
+  button.add-bot {
+    background-color: var(--color-primary);
     border: none;
-    padding: 10px 22px;
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 16px;
+    color: white;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 10px 18px;
     border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(58,90,64,0.7);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
   }
-  .hero-content .btn-menu:hover, .hero-content .btn-menu:focus {
-    background-color: var(--accent-brick);
+  button.add-bot:hover,
+  button.add-bot:focus {
+    background-color: #1E40AF;
   }
-
-  /* About */
-  .about {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    font-size: 17px;
-    line-height: 1.6;
-  }
-  .about img {
-    flex: 1 1 320px;
-    border-radius: 14px;
-    box-shadow: 0 4px 10px rgb(111 78 55 / 0.2);
-    user-select: none;
-  }
-  .about-text {
-    flex: 1 1 520px;
-    font-family: var(--font-body);
-    color: var(--brown-dark);
-  }
-  .about-text h2 {
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 32px;
-    margin-bottom: 16px;
-    color: var(--brown-dark);
-  }
-
-  /* Menu */
-  .menu {
-    font-family: var(--font-body);
-  }
-  .menu h2 {
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 32px;
-    margin-bottom: 20px;
-    color: var(--brown-dark);
-  }
-  .filter-buttons {
-    margin-bottom: 18px;
-    display: flex;
-    gap: 14px;
-  }
-  .filter-button {
-    background-color: var(--cream-dark);
-    border: none;
-    padding: 7px 18px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 15px;
-    cursor: pointer;
-    color: var(--brown-dark);
-    box-shadow: 0 2px 5px rgba(139,109,92,0.3);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  .filter-button.active,
-  .filter-button:hover,
-  .filter-button:focus {
-    background-color: var(--accent-green);
-    color: var(--cream-light);
-    box-shadow: 0 4px 10px rgba(58,90,64,0.7);
-  }
-  .menu-items {
-    display: grid;
-    gap: 24px;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-  }
-  .menu-item {
-    background-color: var(--cream-light);
-    border-radius: 14px;
-    box-shadow: 0 4px 10px rgb(111 78 55 / 0.12);
-    overflow: hidden;
-    cursor: default;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-  }
-  .menu-item:hover, .menu-item:focus-within {
-    box-shadow: 0 8px 20px rgb(161 82 62 / 0.4);
-    transform: translateY(-4px);
-  }
-  .menu-item img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    display: block;
-    user-select: none;
-  }
-  .menu-item-content {
-    padding: 14px 16px;
-  }
-  .menu-item-content h3 {
-    margin: 0 0 8px 0;
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 20px;
-    color: var(--brown-dark);
-  }
-  .menu-item-content p {
-    margin: 0 0 10px 0;
-    font-size: 15px;
-    color: var(--brown-light);
-  }
-  .menu-item-price {
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--accent-brick);
-  }
-
-  /* Special offers */
-  .special-offers {
-    font-family: var(--font-body);
-  }
-  .special-offers h2 {
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 32px;
-    margin-bottom: 20px;
-    color: var(--brown-dark);
-  }
-  .offers-list {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .offer-card {
-    background: var(--cream-dark);
-    border-radius: 14px;
-    padding: 16px;
-    box-shadow: 0 4px 10px rgb(161 82 62 / 0.3);
-    max-width: 280px;
-    cursor: pointer;
+  .user-menu {
     position: relative;
-    overflow: hidden;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
-  .offer-card:hover, .offer-card:focus-within {
-    box-shadow: 0 8px 20px rgb(161 82 62 / 0.5);
-    transform: scale(1.03);
-  }
-  .offer-card img {
-    width: 100%;
-    border-radius: 10px;
-    user-select: none;
-    margin-bottom: 12px;
-    object-fit: cover;
-    height: 160px;
-  }
-  .offer-card h3 {
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 22px;
-    margin: 0 0 8px 0;
-    color: var(--brown-dark);
-  }
-  .offer-card p {
-    margin: 0;
-    font-size: 15px;
-    color: var(--brown-light);
-  }
-
-  /* Reviews */
-  .reviews {
-    font-family: var(--font-body);
-    max-width: 960px;
-  }
-  .reviews h2 {
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 32px;
-    margin-bottom: 20px;
-    color: var(--brown-dark);
-    text-align: center;
-  }
-  .reviews-carousel {
-    position: relative;
-    display: flex;
-    overflow: hidden;
-  }
-  .review-item {
-    min-width: 100%;
-    padding: 24px 20px;
-    box-sizing: border-box;
-    text-align: center;
-    transition: transform 0.5s ease;
-    user-select: none;
-  }
-  .review-photo {
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 14px auto;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 2px 8px rgb(111 78 55 / 0.3);
-  }
-  .review-text {
-    font-size: 16px;
-    font-style: italic;
-    color: var(--brown-dark);
-    margin-bottom: 14px;
-  }
-  .review-author {
-    font-weight: 700;
-    font-family: var(--font-header);
-    color: var(--accent-green);
-    font-size: 16px;
-  }
-  .reviews-controls {
-    text-align: center;
-    margin-top: 12px;
-  }
-  .reviews-button {
-    background: var(--cream-dark);
+  .user-menu button {
+    background: none;
     border: none;
-    font-size: 18px;
-    color: var(--brown-dark);
     cursor: pointer;
-    margin: 0 6px;
+    padding: 6px;
     border-radius: 50%;
+    transition: background-color 0.2s ease;
+  }
+  .user-menu button:hover,
+  .user-menu button:focus {
+    background-color: #E0E7FF;
+  }
+  .user-menu img {
     width: 36px;
     height: 36px;
-    line-height: 36px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
   }
-  .reviews-button:hover, .reviews-button:focus {
-    background-color: var(--accent-brick);
-    color: var(--cream-light);
+  .user-dropdown {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    padding: 8px 0;
+    width: 160px;
+    font-size: 14px;
+    display: none;
+    flex-direction: column;
+    z-index: 10;
+  }
+  .user-dropdown a, .user-dropdown button {
+    padding: 10px 16px;
+    text-align: left;
+    border: none;
+    background: none;
+    width: 100%;
+    cursor: pointer;
+    color: #374151;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .user-dropdown a:hover,
+  .user-dropdown button:hover,
+  .user-dropdown a:focus,
+  .user-dropdown button:focus {
+    background-color: #EFF6FF;
   }
 
-  /* Contacts */
-  .contacts {
-    font-family: var(--font-body);
-    max-width: 960px;
+  /* Filters Panel */
+  .filters-panel {
+    background: white;
+    padding: 16px 24px;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    color: var(--color-text-secondary);
   }
-  .contacts h2 {
-    font-family: var(--font-header);
+  .search-wrapper {
+    flex: 1 1 280px;
+    max-width: 360px;
+    position: relative;
+  }
+  .search-wrapper input[type="search"] {
+    width: 100%;
+    font-family: var(--font-main);
+    font-size: 15px;
+    padding: 10px 40px 10px 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    background-color: #F9FAFB;
+    color: #111827;
+    transition: border-color 0.2s ease;
+  }
+  .search-wrapper input[type="search"]::placeholder {
+    color: var(--color-text-secondary);
+  }
+  .search-wrapper input[type="search"]:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    background: white;
+  }
+  .search-wrapper svg {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    fill: var(--color-text-secondary);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+  }
+
+  .filter-status,
+  .filter-sort {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .filter-status label,
+  .filter-sort label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+  .filter-status input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid #9CA3AF;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+  }
+  .filter-sort select {
+    font-family: var(--font-main);
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #D1D5DB;
+    background-color: #F9FAFB;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  .filter-sort select:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    background: white;
+  }
+
+  /* Main content: bot cards grid */
+  main {
+    padding: 24px 24px 36px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .bots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .bot-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.2s ease;
+    cursor: default;
+  }
+  .bot-card:hover,
+  .bot-card:focus-within {
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+  }
+  .bot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .bot-name {
+    font-weight: 700;
+    font-size: 20px;
+    color: #111827;
+    word-break: break-word;
+  }
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-weight: 600;
-    font-size: 32px;
-    margin-bottom: 24px;
-    color: var(--brown-dark);
+    font-size: 14px;
+    text-transform: capitalize;
+    color: var(--color-text-secondary);
+  }
+  .status-indicator .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .status-active .dot {
+    background-color: var(--color-status-active);
+  }
+  .status-inactive .dot {
+    background-color: #9CA3AF;
+  }
+  .status-draft .dot {
+    background-color: #FBBF24; /* amber-400 */
+  }
+
+  .bot-description {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+    min-height: 38px;
+    word-break: break-word;
+  }
+  .bot-dates {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+  }
+
+  .bot-actions {
+    display: flex;
+    gap: 16px;
+  }
+  .bot-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    color: var(--color-text-secondary);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bot-actions button:hover,
+  .bot-actions button:focus {
+    background-color: #EFF6FF;
+    color: var(--color-primary);
+    outline: none;
+  }
+  .bot-actions button.delete:hover,
+  .bot-actions button.delete:focus {
+    background-color: #FEE2E2;
+    color: var(--color-error);
+  }
+
+  /* Icons base style */
+  svg.icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Load More Button */
+  .load-more-wrapper {
+    margin-top: 32px;
     text-align: center;
   }
-  .contact-info {
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 30px;
-    font-size: 16px;
-    color: var(--brown-dark);
-  }
-  .contact-item {
-    min-width: 200px;
-  }
-  .contact-item strong {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 700;
-  }
-  .map {
-    max-width: 960px;
-    height: 320px;
-    border-radius: 14px;
-    box-shadow: 0 6px 18px rgb(111 78 55 / 0.15);
-    overflow: hidden;
-    user-select: none;
-  }
-  .contact-form {
-    margin-top: 30px;
-    max-width: 480px;
-    background-color: var(--cream-dark);
-    padding: 20px;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgb(111 78 55 / 0.25);
-  }
-  .contact-form label {
-    display: block;
+  button.load-more {
+    background-color: var(--color-primary);
+    border: none;
+    color: white;
     font-weight: 600;
     font-size: 15px;
-    margin-bottom: 6px;
-    color: var(--brown-dark);
-  }
-  .contact-form input, .contact-form textarea {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 16px;
+    padding: 12px 28px;
     border-radius: 8px;
-    border: 1.5px solid var(--brown-light);
-    font-family: var(--font-body);
-    font-size: 16px;
-    color: var(--brown-dark);
-    resize: vertical;
-  }
-  .contact-form input:focus, .contact-form textarea:focus {
-    outline: none;
-    border-color: var(--accent-green);
-    box-shadow: 0 0 6px var(--accent-green);
-  }
-  .contact-form button {
-    background-color: var(--accent-green);
-    color: var(--cream-light);
-    border: none;
-    padding: 12px 24px;
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 16px;
-    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
+    transition: background-color 0.2s ease;
   }
-  .contact-form button:hover, .contact-form button:focus {
-    background-color: var(--accent-brick);
+  button.load-more:hover,
+  button.load-more:focus {
+    background-color: #1D4ED8;
+    outline: none;
   }
 
   /* Footer */
   footer {
-    background-color: var(--brown-light);
-    color: var(--cream-light);
-    padding: 24px 20px;
+    background-color: var(--color-footer-bg);
+    padding: 20px 24px;
     font-size: 14px;
-  }
-  .footer-content {
-    max-width: 960px;
-    margin: 0 auto;
+    color: var(--color-text-secondary);
     display: flex;
+    justify-content: center;
+    gap: 24px;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 14px;
   }
-  .footer-copy {
-    font-family: var(--font-body);
+  footer a {
+    color: var(--color-text-secondary);
+    font-weight: 500;
   }
-  .footer-menu {
-    display: flex;
-    gap: 22px;
-  }
-  .footer-menu a {
-    color: var(--cream-light);
-    font-family: var(--font-header);
-    font-weight: 600;
-    font-size: 14px;
-  }
-  .footer-menu a:hover, .footer-menu a:focus {
-    color: var(--accent-brick);
-  }
-  .footer-socials {
-    display: flex;
-    gap: 18px;
-  }
-  .social-icon {
-    width: 22px;
-    height: 22px;
-    fill: var(--cream-light);
-    cursor: pointer;
-    transition: fill 0.3s ease;
-  }
-  .social-icon:hover, .social-icon:focus {
-    fill: var(--accent-brick);
+  footer a:hover,
+  footer a:focus {
+    text-decoration: underline;
   }
 
   /* Responsive */
-  @media (max-width: 900px) {
-    .about {
-      flex-direction: column;
-      text-align: center;
+  @media (max-width: 768px) {
+    header {
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
     }
-    .about img {
-      max-width: 100%;
-      height: auto;
+    .header-left {
+      order: 1;
+      flex-basis: 100%;
+      justify-content: center;
     }
-    .contact-info {
-      flex-direction: column;
-      text-align: center;
-    }
-  }
-
-  @media (max-width: 700px) {
-    nav ul {
-      display: none;
-    }
-    .header-actions {
-      gap: 10px;
-    }
-    .hamburger {
-      display: block;
-      width: 26px;
-      height: 22px;
-      position: relative;
-      cursor: pointer;
-      z-index: 1100;
-    }
-    .hamburger span {
-      display: block;
-      height: 3px;
-      background: var(--brown-dark);
-      margin: 5px 0;
-      border-radius: 2px;
-      transition: 0.3s ease;
-    }
-    nav[data-open="true"] {
-      position: fixed;
-      top: 60px;
-      right: 0;
-      width: 220px;
-      background-color: var(--cream-light);
-      box-shadow: -4px 0 8px rgb(111 78 55 / 0.3);
-      height: calc(100vh - 60px);
-      display: flex !important;
-      flex-direction: column;
-      padding: 20px 10px;
+    .header-right {
+      order: 2;
+      flex-basis: 100%;
+      justify-content: center;
       gap: 20px;
-      z-index: 1050;
-      border-radius: 0 0 0 20px;
-      transform: translateX(0);
-      transition: transform 0.3s ease;
     }
-    nav[data-open="false"] {
-      transform: translateX(100%);
-    }
-    nav ul {
+    .filters-panel {
       flex-direction: column;
-      gap: 18px;
-      display: flex !important;
+      align-items: stretch;
     }
-    nav li a {
-      font-size: 18px;
+    .filter-status,
+    .filter-sort {
+      justify-content: flex-start;
     }
-    .btn-order {
-      padding: 10px 14px;
-      font-size: 14px;
+    .bots-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
 </head>
 <body>
-
 <header>
-  <div class="logo" aria-label="Уютный Кофе - Логотип">Уютный Кофе</div>
-  <nav id="main-nav" aria-label="Основное меню" data-open="false">
-    <ul>
-      <li><a href="#hero">Главная</a></li>
-      <li><a href="#menu">Меню</a></li>
-      <li><a href="#about">О нас</a></li>
-      <li><a href="#contacts">Контакты</a></li>
-    </ul>
-    <button class="btn-order" tabindex="0" aria-label="Заказать онлайн">Заказать онлайн</button>
-  </nav>
-  <svg class="icon-cart" tabindex="0" aria-label="Корзина" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="9" cy="21" r="1.5"/>
-    <circle cx="20" cy="21" r="1.5"/>
-    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-  </svg>
-  <div class="hamburger" aria-label="Открыть меню" role="button" tabindex="0" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
+  <div class="header-left" role="banner">
+    <a href="#" class="logo" aria-label="Логотип сайта">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=80" alt="Логотип" loading="lazy">
+    </a>
+    <h1 class="page-title">Мои боты</h1>
+  </div>
+  <div class="header-right">
+    <button type="button" class="add-bot" aria-label="Добавить бота">Добавить бота</button>
+    <div class="user-menu">
+      <button aria-haspopup="true" aria-expanded="false" aria-controls="user-menu-list" id="user-menu-button" aria-label="Меню пользователя">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=80" alt="Фото пользователя" loading="lazy" width="36" height="36">
+      </button>
+      <div id="user-menu-list" class="user-dropdown" role="menu" aria-labelledby="user-menu-button" tabindex="-1">
+        <a href="#settings" role="menuitem" tabindex="-1">Настройки</a>
+        <button type="button" role="menuitem" tabindex="-1">Выйти</button>
+      </div>
+    </div>
   </div>
 </header>
 
+<section class="filters-panel" aria-label="Панель фильтров и поиска">
+  <div class="search-wrapper">
+    <input type="search" placeholder="Поиск по имени бота" aria-label="Поиск по имени бота" />
+    <svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="7" stroke-width="2"></circle><line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2" stroke-linecap="round"></line>
+    </svg>
+  </div>
+  <fieldset class="filter-status" aria-label="Фильтр по статусу">
+    <legend style="position:absolute;left:-9999px;">Фильтр по статусу</legend>
+    <label><input type="checkbox" name="status" value="active" checked /> Активные</label>
+    <label><input type="checkbox" name="status" value="inactive" checked /> Неактивные</label>
+    <label><input type="checkbox" name="status" value="draft" checked /> Черновики</label>
+  </fieldset>
+  <div class="filter-sort">
+    <label for="sort-select">Сортировка:</label>
+    <select id="sort-select" name="sort" aria-label="Сортировка списка ботов">
+      <option value="date-desc" selected>По дате создания (новые)</option>
+      <option value="date-asc">По дате создания (старые)</option>
+      <option value="name-asc">По имени (А–Я)</option>
+      <option value="name-desc">По имени (Я–А)</option>
+      <option value="status">По активности</option>
+    </select>
+  </div>
+</section>
+
 <main>
-
-<section class="hero" id="hero" aria-label="Главный баннер">
-  <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200" alt="Крупный план чашки кофе в уютной кофейне" loading="lazy" />
-  <div class="hero-content">
-    <h1>Ваш уютный кофе с утра</h1>
-    <button class="btn-menu" onclick="location.href='#menu'" aria-label="Посмотреть меню">Посмотреть меню</button>
-  </div>
-</section>
-
-<section class="about" id="about" aria-labelledby="about-title">
-  <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800" alt="Интерьер кофейни с деревянными элементами и текстурой" loading="lazy" />
-  <div class="about-text">
-    <h2 id="about-title">О нашей кофейне</h2>
-    <p>Наше кафе – это место, где современный минимализм встречается с уютной винтажностью. Мы готовим кофе с любовью, отдавая дань качеству и атмосфере, пропитанной ароматами свежей выпечки и дерева.</p>
-    <p>История нашего кофейного пространства началась с желания подарить каждому тепло и комфорт с каждой чашкой.</p>
-  </div>
-</section>
-
-<section class="menu" id="menu" aria-labelledby="menu-title">
-  <h2 id="menu-title">Меню</h2>
-  <div class="filter-buttons" role="tablist" aria-label="Фильтр по меню">
-    <button class="filter-button active" data-filter="all" role="tab" aria-selected="true" tabindex="0">Все</button>
-    <button class="filter-button" data-filter="coffee" role="tab" aria-selected="false" tabindex="-1">Кофе</button>
-    <button class="filter-button" data-filter="bakery" role="tab" aria-selected="false" tabindex="-1">Выпечка</button>
-    <button class="filter-button" data-filter="drinks" role="tab" aria-selected="false" tabindex="-1">Напитки</button>
-    <button class="filter-button" data-filter="decaf" role="tab" aria-selected="false" tabindex="-1">Без кофеина</button>
-  </div>
-  <div class="menu-items">
-
-    <article class="menu-item" data-category="coffee" tabindex="0" aria-label="Эспрессо, кофейный напиток, цена 150 рублей">
-      <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800" alt="Чашка эспрессо" loading="lazy" />
-      <div class="menu-item-content">
-        <h3>Эспрессо</h3>
-        <p>Классический крепкий кофейный напиток с насыщенным вкусом.</p>
-        <div class="menu-item-price">150 ₽</div>
+  <section class="bots-grid" aria-label="Список ботов">
+    <article class="bot-card" tabindex="0">
+      <header class="bot-header">
+        <h2 class="bot-name">Помощник по финансам</h2>
+        <div class="status-indicator status-active" aria-label="Статус: Активен">
+          <span class="dot" aria-hidden="true"></span> Активен
+        </div>
+      </header>
+      <p class="bot-description">Автоматизирует бюджетирование и прогнозирует расходы.</p>
+      <p class="bot-dates">Создан: 12.05.2023 | Обновлён: 01.06.2023</p>
+      <div class="bot-actions" role="group" aria-label="Действия с ботом Помощник по финансам">
+        <button type="button" title="Редактировать">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-1.5l-8 8V17h3.232l8-8a2.828 2.828 0 00-4-4z"/></svg>
+        </button>
+        <button type="button" class="delete" title="Удалить" aria-describedby="delete-confirm-desc">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-7 4h10"/></svg>
+        </button>
+        <button type="button" title="Запустить">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.172-3.597A1 1 0 007 8.402v7.196a1 1 0 001.58.814l6.172-3.597a1 1 0 000-1.742z"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="menu-item" data-category="coffee decaf" tabindex="0" aria-label="Капучино без кофеина, цена 190 рублей">
-      <img src="https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?w=800" alt="Капучино с пенкой" loading="lazy" />
-      <div class="menu-item-content">
-        <h3>Капучино без кофеина</h3>
-        <p>Нежный капучино на основе декофеинизированного эспрессо.</p>
-        <div class="menu-item-price">190 ₽</div>
+    <article class="bot-card" tabindex="0">
+      <header class="bot-header">
+        <h2 class="bot-name">Чат-бот поддержки</h2>
+        <div class="status-indicator status-inactive" aria-label="Статус: Не активен">
+          <span class="dot" aria-hidden="true"></span> Неактивен
+        </div>
+      </header>
+      <p class="bot-description">Отвечает на часто задаваемые вопросы клиентов автоматически.</p>
+      <p class="bot-dates">Создан: 30.03.2023 | Обновлён: 15.04.2023</p>
+      <div class="bot-actions" role="group" aria-label="Действия с ботом Чат-бот поддержки">
+        <button type="button" title="Редактировать">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-1.5l-8 8V17h3.232l8-8a2.828 2.828 0 00-4-4z"/></svg>
+        </button>
+        <button type="button" class="delete" title="Удалить" aria-describedby="delete-confirm-desc">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-7 4h10"/></svg>
+        </button>
+        <button type="button" title="Запустить">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.172-3.597A1 1 0 007 8.402v7.196a1 1 0 001.58.814l6.172-3.597a1 1 0 000-1.742z"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="menu-item" data-category="bakery" tabindex="0" aria-label="Круассан с миндалём, цена 120 рублей">
-      <img src="https://images.unsplash.com/photo-1505253210345-845de44a7e6f?w=800" alt="Круассан с миндалём" loading="lazy" />
-      <div class="menu-item-content">
-        <h3>Круассан с миндалём</h3>
-        <p>Свежая сладкая выпечка с приятной миндальной начинкой.</p>
-        <div class="menu-item-price">120 ₽</div>
+    <article class="bot-card" tabindex="0">
+      <header class="bot-header">
+        <h2 class="bot-name">Бета-тест бот</h2>
+        <div class="status-indicator status-draft" aria-label="Статус: Черновик">
+          <span class="dot" aria-hidden="true"></span> Черновик
+        </div>
+      </header>
+      <p class="bot-description">Функции в разработке, тестируется новый алгоритм обработки запросов.</p>
+      <p class="bot-dates">Создан: 05.05.2023 | Обновлён: 29.05.2023</p>
+      <div class="bot-actions" role="group" aria-label="Действия с ботом Бета-тест бот">
+        <button type="button" title="Редактировать">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-1.5l-8 8V17h3.232l8-8a2.828 2.828 0 00-4-4z"/></svg>
+        </button>
+        <button type="button" class="delete" title="Удалить" aria-describedby="delete-confirm-desc">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-7 4h10"/></svg>
+        </button>
+        <button type="button" title="Запустить">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-6.172-3.597A1 1 0 007 8.402v7.196a1 1 0 001.58.814l6.172-3.597a1 1 0 000-1.742z"/></svg>
+        </button>
       </div>
     </article>
-
-    <article class="menu-item" data-category="bakery" tabindex="0" aria-label="Пирожное с ягодами, цена 140 рублей">
-      <img src="https://images.unsplash.com/photo-1523983308745-3e3f2b05f562?w=800" alt="Пирожное с ягодами" loading="lazy" />
-      <div class="menu-item-content">
-        <h3>Пирожное с ягодами</h3>
-        <p>Лёгкое пирожное с сезонными свежими ягодами.</p>
-        <div class="menu-item-price">140 ₽</div>
-      </div>
-    </article>
-
-    <article class="menu-item" data-category="drinks" tabindex="0" aria-label="Зелёный чай, цена 110 рублей">
-      <img src="https://images.unsplash.com/photo-1484981138541-3d074aa97716?w=800" alt="Чашка с зелёным чаем" loading="lazy" />
-      <div class="menu-item-content">
-        <h3>Зелёный чай</h3>
-        <p>Свежий заваренный зелёный чай для спокойствия и уюта.</p>
-        <div class="menu-item-price">110 ₽</div>
-      </div>
-    </article>
-
-    <article class="menu-item" data-category="drinks" tabindex="0" aria-label="Мятный лимонад, цена 130 рублей">
-      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800" alt="Стакан мятного лимонада" loading="lazy" />
-      <div class="menu-item-content">
-        <h3>Мятный лимонад</h3>
-        <p>Освежающий лимонад с натуральной мятой и лимоном.</p>
-        <div class="menu-item-price">130 ₽</div>
-      </div>
-    </article>
-
+  </section>
+  <div class="load-more-wrapper">
+    <button type="button" class="load-more" aria-label="Загрузить ещё ботов">Загрузить ещё</button>
   </div>
-</section>
-
-<section class="special-offers" aria-label="Специальные предложения">
-  <h2>Специальные предложения</h2>
-  <div class="offers-list">
-
-    <article class="offer-card" tabindex="0" aria-label="Сезонное предложение: тыквенный латте">
-      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800" alt="Тыквенный латте с корицей" loading="lazy" />
-      <h3>Тыквенный латте</h3>
-      <p>Тёплый сезонный напиток с пряностями и тыквенным пюре.</p>
-    </article>
-
-    <article class="offer-card" tabindex="0" aria-label="Акция: вторая выпечка бесплатно при заказе кофе">
-      <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800" alt="Свежая выпечка" loading="lazy" />
-      <h3>Акция: 2-я выпечка бесплатно</h3>
-      <p>При заказе любого кофе — получи вторую выпечку в подарок.</p>
-    </article>
-
-  </div>
-</section>
-
-<section class="reviews" aria-labelledby="reviews-title" tabindex="0">
-  <h2 id="reviews-title">Отзывы клиентов</h2>
-  <div class="reviews-carousel" id="reviews-carousel" aria-live="polite">
-    <article class="review-item" aria-hidden="false">
-      <img class="review-photo" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=80" alt="Фото клиента Анастасии" loading="lazy" />
-      <p class="review-text">"Лучшее место для утреннего кофе! Атмосфера и сервис вызывают улыбку каждый день."</p>
-      <p class="review-author">— Анастасия П.</p>
-    </article>
-    <article class="review-item" aria-hidden="true" style="transform: translateX(100%)">
-      <img class="review-photo" src="https://images.unsplash.com/photo-1517363898877-7371a117b7f6?w=80" alt="Фото клиента Ивана" loading="lazy" />
-      <p class="review-text">"Отличный кофе и уютный интерьер. Всегда приятно возвращаться сюда."</p>
-      <p class="review-author">— Иван С.</p>
-    </article>
-    <article class="review-item" aria-hidden="true" style="transform: translateX(100%)">
-      <img class="review-photo" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=80" alt="Фото клиента Ольги" loading="lazy" />
-      <p class="review-text">"Всегда свежая выпечка и внимательный персонал. Настоящее уютное место."</p>
-      <p class="review-author">— Ольга К.</p>
-    </article>
-  </div>
-  <div class="reviews-controls">
-    <button class="reviews-button" aria-label="Предыдущий отзыв" id="prev-review">&#8592;</button>
-    <button class="reviews-button" aria-label="Следующий отзыв" id="next-review">&#8594;</button>
-  </div>
-</section>
-
-<section class="contacts" id="contacts" aria-labelledby="contacts-title">
-  <h2 id="contacts-title">Контактная информация</h2>
-  <div class="contact-info">
-    <div class="contact-item" tabindex="0">
-      <strong>Адрес</strong>
-      Москва, ул. Кофейная, 25
-    </div>
-    <div class="contact-item" tabindex="0">
-      <strong>Телефон</strong>
-      <a href="tel:+74951234567" style="color: var(--brown-dark); text-decoration: underline;">+7 (495) 123-45-67</a>
-    </div>
-    <div class="contact-item" tabindex="0">
-      <strong>Часы работы</strong>
-      Пн-Вс: 08:00 – 22:00
-    </div>
-  </div>
-
-  <iframe class="map" 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.045634337366!2d37.62156381608494!3d55.75582698055354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x414ab585f51b4c99%3A0x42a63c9e6cab373b!2z0JrRgNCw0L3QvtCy0LAsIDE1LCDQntC10LrQsCDQodCw0YHQutC-0YHQutCy0LAsIDEwMDAwMA!5e0!3m2!1sru!2sru!4v1686221580551!5m2!1sru!2sru" 
-    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Карта расположения кофейни"></iframe>
-
-  <form class="contact-form" aria-label="Форма обратной связи" novalidate>
-    <label for="name">Имя</label>
-    <input type="text" id="name" name="name" required autocomplete="name" placeholder="Ваше имя" />
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required autocomplete="email" placeholder="example@mail.com" />
-    <label for="message">Сообщение</label>
-    <textarea id="message" name="message" rows="4" placeholder="Ваш вопрос или отзыв" required></textarea>
-    <button type="submit" aria-label="Отправить сообщение">Отправить</button>
-  </form>
-</section>
-
 </main>
 
 <footer>
-  <div class="footer-content">
-    <div class="footer-copy" aria-label="Копирайт">
-      &copy; 2024 Уютный Кофе. Все права защищены.
-    </div>
-    <nav class="footer-menu" aria-label="Дополнительное меню">
-      <a href="#privacy-policy">Политика конфиденциальности</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <div class="footer-socials" aria-label="Социальные сети">
-      <a href="#" aria-label="Instagram" tabindex="0">
-        <svg class="social-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d="M7 2H17C20.31 2 22 3.69 22 7V17C22 20.31 20.31 22 17 22H7C3.69 22 2 20.31 2 17V7C2 3.69 3.69 2 7 2Z"/>
-          <path stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d="M12 17A5 5 0 1 0 12 7a5 5 0 0 0 0 10z"/>
-          <path stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d="M17.5 6.5H17.51"/>
-        </svg>
-      </a>
-      <a href="#" aria-label="Facebook" tabindex="0">
-        <svg class="social-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d="M18 2H15C12.243 2 10 4.243 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.447 14.448 6 15 6H18V2Z"/>
-        </svg>
-      </a>
-      <a href="#" aria-label="Twitter" tabindex="0">
-        <svg class="social-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3V9a12.94 12.94 0 0 1-9.4-4.92S1 11.12 8 14a13.34 13.34 0 0 1-7 2c9 5 20 0 20-11.5a4.75 4.75 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-        </svg>
-      </a>
-    </div>
-  </div>
+  <a href="#contacts" tabindex="0">Контактная информация</a>
+  <a href="#privacy" tabindex="0">Политика конфиденциальности</a>
+  <a href="#help" tabindex="0">Помощь</a>
 </footer>
 
 <script>
-  // Hamburger toggle for mobile
-  const hamburger = document.querySelector('.hamburger');
-  const nav = document.getElementById('main-nav');
-  hamburger.addEventListener('click', () => {
-    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-    hamburger.setAttribute('aria-expanded', (!expanded).toString());
-    nav.dataset.open = (!expanded).toString();
+  // User menu toggling
+  const userBtn = document.getElementById('user-menu-button');
+  const userMenu = document.getElementById('user-menu-list');
+
+  userBtn.addEventListener('click', () => {
+    const expanded = userBtn.getAttribute('aria-expanded') === 'true';
+    userBtn.setAttribute('aria-expanded', String(!expanded));
     if (!expanded) {
-      // Trap focus inside menu
-      nav.querySelector('ul li a, .btn-order').focus();
-    }
-  });
-  hamburger.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      hamburger.click();
-    }
-  });
-
-  // Menu filtering
-  const filterButtons = document.querySelectorAll('.filter-button');
-  const menuItems = document.querySelectorAll('.menu-item');
-
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Update ARIA and active states
-      filterButtons.forEach(btn => {
-        btn.classList.remove('active');
-        btn.setAttribute('aria-selected', 'false');
-        btn.tabIndex = -1;
-      });
-      button.classList.add('active');
-      button.setAttribute('aria-selected', 'true');
-      button.tabIndex = 0;
-
-      const filter = button.dataset.filter;
-      menuItems.forEach(item => {
-        if (filter === 'all') {
-          item.style.display = 'block';
-        } else {
-          // support categories with multiple classes (e.g. decaf)
-          const categories = item.dataset.category.split(' ');
-          item.style.display = categories.includes(filter) ? 'block' : 'none';
-        }
-      });
-    });
-  });
-
-  // Reviews carousel
-  const reviews = document.querySelectorAll('.review-item');
-  const prevBtn = document.getElementById('prev-review');
-  const nextBtn = document.getElementById('next-review');
-  let currentReview = 0;
-
-  function showReview(index) {
-    reviews.forEach((review, i) => {
-      review.style.transform = `translateX(${100 * (i - index)}%)`;
-      review.setAttribute('aria-hidden', i === index ? 'false' : 'true');
-      if(i === index) review.tabIndex = 0;
-      else review.tabIndex = -1;
-    });
-    currentReview = index;
-  }
-
-  prevBtn.addEventListener('click', () => {
-    let nextIndex = currentReview - 1;
-    if (nextIndex < 0) nextIndex = reviews.length -1;
-    showReview(nextIndex);
-  });
-  nextBtn.addEventListener('click', () => {
-    let nextIndex = currentReview + 1;
-    if (nextIndex >= reviews.length) nextIndex = 0;
-    showReview(nextIndex);
-  });
-
-  showReview(0);
-
-  // Simple form validation and submission handler
-  const form = document.querySelector('.contact-form');
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const message = form.message.value.trim();
-    if (name && email && message) {
-      // Simulate sending
-      alert(`Спасибо за ваше сообщение, ${name}! Мы свяжемся с вами по почте ${email}.`);
-      form.reset();
+      userMenu.style.display = 'flex';
+      userMenu.focus();
     } else {
-      alert('Пожалуйста, заполните все поля.');
+      userMenu.style.display = 'none';
     }
   });
 
+  document.addEventListener('click', (e) => {
+    if (!userBtn.contains(e.target) && !userMenu.contains(e.target)) {
+      userBtn.setAttribute('aria-expanded', 'false');
+      userMenu.style.display = 'none';
+    }
+  });
+
+  // Delete confirmation
+  const deleteButtons = document.querySelectorAll('.bot-actions button.delete');
+  deleteButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const botName = btn.closest('.bot-card').querySelector('.bot-name').textContent;
+      const confirmed = confirm(`Вы действительно хотите удалить бота "${botName}"?`);
+      if (confirmed) {
+        btn.closest('.bot-card').remove();
+      }
+    });
+  });
 </script>
 </body>
 </html>
