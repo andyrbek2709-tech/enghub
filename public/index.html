@@ -3,174 +3,283 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bella Pizza - Пиццерия</title>
+<title>Современная кофейня "CoffeeVibe"</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  * {
+    box-sizing: border-box;
+  }
   body {
     margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #fff8f0;
-    color: #4a2c0a;
+    font-family: 'Montserrat', sans-serif;
+    background: #f9f6f2;
+    color: #4b3b2b;
   }
   header {
-    background-color: #d94e18;
-    padding: 1rem 2rem;
+    background-color: #6f4e37;
+    padding: 20px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: #fff;
+    box-shadow: 0 2px 8px rgba(111,78,55,0.5);
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
   header h1 {
     margin: 0;
     font-weight: 700;
+    font-size: 1.8rem;
     letter-spacing: 2px;
   }
   nav a {
     color: #fff;
     text-decoration: none;
-    margin-left: 1.5rem;
+    margin-left: 25px;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: color 0.3s ease;
   }
   nav a:hover {
-    color: #fbd2a0;
+    color: #d5b28f;
   }
-  main {
-    max-width: 1100px;
-    margin: 2rem auto 4rem;
-    padding: 0 1rem;
-  }
-  .intro {
+  .hero {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 3rem;
+    padding: 60px 40px;
+    background: #fff7f0;
+    gap: 40px;
   }
-  .intro img {
-    max-width: 100%;
+  .hero-text {
+    flex: 1 1 400px;
+  }
+  .hero-text h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  .hero-text p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #6d574e;
+  }
+  .hero-image {
+    flex: 1 1 400px;
+    overflow: hidden;
     border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    flex: 1 1 350px;
+    box-shadow: 0 10px 20px rgba(111,78,55,0.25);
   }
-  .intro-text {
-    flex: 1 1 320px;
+  .hero-image img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    height: 350px;
+    transition: transform 0.5s ease;
   }
-  .intro-text h2 {
-    font-size: 2.5rem;
-    margin-bottom: 0.2rem;
+  .hero-image img:hover {
+    transform: scale(1.05);
   }
-  .intro-text p {
-    font-size: 1.15rem;
-    color: #6c4a1a;
+  main {
+    padding: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
   }
-  section.menu {
-    background: #fff4e8;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(217,78,24,0.3);
-  }
-  section.menu h3 {
+  h3.section-title {
     font-size: 2rem;
-    text-align: center;
-    margin-bottom: 2rem;
+    border-bottom: 3px solid #6f4e37;
+    padding-bottom: 8px;
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(270px,1fr));
+    gap: 25px;
   }
   .menu-item {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgb(111 78 55 / 0.15);
+    overflow: hidden;
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.8rem;
-    border-bottom: 1px solid #ddb4a1;
-    padding-bottom: 1rem;
+    flex-direction: column;
+    transition: transform 0.3s ease;
   }
-  .menu-item:last-child {
-    border-bottom: none;
+  .menu-item:hover {
+    transform: translateY(-8px);
   }
-  .menu-item img {
-    width: 100px;
-    height: 70px;
+  .menu-photo {
+    height: 180px;
+    overflow: hidden;
+  }
+  .menu-photo img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    display: block;
+    transition: transform 0.4s ease;
   }
-  .menu-description {
-    flex: 1;
+  .menu-item:hover .menu-photo img {
+    transform: scale(1.07);
   }
-  .menu-description h4 {
-    margin: 0 0 0.3rem;
+  .menu-content {
+    padding: 15px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .menu-name {
     font-weight: 700;
-    font-size: 1.3rem;
-  }
-  .menu-description span.price {
-    font-weight: 700;
-    color: #d94e18;
     font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: #4b3b2b;
+  }
+  .menu-desc {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #7c6a5a;
+    flex-grow: 1;
+  }
+  .menu-price {
+    margin-top: 15px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #8b5e3c;
   }
   footer {
-    background-color: #d94e18;
-    color: #fff;
+    background-color: #6f4e37;
+    color: #f3e9df;
     text-align: center;
-    padding: 1.5rem 1rem;
+    padding: 25px 15px;
+    margin-top: 60px;
     font-size: 0.9rem;
-    letter-spacing: 1px;
   }
   @media (max-width: 600px) {
-    .menu-item {
+    header {
       flex-direction: column;
       align-items: flex-start;
+      gap: 10px;
     }
-    .menu-item img {
+    nav {
       width: 100%;
-      height: auto;
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+    nav a {
+      margin-left: 0;
+      margin-right: 20px;
+      margin-bottom: 5px;
+    }
+    .hero {
+      justify-content: center;
+    }
+    .hero-image {
+      height: 250px;
     }
   }
 </style>
 </head>
 <body>
 <header>
-  <h1>Bella Pizza</h1>
+  <h1>CoffeeVibe</h1>
   <nav>
     <a href="#about">О нас</a>
     <a href="#menu">Меню</a>
     <a href="#contact">Контакты</a>
   </nav>
 </header>
+<section class="hero" id="about">
+  <div class="hero-text">
+    <h2>Современная кофейня с уютной атмосферой</h2>
+    <p>Добро пожаловать в CoffeeVibe — место, где ароматный кофе встречается с душевным сервисом и современным дизайном. Насладитесь свежей обжаркой зерен, авторскими напитками и изысканными десертами в нашем стильном кафе.</p>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Кофе и десерт" />
+  </div>
+</section>
 <main>
-  <section class="intro" id="about">
-    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Свежая пицца Bella Pizza" />
-    <div class="intro-text">
-      <h2>Добро пожаловать в Bella Pizza!</h2>
-      <p>Настоящая итальянская пицца в Алматы. Мы создаём пиццу с любовью, используя только свежие и качественные ингредиенты. Попробуйте наши классические вкусы – от Маргариты до Пепперони и Четырёх сыров.</p>
-    </div>
-  </section>
-  <section class="menu" id="menu">
-    <h3>Наше меню</h3>
+  <h3 class="section-title" id="menu">Меню</h3>
+  <div class="menu">
     <article class="menu-item">
-      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=60" alt="Пицца Маргарита" />
-      <div class="menu-description">
-        <h4>Маргарита</h4>
-        <span class="price">3500 ₸</span>
+      <div class="menu-photo">
+        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=500&q=80" alt="Эспрессо" />
+      </div>
+      <div class="menu-content">
+        <div>
+          <h4 class="menu-name">Эспрессо</h4>
+          <p class="menu-desc">Классический крепкий эспрессо из свежемолотых зерен.</p>
+        </div>
+        <div class="menu-price">600 ₸</div>
       </div>
     </article>
     <article class="menu-item">
-      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=40" alt="Пицца Пепперони" />
-      <div class="menu-description">
-        <h4>Пепперони</h4>
-        <span class="price">4500 ₸</span>
+      <div class="menu-photo">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=500&q=80" alt="Капучино" />
+      </div>
+      <div class="menu-content">
+        <div>
+          <h4 class="menu-name">Капучино</h4>
+          <p class="menu-desc">Итальянский кофе с воздушной молочной пеной и легкой корицей.</p>
+        </div>
+        <div class="menu-price">850 ₸</div>
       </div>
     </article>
     <article class="menu-item">
-      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=50" alt="Пицца Четыре сыра" />
-      <div class="menu-description">
-        <h4>Четыре сыра</h4>
-        <span class="price">4800 ₸</span>
+      <div class="menu-photo">
+        <img src="https://images.unsplash.com/photo-1510626176961-4b1a190badc5?auto=format&fit=crop&w=500&q=80" alt="Латте" />
+      </div>
+      <div class="menu-content">
+        <div>
+          <h4 class="menu-name">Латте</h4>
+          <p class="menu-desc">Мягкий кофе с большим количеством подогретого молока и сахаром по желанию.</p>
+        </div>
+        <div class="menu-price">900 ₸</div>
       </div>
     </article>
-  </section>
+    <article class="menu-item">
+      <div class="menu-photo">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=500&q=80" alt="Американо" />
+      </div>
+      <div class="menu-content">
+        <div>
+          <h4 class="menu-name">Американо</h4>
+          <p class="menu-desc">Разбавленный горячей водой эспрессо — крепкий и насыщенный напиток.</p>
+        </div>
+        <div class="menu-price">700 ₸</div>
+      </div>
+    </article>
+    <article class="menu-item">
+      <div class="menu-photo">
+        <img src="https://images.unsplash.com/photo-1529098579597-ef98e6e20804?auto=format&fit=crop&w=500&q=80" alt="Мокко" />
+      </div>
+      <div class="menu-content">
+        <div>
+          <h4 class="menu-name">Мокко</h4>
+          <p class="menu-desc">Кофе с шоколадом, взбитыми сливками и нежным вкусом какао.</p>
+        </div>
+        <div class="menu-price">1000 ₸</div>
+      </div>
+    </article>
+    <article class="menu-item">
+      <div class="menu-photo">
+        <img src="https://images.unsplash.com/photo-1562440499-1e09a617d6a1?auto=format&fit=crop&w=500&q=80" alt="Кофейный десерт" />
+      </div>
+      <div class="menu-content">
+        <div>
+          <h4 class="menu-name">Тирамису</h4>
+          <p class="menu-desc">Классический кофейный десерт с маскарпоне и ароматом кофе.</p>
+        </div>
+        <div class="menu-price">1200 ₸</div>
+      </div>
+    </article>
+  </div>
 </main>
 <footer id="contact">
-  <p>© 2024 Bella Pizza — Алматы, Казахстан | Телефон: +7 (727) 123-45-67 | Адрес: ул. Пушкина, 10</p>
+  <p>Кофейня CoffeeVibe &nbsp;&bull;&nbsp; г. Алматы, ул. Абая 123 &nbsp;&bull;&nbsp; Тел: +7 777 123 45 67 &nbsp;&bull;&nbsp; © 2024</p>
 </footer>
 </body>
 </html>
