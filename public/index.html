@@ -3,26 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Розовый тон</title>
+<title>Привет</title>
 <style>
-  :root {
-    --pink-light: #f8bbd0;
-    --pink-medium: #ec407a;
-    --pink-dark: #ad1457;
-    --pink-bg: #ffe4ec;
-    --pink-text: #880e4f;
-    --pink-accent: #f48fb1;
-  }
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--pink-bg);
-    color: var(--pink-text);
+    background: #f9fafb;
+    color: #333;
   }
   header {
-    background: var(--pink-medium);
-    color: white;
+    background: #4f46e5;
     padding: 1rem 2rem;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,104 +22,62 @@
   header h1 {
     margin: 0;
     font-weight: 700;
-    font-size: 1.5rem;
   }
   nav a {
-    color: white;
+    color: #c7d2fe;
     text-decoration: none;
     margin-left: 1.5rem;
     font-weight: 600;
     transition: color 0.3s ease;
   }
   nav a:hover {
-    color: var(--pink-light);
+    color: #a5b4fc;
   }
   main {
-    max-width: 1200px;
+    max-width: 960px;
     margin: 2rem auto;
     padding: 0 1rem;
+    text-align: center;
   }
-  .hero {
-    background: url('https://images.unsplash.com/photo-1523906630133-f6934a84b06b?w=800') center/cover no-repeat;
-    border-radius: 15px;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-shadow: 1px 1px 7px rgba(0,0,0,0.7);
+  main h2 {
     font-size: 2.5rem;
-    font-weight: 700;
+    margin-bottom: 1rem;
   }
-  section {
-    margin-top: 3rem;
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(236, 64, 122, 0.3);
+  main p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #555;
   }
-  section h2 {
-    color: var(--pink-dark);
-    margin-top: 0;
-    font-weight: 700;
+  main img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
   }
   footer {
-    background: var(--pink-dark);
-    color: white;
+    background: #1e293b;
+    color: #94a3b8;
     text-align: center;
     padding: 1rem 2rem;
-    margin-top: 4rem;
-  }
-  @media (max-width: 600px) {
-    header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    nav a {
-      margin-left: 0;
-      margin-top: 0.75rem;
-      display: inline-block;
-    }
-    .hero {
-      font-size: 1.8rem;
-      height: 250px;
-    }
+    font-size: 0.9rem;
   }
 </style>
 </head>
 <body>
 <header>
-  <h1>Розовый Тон</h1>
+  <h1>Привет</h1>
   <nav>
     <a href="#home">Главная</a>
     <a href="#about">О нас</a>
-    <a href="#services">Услуги</a>
     <a href="#contact">Контакты</a>
   </nav>
 </header>
 <main>
-  <div class="hero" id="home">
-    Добро пожаловать в розовый мир
-  </div>
-  <section id="about">
-    <h2>О нас</h2>
-    <p>Мы создаем современные и красивые сайты с нежной розовой палитрой, чтобы подарить вам и вашим посетителям уют и позитив.</p>
-  </section>
-  <section id="services">
-    <h2>Услуги</h2>
-    <ul>
-      <li>Веб-дизайн с акцентом на розовые оттенки</li>
-      <li>Разработка адаптивных сайтов</li>
-      <li>Оптимизация UX/UI с теплой атмосферой</li>
-    </ul>
-  </section>
-  <section id="contact">
-    <h2>Контакты</h2>
-    <p>Свяжитесь с нами по электронной почте: info@rozoviyton.ru</p>
-  </section>
+  <h2>Добро пожаловать!</h2>
+  <p>Это современный и красивый сайт с навигацией и футером.</p>
+  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800" alt="Красивый пейзаж с природой" />
 </main>
 <footer>
-  &copy; 2024 Розовый Тон. Все права защищены.
+  &copy; 2024 Привет. Все права защищены.
 </footer>
 </body>
 </html>
