@@ -1,0 +1,816 @@
+import { useState, useEffect, useRef } from 'react';
+import { DARK, LIGHT, statusMap, roleLabels } from './constants';
+import { get, post, patch, del } from './api/supabase';
+import { ThemeToggle, Modal, Field, AvatarComp, BadgeComp, PriorityDot, getInp } from './components/ui';
+import { LoginPage } from './pages/LoginPage';
+import { AdminPanel } from './pages/AdminPanel';
+import { useNotifications, ToastContainer } from './components/Notifications';
+import { CalculationView } from './calculations/CalculationView';
+import { ConferenceRoom } from './pages/ConferenceRoom';
+import { CopilotPanel } from './components/CopilotPanel';
+
+export default function App() {
+  const [dark, setDark] = useState(false); // Светлая тема по умолчанию
+  const C = dark ? DARK : LIGHT;
+
+  const [token, setToken] = useState<string | null>(localStorage.getItem('enghub_token'));
+  const [userEmail, setUserEmail] = useState<string>(localStorage.getItem('enghub_email') || "");
+  const [currentUserData, setCurrentUserData] = useState<any>(null);
+  const [screen, setScreen] = useState(localStorage.getItem('enghub_screen') || "dashboard");
+  const [projects, setProjects] = useState<any[]>([]);
+  const [allTasks, setAllTasks] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<any[]>([]);
+  const [msgs, setMsgs] = useState<any[]>([]);
+  const [appUsers, setAppUsers] = useState<any[]>([]);
+  const [depts, setDepts] = useState<any[]>([]);
+  const [activeProject, setActiveProject] = useState<any>(null);
+  const [showArchive, setShowArchive] = useState(false);
+  const [archivedProjects, setArchivedProjects] = useState<any[]>([]);
+  const [sideTab, setSideTab] = useState(localStorage.getItem('enghub_sidetab') || "tasks");
+  const [chatInput, setChatInput] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [maxTasksPerEng, setMaxTasksPerEng] = useState(5);
+
+  const [showNewProject, setShowNewProject] = useState(false);
+  const [newProject, setNewProject] = useState<any>({ name: "", code: "", deadline: "", status: "active", depts: [] });
+  const [selectedDeptId, setSelectedDeptId] = useState<number | null>(null);
+  const [showNewTask, setShowNewTask] = useState(false);
+  const [newTask, setNewTask] = useState({ name: "", dept_id: "", priority: "medium", deadline: "", assigned_to: "" });
+  const [showTaskDetail, setShowTaskDetail] = useState(false);
+  const [selectedTask, setSelectedTask] = useState<any>(null);
+  const [taskComment, setTaskComment] = useState("");
+
+  // Поиск и фильтры
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [filterPriority, setFilterPriority] = useState("all");
+  const [filterAssigned, setFilterAssigned] = useState("all");
+
+  const isAdmin = userEmail === "admin@enghub.com";
+  const role = currentUserData?.role;
+  const isGip = role === "gip";
+  const isLead = role === "lead";
+  const isEng = role === "engineer";
+
+  const getUserById = (id: any) => appUsers.find(u => String(u.id) === String(id));
+  const getDeptName = (id: any) => depts.find(d => d.id === id)?.name || "";
+
+  useEffect(() => { if (token && !isAdmin) { loadAppUsers(); loadDepts(); loadProjects(); } }, [token]);
+  useEffect(() => { if (activeProject && token) { loadAllTasks(activeProject.id); loadMessages(activeProject.id); } }, [activeProject]);
+  useEffect(() => { document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light'); }, [dark]);
+  useEffect(() => { localStorage.setItem('enghub_screen', screen); }, [screen]);
+  useEffect(() => { localStorage.setItem('enghub_sidetab', sideTab); }, [sideTab]);
+
+  // Calculation Module States
+  const [calcFilter, setCalcFilter] = useState(""); // active category accordion
+  const [activeCalc, setActiveCalc] = useState<string | null>(null);
+
+  // Copilot AI Module States
+  const [showCopilot, setShowCopilot] = useState(false);
+
+  // Перезагружаем задачи когда currentUserData загрузился
+  useEffect(() => { if (activeProject && token && currentUserData) { loadAllTasks(activeProject.id); } }, [currentUserData?.id]);
+
+  const loadAppUsers = async () => { const data = await get("app_users?order=id", token!); if (Array.isArray(data)) { setAppUsers(data); const me = data.find((u: any) => u.email === userEmail); if (me) setCurrentUserData(me); } };
+  const loadDepts = async () => { const data = await get("departments?order=name", token!); if (Array.isArray(data)) setDepts(data); };
+  const loadProjects = async () => { const data = await get("projects?archived=eq.false&order=id", token!); if (Array.isArray(data)) { setProjects(data); if (data.length > 0) setActiveProject(data[0]); } setLoading(false); };
+  const loadArchived = async () => { const data = await get("projects?archived=eq.true&order=id", token!); if (Array.isArray(data)) setArchivedProjects(data); };
+  const loadAllTasks = async (pid: number) => {
+    const data = await get(`tasks?project_id=eq.${pid}&order=id`, token!);
+    if (Array.isArray(data)) {
+      setAllTasks(data);
+      // Фильтрация по роли
+      const myRole = currentUserData?.role;
+      const myId = String(currentUserData?.id || "");
+      const myDeptId = currentUserData?.dept_id;
+      if (myRole === "gip") {
+        setTasks(data);
+      } else if (myRole === "lead") {
+        const myEngIds = appUsers.filter(u => u.dept_id === myDeptId && u.role === "engineer").map(u => String(u.id));
+        setTasks(data.filter((t: any) => String(t.assigned_to) === myId || myEngIds.includes(String(t.assigned_to))));
+      } else {
+        setTasks(data.filter((t: any) => String(t.assigned_to) === myId));
+      }
+    }
+  };
+  // Keep loadTasks as alias
+  const loadTasks = loadAllTasks;
+  const loadMessages = async (pid: number) => { const data = await get(`messages?project_id=eq.${pid}&order=created_at`, token!); if (Array.isArray(data)) setMsgs(data); };
+
+  const sendMsg = async () => { if (!chatInput.trim() || !activeProject) return; await post("messages", { text: chatInput, user_id: currentUserData?.id, project_id: activeProject.id, type: "text" }, token!); setChatInput(""); loadMessages(activeProject.id); };
+  const { notifications, addNotification, removeNotification } = useNotifications();
+  const prevTasksRef = useRef<string>("");
+
+  // Polling — проверяем изменения задач каждые 10сек
+  useEffect(() => {
+    if (!activeProject || !token) return;
+    const interval = setInterval(async () => {
+      const data = await get(`tasks?project_id=eq.${activeProject.id}&order=id`, token);
+      if (Array.isArray(data)) {
+        const newHash = JSON.stringify(data.map((t: any) => ({ id: t.id, status: t.status, assigned_to: t.assigned_to })));
+        if (prevTasksRef.current && prevTasksRef.current !== newHash) {
+          // Сравним что изменилось
+          const oldTasks = JSON.parse(prevTasksRef.current) as any[];
+          data.forEach((t: any) => {
+            const old = oldTasks.find((o: any) => o.id === t.id);
+            if (old && old.status !== t.status) {
+              const taskName = t.name || `#${t.id}`;
+              const statusLabel = statusMap[t.status]?.label || t.status;
+              if (t.status === "review_lead" && isLead) addNotification(`📋 Задача "${taskName}" отправлена на проверку`, 'warning');
+              if (t.status === "review_gip" && isGip) addNotification(`📋 Задача "${taskName}" ожидает вашей проверки`, 'warning');
+              if (t.status === "inprogress" && isLead) addNotification(`▶ Задача "${taskName}" взята в работу`, 'info');
+              if (t.status === "done" && isGip) addNotification(`✓ Задача "${taskName}" завершена!`, 'success');
+              if (t.status === "revision" && isEng && String(t.assigned_to) === String(currentUserData?.id)) addNotification(`⚡ Задача "${taskName}" возвращена на доработку`, 'warning');
+            }
+            if (old && old.assigned_to !== t.assigned_to && String(t.assigned_to) === String(currentUserData?.id)) {
+              addNotification(`📋 Вам назначена задача "${t.name || '#' + t.id}"`, 'info');
+            }
+          });
+          loadTasks(activeProject.id);
+        }
+        prevTasksRef.current = newHash;
+      }
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [activeProject, token, currentUserData?.id]);
+
+  const createProject = async () => { if (!newProject.name || !newProject.code) return; setSaving(true); await post("projects", { ...newProject, progress: 0, archived: false }, token!); setNewProject({ name: "", code: "", deadline: "", status: "active", depts: [] }); setShowNewProject(false); setSaving(false); loadProjects(); addNotification(`Проект "${newProject.name}" создан`, 'success'); };
+  
+  const toggleProjectDept = (deptId: number) => {
+    const current = newProject.depts || [];
+    const next = current.includes(deptId) ? current.filter((id: number) => id !== deptId) : [...current, deptId];
+    setNewProject({ ...newProject, depts: next });
+  };
+
+  const getDeptNameById = (id: number | string) => depts.find(d => String(d.id) === String(id))?.name || "";
+  const archiveProject = async (id: number) => { await patch(`projects?id=eq.${id}`, { archived: true }, token!); loadProjects(); };
+  const createTask = async () => {
+    if (!newTask.name || !activeProject) return;
+    setSaving(true);
+    const leadUser = getUserById(newTask.assigned_to);
+    await post("tasks", { name: newTask.name, dept: getDeptName(newTask.dept_id), priority: newTask.priority, deadline: newTask.deadline, assigned_to: newTask.assigned_to || null, status: "todo", project_id: activeProject.id }, token!);
+    addNotification(`Задача "${newTask.name}" создана${leadUser ? ` → ${leadUser.full_name}` : ''}`, 'success');
+    setNewTask({ name: "", dept_id: "", priority: "medium", deadline: "", assigned_to: "" }); setShowNewTask(false); setSaving(false); loadTasks(activeProject.id);
+  };
+  const updateTaskStatus = async (taskId: number, status: string, comment?: string) => {
+    setSaving(true);
+    await patch(`tasks?id=eq.${taskId}`, { status, ...(comment ? { comment } : {}) }, token!);
+    const statusLabel = statusMap[status]?.label || status;
+    addNotification(`Статус задачи изменён → "${statusLabel}"`, status === 'done' ? 'success' : 'info');
+    setSaving(false); setShowTaskDetail(false); setTaskComment(""); if (activeProject) loadTasks(activeProject.id);
+  };
+  const assignTask = async (taskId: number, assignedTo: string) => {
+    const eng = getUserById(assignedTo);
+    await patch(`tasks?id=eq.${taskId}`, { assigned_to: assignedTo, status: "todo" }, token!);
+    addNotification(`Задача назначена → ${eng?.full_name || 'инженер'}`, 'info');
+    setShowTaskDetail(false); if (activeProject) loadTasks(activeProject.id);
+  };
+  const handleLogin = async (accessToken: string, email: string) => { setToken(accessToken); setUserEmail(email); localStorage.setItem('enghub_token', accessToken); localStorage.setItem('enghub_email', email); if (email !== "admin@enghub.com") setLoading(true); else setLoading(false); };
+  const handleLogout = () => { setToken(null); setUserEmail(""); setCurrentUserData(null); setProjects([]); setTasks([]); setMsgs([]); localStorage.removeItem('enghub_token'); localStorage.removeItem('enghub_email'); };
+
+  const getAutoProgress = (pid: number): number => { const pt = allTasks.filter(t => t.project_id === pid); if (pt.length === 0) return 0; return Math.round((pt.filter(t => t.status === "done").length / pt.length) * 100); };
+  const activeProjectProgress = activeProject ? getAutoProgress(activeProject.id) : 0;
+
+  if (!token) return <LoginPage onLogin={handleLogin} dark={dark} setDark={setDark} />;
+  if (isAdmin) return <AdminPanel token={token} onLogout={handleLogout} dark={dark} setDark={setDark} />;
+
+  const myLeads = appUsers.filter(u => u.role === "lead");
+  const myEngineers = currentUserData ? appUsers.filter(u => u.dept_id === currentUserData.dept_id && u.role === "engineer") : [];
+  const getEngLoad = (engId: any) => { const n = allTasks.filter(t => String(t.assigned_to) === String(engId) && t.status !== "done").length; return Math.min(100, Math.round((n / maxTasksPerEng) * 100)); };
+
+  const getTaskActions = (task: any) => {
+    const actions: any[] = [];
+    const myId = String(currentUserData?.id);
+    const assigned = String(task.assigned_to);
+    if (isEng && assigned === myId) {
+      if (task.status === "todo") actions.push({ label: "▶ Взять в работу", status: "inprogress", color: C.blue });
+      if (task.status === "inprogress") actions.push({ label: "↑ Отправить на проверку", status: "review_lead", color: C.accent });
+      if (task.status === "revision") actions.push({ label: "▶ Снова в работу", status: "inprogress", color: C.blue });
+    }
+    if (isLead) {
+      const myEngIds = appUsers.filter(u => u.dept_id === currentUserData?.dept_id && u.role === "engineer").map(u => String(u.id));
+      if (myEngIds.includes(assigned) && task.status === "review_lead") { actions.push({ label: "✓ Утвердить → ГИПу", status: "review_gip", color: C.green }); actions.push({ label: "✗ На доработку", status: "revision", color: C.red }); }
+    }
+    if (isGip && task.status === "review_gip") { actions.push({ label: "✓ Завершить задачу", status: "done", color: C.green }); actions.push({ label: "✗ На доработку", status: "revision", color: C.red }); }
+    return actions;
+  };
+
+  const navItems = [
+    { id: "dashboard", icon: "⬡", label: "Обзор" },
+    { id: "projects_list", icon: "◈", label: "Проекты" },
+    { id: "tasks", icon: "≡", label: "Задачи" },
+    { id: "calculations", icon: "⎍", label: "Расчёты" }
+  ];
+
+  const screenTitles: Record<string, string> = { dashboard: "Рабочий стол", project: "Карточка проекта", projects_list: "Реестр проектов", tasks: "Мои задачи", calculations: "Инженерные расчёты" };
+
+  const calcTemplates = [
+    { id: "tx_material_balance", name: "Материальный баланс", cat: "ТХ", desc: "Сводка массы веществ на входе и выходе" },
+    { id: "tx_heat_balance", name: "Тепловой баланс", cat: "ТХ", desc: "Вычисление тепловых потоков аппарата" },
+    { id: "tt_pressure_drop", name: "Потери давления (Дарси–Вейсбах)", cat: "ТТ", desc: "Гидравлический расчет трубопровода (потери на трение)" },
+    { id: "ov_heat_power", name: "Расчёт мощности отопления", cat: "ОВ", desc: "Укрупненный расчет теплопотерь помещения" },
+    { id: "eo_cable_section", name: "Подбор сечения кабеля", cat: "ЭО", desc: "Выбор кабеля по току и потерям напряжения" },
+    { id: "km_beam_deflection", name: "Прогиб балки", cat: "КЖ / КМ", desc: "Расчет максимального прогиба при изгибе" },
+  ];
+
+  if (loading) return (
+    <div className="loading-screen">
+      <div className="loading-logo">⬡</div>
+      <div style={{ color: "#8892a4", fontSize: 14, fontWeight: 500 }}>Загрузка EngHub...</div>
+    </div>
+  );
+
+  return (
+    <div className="app-root">
+      {/* ===== MODALS ===== */}
+      {showNewProject && (
+        <Modal title="Новый проект" onClose={() => setShowNewProject(false)} C={C}>
+          <div className="form-stack">
+            <Field label="НАЗВАНИЕ *" C={C}><input value={newProject.name} onChange={e => setNewProject({ ...newProject, name: e.target.value })} placeholder="ТЭЦ-6 Строительство" style={getInp(C)} /></Field>
+            <Field label="КОД ПРОЕКТА *" C={C}><input value={newProject.code} onChange={e => setNewProject({ ...newProject, code: e.target.value })} placeholder="ТЭЦ-2025-01" style={getInp(C)} /></Field>
+            <Field label="ОТДЕЛЫ *" C={C}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: 12, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10 }}>
+                {depts.map(d => (
+                  <label key={d.id} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: C.text, cursor: 'pointer' }}>
+                    <input type="checkbox" checked={newProject.depts?.includes(d.id)} onChange={() => toggleProjectDept(d.id)} />
+                    {d.name}
+                  </label>
+                ))}
+              </div>
+            </Field>
+            <Field label="ДЕДЛАЙН" C={C}><input type="date" value={newProject.deadline} onChange={e => setNewProject({ ...newProject, deadline: e.target.value })} style={getInp(C)} /></Field>
+            <Field label="СТАТУС" C={C}><select value={newProject.status} onChange={e => setNewProject({ ...newProject, status: e.target.value })} style={getInp(C)}><option value="active">В работе</option><option value="review">На проверке</option></select></Field>
+            <button className="btn btn-primary" onClick={createProject} disabled={saving || !newProject.name || !newProject.code} style={{ width: "100%", opacity: (!newProject.name || !newProject.code) ? 0.5 : 1 }}>{saving ? "Создаётся..." : "Создать проект"}</button>
+          </div>
+        </Modal>
+      )}
+      {showNewTask && (
+        <Modal title="Новая задача" onClose={() => setShowNewTask(false)} C={C}>
+          <div className="form-stack">
+            <Field label="НАЗВАНИЕ *" C={C}><input value={newTask.name} onChange={e => setNewTask({ ...newTask, name: e.target.value })} placeholder="Расчёт нагрузок" style={getInp(C)} /></Field>
+            <Field label="НАЗНАЧИТЬ РУКОВОДИТЕЛЮ" C={C}><select value={newTask.assigned_to} onChange={e => { const lead = appUsers.find(u => String(u.id) === e.target.value); setNewTask({ ...newTask, assigned_to: e.target.value, dept_id: lead?.dept_id || "" }); }} style={getInp(C)}><option value="">— Выбрать —</option>{myLeads.map(u => <option key={u.id} value={u.id}>{u.full_name} ({getDeptName(u.dept_id)})</option>)}</select></Field>
+            <Field label="ПРИОРИТЕТ" C={C}><select value={newTask.priority} onChange={e => setNewTask({ ...newTask, priority: e.target.value })} style={getInp(C)}><option value="high">🔴 Высокий</option><option value="medium">🟡 Средний</option><option value="low">⚪ Низкий</option></select></Field>
+            <Field label="ДЕДЛАЙН" C={C}><input type="date" value={newTask.deadline} onChange={e => setNewTask({ ...newTask, deadline: e.target.value })} style={getInp(C)} /></Field>
+            <button className="btn btn-primary" onClick={createTask} disabled={saving || !newTask.name} style={{ width: "100%", opacity: !newTask.name ? 0.5 : 1 }}>{saving ? "Создаётся..." : "Создать задачу"}</button>
+          </div>
+        </Modal>
+      )}
+      {showTaskDetail && selectedTask && (
+        <Modal title="Задача" onClose={() => { setShowTaskDetail(false); setSelectedTask(null); setTaskComment(""); }} C={C}>
+          <div className="form-stack">
+            <div style={{ background: C.surface2, borderRadius: 10, padding: 16 }}>
+              <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 8, color: C.text }}>{selectedTask.name}</div>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+                <BadgeComp status={selectedTask.status} C={C} />
+                <PriorityDot p={selectedTask.priority} C={C} />
+                {selectedTask.dept && <span style={{ fontSize: 11, color: C.textMuted, background: C.surface, padding: "3px 8px", borderRadius: 6 }}>{selectedTask.dept}</span>}
+                {selectedTask.deadline && <span style={{ fontSize: 11, color: C.textMuted }}>до {selectedTask.deadline}</span>}
+              </div>
+            </div>
+            {selectedTask.assigned_to && (() => { const u = getUserById(selectedTask.assigned_to); return u ? (<div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13 }}><AvatarComp user={u} size={28} C={C} /><span style={{ color: C.textDim, fontWeight: 500 }}>{u.full_name}</span><span style={{ fontSize: 11, color: C.textMuted }}>{u.position || roleLabels[u.role]}</span></div>) : null; })()}
+            {selectedTask.comment && (<div style={{ background: C.red + "10", border: `1px solid ${C.red}25`, borderRadius: 10, padding: 14 }}><div style={{ fontSize: 10, color: C.red, fontWeight: 600, marginBottom: 4 }}>КОММЕНТАРИЙ К ДОРАБОТКЕ</div><div style={{ fontSize: 13, color: C.textDim }}>{selectedTask.comment}</div></div>)}
+            {isLead && selectedTask.status === "todo" && String(selectedTask.assigned_to) === String(currentUserData?.id) && (
+              <Field label="НАЗНАЧИТЬ ИНЖЕНЕРУ" C={C}><select onChange={e => { if (e.target.value) assignTask(selectedTask.id, e.target.value); }} defaultValue="" style={getInp(C)}><option value="">— Выбрать инженера —</option>{myEngineers.map(u => <option key={u.id} value={u.id}>{u.full_name} — {getEngLoad(u.id)}% загрузка</option>)}</select></Field>
+            )}
+            {isLead && (<Field label="ПРИОРИТЕТ" C={C}><select value={selectedTask.priority} onChange={async e => { await patch(`tasks?id=eq.${selectedTask.id}`, { priority: e.target.value }, token!); setSelectedTask({ ...selectedTask, priority: e.target.value }); if (activeProject) loadTasks(activeProject.id); }} style={getInp(C)}><option value="high">🔴 Высокий</option><option value="medium">🟡 Средний</option><option value="low">⚪ Низкий</option></select></Field>)}
+            {getTaskActions(selectedTask).length > 0 && (
+              <div>
+                <div className="field-label" style={{ marginBottom: 8 }}>ДЕЙСТВИЯ</div>
+                {(selectedTask.status === "review_lead" || selectedTask.status === "review_gip") && (<div style={{ marginBottom: 10 }}><div className="field-label" style={{ marginBottom: 6 }}>КОММЕНТАРИЙ ПРИ ДОРАБОТКЕ</div><input value={taskComment} onChange={e => setTaskComment(e.target.value)} placeholder="Что нужно исправить..." style={getInp(C)} /></div>)}
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {getTaskActions(selectedTask).map((action: any, i: number) => (
+                    <button key={i} onClick={() => updateTaskStatus(selectedTask.id, action.status, taskComment)} disabled={saving}
+                      style={{ background: action.color + "15", border: `1px solid ${action.color}30`, color: action.color, borderRadius: 10, padding: "11px", cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "inherit" }}>{action.label}</button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </Modal>
+      )}
+      {showArchive && (
+        <Modal title="📦 Архив проектов" onClose={() => setShowArchive(false)} C={C}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {archivedProjects.length === 0 ? <div className="empty-state" style={{ padding: 30 }}>Архив пуст</div> : archivedProjects.map(p => (
+              <div key={p.id} style={{ background: C.surface2, borderRadius: 10, padding: "14px 18px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div><div style={{ fontWeight: 600, color: C.text }}>{p.name}</div><div style={{ fontSize: 11, color: C.textMuted }}>{p.code} · до {p.deadline}</div></div>
+                <span style={{ fontSize: 11, color: C.textMuted }}>В архиве</span>
+              </div>
+            ))}
+          </div>
+        </Modal>
+      )}
+
+      {/* ===== SIDEBAR ===== */}
+      <div className="sidebar">
+        <div className="sidebar-logo">
+          <div className="sidebar-logo-icon">⬡</div>
+          <div className="sidebar-logo-text">EngHub</div>
+        </div>
+        <div className="sidebar-logo-sub">ENGINEERING PLATFORM</div>
+        <div className="sidebar-nav">
+          <div className="sidebar-section-label">Навигация</div>
+          {navItems.map(n => (
+            <button key={n.id} className={`sidebar-btn ${screen === n.id ? "active" : ""}`} onClick={() => setScreen(n.id)}>
+              <span className="sidebar-btn-icon">{n.icon}</span>
+              <span>{n.label}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Проекты в сайдбаре (Figma-style) */}
+        {projects.length > 0 && (
+          <div style={{ padding: "0 12px", marginBottom: 16 }}>
+            <div className="sidebar-section-label" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span>Проекты</span>
+              <span style={{ color: C.accent, fontSize: 11, cursor: "pointer" }}>Все →</span>
+            </div>
+            {projects.map((p, i) => {
+              const progress = getAutoProgress(p.id);
+              const dotColors = [C.accent, C.blue, C.purple, C.green, C.orange];
+              const isActive = activeProject?.id === p.id;
+              return (
+                <div key={p.id}>
+                  <button className={`sidebar-project-item ${isActive ? "active" : ""}`}
+                    onClick={() => { setActiveProject(p); setScreen("project"); setSideTab("tasks"); setSelectedDeptId(null); }}>
+                    <div className="sidebar-project-dot" style={{ background: dotColors[i % dotColors.length] }} />
+                    <div className="sidebar-project-info">
+                      <div className="sidebar-project-name">{p.name || p.code}</div>
+                      <div className="sidebar-project-progress" style={{ fontSize: 10 }}>{p.code} • {progress}%</div>
+                    </div>
+                  </button>
+                  {isActive && p.depts && p.depts.length > 0 && (
+                    <div className="sidebar-project-depts" style={{ paddingLeft: 24, marginTop: -4, marginBottom: 8 }}>
+                      <button className={`sidebar-dept-item ${selectedDeptId === null ? "active" : ""}`} onClick={() => { setSelectedDeptId(null); setScreen("project"); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 12px', fontSize: 13, background: selectedDeptId === null ? C.surface2 : 'transparent', color: selectedDeptId === null ? C.text : C.textMuted, border: 'none', borderRadius: 6, cursor: 'pointer' }}>
+                        ВЕСЬ ПРОЕКТ
+                      </button>
+                      {p.depts.map((dId: number) => {
+                        const dept = depts.find(d => String(d.id) === String(dId));
+                        if (!dept) return null;
+                        const isDeptActive = selectedDeptId === dId;
+                        return (
+                          <button key={dId} className={`sidebar-dept-item ${isDeptActive ? "active" : ""}`} onClick={() => { setSelectedDeptId(dId); setScreen("project"); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '6px 12px', fontSize: 13, background: isDeptActive ? C.surface2 : 'transparent', color: isDeptActive ? C.text : C.textMuted, border: 'none', borderRadius: 6, cursor: 'pointer', marginTop: 2 }}>
+                            ↳ {dept.name}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+            {isGip && <button className="sidebar-btn" onClick={() => setShowNewProject(true)} style={{ color: C.accent, marginTop: 4 }}>
+              <span className="sidebar-btn-icon">+</span><span>Новый проект</span>
+            </button>}
+          </div>
+        )}
+
+        <div style={{ padding: "0 12px" }}>
+          <div className="sidebar-section-label">Система</div>
+          <button className="sidebar-btn" onClick={() => { loadArchived(); setShowArchive(true); }}>
+            <span className="sidebar-btn-icon">📦</span><span>Архив</span>
+          </button>
+        </div>
+
+        <div className="sidebar-bottom">
+          <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 14px" }}>
+            <AvatarComp user={currentUserData} size={34} C={C} />
+            <div style={{ flex: 1, overflow: "hidden" }}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{currentUserData?.full_name?.split(" ").slice(0, 2).join(" ")}</div>
+              <div style={{ fontSize: 10, color: C.sidebarText }}>{currentUserData?.position || roleLabels[currentUserData?.role] || ""}</div>
+            </div>
+            <button onClick={handleLogout} style={{ background: "none", border: "none", color: "#ef4444", cursor: "pointer", fontSize: 14, padding: 4 }} title="Выйти">⏻</button>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== MAIN AREA ===== */}
+      <div className="main-area">
+        {/* TOPBAR (Figma-style breadcrumbs) */}
+        <div className="topbar">
+          <div className="topbar-left">
+            <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+              <span className="topbar-title">{screen === "project" ? "Карточка проекта" : screenTitles[screen] || "EngHub"}</span>
+              <span style={{ fontSize: 13, color: C.textMuted, fontWeight: 400 }}>/ EngHub</span>
+            </div>
+          </div>
+          <div className="topbar-right">
+            <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+              <input placeholder="Поиск... ⌘K" style={{ padding: "8px 14px 8px 32px", borderRadius: 10, border: `1px solid ${C.border}`, background: C.surface2, color: C.text, fontSize: 13, width: 160, fontFamily: "inherit", outline: "none" }} readOnly />
+              <span style={{ position: "absolute", left: 10, color: C.textMuted, fontSize: 14 }}>🔍</span>
+            </div>
+            <ThemeToggle dark={dark} setDark={setDark} C={C} />
+            {notifications.length > 0 && (
+              <div style={{ position: 'relative' }}>
+                <span style={{ background: C.accent, color: '#fff', borderRadius: 20, padding: '4px 10px', fontSize: 11, fontWeight: 700 }}>🔔 {notifications.length}</span>
+              </div>
+            )}
+            {currentUserData && (
+              <div className="topbar-user">
+                <AvatarComp user={currentUserData} size={34} C={C} />
+                <div className="topbar-user-info">
+                  <div className="topbar-user-name">{currentUserData.full_name}</div>
+                  <div className="topbar-user-role">{currentUserData.position || roleLabels[role]}</div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* CONTENT */}
+        <div className="content">
+          {/* ===== DASHBOARD ===== */}
+          {screen === "dashboard" && (
+            <div>
+              <div className="page-header">
+                <div>
+                  <div className="page-label">Рабочий стол</div>
+                  <div className="page-title">Добро пожаловать, {currentUserData?.full_name?.split(" ")[0]} 👋</div>
+                </div>
+                {isGip && <button className="btn btn-primary" onClick={() => setShowNewProject(true)}>+ Новый проект</button>}
+              </div>
+
+              {/* Поиск */}
+              <div className="search-wrap" style={{ marginBottom: 20 }}>
+                <span className="search-icon">🔍</span>
+                <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Поиск по проектам и задачам..."
+                  className="search-input" style={getInp(C, { paddingLeft: 40, borderRadius: 10, background: C.surface })} />
+                {searchQuery && <button className="search-clear" onClick={() => setSearchQuery("")}>✕</button>}
+              </div>
+
+              {/* Стат-карточки */}
+              <div className="stats-row">
+                {[
+                  { label: "Проектов", value: projects.length, color: C.accent },
+                  { label: "Активных задач", value: tasks.filter(t => t.status !== "done").length, color: C.blue },
+                  { label: "На проверке", value: tasks.filter(t => t.status === "review_lead" || t.status === "review_gip").length, color: C.purple },
+                  { label: "Завершено", value: tasks.filter(t => t.status === "done").length, color: C.green },
+                ].map(s => (
+                  <div key={s.label} className="stat-card">
+                    <div className="stat-card-header">
+                      <span className="stat-card-dot" style={{ background: s.color }} />
+                      <span className="stat-card-label">{s.label}</span>
+                    </div>
+                    <div className="stat-card-value" style={{ color: s.color }}>{s.value}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Результаты поиска по задачам */}
+              {searchQuery && (() => {
+                const sq = searchQuery.toLowerCase();
+                const matchedTasks = tasks.filter(t => t.name.toLowerCase().includes(sq) || (t.dept || "").toLowerCase().includes(sq));
+                if (matchedTasks.length > 0) return (
+                  <div style={{ marginBottom: 20 }}>
+                    <div className="page-label" style={{ marginBottom: 10 }}>Найдено задач: {matchedTasks.length}</div>
+                    <div className="task-list">
+                      {matchedTasks.map(t => { const u = getUserById(t.assigned_to); return (
+                        <div key={t.id} className="task-row" onClick={() => { setSelectedTask(t); setShowTaskDetail(true); }}>
+                          <PriorityDot p={t.priority} C={C} /><span style={{ flex: 1, fontSize: 13, color: C.text, fontWeight: 500 }}>{t.name}</span>
+                          {u && <span style={{ fontSize: 11, color: C.textMuted }}>{u.full_name.split(" ")[0]}</span>}<BadgeComp status={t.status} C={C} />
+                        </div>
+                      ); })}
+                    </div>
+                  </div>
+                ); else return null;
+              })()}
+
+              {/* Проекты */}
+              <div className="page-label" style={{ marginBottom: 12 }}>Проекты</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {projects.filter(p => { if (!searchQuery) return true; const sq = searchQuery.toLowerCase(); return p.name.toLowerCase().includes(sq) || p.code.toLowerCase().includes(sq); }).map(p => {
+                  const progress = getAutoProgress(p.id);
+                  return (
+                    <div key={p.id} className={`project-card ${activeProject?.id === p.id ? "active" : ""}`} onClick={() => { setActiveProject(p); setScreen("project"); setSideTab("tasks"); }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, alignItems: "center" }}>
+                        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                          <span style={{ fontWeight: 600, fontSize: 15, color: C.text }}>{p.name}</span>
+                          <span style={{ fontSize: 11, color: C.textMuted, background: C.surface2, padding: "3px 10px", borderRadius: 6 }}>{p.code}</span>
+                        </div>
+                        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                          <span style={{ fontSize: 12, color: C.textMuted }}>до {p.deadline}</span>
+                          {isGip && <button className="btn btn-ghost btn-sm" onClick={e => { e.stopPropagation(); if (window.confirm(`Отправить "${p.name}" в архив?`)) archiveProject(p.id); }}>→ Архив</button>}
+                        </div>
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                        <div className="progress-track" style={{ flex: 1 }}><div className="progress-bar" style={{ width: `${progress}%` }} /></div>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: C.accent, minWidth: 40, textAlign: "right" }}>{progress}%</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* ===== PROJECT (Figma-style) ===== */}
+          {screen === "project" && activeProject && (
+            <div>
+              {/* Back + Meta Bar */}
+              <div className="project-meta-bar">
+                <button onClick={() => setScreen("dashboard")} style={{ background: "none", border: `1px solid ${C.border}`, borderRadius: 8, padding: "4px 10px", cursor: "pointer", color: C.textMuted, fontSize: 16 }}>←</button>
+                <span className="project-meta-badge" style={{ color: C.accent, borderColor: C.accent + "40", background: C.accent + "10" }}>{activeProject.code}</span>
+                <span className="project-meta-badge" style={{ color: C.green, borderColor: C.green + "40", background: C.green + "10" }}>{activeProject.status === "active" ? "В работе" : "На проверке"}</span>
+                {activeProject.department && <span style={{ fontSize: 12, color: C.textMuted }}>{activeProject.department}</span>}
+                <div style={{ flex: 1 }}></div>
+                
+                {/* COPILOT BUTTON */}
+                <button 
+                  onClick={() => setShowCopilot(!showCopilot)}
+                  style={{ background: showCopilot ? C.accent : C.surface, color: showCopilot ? '#fff' : C.accent, border: `1px solid ${C.accent}`, padding: '6px 14px', borderRadius: 20, fontSize: 13, fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}
+                >
+                  <span style={{ fontSize: 14 }}>✨</span> AI Copilot
+                </button>
+
+                <div className="project-stats-bar">
+                  <div className="project-stat">
+                    <div className="project-stat-value" style={{ color: C.accent }}>{activeProjectProgress}%</div>
+                    <div className="project-stat-label">прогресс</div>
+                  </div>
+                  <div className="project-stat">
+                    <div className="project-stat-value" style={{ color: C.text }}>{tasks.filter(t => t.status === "done").length}/{tasks.length}</div>
+                    <div className="project-stat-label">задач</div>
+                  </div>
+                  {activeProject.deadline && <div className="project-stat">
+                    <div className="project-stat-value" style={{ color: C.text, fontSize: 14 }}>{activeProject.deadline}</div>
+                    <div className="project-stat-label">дедлайн</div>
+                  </div>}
+                </div>
+              </div>
+
+              {/* PROJECT COPILOT DRAWER */}
+              {showCopilot && (
+                <CopilotPanel 
+                  userId={currentUserData?.id} 
+                  projectId={activeProject.id} 
+                  C={C} 
+                  onClose={() => setShowCopilot(false)} 
+                  onTaskCreated={() => loadTasks(activeProject.id)} 
+                />
+              )}
+
+              {/* Project Name */}
+              <div className="page-title" style={{ marginBottom: 16, fontSize: 28 }}>{activeProject.name}</div>
+
+              {/* Progress Bar */}
+              <div className="progress-track" style={{ height: 6, marginBottom: 24 }}><div className="progress-bar" style={{ width: `${activeProjectProgress}%`, height: "100%" }} /></div>
+
+              {/* Tabs */}
+              <div style={{ display: "flex", gap: 8, marginBottom: 24 }}>
+                {["tasks", "conference"].map(t => (
+                  <button key={t} className={`tab-btn ${sideTab === t ? "active" : ""}`} onClick={() => setSideTab(t)}>
+                    {t === "tasks" ? "⊙ Задачи" : "⊕ Конференц-зал"}
+                  </button>
+                ))}
+              </div>
+
+              {sideTab === "tasks" && (
+                <div>
+                  {/* Task List Header */}
+                  <div className="task-list-header">
+                    <div className="task-list-title">Список задач</div>
+                    {isGip && <button className="btn btn-primary" style={{ borderRadius: 20, padding: "10px 22px" }} onClick={() => setShowNewTask(true)}>+ Новая задача</button>}
+                  </div>
+                  <div className="task-list">
+                    {tasks.length === 0 && <div className="empty-state" style={{ padding: 40 }}>Задач пока нет</div>}
+                    {tasks.filter(t => {
+                      if (selectedDeptId === null) return true;
+                      const selectedDeptName = getDeptNameById(selectedDeptId);
+                      const u = getUserById(t.assigned_to);
+                      const currentDeptName = t.dept || (u ? getDeptName(u.dept_id) : "");
+                      return currentDeptName === selectedDeptName;
+                    }).map(t => {
+                      const u = getUserById(t.assigned_to);
+                      const deptName = t.dept || (u ? getDeptName(u.dept_id) : "");
+                      const st = statusMap[t.status] || statusMap.todo;
+                      return (
+                        <div key={t.id} className="task-row" data-priority={t.priority} onClick={() => { setSelectedTask(t); setShowTaskDetail(true); }}>
+                          <div style={{ flex: 1 }}>
+                            <div style={{ fontSize: 15, fontWeight: 600, color: C.text, marginBottom: 4 }}>{t.name}</div>
+                            <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+                              {deptName && <span style={{ fontSize: 11, color: C.textMuted, background: C.surface2, padding: "3px 10px", borderRadius: 6, fontWeight: 500 }}>{deptName}</span>}
+                              {t.deadline && <span style={{ fontSize: 11, color: C.textMuted }}>📅 {t.deadline}</span>}
+                              <span style={{ fontSize: 11, color: t.priority === "high" ? C.red : t.priority === "medium" ? C.orange : C.green, fontWeight: 600 }}>● {t.priority === "high" ? "Высокий" : t.priority === "medium" ? "Средний" : "Низкий"}</span>
+                            </div>
+                          </div>
+                          <span className="badge" style={{ color: st.color, background: st.bg, border: `1px solid ${st.color}25` }}>⊙ {st.label}</span>
+                          {u && <AvatarComp user={u} size={34} C={C} />}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {sideTab === "conference" && (
+                <ConferenceRoom
+                  project={activeProject}
+                  currentUser={currentUserData}
+                  appUsers={appUsers}
+                  msgs={msgs}
+                  C={C}
+                  token={token!}
+                  onSendMsg={(text: string) => { post("messages", { text, user_id: currentUserData?.id, project_id: activeProject.id, type: "text" }, token!).then(() => loadMessages(activeProject.id)); }}
+                  getUserById={getUserById}
+                />
+              )}
+            </div>
+          )}
+
+          {/* ===== PROJECTS REGISTRY ===== */}
+          {screen === "projects_list" && (
+            <div>
+              <div className="page-header">
+                <div>
+                  <div className="page-label">Реестр проектов</div>
+                  <div className="page-title">Все доступные проекты</div>
+                </div>
+                {isGip && <button className="btn btn-primary" onClick={() => setShowNewProject(true)}>+ Новый проект</button>}
+              </div>
+
+              <div className="search-wrap" style={{ marginBottom: 20 }}>
+                <span className="search-icon">🔍</span>
+                <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Поиск по названию или шифру..."
+                  className="search-input" style={getInp(C, { paddingLeft: 40, borderRadius: 10, background: C.surface })} />
+                {searchQuery && <button className="search-clear" onClick={() => setSearchQuery("")}>✕</button>}
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {projects.filter(p => { if (!searchQuery) return true; const sq = searchQuery.toLowerCase(); return p.name.toLowerCase().includes(sq) || p.code.toLowerCase().includes(sq); }).map(p => {
+                  const progress = getAutoProgress(p.id);
+                  return (
+                    <div key={p.id} className={`project-card ${activeProject?.id === p.id ? "active" : ""}`} onClick={() => { setActiveProject(p); setScreen("project"); setSideTab("tasks"); }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, alignItems: "center" }}>
+                        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                          <span style={{ fontWeight: 600, fontSize: 15, color: C.text }}>{p.name}</span>
+                          <span style={{ fontSize: 11, color: C.textMuted, background: C.surface2, padding: "3px 10px", borderRadius: 6 }}>{p.code}</span>
+                        </div>
+                        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                          <span style={{ fontSize: 12, color: C.textMuted }}>до {p.deadline}</span>
+                          {isGip && <button className="btn btn-ghost btn-sm" onClick={e => { e.stopPropagation(); if (window.confirm(`Отправить "${p.name}" в архив?`)) archiveProject(p.id); }}>→ Архив</button>}
+                        </div>
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                        <div className="progress-track" style={{ flex: 1 }}><div className="progress-bar" style={{ width: `${progress}%` }} /></div>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: C.accent, minWidth: 40, textAlign: "right" }}>{progress}%</span>
+                      </div>
+                    </div>
+                  );
+                })}
+                {projects.length === 0 && <div className="empty-state" style={{ padding: 40 }}>Доступных проектов нет</div>}
+              </div>
+            </div>
+          )}
+
+          {/* ===== TASKS KANBAN ===== */}
+          {screen === "tasks" && (
+            <div>
+              <div className="page-header"><div><div className="page-label">Мои задачи</div><div className="page-title">Задачи по статусу</div></div></div>
+
+              {/* Фильтры */}
+              <div className="filters-bar">
+                <div className="search-wrap" style={{ flex: "1 1 200px" }}>
+                  <span className="search-icon">🔍</span>
+                  <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Поиск задач..."
+                    className="search-input" style={getInp(C, { paddingLeft: 40, fontSize: 12, borderRadius: 10, background: C.surface })} />
+                </div>
+                <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="filter-chip" style={{ border: `1.5px solid ${C.border}`, background: C.surface, color: C.textDim, fontFamily: "inherit", cursor: "pointer", minWidth: 140 }}>
+                  <option value="all">⊕ Все статусы</option>
+                  {Object.entries(statusMap).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
+                </select>
+                <select value={filterPriority} onChange={e => setFilterPriority(e.target.value)} className="filter-chip" style={{ border: `1.5px solid ${C.border}`, background: C.surface, color: C.textDim, fontFamily: "inherit", cursor: "pointer", minWidth: 140 }}>
+                  <option value="all">⊕ Приоритет</option>
+                  <option value="high">🔴 Высокий</option><option value="medium">🟡 Средний</option><option value="low">⚪ Низкий</option>
+                </select>
+                {(isGip || isLead) && (
+                  <select value={filterAssigned} onChange={e => setFilterAssigned(e.target.value)} className="filter-chip" style={{ border: `1.5px solid ${C.border}`, background: C.surface, color: C.textDim, fontFamily: "inherit", cursor: "pointer", minWidth: 150 }}>
+                    <option value="all">⊕ Исполнитель</option>
+                    {appUsers.filter(u => u.role === "engineer" || u.role === "lead").map(u => <option key={u.id} value={String(u.id)}>{u.full_name}</option>)}
+                  </select>
+                )}
+                {(searchQuery || filterStatus !== "all" || filterPriority !== "all" || filterAssigned !== "all") && (
+                  <button className="btn btn-danger btn-sm" onClick={() => { setSearchQuery(""); setFilterStatus("all"); setFilterPriority("all"); setFilterAssigned("all"); }}>✕ Сбросить</button>
+                )}
+              </div>
+
+              <div className="kanban-grid">
+                {Object.entries(statusMap).map(([col, s]) => {
+                  const colTasks = tasks.filter(t => {
+                    if (t.status !== col) return false;
+                    if (filterStatus !== "all" && t.status !== filterStatus) return false;
+                    if (filterPriority !== "all" && t.priority !== filterPriority) return false;
+                    if (filterAssigned !== "all" && String(t.assigned_to) !== filterAssigned) return false;
+                    if (searchQuery) { const sq = searchQuery.toLowerCase(); const u = getUserById(t.assigned_to); if (!t.name.toLowerCase().includes(sq) && !(t.dept || "").toLowerCase().includes(sq) && !(u?.full_name || "").toLowerCase().includes(sq)) return false; }
+                    return true;
+                  });
+                  if (colTasks.length === 0 && col !== "todo" && col !== "inprogress") return null;
+                  return (
+                    <div key={col}>
+                      <div className="kanban-col-title" style={{ color: s.color }}>
+                        <span className="stat-card-dot" style={{ background: s.color }} />{s.label}
+                        <span className="kanban-col-count">{colTasks.length}</span>
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                        {colTasks.map(t => {
+                          const u = getUserById(t.assigned_to);
+                          return (
+                            <div key={t.id} className="kanban-card" onClick={() => { setSelectedTask(t); setShowTaskDetail(true); }}>
+                              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                                <PriorityDot p={t.priority} C={C} />
+                                <span style={{ fontSize: 13, flex: 1, color: C.text, fontWeight: 500 }}>{t.name}</span>
+                              </div>
+                              <div style={{ fontSize: 11, color: C.textMuted, marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}>
+                                <span>📁 {projects.find(p => String(p.id) === String(t.project_id))?.name || "Неизвестный проект"}</span>
+                              </div>
+                              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+                                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                                  {t.dept && <span style={{ fontSize: 10, color: C.textMuted, background: C.surface2, padding: "3px 8px", borderRadius: 6, width: "fit-content" }}>{t.dept}</span>}
+                                  {t.deadline && <span style={{ fontSize: 10, color: C.textMuted }}>📅 {t.deadline}</span>}
+                                </div>
+                                {u && (
+                                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                                    <span style={{ fontSize: 11, color: C.textMuted, fontWeight: 500 }}>{u.full_name.split(" ")[0]}</span>
+                                    <AvatarComp user={u} size={24} C={C} />
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                        {colTasks.length === 0 && <div style={{ fontSize: 12, color: C.textMuted, textAlign: "center", padding: 16, background: C.surface, borderRadius: 8, border: `1px dashed ${C.border}` }}>Пусто</div>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* ===== CALCULATIONS ===== */}
+          {screen === "calculations" && (
+            <div style={{ display: "flex", height: "100%", overflow: "hidden" }}>
+              {/* LEFT SIDEBAR: Accordion Tree */}
+              <div style={{ width: 280, minWidth: 280, borderRight: `1px solid ${C.border}`, display: "flex", flexDirection: "column", background: C.surface, overflowY: "auto" }}>
+                <div style={{ padding: "20px", borderBottom: `1px solid ${C.border}` }}>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: C.text }}>Каталог расчётов</div>
+                  <div style={{ fontSize: 12, color: C.textMuted, marginTop: 4 }}>Выберите дисциплину</div>
+                </div>
+                <div style={{ padding: 12, display: "flex", flexDirection: "column", gap: 4 }}>
+                  {["ТХ", "ТТ", "КЖ / КМ", "ЭО", "КИПиА", "ОВ", "ВК", "Генплан", "ПБ"].map(cat => {
+                    const catCalcs = calcTemplates.filter(t => t.cat === cat);
+                    // if (catCalcs.length === 0) return null; // We will show empty categories too for now
+                    const isExpanded = calcFilter === cat;
+                    return (
+                      <div key={cat} style={{ background: isExpanded ? C.surface2 : "transparent", borderRadius: 8, overflow: "hidden" }}>
+                        <button 
+                          style={{ width: "100%", textAlign: "left", padding: "10px 14px", fontSize: 14, fontWeight: 600, color: C.text, border: "none", background: "transparent", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                          onClick={() => setCalcFilter(isExpanded ? "" : cat)}
+                        >
+                          <span>{cat}</span>
+                          <span style={{ fontSize: 10, color: C.textMuted }}>{isExpanded ? "▼" : "▶"}</span>
+                        </button>
+                        {isExpanded && (
+                          <div style={{ padding: "4px 8px 8px 8px", display: "flex", flexDirection: "column", gap: 2 }}>
+                            {catCalcs.length > 0 ? catCalcs.map(t => (
+                              <button 
+                                key={t.id} 
+                                onClick={() => setActiveCalc(t.id)}
+                                style={{
+                                  width: "100%", textAlign: "left", padding: "8px 12px", fontSize: 13, color: activeCalc === t.id ? C.accent : C.textDim,
+                                  background: activeCalc === t.id ? C.accent + "15" : "transparent", border: "none", borderRadius: 6, cursor: "pointer"
+                                }}
+                              >
+                                {t.name}
+                              </button>
+                            )) : <div style={{ fontSize: 12, color: C.textMuted, padding: "4px 12px" }}>В разработке...</div>}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              
+              {/* RIGHT MAIN VIEW */}
+              <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+                {activeCalc ? (
+                  <CalculationView calcId={activeCalc} C={C} />
+                ) : (
+                  <div style={{ padding: 40, color: C.textDim, textAlign: "center", display: "flex", flexDirection: "column", gap: 12, justifyContent: "center", height: "100%", alignItems: "center" }}>
+                    <div style={{ fontSize: 48, opacity: 0.5 }}>⎍</div>
+                    <div style={{ fontSize: 16, fontWeight: 500 }}>Выберите расчет из каталога слева</div>
+                    <div style={{ fontSize: 13, maxWidth: 300, color: C.textMuted }}>Система автоматически подгрузит формулы, нормативную базу и конвертер для выбранной дисциплины.</div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+
+        </div>
+      </div>
+      <ToastContainer notifications={notifications} onRemove={removeNotification} />
+    </div>
+  );
+}
