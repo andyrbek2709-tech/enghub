@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls d:/ai-site/enghub-main/README*)",
+      "Bash(ls d:/ai-site/README*)"
+    ]
+  }
+}
